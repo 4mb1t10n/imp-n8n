@@ -1,0 +1,38 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2023-07-14T04:47:43.764Z",
+  "id": "3",
+  "name": "[PENDING] Telegram Update Dealflow Status in Pinned Message",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7df56c57-95bd-474b-9015-bae596e20a8f",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        640,
+        480
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "c63e7339-6abb-4aa4-a721-bf9da25cf6f9",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        640,
+        300
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-14T13:16:54.000Z",
+  "versionId": "21fed604-6b8d-45a8-bccc-9462a713a472"
+}
