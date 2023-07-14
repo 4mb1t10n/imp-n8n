@@ -502,8 +502,15 @@
   "pinData": {},
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "id": "apocRFEuRC91EgHK",
+      "createdAt": "2023-07-14T16:49:36.601Z",
+      "updatedAt": "2023-07-14T16:49:36.601Z",
+      "name": "backup"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-14T16:45:53.000Z",
-  "versionId": "eb20956c-45c4-4de6-b0bc-6f5f3ed52e3f"
+  "updatedAt": "2023-07-14T16:50:04.000Z",
+  "versionId": "9124b262-95e4-49c2-af12-ae272af96973"
 }
