@@ -815,8 +815,21 @@
     "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "id": "29gaRf653C0HYhBZ",
+      "createdAt": "2023-07-14T16:50:32.850Z",
+      "updatedAt": "2023-07-14T16:50:32.850Z",
+      "name": "telegram"
+    },
+    {
+      "id": "phpbTWiECevggeQS",
+      "createdAt": "2023-07-14T16:50:29.234Z",
+      "updatedAt": "2023-07-14T16:50:29.234Z",
+      "name": "s8"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-14T15:28:22.000Z",
-  "versionId": "18af74c8-1fea-4d71-aad8-ee4e72d3ecaa"
+  "updatedAt": "2023-07-14T16:50:54.000Z",
+  "versionId": "5f0e0d57-911d-4eea-9cd6-be64a7b45e38"
 }
