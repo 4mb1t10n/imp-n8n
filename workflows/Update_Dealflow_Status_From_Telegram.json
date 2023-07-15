@@ -1,0 +1,831 @@
+{
+  "active": false,
+  "connections": {
+    "Trigger from Telegram Chat": {
+      "main": [
+        [
+          {
+            "node": "Only BotCommands",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Dealflow Command": {
+      "main": [
+        [
+          {
+            "node": "emoji_ID",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Only BotCommands": {
+      "main": [
+        [
+          {
+            "node": "Only Command",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Form_ID",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ThreadID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Only Command": {
+      "main": [
+        [
+          {
+            "node": "Find Dealflow Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ThreadID": {
+      "main": [
+        [
+          {
+            "node": "Found Property",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ThreadIdOnly",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Found Property": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "propertyInfo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "PropRecID DealflowRecID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "emoji_ID": {
+      "main": [
+        [
+          {
+            "node": "emojiID forumID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form_ID": {
+      "main": [
+        [
+          {
+            "node": "emojiID forumID",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "PropRecID DealflowRecID": {
+      "main": [
+        [
+          {
+            "node": "Update Property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Property": {
+      "main": [
+        [
+          {
+            "node": "ThreadIdOnly",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Telegram Topic": {
+      "main": [
+        [
+          {
+            "node": "Wait for HTTP",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "ThreadIdOnly": {
+      "main": [
+        [
+          {
+            "node": "ThreadID EmojiID ForumID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "emojiID forumID": {
+      "main": [
+        [
+          {
+            "node": "ThreadID EmojiID ForumID",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "ThreadID EmojiID ForumID": {
+      "main": [
+        [
+          {
+            "node": "Update Telegram Topic",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "All Info",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "propertyInfo": {
+      "main": [
+        [
+          {
+            "node": "Wait for HTTP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for HTTP": {
+      "main": [
+        [
+          {
+            "node": "All Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "All Info": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-15T03:18:26.558Z",
+  "id": "A4CI22SygWuKraeL",
+  "name": "Update_Dealflow_Status_From_Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "e7257564-d9fa-4538-aa72-79d6ae1e3974",
+        "options": {}
+      },
+      "id": "356d1057-4bf7-4884-a316-0e0735594351",
+      "name": "Trigger from Telegram Chat",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        700
+      ],
+      "webhookId": "e7257564-d9fa-4538-aa72-79d6ae1e3974"
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "list",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/appqrf0R6JhZfIoeZ/tbljxtTmE5bkNR9JF/viwd2CjxZgi5Cb32I?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appqrf0R6JhZfIoeZ/tbljxtTmE5bkNR9JF/viwd2CjxZgi5Cb32I?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+        },
+        "additionalOptions": {
+          "filterByFormula": "={botCommand}='{{ $json.command }}'"
+        }
+      },
+      "id": "4b0adc8d-3540-4590-a70a-132342713bbd",
+      "name": "Find Dealflow Command",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        300,
+        700
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "2",
+          "name": "S8 Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.body[0].message.from.is_bot }}"
+            }
+          ],
+          "string": [
+            {
+              "value1": "={{ $json.body[0].message.text }}",
+              "operation": "regex",
+              "value2": "=(\\/\\w+@P0m0shnik11_Bot)"
+            }
+          ]
+        }
+      },
+      "id": "8cac511b-840a-44e3-bc75-49331309eaa6",
+      "name": "Only BotCommands",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "command",
+              "value": "={{ $json.body[0].message.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b5ee0765-a90b-4dc0-85d7-60b97c17b9d8",
+      "name": "Only Command",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        120,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "ThreadID",
+              "value": "={{ $json.body[0].message.reply_to_message.message_thread_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7c838130-4bdd-422a-8685-aba337c1a3c5",
+      "name": "ThreadID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "list",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/appqrf0R6JhZfIoeZ/tblsVZi3J87BSHvNX/viwnhPk6UMqoIWH9Y?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appqrf0R6JhZfIoeZ/tblsVZi3J87BSHvNX/viwnhPk6UMqoIWH9Y/fldvyyERaruHZmHe8",
+          "mode": "url",
+          "__regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+        },
+        "returnAll": false,
+        "limit": 1,
+        "additionalOptions": {
+          "fields": [],
+          "filterByFormula": "={telegramThreadID}='{{ $json.ThreadID }}'"
+        }
+      },
+      "id": "91700ec1-d784-40d3-9cfa-9405a6ef9c21",
+      "name": "Found Property",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        460
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "2",
+          "name": "S8 Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "update",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/appqrf0R6JhZfIoeZ/tblsVZi3J87BSHvNX/viwnhPk6UMqoIWH9Y?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appqrf0R6JhZfIoeZ/tblsVZi3J87BSHvNX/viwnhPk6UMqoIWH9Y/fld3oq0TOOfS24vne",
+          "mode": "url",
+          "__regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+        },
+        "id": "={{ $json.propID }}",
+        "updateAllFields": false,
+        "fields": [
+          "linkDealflow"
+        ],
+        "options": {
+          "bulkSize": 10,
+          "typecast": true
+        }
+      },
+      "id": "e220cd5e-ef6f-4dcd-9d88-c0e71cf48f7b",
+      "name": "Update Property",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        680
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "2",
+          "name": "S8 Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "id": "3e8a6d5d-2121-4fba-9667-2b927c5d37b3",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "emojiID",
+              "value": "={{ $json.fields.icon_custom_emoji_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c0641d53-0655-4ecc-ad97-c2d42e566cba",
+      "name": "emoji_ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        460,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "formID",
+              "value": "={{ $json.body[0].message.chat.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "46d99f73-eb26-4a72-b7cd-9c22c43e22a0",
+      "name": "Form_ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        460,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "propID",
+              "value": "={{ $json.fields['H-RecordID'] }}"
+            },
+            {
+              "name": "linkDealflow",
+              "value": "={{ $json.fields['H-DealflowRecID'] }}"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "id": "26f21080-41af-4a8b-842c-a01382f9575c",
+      "name": "PropRecID DealflowRecID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1020,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/editForumTopic",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "={{ $json.formID }}"
+            },
+            {
+              "name": "message_thread_id",
+              "value": "={{ $json.ThreadID }}"
+            },
+            {
+              "name": "icon_custom_emoji_id",
+              "value": "={{ $json.emojiID }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "590b4952-642f-413d-b6bc-f7963186d65f",
+      "name": "Update Telegram Topic",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1780,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch",
+        "output": "input2"
+      },
+      "id": "71b0eebb-e989-448f-89cf-61fc95980269",
+      "name": "ThreadIdOnly",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1340,
+        860
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "4f1e553a-b532-4f61-a940-46d4f5af5a86",
+      "name": "emojiID forumID",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1340,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "1e64803e-0a9d-4acf-84f7-30ef5e0d8824",
+      "name": "ThreadID EmojiID ForumID",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1560,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "pinnedMessageID",
+              "value": "={{ $json.fields.telegramPinnedMessageID }}"
+            },
+            {
+              "name": "dealflowStatusWithEmoji",
+              "value": "={{ $json.fields['H-dealflow'] }}"
+            },
+            {
+              "name": "propertyAddress",
+              "value": "={{ $json.fields.propAddFull }}"
+            },
+            {
+              "name": "priceListed",
+              "value": "={{ $json.fields.priceListed }}"
+            },
+            {
+              "name": "Size",
+              "value": "={{ $json.fields.propSize }}"
+            },
+            {
+              "name": "zillowURL",
+              "value": "={{ $json.fields.zillowURL }}"
+            },
+            {
+              "name": "airtableURL",
+              "value": "=https://airtable.com/appqrf0R6JhZfIoeZ/tblsVZi3J87BSHvNX/viwnhPk6UMqoIWH9Y/{{ $json.id }}"
+            },
+            {
+              "name": "driveURL",
+              "value": "={{ $json.fields['H-urlDrive'] }}"
+            },
+            {
+              "name": "beds",
+              "value": "={{ $json.fields.propBed }}"
+            },
+            {
+              "name": "baths",
+              "value": "={{ $json.fields.propBath }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "72f46dd9-d33a-4a00-89e1-90efd565bca7",
+      "name": "propertyInfo",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch"
+      },
+      "id": "14cedd65-5604-472b-8e97-8669cf12b475",
+      "name": "Wait for HTTP",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1960,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "ac9cc12d-b0ec-4cbb-af2a-08272261df74",
+      "name": "All Info",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        2180,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/editMessageCaption",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "={{ $json.formID }}"
+            },
+            {
+              "name": "message_id",
+              "value": "={{ $json.pinnedMessageID }}"
+            },
+            {
+              "name": "caption",
+              "value": "=*{{ $json.dealflowStatusWithEmoji }}*\n{{ $json.propertyAddress }}\n${{ $json[\"priceListed\"] }} \\| {{ $json[\"beds\"] }} bed \\| {{ $json[\"baths\"] }} bath \\| {{ $json[\"Size\"] }} sqft\n[Zillow]({{ $json[\"zillowURL\"] }}) \\| [Airtable]({{ $json[\"airtableURL\"] }}) \\| [Drive]({{ $json[\"driveURL\"] }})"
+            },
+            {
+              "name": "parse_mode",
+              "value": "MarkdownV2"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "59c1fb3a-ffd4-4785-b505-7e464ee46a93",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2400,
+        1120
+      ]
+    }
+  ],
+  "pinData": {
+    "Trigger from Telegram Chat": [
+      {
+        "json": {
+          "headers": {
+            "host": "amb1t1on.app.n8n.cloud",
+            "x-request-id": "5510f45af2a2ced8b3fd1101a8c302b8",
+            "x-real-ip": "142.44.96.130",
+            "x-forwarded-for": "142.44.96.130",
+            "x-forwarded-host": "amb1t1on.app.n8n.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-scheme": "https",
+            "x-scheme": "https",
+            "content-length": "1784",
+            "content-type": "application/json",
+            "user-agent": "PostmanRuntime/7.32.3",
+            "accept": "*/*",
+            "postman-token": "547b33ee-668f-4b1a-bb09-fd3bf9e43906",
+            "accept-encoding": "gzip, deflate, br"
+          },
+          "params": {},
+          "query": {},
+          "body": [
+            {
+              "update_id": 514745497,
+              "message": {
+                "message_id": 3142,
+                "from": {
+                  "id": 384291172,
+                  "is_bot": false,
+                  "first_name": "Alex",
+                  "last_name": "Miles",
+                  "username": "AMOnition",
+                  "language_code": "en",
+                  "is_premium": true
+                },
+                "chat": {
+                  "id": -1001981172279,
+                  "title": "S8 OH Toledo",
+                  "is_forum": true,
+                  "type": "supergroup"
+                },
+                "date": 1689044450,
+                "message_thread_id": 61,
+                "reply_to_message": {
+                  "message_id": 61,
+                  "from": {
+                    "id": 5915934616,
+                    "is_bot": true,
+                    "first_name": "S8_Bot",
+                    "username": "P0m0shnik11_Bot"
+                  },
+                  "chat": {
+                    "id": -1001981172279,
+                    "title": "S8 OH Toledo",
+                    "is_forum": true,
+                    "type": "supergroup"
+                  },
+                  "date": 1686677768,
+                  "message_thread_id": 61,
+                  "forum_topic_created": {
+                    "name": "P102 2437 Caledonia St",
+                    "icon_color": 7322096,
+                    "icon_custom_emoji_id": "5312486108309757006"
+                  },
+                  "is_topic_message": true
+                },
+                "text": "/notpurchased@P0m0shnik11_Bot",
+                "entities": [
+                  {
+                    "offset": 0,
+                    "length": 29,
+                    "type": "bot_command"
+                  }
+                ],
+                "is_topic_message": true
+              }
+            }
+          ]
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "id": "PVnQTyu9cfSsyVTC",
+      "createdAt": "2023-07-15T03:18:12.948Z",
+      "updatedAt": "2023-07-15T03:18:12.948Z",
+      "name": "telegram"
+    },
+    {
+      "id": "SCEyciCiF4isPLzu",
+      "createdAt": "2023-07-15T03:18:12.948Z",
+      "updatedAt": "2023-07-15T03:18:12.948Z",
+      "name": "s8"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-15T03:18:57.534Z",
+  "versionId": "bc33622d-cc71-40a1-8193-1f6ea600b035"
+}
