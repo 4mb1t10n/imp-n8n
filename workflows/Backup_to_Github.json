@@ -220,7 +220,7 @@
       "alwaysOutputData": true,
       "credentials": {
         "githubOAuth2Api": {
-          "id": "ghith67zjHk7WdOi",
+          "id": "aiRWzLeQQOldDUi2",
           "name": "4mb1t10n"
         }
       },
@@ -309,7 +309,7 @@
       "typeVersion": 1,
       "credentials": {
         "githubOAuth2Api": {
-          "id": "ghith67zjHk7WdOi",
+          "id": "aiRWzLeQQOldDUi2",
           "name": "4mb1t10n"
         }
       }
@@ -342,7 +342,7 @@
       "typeVersion": 1,
       "credentials": {
         "githubOAuth2Api": {
-          "id": "ghith67zjHk7WdOi",
+          "id": "aiRWzLeQQOldDUi2",
           "name": "4mb1t10n"
         }
       }
@@ -511,6 +511,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-15T03:20:22.113Z",
-  "versionId": "46d4f249-156f-45ab-95ba-7320c307987d"
+  "updatedAt": "2023-07-15T03:50:52.320Z",
+  "versionId": "a3ece23b-55ed-4c78-93f7-19113ab2cf0a"
 }
