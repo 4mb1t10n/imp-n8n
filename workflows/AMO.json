@@ -1,0 +1,32 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2023-07-17T02:17:30.308Z",
+  "id": "7KY2pvtPWOOaxRWe",
+  "name": "AMO",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "9fe5397b-acaa-4925-9ca3-17774b858297",
+        "options": {}
+      },
+      "id": "f27177fc-cd8e-4623-a498-36b95af4181e",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        720,
+        500
+      ],
+      "webhookId": "9fe5397b-acaa-4925-9ca3-17774b858297"
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-17T12:42:33.194Z",
+  "versionId": "dfdcbc4f-dfaa-4295-b3ad-87625e2ea566"
+}
