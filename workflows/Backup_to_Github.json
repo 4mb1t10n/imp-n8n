@@ -469,8 +469,8 @@
       "typeVersion": 1,
       "credentials": {
         "n8nApi": {
-          "id": "9tuwTIErhdw1LY6C",
-          "name": "My n8n"
+          "id": "alL8dCjVIKmIhDWk",
+          "name": "n8n Railway"
         }
       }
     },
@@ -511,6 +511,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-15T03:50:52.320Z",
-  "versionId": "a3ece23b-55ed-4c78-93f7-19113ab2cf0a"
+  "updatedAt": "2023-07-17T21:49:11.136Z",
+  "versionId": "9253849b-f8db-4f48-9226-33eb47adb940"
 }
