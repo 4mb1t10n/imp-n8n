@@ -344,8 +344,21 @@
   "pinData": {},
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "id": "PVnQTyu9cfSsyVTC",
+      "createdAt": "2023-07-15T03:18:12.948Z",
+      "updatedAt": "2023-07-15T03:18:12.948Z",
+      "name": "telegram"
+    },
+    {
+      "id": "LY1Kj6pTibELWGKc",
+      "createdAt": "2023-07-17T21:49:47.710Z",
+      "updatedAt": "2023-07-17T21:49:47.710Z",
+      "name": "airtable"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-17T19:21:54.457Z",
-  "versionId": "97ceb11f-0014-462a-9492-d395817b356e"
+  "updatedAt": "2023-07-17T21:49:50.290Z",
+  "versionId": "ad6a4936-f8e0-49b7-8d81-a6cb21e92d29"
 }
