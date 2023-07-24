@@ -1,0 +1,39 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2023-07-24T15:46:44.849Z",
+  "id": "H8uHpWVCotAN5Vvx",
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "httpMethod": "POST",
+        "path": "s8-scrape-bank",
+        "options": {}
+      },
+      "id": "9e84b2cd-a64f-450b-a87a-699cd2b4039e",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        600,
+        420
+      ],
+      "webhookId": "7b7e6ea6-bc48-4b29-a66a-9b098bff676f",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "TipJQrA0hi8jgPyX",
+          "name": "S8 Baisic Bank Auth"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-24T15:46:44.849Z",
+  "versionId": "c4f5faed-698d-49d7-a8bd-9158aa48ebcc"
+}
