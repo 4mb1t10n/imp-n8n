@@ -1,0 +1,35 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2023-07-24T15:46:44.849Z",
+  "id": "H8uHpWVCotAN5Vvx",
+  "name": "Bank Transactions > Airtable",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "203091d0-5d6f-4dc3-9fe7-0328c7ea29ee",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        660,
+        380
+      ],
+      "credentials": {
+        "imap": {
+          "id": "Uv3uUlltjUdtocKP",
+          "name": "IMAP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-25T13:13:12.808Z",
+  "versionId": "7a056dd8-9638-4724-963c-667f5ed354c6"
+}
