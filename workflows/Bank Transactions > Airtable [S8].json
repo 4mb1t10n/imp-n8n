@@ -42,6 +42,7 @@
     {
       "parameters": {
         "mailbox": "Tx:Chase",
+        "postProcessAction": "nothing",
         "format": "resolved",
         "options": {
           "forceReconnect": 15
@@ -68,15 +69,11 @@
         "values": {
           "string": [
             {
-              "name": "Amount",
-              "value": "={{ $json.html.match(/(?:You made a debit card transaction of )(\\$.+?\\.\\d+)/i)[1] }}"
-            },
-            {
               "name": "Merchant",
               "value": "={{ $json.html.match(/(?:You made a debit card transaction of \\$.+?\\.\\d+ with )(.+?)(?:[^\\sa-zA-Z0-9])/i)[1] }}"
             },
             {
-              "name": "DateTime",
+              "name": "BankTimestamp_OG",
               "value": "={{ $json.textAsHtml.match(/(?:made on )(.+?)(?:[^0-9a-zA-Z\\s\\,\\:])/i)[1] }}"
             },
             {
@@ -90,6 +87,12 @@
             {
               "name": "IncomeExpense",
               "value": "Expense"
+            }
+          ],
+          "number": [
+            {
+              "name": "Amount_OG",
+              "value": "={{ $json.html.match(/(?:You made a debit card transaction of \\$)(.+?\\.\\d+)/i)[1] }}"
             }
           ]
         },
@@ -151,7 +154,11 @@
   ],
   "pinData": {},
   "settings": {},
-  "staticData": null,
+  "staticData": {
+    "node:Transactions Email": {
+      "lastMessageUid": 12
+    }
+  },
   "tags": [
     {
       "id": "LY1Kj6pTibELWGKc",
@@ -161,6 +168,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-30T03:32:05.550Z",
-  "versionId": "4c4aa150-9391-43df-a2e4-4fb5bad58bda"
+  "updatedAt": "2023-07-30T14:48:14.172Z",
+  "versionId": "2349aaed-818b-40ec-9d66-437415e70152"
 }
