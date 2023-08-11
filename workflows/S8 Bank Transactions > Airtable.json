@@ -159,7 +159,7 @@
   "settings": {},
   "staticData": {
     "node:Transactions Email": {
-      "lastMessageUid": 82
+      "lastMessageUid": 87
     }
   },
   "tags": [
@@ -171,6 +171,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-08-10T02:40:09.446Z",
+  "updatedAt": "2023-08-11T02:02:04.328Z",
   "versionId": "733260ec-bc54-4509-968a-dde46f82fc70"
 }
