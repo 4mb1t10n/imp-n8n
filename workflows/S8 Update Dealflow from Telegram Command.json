@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Filter BotCommands": {
       "main": [
@@ -359,6 +359,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-30T16:43:41.480Z",
-  "versionId": "3aeeefc9-cdad-48b6-b5c7-d233711c1dfe"
+  "updatedAt": "2023-09-14T11:10:21.748Z",
+  "versionId": "ad33b44f-6dc3-42a5-b82c-0d0dbbe8f1ee"
 }
