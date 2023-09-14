@@ -1,0 +1,141 @@
+{
+  "active": true,
+  "connections": {
+    "Airtable Webhook": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram1": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-09-14T00:25:04.567Z",
+  "id": "CcOyZVmYDQpgUYx0",
+  "name": "S8 Applicants",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "e60bf994-dde5-4a77-be45-6d8ce7f4764c",
+        "options": {}
+      },
+      "id": "844f5f38-a71f-47ea-9af2-3c0dcba51bf0",
+      "name": "Airtable Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        660,
+        420
+      ],
+      "webhookId": "e60bf994-dde5-4a77-be45-6d8ce7f4764c"
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblkhV7kYRH3chFVu/viwQEsgAWgk6cAzj1?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblkhV7kYRH3chFVu/viwQEsgAWgk6cAzj1?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+        },
+        "id": "={{ $json.query.recordId }}"
+      },
+      "id": "1f63a52a-d3fd-4476-9d74-09c013f7d1f0",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        880,
+        420
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BNhG76b6vOTpVP0E",
+          "name": "S8 Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "-1001986847733",
+        "file": "={{ $json.fields['Voucher Image'][0].url }}",
+        "additionalFields": {
+          "caption": "=Name: {{ $('Airtable').item.json[\"fields\"][\"First Name\"] }} {{ $('Airtable').item.json[\"fields\"][\"Last Name\"] }}Email: {{ $('Airtable').item.json[\"fields\"][\"Email\"] }}\nPhone: {{ $('Airtable').item.json[\"fields\"][\"Phone\"] }}\nAddress: {{ $('Airtable').item.json[\"fields\"][\"Current Address\"] }}\nHousehold: {{ $('Airtable').item.json[\"fields\"][\"Household Size\"] }}\nAdults: {{ $('Airtable').item.json[\"fields\"][\"Adults\"] }}\nIncome: {{ $('Airtable').item.json[\"fields\"][\"Income\"] }}\nCurrent Rent: {{ $('Airtable').item.json[\"fields\"][\"Current Rent\"] }}\nVoucher: {{ $('Airtable').item.json[\"fields\"][\"Voucher?\"] }}\nBedrooms: {{ $('Airtable').item.json[\"fields\"][\"Voucher Bedrooms\"] }}"
+        }
+      },
+      "id": "e30a0b43-c931-4db2-b2e0-8b68a38ce659",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        420
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "00LXc8xbm2J4UVrX",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Airtable Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-production-29d3.up.railway.app",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "x-airtable-source": "appW0UJP0qQbIw5tS/wflSEEvpuS0324s7M",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-forwarded-for": "3.94.132.42",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "3.94.132.42",
+            "x-request-id": "5ab8cfc3-adfc-4f45-a32d-bf83a15f8302"
+          },
+          "params": {},
+          "query": {
+            "recordId": "recZKqGU9vB0M3jFa"
+          },
+          "body": {}
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-09-14T02:41:03.253Z",
+  "versionId": "530eb29e-177d-4a3d-a4ac-72bd8cd72a58"
+}
