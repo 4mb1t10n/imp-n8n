@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Transactions Email": {
       "main": [
@@ -171,6 +171,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-08-11T16:11:11.564Z",
-  "versionId": "733260ec-bc54-4509-968a-dde46f82fc70"
+  "updatedAt": "2023-09-15T00:50:55.196Z",
+  "versionId": "10143181-b3ae-4cc9-b74c-210c6bb2dfff"
 }
