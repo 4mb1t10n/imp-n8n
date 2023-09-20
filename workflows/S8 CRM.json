@@ -1,0 +1,597 @@
+{
+  "active": true,
+  "connections": {
+    "Get Airtable": {
+      "main": [
+        [
+          {
+            "node": "Send notification to Applicants",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook from Airtable": {
+      "main": [
+        [
+          {
+            "node": "Get Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does Folder Exist?": {
+      "main": [
+        [
+          {
+            "node": "Get File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Folder": {
+      "main": [
+        [
+          {
+            "node": "Get File 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get File": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get File 2": {
+      "main": [
+        [
+          {
+            "node": "Google Drive2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook from Airtable to create Drive Folder": {
+      "main": [
+        [
+          {
+            "node": "Get Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Airtable1": {
+      "main": [
+        [
+          {
+            "node": "Search Drive for Folder 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Drive for Folder 1": {
+      "main": [
+        [
+          {
+            "node": "Does Folder Exist?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does Folder Exist?1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Create Folder1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Drive for Folder 2": {
+      "main": [
+        [
+          {
+            "node": "Does Folder Exist?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-09-14T00:25:04.567Z",
+  "id": "CcOyZVmYDQpgUYx0",
+  "name": "S8 CRM",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "-1001986847733",
+        "file": "={{ $json.fields['Voucher Image'][0].url }}",
+        "additionalFields": {
+          "caption": "=Name: {{ $('Get Airtable').item.json[\"fields\"][\"First Name\"] }} {{ $('Get Airtable').item.json[\"fields\"][\"Last Name\"] }}Email: {{ $('Get Airtable').item.json[\"fields\"][\"Email\"] }}\nPhone: {{ $('Get Airtable').item.json[\"fields\"][\"Phone\"] }}\nAddress: {{ $('Get Airtable').item.json[\"fields\"][\"Current Address\"] }}\nHousehold: {{ $('Get Airtable').item.json[\"fields\"][\"Household Size\"] }}\nAdults: {{ $('Get Airtable').item.json[\"fields\"][\"Adults\"] }}\nIncome: {{ $('Get Airtable').item.json[\"fields\"][\"Income\"] }}\nCurrent Rent: {{ $('Get Airtable').item.json[\"fields\"][\"Current Rent\"] }}\nVoucher: {{ $('Get Airtable').item.json[\"fields\"][\"Voucher?\"] }}\nBedrooms: {{ $('Get Airtable').item.json[\"fields\"][\"Voucher Bedrooms\"] }}"
+        }
+      },
+      "id": "e30a0b43-c931-4db2-b2e0-8b68a38ce659",
+      "name": "Send notification to Applicants",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        980,
+        420
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "00LXc8xbm2J4UVrX",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblkhV7kYRH3chFVu/viwQEsgAWgk6cAzj1?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblkhV7kYRH3chFVu/viwQEsgAWgk6cAzj1?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+        },
+        "id": "={{ $json.query.recordId }}"
+      },
+      "id": "1f63a52a-d3fd-4476-9d74-09c013f7d1f0",
+      "name": "Get Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        820,
+        420
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BNhG76b6vOTpVP0E",
+          "name": "S8 Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "e60bf994-dde5-4a77-be45-6d8ce7f4764c",
+        "options": {}
+      },
+      "id": "844f5f38-a71f-47ea-9af2-3c0dcba51bf0",
+      "name": "Webhook from Airtable",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        660,
+        420
+      ],
+      "webhookId": "e60bf994-dde5-4a77-be45-6d8ce7f4764c"
+    },
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "path": "cb608c6a-f525-4777-8f60-2c42471af181",
+        "options": {}
+      },
+      "id": "fff32f15-f402-4d0a-82ea-1c2dc2efc39d",
+      "name": "Webhook from Aircall",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        660,
+        40
+      ],
+      "webhookId": "cb608c6a-f525-4777-8f60-2c42471af181",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "TipJQrA0hi8jgPyX",
+          "name": "S8 Baisic Bank Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.name }}",
+              "value2": "={{ $('Get Airtable').item.json.fields.Email }}"
+            }
+          ]
+        }
+      },
+      "id": "d8358b3c-9597-4b71-962d-435a811a641d",
+      "name": "Does Folder Exist?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "name": "={{ Date() }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Search Drive for Folder 1').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "b99ef857-d3c4-4c7b-9149-53aea5b0c2b6",
+      "name": "Google Drive1",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2140,
+        700
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "EuFOCFm90s0y3wV4",
+          "name": "Imposbl Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('Get Airtable').item.json.fields.Email }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1A-UIiFgzB1XVcXXD_i9i6N6MY6wzZ6yl",
+          "mode": "list",
+          "cachedResultName": "All Applicants",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1A-UIiFgzB1XVcXXD_i9i6N6MY6wzZ6yl"
+        },
+        "options": {}
+      },
+      "id": "c55c8ca0-153e-431f-bb49-cfebc6b34e6c",
+      "name": "Create Folder",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1920,
+        900
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "EuFOCFm90s0y3wV4",
+          "name": "Imposbl Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ Date() }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Create Folder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "6950aadb-7b3f-41f6-ab69-c96efd5c9b28",
+      "name": "Google Drive2",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2360,
+        900
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "EuFOCFm90s0y3wV4",
+          "name": "Imposbl Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Get Airtable').item.json.fields['Voucher Image'][0].url }}",
+        "options": {}
+      },
+      "id": "0e63e043-dffa-4b59-a07e-23b571619ddc",
+      "name": "Get File",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1920,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Get Airtable').item.json.fields['Voucher Image'][0].url }}",
+        "options": {}
+      },
+      "id": "b1675000-27a7-4500-9d8b-44a97242dc40",
+      "name": "Get File 2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2140,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "path": "06244fc8-40e4-4aeb-adbe-91a5398acac6",
+        "options": {}
+      },
+      "id": "a7126142-a95f-46b9-8ea0-b2c1fb31e397",
+      "name": "Webhook from Airtable to create Drive Folder",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        660,
+        960
+      ],
+      "webhookId": "06244fc8-40e4-4aeb-adbe-91a5398acac6"
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblkhV7kYRH3chFVu/viwQEsgAWgk6cAzj1?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblkhV7kYRH3chFVu/viwQEsgAWgk6cAzj1?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+        },
+        "id": "={{ $json.query.recordId }}"
+      },
+      "id": "578fefa3-5946-44c7-bca4-74237f00475d",
+      "name": "Get Airtable1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        880,
+        960
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BNhG76b6vOTpVP0E",
+          "name": "S8 Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.name }}",
+              "value2": "={{ $('Get Airtable').item.json.fields.Email }}"
+            }
+          ]
+        }
+      },
+      "id": "5ee4f10f-bd17-4afa-bcfe-bb4b3056f1bd",
+      "name": "Does Folder Exist?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('Get Airtable').item.json.fields.Email }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1A-UIiFgzB1XVcXXD_i9i6N6MY6wzZ6yl",
+          "mode": "list",
+          "cachedResultName": "All Applicants",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1A-UIiFgzB1XVcXXD_i9i6N6MY6wzZ6yl"
+        },
+        "options": {}
+      },
+      "id": "5656d959-63ea-43e1-a75d-33678d452e49",
+      "name": "Create Folder1",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1500,
+        1060
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "EuFOCFm90s0y3wV4",
+          "name": "Imposbl Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "searchMethod": "query",
+        "queryString": "=name = '{{ $json.fields.Email }}'",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1A-UIiFgzB1XVcXXD_i9i6N6MY6wzZ6yl",
+            "mode": "list",
+            "cachedResultName": "All Applicants",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1A-UIiFgzB1XVcXXD_i9i6N6MY6wzZ6yl"
+          }
+        },
+        "options": {}
+      },
+      "id": "0fc61afc-bfcc-48d8-94d4-19fb369dc6b1",
+      "name": "Search Drive for Folder 2",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1100,
+        960
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "EuFOCFm90s0y3wV4",
+          "name": "Imposbl Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "searchMethod": "query",
+        "queryString": "=name = '{{ $json.fields.Email }}'",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1A-UIiFgzB1XVcXXD_i9i6N6MY6wzZ6yl",
+            "mode": "list",
+            "cachedResultName": "All Applicants",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1A-UIiFgzB1XVcXXD_i9i6N6MY6wzZ6yl"
+          }
+        },
+        "options": {}
+      },
+      "id": "29ff4b71-cbe7-4f99-8f39-02f29c9f72d9",
+      "name": "Search Drive for Folder 1",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1520,
+        780
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "EuFOCFm90s0y3wV4",
+          "name": "Imposbl Drive"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook from Airtable": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-production-29d3.up.railway.app",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "x-airtable-source": "appW0UJP0qQbIw5tS/wflSEEvpuS0324s7M",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-forwarded-for": "44.199.218.4",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "44.199.218.4",
+            "x-request-id": "06cd2672-0386-4eb4-8ce8-ce8b59b8f327"
+          },
+          "params": {},
+          "query": {
+            "recordId": "rec8xnIZGZX5X7HU4"
+          },
+          "body": {}
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Webhook from Airtable to create Drive Folder": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-production-29d3.up.railway.app",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "x-airtable-source": "appW0UJP0qQbIw5tS/wfl8xio8C5Itm2I5v",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-forwarded-for": "34.227.10.0",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "34.227.10.0",
+            "x-request-id": "32fa43b1-2013-497f-9b23-f9828782dc23"
+          },
+          "params": {},
+          "query": {
+            "recordId": "recupKlEhQQYKAcX1"
+          },
+          "body": {}
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 3,
+  "updatedAt": "2023-09-19T21:27:18.559Z",
+  "versionId": "50941c3b-4804-480e-ac43-5d7f98f0afd6"
+}
