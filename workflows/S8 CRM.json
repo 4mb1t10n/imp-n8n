@@ -208,28 +208,6 @@
     },
     {
       "parameters": {
-        "authentication": "basicAuth",
-        "path": "cb608c6a-f525-4777-8f60-2c42471af181",
-        "options": {}
-      },
-      "id": "fff32f15-f402-4d0a-82ea-1c2dc2efc39d",
-      "name": "Webhook from Aircall",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        660,
-        40
-      ],
-      "webhookId": "cb608c6a-f525-4777-8f60-2c42471af181",
-      "credentials": {
-        "httpBasicAuth": {
-          "id": "TipJQrA0hi8jgPyX",
-          "name": "S8 Baisic Bank Auth"
-        }
-      }
-    },
-    {
-      "parameters": {
         "conditions": {
           "string": [
             {
@@ -591,7 +569,7 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2023-09-19T21:27:18.559Z",
-  "versionId": "50941c3b-4804-480e-ac43-5d7f98f0afd6"
+  "triggerCount": 2,
+  "updatedAt": "2023-09-20T17:21:50.730Z",
+  "versionId": "c270af42-5ce3-45b6-80c5-7ea6982db670"
 }
