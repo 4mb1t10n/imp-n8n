@@ -156,7 +156,7 @@
       "main": [
         [
           {
-            "node": "Create Person",
+            "node": "Set Phone and Email",
             "type": "main",
             "index": 0
           }
@@ -222,14 +222,70 @@
       "main": [
         [
           {
-            "node": "Set1",
+            "node": "Set Bitly",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Airtable2": {
+    "Find all matching phone numbers": {
+      "main": [
+        [
+          {
+            "node": "Count Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Phone and Email": {
+      "main": [
+        [
+          {
+            "node": "Does phone exist?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Count Results": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does Email Exist?": {
+      "main": [
+        [],
+        [
+          {
+            "node": "S8 Notifications",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Bitly": {
+      "main": [
+        [
+          {
+            "node": "Update Bitly",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Bitly": {
       "main": [
         [
           {
@@ -240,11 +296,65 @@
         ]
       ]
     },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "S8 Notifications1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set duplicate = true1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set duplicate = true1": {
+      "main": [
+        [
+          {
+            "node": "Set duplicate = true",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does phone exist?": {
+      "main": [
+        [
+          {
+            "node": "Find all matching phone numbers",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Does Email Exist?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Set1": {
       "main": [
         [
           {
-            "node": "Airtable2",
+            "node": "Create Person",
             "type": "main",
             "index": 0
           }
@@ -343,8 +453,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        880,
-        1980
+        860,
+        1760
       ]
     },
     {
@@ -369,8 +479,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1300,
-        1900
+        1280,
+        1680
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -402,8 +512,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1080,
-        2100
+        1060,
+        1880
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -432,8 +542,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1520,
-        2100
+        1500,
+        1880
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -452,8 +562,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1080,
-        1900
+        1060,
+        1680
       ]
     },
     {
@@ -466,8 +576,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1300,
-        2100
+        1280,
+        1880
       ]
     },
     {
@@ -480,8 +590,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        680,
-        1540
+        660,
+        1400
       ],
       "webhookId": "06244fc8-40e4-4aeb-adbe-91a5398acac6"
     },
@@ -507,8 +617,8 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        900,
-        1540
+        820,
+        1400
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -533,8 +643,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1320,
-        1540
+        1140,
+        1400
       ]
     },
     {
@@ -560,8 +670,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1520,
-        1640
+        1320,
+        1480
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -591,8 +701,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1120,
-        1540
+        980,
+        1400
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -623,8 +733,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        680,
-        1980
+        660,
+        1760
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -706,7 +816,7 @@
       "typeVersion": 1,
       "position": [
         660,
-        640
+        540
       ],
       "webhookId": "e1a5a3c9-068f-4ba8-a7de-d1c1e33290cc"
     },
@@ -721,7 +831,7 @@
       "typeVersion": 1,
       "position": [
         320,
-        640
+        540
       ]
     },
     {
@@ -747,7 +857,7 @@
       "typeVersion": 1,
       "position": [
         820,
-        640
+        540
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -759,7 +869,7 @@
     {
       "parameters": {
         "resource": "person",
-        "name": "={{ $json.fields['First Name'] }} {{ $json.fields['Last Name'] }}",
+        "name": "={{ $('Find all matching phone numbers').item.json.fields['First Name'] }}",
         "additionalFields": {
           "email": [
             "={{ $json.fields.Email }}"
@@ -776,8 +886,8 @@
       "type": "n8n-nodes-base.pipedrive",
       "typeVersion": 1,
       "position": [
-        980,
-        640
+        2300,
+        440
       ],
       "credentials": {
         "pipedriveApi": {
@@ -799,8 +909,8 @@
       "type": "n8n-nodes-base.pipedrive",
       "typeVersion": 1,
       "position": [
-        1140,
-        640
+        2460,
+        440
       ],
       "credentials": {
         "pipedriveApi": {
@@ -868,8 +978,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        1300,
-        640
+        2620,
+        440
       ]
     },
     {
@@ -896,8 +1006,8 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        1460,
-        640
+        2780,
+        440
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -917,8 +1027,8 @@
       "type": "n8n-nodes-base.bitly",
       "typeVersion": 1,
       "position": [
-        1620,
-        640
+        2940,
+        440
       ],
       "credentials": {
         "bitlyOAuth2Api": {
@@ -926,6 +1036,205 @@
           "name": "alex@imposbl.com"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "note",
+        "content": "=Prefilled Questionnaire Link: {{ $json[\"fields\"][\"Bitly\"] }}\n{{ $('Airtable1').item.json.fields.Notes }}",
+        "additionalFields": {
+          "lead_id": "={{ $('Create Lead').item.json.id }}"
+        }
+      },
+      "id": "62e97411-2477-44c8-8e02-6b1700de3684",
+      "name": "Create Note",
+      "type": "n8n-nodes-base.pipedrive",
+      "typeVersion": 1,
+      "position": [
+        3420,
+        440
+      ],
+      "credentials": {
+        "pipedriveApi": {
+          "id": "L1hhaI3honESwfCI",
+          "name": "alex@imposbl.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "list",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblcyhffDtE5ne5Er/viw3ekoy7S2tdgMRj?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblcyhffDtE5ne5Er/viw3ekoy7S2tdgMRj?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+        },
+        "additionalOptions": {
+          "fields": [],
+          "filterByFormula": "={PhoneExtracted}={{ $json.PhoneExtracted }}"
+        }
+      },
+      "id": "d8b1c960-b97a-4639-808c-fb6a0b218862",
+      "name": "Find all matching phone numbers",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        440
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BNhG76b6vOTpVP0E",
+          "name": "S8 Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "number": [
+            {
+              "name": "PhoneExtracted",
+              "value": "={{ $json.fields.PhoneExtracted }}"
+            }
+          ],
+          "string": [
+            {
+              "name": "EmailExtracted",
+              "value": "={{ $json.fields.EmailExtracted }}"
+            },
+            {
+              "name": "recordId",
+              "value": "={{ $json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "80e4b215-8b33-46c3-940b-d27c491b30eb",
+      "name": "Set Phone and Email",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        980,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "if (Object.keys(items[0].json).length === 0) {\n  return [\n     {\n       json: {\n         results: 0,\n       }\n      }\n  ]\n}\nreturn [\n  {\n    json: {\n      results: items.length,\n    }\n  }\n];\n"
+      },
+      "id": "7a4fce44-fc3e-4e46-aa54-3334c57a140b",
+      "name": "Count Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "value1": "={{ $json.results }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "equal"
+            },
+            {
+              "operation": "equal",
+              "value2": 1,
+              "output": 1
+            },
+            {
+              "operation": "largerEqual",
+              "value2": 2,
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "8ee42421-0b2d-4842-b0a7-10a44bce2f79",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.EmailExtracted }}",
+              "operation": "notEqual",
+              "value2": "={{ \"None\" }}"
+            }
+          ]
+        }
+      },
+      "id": "09f0f661-8642-4231-a203-a983c80ac90f",
+      "name": "Does Email Exist?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1001902244643",
+        "text": "=Empty lead added. No phone number or email address detected. Record ID: {{ $json.recordId }}",
+        "additionalFields": {}
+      },
+      "id": "14f2c43b-9b19-47e2-a3c3-6c394bb04b73",
+      "name": "S8 Notifications",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        740
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "00LXc8xbm2J4UVrX",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Bitly",
+              "value": "={{ $json.link }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0c37b7a5-7193-4b68-981f-08bbdb48bf11",
+      "name": "Set Bitly",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        3100,
+        440
+      ]
     },
     {
       "parameters": {
@@ -947,12 +1256,46 @@
         "options": {}
       },
       "id": "e2c2bc71-f85c-46d1-b194-d08127d50a33",
-      "name": "Airtable2",
+      "name": "Update Bitly",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        1940,
-        640
+        3260,
+        440
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BNhG76b6vOTpVP0E",
+          "name": "S8 Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "update",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblcyhffDtE5ne5Er/viw3ekoy7S2tdgMRj?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appW0UJP0qQbIw5tS/tblcyhffDtE5ne5Er/viw3ekoy7S2tdgMRj?blocks=hide",
+          "mode": "url",
+          "__regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+        },
+        "id": "={{ $('Webhook').item.json.query.recordId }}",
+        "options": {}
+      },
+      "id": "b4415654-26c6-4343-b630-09997a396b2f",
+      "name": "Set duplicate = true",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        2380,
+        620
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -965,46 +1308,87 @@
       "parameters": {
         "keepOnlySet": true,
         "values": {
-          "string": [
+          "boolean": [
             {
-              "name": "Bitly",
-              "value": "={{ $json.link }}"
+              "name": "Duplicate?",
+              "value": true
             }
           ]
         },
         "options": {}
       },
-      "id": "0c37b7a5-7193-4b68-981f-08bbdb48bf11",
-      "name": "Set1",
+      "id": "57890b66-eaeb-4323-909c-f3209bf754d5",
+      "name": "Set duplicate = true1",
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        1780,
-        640
+        2200,
+        620
       ]
     },
     {
       "parameters": {
-        "resource": "note",
-        "content": "=Prefilled Questionnaire Link: {{ $json[\"fields\"][\"Bitly\"] }}\n{{ $('Airtable1').item.json.fields.Notes }}",
-        "additionalFields": {
-          "lead_id": "={{ $('Create Lead').item.json.id }}"
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.PhoneExtracted }}",
+              "operation": "notEqual",
+              "value2": "={{ \"None\" }}"
+            }
+          ]
         }
       },
-      "id": "62e97411-2477-44c8-8e02-6b1700de3684",
-      "name": "Create Note",
-      "type": "n8n-nodes-base.pipedrive",
+      "id": "6ab10a7b-be30-438d-bb3e-75334b453c43",
+      "name": "Does phone exist?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1001902244643",
+        "text": "=Empty lead added. No phone number or email address detected. Record ID: {{ $json.recordId }}",
+        "additionalFields": {}
+      },
+      "id": "dfa2c724-6984-4648-975b-abc505e5a8b3",
+      "name": "S8 Notifications1",
+      "type": "n8n-nodes-base.telegram",
       "typeVersion": 1,
       "position": [
         2100,
-        640
+        200
       ],
       "credentials": {
-        "pipedriveApi": {
-          "id": "L1hhaI3honESwfCI",
-          "name": "alex@imposbl.com"
+        "telegramApi": {
+          "id": "00LXc8xbm2J4UVrX",
+          "name": "P0m0shnik11_Bot"
         }
       }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Full Name",
+              "value": "={{ $('Does phone exist?').item.json.PhoneExtracted }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "acdd7d50-480d-4421-a4af-c58aafce8d83",
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1960,
+        440
+      ]
     }
   ],
   "pinData": {
@@ -1082,6 +1466,31 @@
           "item": 0
         }
       }
+    ],
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-production-29d3.up.railway.app",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "x-airtable-source": "appW0UJP0qQbIw5tS/wflTxXzgEq194Ic0c",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-forwarded-for": "3.237.35.188",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "3.237.35.188",
+            "x-request-id": "5afa7ef3-f237-438e-8a58-66ad9ebabf56"
+          },
+          "params": {},
+          "query": {
+            "recordId": "rec60eqwVU8BO3tGj"
+          },
+          "body": {}
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
     ]
   },
   "settings": {},
@@ -1090,6 +1499,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2023-09-28T16:16:44.004Z",
-  "versionId": "9ba6e508-027e-411c-a2d6-d552985832c5"
+  "updatedAt": "2023-09-29T10:37:26.744Z",
+  "versionId": "c1932a40-9048-4b9d-8ac2-719641f36ab9"
 }
