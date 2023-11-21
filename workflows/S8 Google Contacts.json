@@ -1,0 +1,525 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook2": {
+      "main": [
+        [
+          {
+            "node": "Airtable3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable3": {
+      "main": [
+        [
+          {
+            "node": "Contact Doesnt Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact Doesnt Exists?": {
+      "main": [
+        [
+          {
+            "node": "Create Contact",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Google Contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Contact": {
+      "main": [
+        [
+          {
+            "node": "Airtable5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Google Contacts": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-10-04T15:17:56.802Z",
+  "id": "5S6Fr73v0w82W3vc",
+  "name": "S8 Google Contacts",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "google-contacts-sync",
+        "options": {}
+      },
+      "id": "d7b9e180-8335-490e-8c34-6e16c9c1729d",
+      "name": "Webhook2",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        60
+      ],
+      "webhookId": "a36be843-0f82-4394-83b8-369276f27159"
+    },
+    {
+      "parameters": {
+        "content": "## CRM <> Google Contacts",
+        "height": 102.84919477961563
+      },
+      "id": "b48e6438-bc4b-450a-ba1c-b305319b7f27",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblbnrKB8dxGKtN7B",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblbnrKB8dxGKtN7B"
+        },
+        "id": "={{ $json.query.recordId }}",
+        "options": {}
+      },
+      "id": "fc5ead37-bc65-48a6-b3b8-3272e58e79e3",
+      "name": "Airtable3",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        60
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json['Google Contacts'].url }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "ddf5017d-bfc3-4627-8ad7-197ac6289c02",
+      "name": "Contact Doesnt Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "familyName": "={{ $('Airtable3').item.json['Last Name'] }}",
+        "givenName": "={{ $('Airtable3').item.json['First Name'] }}",
+        "additionalFields": {
+          "emailsUi": {
+            "emailsValues": [
+              {
+                "type": "home",
+                "value": "={{ $('Airtable3').item.json.Email }}"
+              }
+            ]
+          },
+          "group": [
+            "contactGroups/44f6a7c78e7436bb"
+          ],
+          "phoneUi": {
+            "phoneValues": [
+              {
+                "type": "home",
+                "value": "={{ $('Airtable3').item.json.Phone }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "bbc175fc-81f9-412a-a713-976fd2acade0",
+      "name": "Create Contact",
+      "type": "n8n-nodes-base.googleContacts",
+      "typeVersion": 1,
+      "position": [
+        180,
+        -20
+      ],
+      "credentials": {
+        "googleContactsOAuth2Api": {
+          "id": "9DPOeBnN6wBPV6V8",
+          "name": "milesalex11@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblXUKKfwW6yBTZHD",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblXUKKfwW6yBTZHD"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Airtable3').item.json.id }}",
+            "Google Contact ID": "={{ $json.contactId }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Rec ID",
+              "displayName": "Rec ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone Input",
+              "displayName": "Phone Input",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Google Contact ID",
+              "displayName": "Google Contact ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Toledo OH",
+                  "value": "Toledo OH"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "runGoogleContacts",
+              "displayName": "runGoogleContacts",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "runPipe",
+              "displayName": "runPipe",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Pipedrive ID",
+              "displayName": "Pipedrive ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Pipedrive",
+              "displayName": "Pipedrive",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Created Reason",
+              "displayName": "Created Reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New Call Created ",
+                  "value": "New Call Created "
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "linkLead",
+              "displayName": "linkLead",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "linkQuestionnaire",
+              "displayName": "linkQuestionnaire",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "linkCRM",
+              "displayName": "linkCRM",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Created Time",
+              "displayName": "Created Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7539e79c-53e8-4e5b-9970-20d8438b2e13",
+      "name": "Airtable5",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        400,
+        -20
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "contactId": "={{ $json['Google Contact ID'] }}",
+        "updateFields": {
+          "familyName": "={{ $json['Last Name'] }}",
+          "givenName": "={{ $json['First Name'] }}",
+          "emailsUi": {
+            "emailsValues": [
+              {
+                "type": "work",
+                "value": "={{ $json.Email }}"
+              }
+            ]
+          },
+          "group": [
+            "contactGroups/44f6a7c78e7436bb"
+          ],
+          "phoneUi": {
+            "phoneValues": [
+              {
+                "type": "home",
+                "value": "={{ $json['Phone Input'] }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "63234784-8910-417e-a5db-dc02739042e7",
+      "name": "Update Google Contacts",
+      "type": "n8n-nodes-base.googleContacts",
+      "typeVersion": 1,
+      "position": [
+        180,
+        160
+      ],
+      "credentials": {
+        "googleContactsOAuth2Api": {
+          "id": "9DPOeBnN6wBPV6V8",
+          "name": "milesalex11@gmail.com"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook2": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "x-airtable-source": "appW0UJP0qQbIw5tS/wfl2EOAAI19KPtGDl",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-forwarded-for": "3.239.164.33",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "3.239.164.33",
+            "x-request-id": "3134eca2-3a3e-4fba-a1f4-304419cef0a4"
+          },
+          "params": {},
+          "query": {
+            "recordId": "recbrmwsSjtmRy3oW"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-10-04T15:28:08.033Z",
+  "versionId": "6b76ae94-b634-4cc3-825c-525f13399751"
+}
