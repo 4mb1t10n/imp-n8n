@@ -1,0 +1,17 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2023-10-29T23:08:20.605Z",
+  "id": "A8ESZgRRLsK2tNbK",
+  "name": "Trello",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-10-29T23:08:20.605Z",
+  "versionId": "a9b9f133-21cc-42b4-8426-040a72328282"
+}
