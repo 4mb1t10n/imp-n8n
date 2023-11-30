@@ -107,7 +107,7 @@
     {
       "parameters": {
         "chatId": "-1001986847733",
-        "text": "=*Questionnaire Submitted*\n{{ $json['First Name'] }} {{ $json['Last Name'] }}\n{{ $json.Email }}\n{{ $json['Phone Input'] }}\n[View Questionnaire](https://airtable.com/appW0UJP0qQbIw5tS/pag8hdY0MVA2fw1Ij?LfMCT={{ $json[\"All Contacts Rec ID\"][0] }})",
+        "text": "=*Questionnaire Submitted*\n{{ $json['First Name'] }} {{ $json['Last Name'] }}\n{{ $json.Email }}\n{{ $json['Phone Input'] }}\n---\nVoucher: {{ $json[\"Voucher?\"] }}\n# Bedrooms: {{ $json[\"Bedrooms\"] }}\nRent Total: {{ $json[\"Current Rent\"] }}\nRent Portion: {{ $json[\"YourPortion\"] }}\nIncome: {{ $json[\"Income\"] }}\nPathway: {{ $json[\"Pathway?\"] }}\n\nAdults: {{ $json[\"Adults\"] }} (all adults need to submit BG check)\nKids: {{ $json[\"Kids\"] }}\nPets: {{ $json[\"Pets\"] }}\nHeavy Pets: {{ $json[\"Pets 25+\"] }}\n\nCollections: {{ $json[\"Collections?\"] }}\nCredit Score: {{ $json[\"Credit Score\"] }}\nEvictions: {{ $json[\"Evictions?\"] }}\nExplain: {{ $json[\"Evictions Explain\"] }}\nCriminal History: {{ $json[\"Convictions?\"] }}\nExplain: {{ $json[\"Convictions Explain\"] }}\n\nMove Reason: {{ $json[\"Move Reason\"] }}\nMove Date: {{ $json[\"Move Date\"] }}",
         "additionalFields": {
           "disable_web_page_preview": true,
           "parse_mode": "Markdown"
@@ -226,6 +226,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2023-10-15T11:55:18.465Z",
-  "versionId": "c6548a1b-bbfb-4624-8349-b74a6bb35001"
+  "updatedAt": "2023-11-29T17:42:35.644Z",
+  "versionId": "dddfbb8d-cb75-4c39-80f6-94fe5ee86a73"
 }
