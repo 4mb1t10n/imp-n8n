@@ -1,15 +1,9 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Webhook": {
       "main": [
-        [
-          {
-            "node": "Airtable",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -19,6 +13,7 @@
   "nodes": [
     {
       "parameters": {
+        "httpMethod": "POST",
         "path": "e43a3317-2c43-41c6-b2de-3fb9419b17b7",
         "options": {}
       },
@@ -31,41 +26,6 @@
         380
       ],
       "webhookId": "e43a3317-2c43-41c6-b2de-3fb9419b17b7"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "base": {
-          "__rl": true,
-          "value": "={{ $json.query.baseRecordURL }}",
-          "mode": "url"
-        },
-        "table": {
-          "__rl": true,
-          "value": "={{ $json.query.baseRecordURL }}",
-          "mode": "url"
-        },
-        "id": "={{ $json.query.recordID }}",
-        "options": {
-          "downloadFields": [
-            "Invoice File"
-          ]
-        }
-      },
-      "id": "5cfc529d-183f-441d-a319-b3d8e330af88",
-      "name": "Airtable",
-      "type": "n8n-nodes-base.airtable",
-      "typeVersion": 2,
-      "position": [
-        840,
-        380
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "ba9BL3rXOUDjb7P2",
-          "name": "alex@section.homes"
-        }
-      }
     }
   ],
   "pinData": {},
@@ -74,7 +34,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2023-11-09T15:51:33.625Z",
-  "versionId": "06ac6ea3-e65c-4a96-8717-f33c3e66a4ca"
+  "triggerCount": 1,
+  "updatedAt": "2023-11-30T14:21:48.919Z",
+  "versionId": "9dd089e4-294d-40ea-85ed-69606e658405"
 }
