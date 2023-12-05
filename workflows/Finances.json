@@ -1,29 +1,6 @@
 {
   "active": true,
-  "connections": {
-    "When clicking \"Execute Workflow\"": {
-      "main": [
-        [
-          {
-            "node": "Supabase get user",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Supabase get user": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
+  "connections": {},
   "createdAt": "2023-11-09T14:57:03.032Z",
   "id": "0jh9kpsrP1m0UxJI",
   "name": "Finances",
@@ -43,89 +20,6 @@
         380
       ],
       "webhookId": "e43a3317-2c43-41c6-b2de-3fb9419b17b7"
-    },
-    {
-      "parameters": {},
-      "id": "c3705f56-5cad-47c9-8e3f-a0a123a792f6",
-      "name": "When clicking \"Execute Workflow\"",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        620,
-        600
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "tableId": "users",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "keyValue": "1"
-            }
-          ]
-        }
-      },
-      "id": "3ec7ee21-90d2-47c0-ac01-cf54f3b43f0f",
-      "name": "Supabase get user",
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        840,
-        600
-      ],
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "milesalex11@gmail.com"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "url": "https://development.plaid.com/transactions/sync",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "client_id",
-              "value": "64c67d624dcbfb00170aea9f"
-            },
-            {
-              "name": "secret",
-              "value": "71d6f4db5fe52c8b7b04cb9cca860d"
-            },
-            {
-              "name": "access_token",
-              "value": "={{ $json.accessToken }}"
-            },
-            {
-              "name": "count",
-              "value": "250"
-            }
-          ]
-        },
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "b2a7ef00-6184-4a38-850b-d6d31eca16c4",
-      "name": "HTTP Request",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
-      "position": [
-        1060,
-        600
-      ]
     }
   ],
   "pinData": {},
@@ -135,6 +29,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-12-03T22:00:45.455Z",
-  "versionId": "a4b81e9d-6599-4756-a230-3e65577070da"
+  "updatedAt": "2023-12-04T17:10:18.496Z",
+  "versionId": "ac3abd71-bdf4-4dc8-964b-e27a26b935db"
 }
