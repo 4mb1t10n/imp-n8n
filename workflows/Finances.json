@@ -8,6 +8,11 @@
             "node": "Get Airtable Record",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Get All Autocat Rules Airtable",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -100,6 +105,28 @@
       "main": [
         [
           {
+            "node": "set all fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set all fields": {
+      "main": [
+        [
+          {
+            "node": "set null if does not exist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set null if does not exist": {
+      "main": [
+        [
+          {
             "node": "Airtable",
             "type": "main",
             "index": 0
@@ -123,7 +150,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        640,
+        840,
         360
       ],
       "webhookId": "e43a3317-2c43-41c6-b2de-3fb9419b17b7"
@@ -315,9 +342,10 @@
           "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblDg7JXvWW4mst1j"
         },
         "columns": {
-          "mappingMode": "defineBelow",
+          "mappingMode": "autoMapInputData",
           "value": {
-            "id": "={{ $('Get Airtable Record').first().json.id }}"
+            "id": "={{ $('Get Airtable Record').first().json.id }}",
+            "display_category": "={{ $('Get All Autocat Rules Airtable').first().json[\"set_this_category\"] }}"
           },
           "matchingColumns": [
             "id"
@@ -1017,7 +1045,7 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        2240,
+        2620,
         540
       ],
       "credentials": {
@@ -1026,6 +1054,56 @@
           "name": "alex@section.homes"
         }
       }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "link_payees_input",
+              "stringValue": "={{ $('Get All Autocat Rules Airtable').first().json.link_this_payee[0] }}"
+            },
+            {
+              "name": "link_property_input",
+              "stringValue": "={{ $('Get All Autocat Rules Airtable').first().json.link_this_property[0] }}"
+            },
+            {
+              "name": "display_category",
+              "stringValue": "={{ $('Get All Autocat Rules Airtable').first().json.set_this_category }}"
+            },
+            {
+              "name": "id",
+              "stringValue": "={{ $('Get Airtable Record').first().json.id }}"
+            },
+            {
+              "name": "link_autocat_input",
+              "stringValue": "={{ $node[\"Split In Batches\"].json[\"id\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e6e44ecc-4095-45b1-9260-fa584b4f0a94",
+      "name": "set all fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        2220,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputs = $node[\"set all fields\"].json;\n\nconst output = {};\n\n// Check each input and add it to the output if it is defined\nif (inputs.link_payees_input !== undefined && inputs.link_payees_input !== \"undefined\") {\n    output.link_payees_input = inputs.link_payees_input;\n}\n\nif (inputs.link_property_input !== undefined && inputs.link_property_input !== \"undefined\") {\n    output.link_property_input = inputs.link_property_input;\n}\n\nif (inputs.display_category !== undefined && inputs.display_category !== \"undefined\") {\n    output.display_category = inputs.display_category;\n}\n\nif (inputs.link_autocat_input !== undefined && inputs.link_autocat_input !== \"undefined\") {\n    output.link_autocat_input = inputs.link_autocat_input;\n}\n\nif (inputs.id !== undefined) {\n    output.id = inputs.id;\n}\n\nreturn output;\n"
+      },
+      "id": "ccb372c3-4a15-450b-b9d6-9c65c660453b",
+      "name": "set null if does not exist",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2420,
+        540
+      ]
     }
   ],
   "pinData": {
@@ -1060,6 +1138,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2023-12-11T06:39:16.424Z",
-  "versionId": "a24f98b4-d909-4642-963c-0a144e4b2438"
+  "updatedAt": "2023-12-11T21:09:47.455Z",
+  "versionId": "34490fd4-09fc-46ce-9e91-8af95774b550"
 }
