@@ -5,56 +5,12 @@
       "main": [
         [
           {
-            "node": "Get Airtable Record",
+            "node": "All Autocat Records",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Get All Autocat Rules Airtable",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Airtable Record": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get All Autocat Rules Airtable": {
-      "main": [
-        [
-          {
-            "node": "Split In Batches",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split In Batches": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Merge": {
-      "main": [
-        [
-          {
-            "node": "Code",
+            "node": "Tx Record",
             "type": "main",
             "index": 0
           }
@@ -90,44 +46,11 @@
         ]
       ]
     },
-    "no match": {
-      "main": [
-        [
-          {
-            "node": "Split In Batches",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "match found": {
       "main": [
         [
           {
-            "node": "set all fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "set all fields": {
-      "main": [
-        [
-          {
-            "node": "set null if does not exist",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "set null if does not exist": {
-      "main": [
-        [
-          {
-            "node": "Airtable",
+            "node": "Get Autocat Rule",
             "type": "main",
             "index": 0
           }
@@ -139,6 +62,100 @@
         [
           {
             "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tx Record": {
+      "main": [
+        [
+          {
+            "node": "TX Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "All Autocat Records": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "no match": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "AC Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Autocat Rule": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "TX Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TX Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -162,8 +179,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        840,
-        360
+        1380,
+        160
       ],
       "webhookId": "e43a3317-2c43-41c6-b2de-3fb9419b17b7"
     },
@@ -177,116 +194,23 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        840,
-        660
+        1380,
+        580
       ],
       "webhookId": "e08667ee-32aa-43df-a69a-8dfccd367f1c"
     },
     {
       "parameters": {
-        "operation": "get",
-        "base": {
-          "__rl": true,
-          "value": "appjjY9qVQZlWUkkj",
-          "mode": "list",
-          "cachedResultName": "Finances",
-          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tblDg7JXvWW4mst1j",
-          "mode": "list",
-          "cachedResultName": "Transactions",
-          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblDg7JXvWW4mst1j"
-        },
-        "id": "={{ $json.query.rec_id }}",
-        "options": {}
-      },
-      "id": "0b6644fe-3c19-4d98-81b9-c0b5c608173e",
-      "name": "Get Airtable Record",
-      "type": "n8n-nodes-base.airtable",
-      "typeVersion": 2,
-      "position": [
-        1140,
-        560
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "ba9BL3rXOUDjb7P2",
-          "name": "alex@section.homes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "search",
-        "base": {
-          "__rl": true,
-          "value": "appjjY9qVQZlWUkkj",
-          "mode": "list",
-          "cachedResultName": "Finances",
-          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tblprQT6hfXUR56Xm",
-          "mode": "list",
-          "cachedResultName": "Autocat",
-          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblprQT6hfXUR56Xm"
-        },
-        "options": {}
-      },
-      "id": "d22b887e-c3e4-4fe8-9e14-8fdb3ba8f08a",
-      "name": "Get All Autocat Rules Airtable",
-      "type": "n8n-nodes-base.airtable",
-      "typeVersion": 2,
-      "position": [
-        1040,
-        740
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "ba9BL3rXOUDjb7P2",
-          "name": "alex@section.homes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "batchSize": 1,
-        "options": {}
-      },
-      "id": "1171f351-d8da-4811-939f-037e4c736ef7",
-      "name": "Split In Batches",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 2,
-      "position": [
-        1240,
-        740
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Retrieve fields from the n8n items\nconst direction = $('Merge').first().json[\"direction\"];\nconst IncomeOrExpense_display = $('Merge').first().json[\"IncomeOrExpense_display\"];\nconst analyzeText = $('Merge').first().json[\"ac_analyze_this_text\"];\nconst expression = new RegExp($('Merge').first().json[\"expression\"]);\n\n// Check direction\nif ((direction === \"Expense Only\" && IncomeOrExpense_display !== \"Expense\") ||\n    (direction === \"Income Only\" && IncomeOrExpense_display !== \"Income\")) {\n    return { result: \"Not a Match\" };\n}\n\n// Check regex match\nconst isMatch = expression.test(analyzeText);\nreturn { result: isMatch ? \"Match\" : \"Not a Match\" };"
+        "mode": "runOnceForEachItem",
+        "jsCode": "function checkTransaction() {\n    const txDirection = $json[\"tx_direction\"];\n    const acFlowDirection = $json[\"ac_flow_direction\"];\n    const txTextToAnalyze = $json[\"tx_text_to_analyze\"];\n    const acExpression = $json[\"ac_expression\"];\n    const acRecId = $json[\"ac_rec_id\"];\n\n    // Check if any inputs are missing\n    if (!txDirection || !acFlowDirection || !txTextToAnalyze || !acExpression || !acRecId) {\n        console.error(\"Missing Inputs\");\n        return { result: \"Missing Inputs\" };\n    }\n\n    // Check flow direction\n    if ((acFlowDirection === \"Income Only\" && txDirection !== \"Income\") ||\n        (acFlowDirection === \"Expense Only\" && txDirection !== \"Expense\")) {\n        return { result: \"No Match\" };\n    }\n\n    // Check regex match\n    try {\n        const regex = new RegExp(acExpression);\n        if (regex.test(txTextToAnalyze)) {\n            return { result: \"Match\", ac_rec_id: acRecId };\n        } else {\n            return { result: \"No Match\" };\n        }\n    } catch (error) {\n        console.error(\"Invalid regex:\", acExpression);\n        return { result: \"Error in regex\" };\n    }\n}\n\nreturn checkTransaction();\n"
       },
       "id": "ceb01527-b5c4-492f-a85f-421d84c39507",
       "name": "Code",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1640,
-        620
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "29e02f59-1e3c-42ad-8986-a97af4e09a76",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        1440,
-        620
+        2520,
+        660
       ]
     },
     {
@@ -299,19 +223,20 @@
               "value2": "Match"
             },
             {
-              "value2": "Not a Match",
+              "value2": "No Match",
               "output": 1
             }
           ]
-        }
+        },
+        "fallbackOutput": 1
       },
       "id": "5162e980-def1-49ee-9f6b-5bf34450f7b9",
       "name": "Switch",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        1840,
-        620
+        2720,
+        660
       ]
     },
     {
@@ -320,8 +245,8 @@
       "name": "match found",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        2020,
-        540
+        2940,
+        560
       ],
       "typeVersion": 1
     },
@@ -331,8 +256,8 @@
       "name": "no match",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        2020,
-        740
+        2940,
+        760
       ],
       "typeVersion": 1
     },
@@ -354,10 +279,10 @@
           "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblDg7JXvWW4mst1j"
         },
         "columns": {
-          "mappingMode": "autoMapInputData",
+          "mappingMode": "defineBelow",
           "value": {
-            "id": "={{ $('Get Airtable Record').first().json.id }}",
-            "display_category": "={{ $('Get All Autocat Rules Airtable').first().json[\"set_this_category\"] }}"
+            "id": "={{ $('Tx Record').first().json.id }}",
+            "display_category": "={{ $('All Autocat Records').first().json[\"set_this_category\"] }}"
           },
           "matchingColumns": [
             "id"
@@ -1057,8 +982,8 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        2620,
-        540
+        3380,
+        560
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -1066,56 +991,6 @@
           "name": "alex@section.homes"
         }
       }
-    },
-    {
-      "parameters": {
-        "fields": {
-          "values": [
-            {
-              "name": "link_payees_input",
-              "stringValue": "={{ $('Get All Autocat Rules Airtable').first().json.link_this_payee[0] }}"
-            },
-            {
-              "name": "link_property_input",
-              "stringValue": "={{ $('Get All Autocat Rules Airtable').first().json.link_this_property[0] }}"
-            },
-            {
-              "name": "display_category",
-              "stringValue": "={{ $('Get All Autocat Rules Airtable').first().json.set_this_category }}"
-            },
-            {
-              "name": "id",
-              "stringValue": "={{ $('Get Airtable Record').first().json.id }}"
-            },
-            {
-              "name": "link_autocat_input",
-              "stringValue": "={{ $node[\"Split In Batches\"].json[\"id\"] }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "e6e44ecc-4095-45b1-9260-fa584b4f0a94",
-      "name": "set all fields",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3,
-      "position": [
-        2220,
-        540
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "const inputs = $node[\"set all fields\"].json;\n\nconst output = {};\n\n// Check each input and add it to the output if it is defined\nif (inputs.link_payees_input !== undefined && inputs.link_payees_input !== \"undefined\") {\n    output.link_payees_input = inputs.link_payees_input;\n}\n\nif (inputs.link_property_input !== undefined && inputs.link_property_input !== \"undefined\") {\n    output.link_property_input = inputs.link_property_input;\n}\n\nif (inputs.display_category !== undefined && inputs.display_category !== \"undefined\") {\n    output.display_category = inputs.display_category;\n}\n\nif (inputs.link_autocat_input !== undefined && inputs.link_autocat_input !== \"undefined\") {\n    output.link_autocat_input = inputs.link_autocat_input;\n}\n\nif (inputs.id !== undefined) {\n    output.id = inputs.id;\n}\n\nreturn output;\n"
-      },
-      "id": "ccb372c3-4a15-450b-b9d6-9c65c660453b",
-      "name": "set null if does not exist",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2420,
-        540
-      ]
     },
     {
       "parameters": {
@@ -1127,8 +1002,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        1040,
-        1100
+        1360,
+        1060
       ],
       "webhookId": "5e4a40fa-ff29-4cc4-91e1-c07482da4ed2"
     },
@@ -1145,8 +1020,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.1,
       "position": [
-        1260,
-        1100
+        1580,
+        1060
       ],
       "credentials": {
         "telegramApi": {
@@ -1154,6 +1029,201 @@
           "name": "P0m0shnik11_Bot"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblDg7JXvWW4mst1j",
+          "mode": "list",
+          "cachedResultName": "Transactions",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblDg7JXvWW4mst1j"
+        },
+        "id": "={{ $('Webhook from Airtable').first().json.query.rec_id }}",
+        "options": {}
+      },
+      "id": "0b6644fe-3c19-4d98-81b9-c0b5c608173e",
+      "name": "Tx Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        460
+      ],
+      "executeOnce": false,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblprQT6hfXUR56Xm",
+          "mode": "list",
+          "cachedResultName": "Autocat",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblprQT6hfXUR56Xm"
+        },
+        "filterByFormula": "=",
+        "options": {}
+      },
+      "id": "d22b887e-c3e4-4fe8-9e14-8fdb3ba8f08a",
+      "name": "All Autocat Records",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        680
+      ],
+      "executeOnce": false,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "3a83085b-004f-404c-9eeb-fa02976443a7",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1800,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "9520657b-c1de-4ff6-8cad-a0acf78e0d24",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        2320,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblprQT6hfXUR56Xm",
+          "mode": "list",
+          "cachedResultName": "Autocat",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblprQT6hfXUR56Xm"
+        },
+        "id": "={{ $json.ac_rec_id }}",
+        "options": {}
+      },
+      "id": "cc6cf135-cc6e-42ed-aabd-27ecb3dba54d",
+      "name": "Get Autocat Rule",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        3160,
+        560
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "ac_flow_direction",
+              "stringValue": "={{ $json.direction }}"
+            },
+            {
+              "name": "ac_expression",
+              "stringValue": "={{ $json.expression }}"
+            },
+            {
+              "name": "ac_rec_id",
+              "stringValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "c1f30df6-ac03-459d-8e20-cd6213ae992e",
+      "name": "AC Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2000,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "tx_text_to_analyze",
+              "stringValue": "={{ $node[\"Tx Record\"].json[\"p_name_guess\"] }}\n{{ $node[\"Tx Record\"].json[\"p_name_og\"] }}\n{{ $node[\"Tx Record\"].json[\"cp_entity_id\"] }}"
+            },
+            {
+              "name": "tx_direction",
+              "stringValue": "={{ $node[\"Tx Record\"].json[\"IncomeOrExpense_display\"] }}"
+            },
+            {
+              "name": "tx_rec_id",
+              "stringValue": "={{ $node[\"Tx Record\"].json[\"at_record_id\"] }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "59f4378c-4f13-4301-b08f-111cda573387",
+      "name": "TX Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2160,
+        460
+      ]
     }
   ],
   "pinData": {
@@ -1163,17 +1233,17 @@
           "headers": {
             "host": "imposbl.up.railway.app",
             "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
-            "x-airtable-source": "appjjY9qVQZlWUkkj/wflQgy1e4xNVx5HMD",
+            "x-airtable-source": "appjjY9qVQZlWUkkj/wflKUbNbPPAcBgYqG",
             "accept": "*/*",
             "accept-encoding": "gzip,deflate",
-            "x-forwarded-for": "44.193.7.2",
+            "x-forwarded-for": "3.91.239.93",
             "x-forwarded-proto": "https",
-            "x-envoy-external-address": "44.193.7.2",
-            "x-request-id": "77f2d379-3da2-4901-9921-30d2fd796370"
+            "x-envoy-external-address": "3.91.239.93",
+            "x-request-id": "96752a48-1a8a-4874-bc0c-cc66093d579a"
           },
           "params": {},
           "query": {
-            "rec_id": "recMBhN2ZOOa51DIj"
+            "rec_id": "recxQWRFP2KQDvQeE"
           }
         }
       }
@@ -1185,6 +1255,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2023-12-12T20:51:51.985Z",
-  "versionId": "c48fc6b4-b2ae-4aec-8baa-1f1346756fa9"
+  "updatedAt": "2023-12-13T21:26:35.868Z",
+  "versionId": "a427ca6b-2420-44be-9836-991456d17499"
 }
