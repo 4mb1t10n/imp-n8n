@@ -128,7 +128,7 @@
       "main": [
         [
           {
-            "node": "Airtable",
+            "node": "Fields to Update",
             "type": "main",
             "index": 0
           }
@@ -156,6 +156,17 @@
         [
           {
             "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fields to Update": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
             "type": "main",
             "index": 0
           }
@@ -279,10 +290,10 @@
           "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblDg7JXvWW4mst1j"
         },
         "columns": {
-          "mappingMode": "defineBelow",
+          "mappingMode": "autoMapInputData",
           "value": {
-            "id": "={{ $('Tx Record').first().json.id }}",
-            "display_category": "={{ $('All Autocat Records').first().json[\"set_this_category\"] }}"
+            "id": "={{ $json.tx_rec_id }}",
+            "display_category": "="
           },
           "matchingColumns": [
             "id"
@@ -975,14 +986,16 @@
             }
           ]
         },
-        "options": {}
+        "options": {
+          "ignoreFields": "id"
+        }
       },
       "id": "b382e8bf-6af7-4c2e-bd85-95ff1565b3a3",
       "name": "Airtable",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        3380,
+        3660,
         560
       ],
       "credentials": {
@@ -1224,6 +1237,44 @@
         2160,
         460
       ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "link_payees_input",
+              "stringValue": "={{ $json.link_this_payee[0] }}"
+            },
+            {
+              "name": "link_property_input",
+              "stringValue": "={{ $json.link_this_property[0] }}"
+            },
+            {
+              "name": "category_input",
+              "stringValue": "={{ $json.set_this_category }}"
+            },
+            {
+              "name": "link_autocat_input",
+              "stringValue": "={{ $json.id }}"
+            },
+            {
+              "name": "id",
+              "stringValue": "={{ $('Tx Record').first().json.id }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "a9c298fd-ada5-4ee7-be4f-7632e11f2260",
+      "name": "Fields to Update",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        3420,
+        560
+      ]
     }
   ],
   "pinData": {
@@ -1243,7 +1294,7 @@
           },
           "params": {},
           "query": {
-            "rec_id": "recxQWRFP2KQDvQeE"
+            "rec_id": "reckrV5p3W8NglsF4"
           }
         }
       }
@@ -1255,6 +1306,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2023-12-13T21:26:35.868Z",
-  "versionId": "a427ca6b-2420-44be-9836-991456d17499"
+  "updatedAt": "2023-12-13T23:33:22.775Z",
+  "versionId": "4232298d-13ac-4afb-a2e8-1ec17f340820"
 }
