@@ -23,7 +23,8 @@
         "rule": {
           "interval": [
             {
-              "field": "minutes"
+              "field": "minutes",
+              "minutesInterval": 3
             }
           ]
         }
@@ -65,13 +66,54 @@
       ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Get details of all the users working": [
+      {
+        "json": {
+          "items": [
+            {
+              "id": 53792,
+              "first_name": "Tege",
+              "last_name": "Crape",
+              "role": "Employee",
+              "company_employee_id": null,
+              "timesheet_id": 5080335,
+              "clock_in_time": "2023-12-15T13:28:00",
+              "clock_out_time": null,
+              "clock_in_timezone": "America/New_York",
+              "clock_out_timezone": null,
+              "clock_in_address": "Cricket West Shopping Center, Secor Road, Toledo, OH 43613, United States of America",
+              "mileage": 0,
+              "distance": 0,
+              "in_source": "iOS - Timeero version 2.21",
+              "out_source": "",
+              "start_longitude": -83.620145967079,
+              "start_latitude": 41.680027235547,
+              "end_longitude": null,
+              "end_latitude": null,
+              "clock_out_address": null,
+              "job_name": "Home Depot on Alexis",
+              "job_id": 182546,
+              "task_name": "",
+              "task_id": "",
+              "current_break": false,
+              "current_break_name": null,
+              "clock_in_time_utc": "2023-12-15T18:28:00"
+            }
+          ]
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-15T11:51:46.375Z",
-  "versionId": "816a3a5c-c6eb-4246-a6d2-aaa6014d4a6a"
+  "updatedAt": "2023-12-15T18:29:51.427Z",
+  "versionId": "eb512dd1-ac6c-43a3-8697-3a541a2c223e"
 }
