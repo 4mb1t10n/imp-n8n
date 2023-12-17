@@ -2681,8 +2681,10 @@
     {
       "parameters": {
         "chatId": "-1001902244643",
-        "text": "=New webhook from Plaid \nExecution ID: {{ $executionId }}",
-        "additionalFields": {}
+        "text": "=New webhook from Plaid \nExecution ID: \"{{ $executionId }}\"",
+        "additionalFields": {
+          "appendAttribution": false
+        }
       },
       "id": "69df0abb-2be4-4fc6-a749-2c4432dec8ab",
       "name": "Telegram Notification",
@@ -2787,6 +2789,34 @@
           }
         }
       }
+    ],
+    "Webhook from Plaid": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "content-type": "application/json",
+            "plaid-verification": "eyJhbGciOiJFUzI1NiIsImtpZCI6IjZmZDM2ZDA3LTExOTItNDM1Ni1hZWU4LTZmYTlkNWYyYTIwZCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDI3MjE0MzcsInJlcXVlc3RfYm9keV9zaGEyNTYiOiI5MmIzMTcxZTk1NGFhMjZiY2JlZjM3OTE3YTg5NDNiYTExMGM4ZjViM2JlM2ViOTBkMTlhMGY0MTdjMzZkZTA0In0.d6b6gy0y9sdv3csQ9urYoWmD1GEmClB_P8E8ywyrNq1fMU8aHLoTrJy1WKIQ5UVVpaPc7INN6SYY-idKIxXrYA",
+            "content-length": "239",
+            "accept-encoding": "gzip",
+            "user-agent": "Go-http-client/2.0",
+            "x-forwarded-for": "52.21.47.157",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "52.21.47.157",
+            "x-request-id": "a56c4aff-0aad-46d4-a680-fe9a863247c7"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "environment": "development",
+            "historical_update_complete": true,
+            "initial_update_complete": true,
+            "item_id": "xqrZgoe07QcxqRAxE1aycPeYem9ARbHMBmJno",
+            "webhook_code": "SYNC_UPDATES_AVAILABLE",
+            "webhook_type": "TRANSACTIONS"
+          }
+        }
+      }
     ]
   },
   "settings": {
@@ -2795,6 +2825,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2023-12-15T16:05:48.914Z",
-  "versionId": "f2381b9f-a75d-44c3-8379-db3932eec3a3"
+  "updatedAt": "2023-12-17T04:39:20.425Z",
+  "versionId": "2213a54b-c80b-4679-9876-4b9caa826651"
 }
