@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "AH or PM",
+            "node": "Airtable",
             "type": "main",
             "index": 0
           }
@@ -156,6 +156,17 @@
           }
         ]
       ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "AH or PM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-29T16:49:42.990Z",
@@ -174,7 +185,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1380,
+        -1440,
         -420
       ]
     },
@@ -189,7 +200,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -1040,
+        -1100,
         -420
       ],
       "webhookId": "710ee861-2765-4ed3-90e2-07e09ae9e472",
@@ -406,7 +417,7 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        180,
+        420,
         -880
       ],
       "credentials": {
@@ -425,7 +436,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -200,
+        40,
         -780
       ]
     },
@@ -434,11 +445,11 @@
         "conditions": {
           "string": [
             {
-              "value1": "={{ $json.body.data.number.digits }}",
+              "value1": "={{ $node[\"Webhook from Aircall\"].json.body.data.number.digits }}",
               "value2": "+1 786-458-8682"
             },
             {
-              "value1": "={{ $json.body.data.number.digits }}",
+              "value1": "={{ $node[\"Webhook from Aircall\"].json[\"body\"][\"data\"][\"number\"][\"digits\"] }}",
               "value2": "+1 567-221-2515"
             }
           ]
@@ -450,7 +461,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 1,
       "position": [
-        -880,
+        -700,
         -420
       ]
     },
@@ -475,7 +486,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -40,
+        200,
         -780
       ]
     },
@@ -492,7 +503,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1,
       "position": [
-        360,
+        600,
         -880
       ],
       "credentials": {
@@ -515,7 +526,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1,
       "position": [
-        360,
+        600,
         -700
       ],
       "credentials": {
@@ -538,7 +549,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1,
       "position": [
-        360,
+        600,
         -500
       ],
       "credentials": {
@@ -551,7 +562,7 @@
     {
       "parameters": {
         "dataType": "string",
-        "value1": "={{ $json.body.event }}",
+        "value1": "={{ $json.fields.a_event }}",
         "rules": {
           "rules": [
             {
@@ -573,7 +584,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -720,
+        -480,
         -420
       ],
       "notesInFlow": false
@@ -603,7 +614,7 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        -360,
+        -120,
         -780
       ],
       "alwaysOutputData": true,
@@ -639,7 +650,7 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        -360,
+        -120,
         -420
       ],
       "alwaysOutputData": true,
@@ -663,7 +674,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1,
       "position": [
-        360,
+        600,
         -320
       ],
       "credentials": {
@@ -698,7 +709,7 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2,
       "position": [
-        -360,
+        -120,
         -40
       ],
       "alwaysOutputData": true,
@@ -731,7 +742,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -40,
+        200,
         -40
       ]
     },
@@ -748,7 +759,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1,
       "position": [
-        360,
+        600,
         -120
       ],
       "credentials": {
@@ -771,7 +782,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1,
       "position": [
-        360,
+        600,
         60
       ],
       "credentials": {
@@ -803,24 +814,244 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -40,
+        200,
         -420
       ]
     },
     {
       "parameters": {
-        "path": "e592abef-a11c-4387-8fd8-e3772b909913",
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljz5cOvavbYIzkb",
+          "mode": "list",
+          "cachedResultName": "Aircall",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tbljz5cOvavbYIzkb"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "n8n_exec_id": "={{ $execution.id }}",
+            "a_event": "={{ $json.body.event }}",
+            "a_resource": "={{ $json.body.resource }}",
+            "a_direction": "={{ $json.body.data.direction }}",
+            "a_call_uuid": "={{ $json.body.data.call_uuid }}",
+            "a_direct_link": "={{ $json.body.data.direct_link }}",
+            "a_status": "={{ $json.body.data.status }}",
+            "a_phone_their": "={{ $json.body.data.raw_digits }}",
+            "a_phone_our": "={{ $json.body.data.number.digits }}",
+            "a_hangup_cause": "={{ $json.body.data.hangup_cause }}",
+            "a_voicemail": "={{ $json.body.data.voicemail }}",
+            "a_asset": "={{ $json.body.data.asset }}",
+            "a_is_open": "={{ $json.body.data.number.open }}",
+            "a_availability_status": "={{ $json.body.data.number.availability_status }}",
+            "a_phone_our_name": "={{ $json.body.data.number.name }}"
+          },
+          "matchingColumns": [
+            "at_rec_id"
+          ],
+          "schema": [
+            {
+              "id": "at_rec_id",
+              "displayName": "at_rec_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "n8n_exec_id",
+              "displayName": "n8n_exec_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_event",
+              "displayName": "a_event",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_resource",
+              "displayName": "a_resource",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_direction",
+              "displayName": "a_direction",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_call_uuid",
+              "displayName": "a_call_uuid",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_direct_link",
+              "displayName": "a_direct_link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_status",
+              "displayName": "a_status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_phone_their",
+              "displayName": "a_phone_their",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_phone_our",
+              "displayName": "a_phone_our",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_phone_our_name",
+              "displayName": "a_phone_our_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_hangup_cause",
+              "displayName": "a_hangup_cause",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_voicemail",
+              "displayName": "a_voicemail",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_asset",
+              "displayName": "a_asset",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_is_open",
+              "displayName": "a_is_open",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_availability_status",
+              "displayName": "a_availability_status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ]
+        },
         "options": {}
       },
-      "id": "67efa32a-b4df-4213-87eb-54e30a40ceee",
-      "name": "Aircall Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
+      "id": "ad83aaa1-9a5d-4187-a62c-c8976f8ee342",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
       "position": [
-        -1040,
-        620
+        -900,
+        -420
       ],
-      "webhookId": "e592abef-a11c-4387-8fd8-e3772b909913"
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
     }
   ],
   "pinData": {
@@ -1009,79 +1240,6 @@
           "SMS 2 Missing Info": "Hey, it looks like there is some info missing in the questionnaire. You can pick up where you last left off here 👉 https://bit.ly/3R5kNlv"
         }
       }
-    ],
-    "Aircall Webhook": [
-      {
-        "json": {
-          "headers": {
-            "host": "imposbl.up.railway.app",
-            "accept": "application/json, text/plain, */*",
-            "content-type": "application/json",
-            "user-agent": "axios/1.4.0",
-            "content-length": "1528",
-            "accept-encoding": "gzip, compress, deflate, br",
-            "x-datadog-trace-id": "7300014735388397951",
-            "x-datadog-parent-id": "6649711904533456556",
-            "x-datadog-sampling-priority": "1",
-            "traceparent": "00-0000000000000000654edcb985f1517f-5c4885bed86726ac-01",
-            "tracestate": "dd=s:1",
-            "x-forwarded-for": "44.237.249.17",
-            "x-forwarded-proto": "https",
-            "x-envoy-external-address": "44.237.249.17",
-            "x-request-id": "a85aea66-b6c3-4322-a3a1-658bad0da1d5"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "resource": "call",
-            "event": "call.hungup",
-            "timestamp": 1701288678,
-            "token": "23012f4169554dbc9a2c0aebf0bcedae",
-            "data": {
-              "id": 1713291052,
-              "direct_link": "https://api.aircall.io/v1/calls/1713291052",
-              "direction": "inbound",
-              "call_uuid": "CA8c08413a70af333a2c2032523a547c2a",
-              "status": "done",
-              "missed_call_reason": "agents_did_not_answer",
-              "started_at": 1701288595,
-              "answered_at": null,
-              "ended_at": 1701288678,
-              "duration": 82,
-              "cost": "0",
-              "hangup_cause": null,
-              "voicemail": null,
-              "recording": null,
-              "asset": null,
-              "raw_digits": "+1 305-804-6505",
-              "number": {
-                "id": 662394,
-                "direct_link": "https://api.aircall.io/v1/numbers/662394",
-                "name": "AffordableHousing.com",
-                "digits": "+1 786-458-8682",
-                "country": "US",
-                "time_zone": "Etc/UTC",
-                "open": true,
-                "availability_status": "open",
-                "is_ivr": false,
-                "live_recording_activated": true,
-                "messages": {
-                  "welcome": "https://media-web.aircall.io/tracks/tts/languages/en/voices/Joanna/85a54589f4bac4767f07c3adb4d5bad49602c0e4.mp3",
-                  "waiting": "https://media-web.aircall.io/tracks/library/bensound-retrosoul.mp3",
-                  "ivr": "https://media-web.aircall.io/tts/languages/en/voices/Joanna/5b2401096b75861108e2ceb6ccc4e4c81e03b525.mp3",
-                  "voicemail": "https://media-web.aircall.io/tracks/tts/languages/en/voices/Joanna/74ce97ac9772be646ccf5583b92be7248930af18.mp3",
-                  "closed": "https://media-web.aircall.io/tracks/tts/languages/en/voices/Joanna/e5bc465c2b0595ade98a98500aa6851cb557a663.mp3",
-                  "callback_later": "https://media-web.aircall.io/tts/languages/en/voices/Joanna/a04a676e475a50791cccbea7faa349dab88c4f05.mp3"
-                }
-              },
-              "archived": false,
-              "teams": [],
-              "comments": [],
-              "tags": []
-            }
-          }
-        }
-      }
     ]
   },
   "settings": {
@@ -1091,7 +1249,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2023-12-17T04:49:19.421Z",
-  "versionId": "0fb4172c-245f-4268-b399-d609434c6a68"
+  "triggerCount": 1,
+  "updatedAt": "2023-12-17T07:14:02.835Z",
+  "versionId": "f8970ac0-2ab5-41b8-a93d-2e3285891342"
 }
