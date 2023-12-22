@@ -1,0 +1,1701 @@
+{
+  "active": true,
+  "connections": {
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Find Phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Phone": {
+      "main": [
+        [
+          {
+            "node": "Extract Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Email": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Body": {
+      "main": [
+        [
+          {
+            "node": "Find Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Job Applicants": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Name": {
+      "main": [
+        [
+          {
+            "node": "Extract Name1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Name1": {
+      "main": [
+        [
+          {
+            "node": "Find in All Contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find in All Contacts": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Airtable2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable1": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable2": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Doorloop Application": {
+      "main": [
+        [
+          {
+            "node": "Extract Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "try to find contact by email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact Exists?": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "try to find contact by email": {
+      "main": [
+        [
+          {
+            "node": "Contact Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Telegram3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Fields": {
+      "main": [
+        [
+          {
+            "node": "Create Email record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        [
+          {
+            "node": "Set Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-10-06T23:08:04.486Z",
+  "id": "ySabkFB3EAq2m8IE",
+  "meta": null,
+  "name": "Email",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblfdsRNROSeLeNRq",
+          "mode": "list",
+          "cachedResultName": "Job Applicants",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblfdsRNROSeLeNRq"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json.message.content }}",
+            "Phone": "={{ $('Find Phone').first().json.message.content }}",
+            "Drive File ID": "={{ $('Google Drive').item.json.webViewLink }}",
+            "Body": "={{ $('Extract Body').item.json.message.content }}",
+            "Subject": "={{ $('Job Applicants').item.json.subject }}",
+            "Reply Address": "={{ $('Job Applicants').item.json.html.match(/[a-z0-9]+(?:@reply.craigslist.org)/i)[0] }}",
+            "Name": "={{ $('Job Applicants').item.json.html.match(/([a-z0-9 ]+)(?:<\\/strong>)/i)[1] }}",
+            "Drive URL": "={{ $('Google Drive').item.json.webViewLink }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Reply Address",
+              "displayName": "Reply Address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Subject",
+              "displayName": "Subject",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Body",
+              "displayName": "Body",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Drive URL",
+              "displayName": "Drive URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Open File",
+              "displayName": "Open File",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ece0ada4-64e3-4a08-89ea-6824c63a71b7",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1380,
+        380
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "attachment_0",
+        "name": "={{ `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}` }} {{ $json.html.match(/(?:>)([a-z ]+)(?:<\\/strong>)/i)[1] }}.{{ $binary.attachment_0.fileExtension }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1I08ZTnn-w5JT1qKQ4U_uKEWdX5x6D_Mt",
+          "mode": "list",
+          "cachedResultName": "Job Applicants",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1I08ZTnn-w5JT1qKQ4U_uKEWdX5x6D_Mt"
+        },
+        "options": {}
+      },
+      "id": "f33dc595-8bf2-4cb2-8fb0-2f9560f46ece",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        740,
+        380
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "nW7nlrz7YTdeOqB7",
+          "name": "4mb Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "content": "This is an email from a job applicant. Parse the email and look if the applicant provided their email address. Return only one email if it exists. If it does not exist return \"None\" only. Look for the best Email address for the applicant if they provided several. Ignore all emails from Craigslist.org"
+            },
+            {
+              "content": "={{ $('Job Applicants').item.json.html }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "id": "0463e93a-27cb-4282-a67d-cb8f459ae7e8",
+      "name": "Find Email",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        380
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "AbS3AejJRJJV3c7s",
+          "name": "milesalex11@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "content": "This is an email from a job applicant. Parse the email and look if the applicant provided their phone number. Return only one phone number if it exists. If it does not exist return \"None\" only. Look for the best phone number for the applicant if they provided several"
+            },
+            {
+              "content": "={{ $('Job Applicants').item.json.html }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "id": "824beefb-be8c-4b6d-ae7d-57d749e12e34",
+      "name": "Find Phone",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        900,
+        380
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "AbS3AejJRJJV3c7s",
+          "name": "milesalex11@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "content": "=This is an email from a job applicant. Parse the email and extract the body of the email as simple text. If it does not exist return \"None\" only. Do not include any text that is generated by Craigslist.org"
+            },
+            {
+              "content": "={{ $('Job Applicants').item.json.html }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "id": "5c298d26-6614-4f1c-bf03-e0ed968944f7",
+      "name": "Extract Body",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        380
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "AbS3AejJRJJV3c7s",
+          "name": "milesalex11@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "labelIds": [
+            "Label_6447132851240658398"
+          ],
+          "q": "@reply.craigslist.org",
+          "sender": "landlord@section.homes"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "id": "3b02ddac-ae13-44eb-b736-a35a55c64fcf",
+      "name": "Job Applicants",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        580,
+        380
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nqsm2hA9BcoD8YHt",
+          "name": "alex@imposbl.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblN8k624CcME6lq7",
+          "mode": "list",
+          "cachedResultName": "BG Application",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblN8k624CcME6lq7"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Property": "={{ $('Doorloop Application').first().json.subject.match(/(?:submitted for )(.+)/i)[1] }}",
+            "URL": "={{ $('Doorloop Application').first().json.html.match(/(https:\\/\\/txn-emails.doorloop.com[^\"]+)(?:[^\"])/i)[0] }}",
+            "Name": "={{ $('Extract Name').first().json.message.content }}",
+            "Link Input to Contact": "={{ $('Find in All Contacts').first().json.id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Property",
+              "displayName": "Property",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "URL",
+              "displayName": "URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Link Input to Contact",
+              "displayName": "Link Input to Contact",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "linkAllContacts",
+              "displayName": "linkAllContacts",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Base",
+              "displayName": "Base",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5a397cda-11b4-4eda-8532-e36927946036",
+      "name": "Airtable1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        780
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "content": "=This is an email from Doorloop letting me know that an applicant submitted their application. Parse the email and extract the full name of the applicant. If it does not exist return \"None\" only."
+            },
+            {
+              "content": "={{ $json.html }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "id": "b95989e3-1329-4656-b160-5f06b3b5ad4f",
+      "name": "Extract Name",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        740,
+        780
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "AbS3AejJRJJV3c7s",
+          "name": "milesalex11@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Name First",
+              "stringValue": "={{ $json.message.content.match(/([a-z]+)(?: )/i)[1] }}"
+            },
+            {
+              "name": "Name Last",
+              "stringValue": "={{ $json.message.content.match(/(?: )([a-z]+)$/i)[1] }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "4eb2972c-7e16-4ad7-91fc-282a07da6c08",
+      "name": "Extract Name1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        900,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "if (Object.keys(items[0].json).length === 0) {\n  return [\n     {\n       json: {\n         results: 0,\n       }\n      }\n  ]\n}\nreturn [\n  {\n    json: {\n      results: items.length,\n    }\n  }\n];\n"
+      },
+      "id": "08743284-d928-4641-9180-ad6052b6a38c",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblXUKKfwW6yBTZHD",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblXUKKfwW6yBTZHD"
+        },
+        "filterByFormula": "={Full Name}='{{ $json['Name First'] }} {{ $json['Name Last'] }}'",
+        "options": {}
+      },
+      "id": "d5e93051-6406-4573-876a-88868324a9ad",
+      "name": "Find in All Contacts",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1060,
+        780
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "value1": "={{ $json.results }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "equal"
+            },
+            {
+              "operation": "equal",
+              "value2": 1,
+              "output": 1
+            },
+            {
+              "operation": "largerEqual",
+              "value2": 2,
+              "output": 2
+            }
+          ]
+        },
+        "fallbackOutput": 2
+      },
+      "id": "7825505c-bf86-444f-985c-2b14b67fe7a5",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "=*New Paid BG Application*\n{{ $json.fields.Property }}\n{{ $json.fields.Name }} \n[Doorloop link]({{ $json.fields.URL }})\n[CRM Link](https://airtable.com/appW0UJP0qQbIw5tS/pag1vSLhECU1cxCik?phY9U={{ $json.id }})",
+        "additionalFields": {
+          "disable_web_page_preview": true,
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "4ef858cb-ca99-4cf9-904c-f63a9ceecbf7",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        780
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "=*Not matched to a contact in CRM*\n[New Paid BG Application]({{ $('Doorloop Application').first().json.html.match(/(https:\\/\\/txn-emails.doorloop.com[^\"]+)(?:[^\"])/i)[0] }})\n{{ $('Doorloop Application').first().json.subject.match(/(?:submitted for )(.+)/i)[1] }}\n{{ $('Extract Name').first().json.message.content }}",
+        "additionalFields": {
+          "disable_web_page_preview": true,
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "031ce016-39d4-4a4a-a542-ffc567d8dc80",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        620
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "=*{{ $('Code').first().json.results }} contacts found in CRM*\n[New Paid BG Application]({{ $('Doorloop Application').first().json.html.match(/(https:\\/\\/txn-emails.doorloop.com[^\"]+)(?:[^\"])/i)[0] }})\n{{ $('Doorloop Application').first().json.subject.match(/(?:submitted for )(.+)/i)[1] }}\n{{ $('Extract Name').first().json.message.content }}",
+        "additionalFields": {
+          "disable_web_page_preview": true,
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "1cc60a43-879f-45dd-9ec6-d5dba93053d9",
+      "name": "Telegram2",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        940
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblN8k624CcME6lq7",
+          "mode": "list",
+          "cachedResultName": "BG Application",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblN8k624CcME6lq7"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Property": "={{ $('Doorloop Application').first().json.subject.match(/(?:submitted for )(.+)/i)[1] }}",
+            "URL": "={{ $('Doorloop Application').first().json.html.match(/(https:\\/\\/txn-emails.doorloop.com[^\"]+)(?:[^\"])/i)[0] }}",
+            "Name": "={{ $('Extract Name').first().json.message.content }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Property",
+              "displayName": "Property",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "URL",
+              "displayName": "URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Link Input to Contact",
+              "displayName": "Link Input to Contact",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "linkAllContacts",
+              "displayName": "linkAllContacts",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Base",
+              "displayName": "Base",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5918f937-0a04-4adb-bde0-83b9b17d65c6",
+      "name": "Airtable2",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        620
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "support@doorloop.com"
+        },
+        "options": {
+          "downloadAttachments": false
+        }
+      },
+      "id": "2c9f4cf2-41e2-46fb-b3e1-dfab53f8a9bc",
+      "name": "Doorloop Application",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        580,
+        780
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nqsm2hA9BcoD8YHt",
+          "name": "alex@imposbl.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "simple": false,
+        "filters": {
+          "labelIds": [
+            "Label_6447132851240658398",
+            "STARRED"
+          ]
+        },
+        "options": {}
+      },
+      "id": "a068ef15-dbb2-438a-9ac1-b79f43e58b08",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [
+        580,
+        120
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nqsm2hA9BcoD8YHt",
+          "name": "alex@imposbl.com"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c758e5e5-5734-4bf8-b5c7-59afa9f666f3",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        740,
+        120
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "readStatus": "unread"
+        },
+        "options": {}
+      },
+      "id": "0908d3ef-9429-4d2f-af88-821a4c5bb273",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        540,
+        1340
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ISacoa0FmHYN7ljX",
+          "name": "management@imposbl.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the input data to this node\nconst inputData = items[0].json;\n\n// Check if the input data is empty or undefined\nif (!inputData || Object.keys(inputData).length === 0) {\n  // Return \"No Match\" if there's no input\n  return [\n    {\n      json: {\n        result: \"No Match\"\n      }\n    }\n  ];\n} else {\n  // Return \"Match\" if there is some input\n  return [\n    {\n      json: {\n        result: \"Match\"\n      }\n    }\n  ];\n}\n"
+      },
+      "id": "cd3a7675-2fbf-49b5-8258-811a05daedad",
+      "name": "Contact Exists?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        1340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblUibgylVCrkliza",
+          "mode": "list",
+          "cachedResultName": "Contacts Info",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblUibgylVCrkliza"
+        },
+        "filterByFormula": "={email_out} = '{{ $json.from.value[0].address }}'",
+        "options": {
+          "fields": [
+            "email_out",
+            "link_contacts"
+          ]
+        }
+      },
+      "id": "b74b27e7-d7d0-4a5e-8ddd-96b7693ed342",
+      "name": "try to find contact by email",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        780,
+        1340
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.result }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "No Match",
+              "outputKey": "0"
+            },
+            {
+              "value2": "Match",
+              "outputKey": "1"
+            }
+          ]
+        }
+      },
+      "id": "5369199c-2ab7-45ea-ba75-c5169ccdd818",
+      "name": "Switch1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        1340
+      ]
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "09d2fdeb-dc30-454f-adb0-d20bc9f936b2",
+      "name": "Telegram3",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        1480,
+        1220
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblwB8e5d1doVVcLx",
+          "mode": "list",
+          "cachedResultName": "Email",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblwB8e5d1doVVcLx"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "email_summary": "={{ $json.choices[0].message.content }}",
+            "email_subject": "={{ $('Gmail Trigger').first().json.headers.subject }}",
+            "email_body": "={{ $('Gmail Trigger').first().json.textAsHtml }}",
+            "email_ours_inbound": "={{ $('Gmail Trigger').first().json.headers['delivered-to'] }}",
+            "email_delivered_from": "={{ $('Gmail Trigger').first().json.headers.from }}",
+            "email_delivered_to": "={{ $('Gmail Trigger').first().json.headers.to }}"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "email_id",
+              "displayName": "email_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "email_delivered_from",
+              "displayName": "email_delivered_from",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email_delivered_to",
+              "displayName": "email_delivered_to",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email_subject",
+              "displayName": "email_subject",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email_summary",
+              "displayName": "email_summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email_body",
+              "displayName": "email_body",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ]
+        },
+        "options": {
+          "ignoreFields": ""
+        }
+      },
+      "id": "52da0555-8ca9-4af2-bd77-ddb6c2b8117d",
+      "name": "Create Email record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        1440
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "email_delivered_from",
+              "stringValue": "={{ $('Gmail Trigger').first().json.headers.from }}"
+            },
+            {
+              "name": "email_delivered_to",
+              "stringValue": "={{ $('Gmail Trigger').first().json.headers.to }}"
+            },
+            {
+              "name": "email_subject",
+              "stringValue": "={{ $('Gmail Trigger').first().json.headers.subject }}"
+            },
+            {
+              "name": "email_summary",
+              "stringValue": "={{ $('Summarize').first().json.choices[0].message.content }}"
+            },
+            {
+              "name": "email_body",
+              "stringValue": "={{ $('Gmail Trigger').first().json.text }}"
+            },
+            {
+              "name": "email_date",
+              "stringValue": "={{ $('Gmail Trigger').first().json.date }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "8465daa4-b16f-4525-9b4f-1081d13d20eb",
+      "name": "Set Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1700,
+        1440
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "=gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "content": "=Summarize this email using as few words as possible: {{ $('Gmail Trigger').first().json.text }}"
+            }
+          ]
+        },
+        "simplifyOutput": false,
+        "options": {}
+      },
+      "id": "c1b68ec4-b376-40cc-abc2-1fcbfc5c1936",
+      "name": "Summarize",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        1440
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "AbS3AejJRJJV3c7s",
+          "name": "milesalex11@gmail.com"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Code": [
+      {
+        "json": {
+          "results": 0
+        }
+      }
+    ],
+    "Airtable1": [
+      {
+        "json": {
+          "id": "rec5qI9I3IXIhbKiS",
+          "createdTime": "2023-10-07T04:46:54.000Z",
+          "fields": {
+            "Property": "1113 Radcliffe Drive",
+            "Name": "Markeisha N. Evans",
+            "URL": "https://txn-emails.doorloop.com/CL0/https:%2F%2Fimposbl.app.doorloop.com%2Frental-applications%2F651b973b3aeaa3228666c684%2Foverview/1/0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000/nDLPcf9k3Jqwy1jGPFmiIHRlNn-4oBeMxYig-3muHE8=320",
+            "Base": 7,
+            "Link Input to Contact": "rec7NrXSE8LOBUPc2",
+            "ID": "Application 7"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Airtable2": [
+      {
+        "json": {
+          "id": "rec5qI9I3IXIhbKiS",
+          "createdTime": "2023-10-07T04:46:54.000Z",
+          "fields": {
+            "Property": "1113 Radcliffe Drive",
+            "Name": "Markeisha N. Evans",
+            "URL": "https://txn-emails.doorloop.com/CL0/https:%2F%2Fimposbl.app.doorloop.com%2Frental-applications%2F651b973b3aeaa3228666c684%2Foverview/1/0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000/nDLPcf9k3Jqwy1jGPFmiIHRlNn-4oBeMxYig-3muHE8=320",
+            "Base": 7,
+            "Link Input to Contact": "rec7NrXSE8LOBUPc2",
+            "ID": "Application 7"
+          }
+        }
+      }
+    ],
+    "Find in All Contacts": [
+      {
+        "json": {
+          "id": "rec7NrXSE8LOBUPc2",
+          "createdTime": "2023-10-01T01:20:16.000Z",
+          "Pipedrive ID": 41,
+          "linkQuestionnaire": [
+            "recPO5aiO4cx9iWeF"
+          ],
+          "Last Name": "Evans",
+          "linkLead": [
+            "recpEQWWIvNcC3dRU"
+          ],
+          "BG Application": [
+            "rec5qI9I3IXIhbKiS"
+          ],
+          "Phone Input": "+1 419-901-7403",
+          "First Name": "Markeisha",
+          "Notes": "Not enough assistance",
+          "Label": [
+            "recgql6T2d2qIKncr"
+          ],
+          "Google Contact ID": "c5509810976461752878",
+          "Created Reason": "AH.com Lead",
+          "Rec ID": "Markeisha Evans - rec7NrXSE8LOBUPc2",
+          "Created Time": "2023-10-01T01:20:16.000Z",
+          "Pipedrive": {
+            "label": "Open PD",
+            "url": "https://imposbl.pipedrive.com/person/41"
+          },
+          "Google Contacts": {
+            "label": "G Contact",
+            "url": "https://contacts.google.com/person/c5509810976461752878"
+          },
+          "Initial Message": "Hey Markeisha, we currently have these homes available for rent (Section 8 welcome): \n https://bit.ly/3126-126-Th-St \n https://bit.ly/1113-Radcliffe-Dr \n https://bit.ly/2202-Walnut-St \n \n If you’re interested, then please fill out this brief questionnaire. It’s free and takes less than two minutes:\n https://bit.ly/imposbl \n\nThank you!",
+          "Voucher Pic": [
+            {
+              "id": "attaRLX4bFPs9LHDA",
+              "width": 720,
+              "height": 1600,
+              "url": "https://v5.airtableusercontent.com/v1/21/21/1696694400000/E3yhp9fhY96Wn4TqNF6p7g/m7LtIy9RI2pfDw8AiMS1lHzcBjpOecWjCD93VhXwLREWx1xs-Xp9OeMqSeQn_lpM7EFug_ZDbInr2fFUknsL_uwEGbFMPXrVmAsKAyE399lqmUbeCjP0JAefJqIqBzBB/OlVutMgwWTNaEMJJIDSCoTLJ3Bjh9co2lpuhEIsPz48",
+              "filename": "Screenshot_20231002-071322.png",
+              "size": 540690,
+              "type": "image/png",
+              "thumbnails": {
+                "small": {
+                  "url": "https://v5.airtableusercontent.com/v1/21/21/1696694400000/-_K4rajPIpJeyQNH_i66tQ/IYo771nVGxwfjBuDhO6-cDkrj_UQ2sggG7rZABccnhDwNnIScZpmfCsJHjiMnGTnJxGvX6WzbIetJm_clxNWCg/ZvK3kwZDda1tUFjBi9g6LvVEJ0cPS9vzl7sEr9SMu58",
+                  "width": 16,
+                  "height": 36
+                },
+                "large": {
+                  "url": "https://v5.airtableusercontent.com/v1/21/21/1696694400000/PDOMdaH0aoTJkjW-LYjbnA/erwVDEZHzmGe3XmYKl1sycXUksAmNOCXz5e9Ea_i-v0pY_W1Azx95AaiELbmszo9AColcuGIbr54LvApjWn7gw/VfzZsQcTZgZ3H0hTw06_TU6Zs2a45YzuU6IoZwBHzNk",
+                  "width": 512,
+                  "height": 1138
+                },
+                "full": {
+                  "url": "https://v5.airtableusercontent.com/v1/21/21/1696694400000/Zv6dVJTOVRtol0jUq3dcsw/Q47nXzg_-fPAgOD4_s9EJ8n3ULL4V5GbnEDLTSmkc0uwKgZGWTqigBYuyTi55U-YkYT5gWqWCd__e7nVq788TA/Bftw7tf6WUOI-ylW3SJ0iAeyE98RNl34tF2WKps7QhU",
+                  "width": 3000,
+                  "height": 3000
+                }
+              }
+            },
+            {
+              "id": "attRQak0OSsALRNxt",
+              "width": 720,
+              "height": 1600,
+              "url": "https://v5.airtableusercontent.com/v1/21/21/1696694400000/kmlm8wBXbwxYo-MoQY3MgQ/j9t4fp1XPv4bJAWxdvR3vk-jvAF4IuXwNrLN7dEb6gyOz2XWgFa_bnRqCEGYML9bHKYSa4XU0aC0UkbtpELG6MiQQ7WtZwrOJ2I0y4l7Kpzt0dYc0WDfg3FY32LdL9Jc/8HttRRmpb-MfTIiN2njceuny52UwuVJMZnYzlrMBYyI",
+              "filename": "Screenshot_20231002-071329.png",
+              "size": 216289,
+              "type": "image/png",
+              "thumbnails": {
+                "small": {
+                  "url": "https://v5.airtableusercontent.com/v1/21/21/1696694400000/RoGHuxK9Af1Bx-TboGw6Ng/y7Vqka2Yig1a7g8X88jxGf2aqA_GQ50oDDQhplrb3_5BgHyD8p-lKjAtiSOBXB2JDk6Epj1AZT3UanWrzqJFHw/6NN1U6332-lHZE63m6N1BaF8ZCBKkhDts4JLFMnxEd8",
+                  "width": 16,
+                  "height": 36
+                },
+                "large": {
+                  "url": "https://v5.airtableusercontent.com/v1/21/21/1696694400000/zLbhYWJGNfoJXBrao_Ac-Q/mCN4ZcuD3yZFgCvN1mklXUFV1hr_W6QhXeVdHXrbROO_R2tUEiE_N8jwKMNvtDLHLti9HTn8kCXEcnGH6OsIYA/mhjKEGBy6ziCEHXDdueHrLs6yUMpWxsje3BuiadVFzM",
+                  "width": 512,
+                  "height": 1138
+                },
+                "full": {
+                  "url": "https://v5.airtableusercontent.com/v1/21/21/1696694400000/2-111kxZ18pxE6YLf14H3w/bNTQytO2nVjD4i8YlZ8vZtWkw5Ip55b5iPjYfMIZFn49HaWRXb7vLnRFUY8KLjmPSSLr7iU4D2n2eZ-qvXKAHQ/rncHwnDKze_SIfhkH3cWTOePsAGmUH_s050DgB9HvaY",
+                  "width": 3000,
+                  "height": 3000
+                }
+              }
+            }
+          ],
+          "Kids": [
+            4
+          ],
+          "Adults": [
+            1
+          ],
+          "Bedrooms": [
+            "3"
+          ],
+          "Voucher Amount": [
+            1461
+          ],
+          "Current Rent": [
+            950
+          ],
+          "SMS Tour": "Hey Markeisha, thanks for submitting your questionnaire! We currently have these homes available for rent (Section 8 welcome): \n https://bit.ly/3126-126-Th-St \n https://bit.ly/1113-Radcliffe-Dr \n https://bit.ly/2202-Walnut-St \n \n Please let me know which you are interested in, I will be happy to set up a tour. Thanks!",
+          "Income": [
+            3700
+          ],
+          "Followup Message": "Hey Markeisha, are you still looking for an affordable home?",
+          "Phone": "+1 419-901-7403",
+          "Pipedrive Name": "Markeisha Evans",
+          "Email": "none@empty.com",
+          "Label_ID": [
+            19
+          ],
+          "Full Name": "Markeisha Evans"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Doorloop Application": [
+      {
+        "json": {
+          "id": "18b0830cb9ff459a",
+          "threadId": "18b0830cb9ff459a",
+          "labelIds": [
+            "IMPORTANT",
+            "CATEGORY_PERSONAL",
+            "INBOX"
+          ],
+          "sizeEstimate": 25689,
+          "headers": {
+            "delivered-to": "Delivered-To: alex@imposbl.com",
+            "received": "Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])\r\n        by mx.google.com with SMTPS id i131-20020a0ddf89000000b0059bcdb229f4sor2807970ywe.10.2023.10.06.20.31.37\r\n        for <alex@imposbl.com>\r\n        (Google Transport Security);\r\n        Fri, 06 Oct 2023 20:31:37 -0700 (PDT)",
+            "x-received": "X-Received: by 2002:a81:8413:0:b0:59f:4c55:efa3 with SMTP id\r\n u19-20020a818413000000b0059f4c55efa3mr10519903ywf.12.1696649496307; Fri, 06\r\n Oct 2023 20:31:36 -0700 (PDT)",
+            "arc-seal": "ARC-Seal: i=1; a=rsa-sha256; t=1696649497; cv=none;\r\n        d=google.com; s=arc-20160816;\r\n        b=f3x24KE/Ur1dPCHmXP0hnAImZwTA3P75GWjOeebPvEYW801X3i80JvfSmpB5HCfWe2\r\n         8G0GKY12UqfIb2Bd7xvUD2X3LlpNYq0XBPacvrGvDgynlVyg4EsewDCfIeUAMXFZJBHg\r\n         14mBRnkJLZl2NRdcIDvZir8K89fiCplv4DTSfMSXcJ+DcfXBj+SknXHk/cRYCw/mKyuH\r\n         ryF4aFuvFrsx+wPl2/KmRGqfraq1sm+Ugy3phmAal456RJxv8dfsLRVr7js/+WK8+8GA\r\n         Mg/Mw9v5JZjy4T3rmGwQyNqN527Mx3VPw3jltPxX+wz9utQUYRLIVmcNUOD7nwMOi1Kf\r\n         mmcw==",
+            "arc-message-signature": "ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;\r\n        h=to:subject:message-id:date:from:in-reply-to:references:mime-version\r\n         :dkim-signature;\r\n        bh=P0sX/butCuZlPn8zOea8LMBsUcp/PPj/rodIsQWXvTI=;\r\n        fh=nJDzH6qwAnKlDt5m0qSpgVjyncrT4XbaFnyrUzUV1R0=;\r\n        b=z23otqbtUg+x9JVgkFpbv1XFEZE5NiINU4uRmODiEAve7PXpaXUxn7MIEz/Ji3RKKA\r\n         Dv1nukvvSO1KPmxWEL5rCmNo01J4lhOwJwdfJCpywQ+SI6lslRMpvrlt1azpGoTNpzba\r\n         8gQIKtmmeOZXIkVESntJ+SQsgKG1z7dFgGjYPeeninhE+6EwkbZVKcfP17AleC9x91Fx\r\n         ghRXVZIJIIzW51fo7WJ7S3tjcNMNU6hWq4sNSSxRLfh+4iV1ueink06rdJRkAWfSz54t\r\n         oUlGRbvfqi+bOW/P9vMoKzmCkvYVUVKMwLCEORQc6FR7fuAdpWAKn3q9z49FXliG1GTC\r\n         7PRw==",
+            "arc-authentication-results": "ARC-Authentication-Results: i=1; mx.google.com;\r\n       dkim=pass header.i=@section-homes.20230601.gappssmtp.com header.s=20230601 header.b=UslWN5tt;\r\n       spf=neutral (google.com: 209.85.220.41 is neither permitted nor denied by best guess record for domain of alex@section.homes) smtp.mailfrom=alex@section.homes",
+            "return-path": "Return-Path: <alex@section.homes>",
+            "received-spf": "Received-SPF: neutral (google.com: 209.85.220.41 is neither permitted nor denied by best guess record for domain of alex@section.homes) client-ip=209.85.220.41;",
+            "authentication-results": "Authentication-Results: mx.google.com;\r\n       dkim=pass header.i=@section-homes.20230601.gappssmtp.com header.s=20230601 header.b=UslWN5tt;\r\n       spf=neutral (google.com: 209.85.220.41 is neither permitted nor denied by best guess record for domain of alex@section.homes) smtp.mailfrom=alex@section.homes",
+            "dkim-signature": "DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=section-homes.20230601.gappssmtp.com; s=20230601; t=1696649496; x=1697254296; darn=imposbl.com;\r\n        h=to:subject:message-id:date:from:in-reply-to:references:mime-version\r\n         :from:to:cc:subject:date:message-id:reply-to;\r\n        bh=P0sX/butCuZlPn8zOea8LMBsUcp/PPj/rodIsQWXvTI=;\r\n        b=UslWN5ttNCO8Zt844YwfQEcbVr/gF5JeT3ExCWEQqhZET4zWlCvoVOzRCk9lp5oGLf\r\n         3BjDC8mrj3iztD3ztA4dNLdWmZWvmXn3A9l8j91wRPmKRQGPHeDPv35HKuFXK2sK/6cF\r\n         fPY8HG/57j0sC3ct5yBd6nbREP0ue7HjGgZxM89gsbOkC4s8RXYcDIm/zykENpmIn1HR\r\n         vEIBezhmuBI9H150jnhquCmcQfX9RXP60mxSTlOqky2dxh9B0Us9wGvfunbCaL4ZX3zR\r\n         7knA/YpqLwEfIjdQIsC36n8q/Q0Lz61igEkLh7idqILWGaF55rmKt5A51JJ/BCVWlqWY\r\n         BsWw==",
+            "x-google-dkim-signature": "X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=1e100.net; s=20230601; t=1696649496; x=1697254296;\r\n        h=to:subject:message-id:date:from:in-reply-to:references:mime-version\r\n         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;\r\n        bh=P0sX/butCuZlPn8zOea8LMBsUcp/PPj/rodIsQWXvTI=;\r\n        b=IpisifD9/LoTDxDfOZ9McEQOzUBYmqa5n/djgMzWJHm43FkoKyRzSZLrdxB0vTA/0X\r\n         N7e/iHLnlYpmb96Y5M200mTU9c88rZ3O8x8C2SpjLpX4X89cR0vISvCqTGVxQa5fPBjm\r\n         s/Ot/AicpM3ZSynrijjwM+sQ5TkABJVU06Cn43Wg5kVDQcKI7GllnUwclx06wK1yb9St\r\n         qCfCtY0RDtzZ0dSl6oPM3LXAiEwtV1RmtxLYwSiUmRJ+1WyOVvm6iuxPW8oLRzQMD71Y\r\n         UDs3AOxSJ2ISI37Y9u70I7Z2n9FSRPSNeuYjkSSfMxTUj3NAIMYdAItwqHJJci+AG9ZM\r\n         0IhQ==",
+            "x-gm-message-state": "X-Gm-Message-State: AOJu0Yyya0zhwEw1Ci88kRDK9OEbmgpxLFdMYz680Nokzf/SOGXTxiGy\r\n\tv85pP1Ou8MeBSuMx5uR5h9n8tdnxOwFwHwjjmObdooSLP3S1O0dN",
+            "x-google-smtp-source": "X-Google-Smtp-Source: AGHT+IHcQ8rllAAq5YbPsGv+vDP6a26n+o3gKMhYiOrzPWzuwFMfJlJ9OjR2gr0a3af4w231bXfzUshm7Wp2AgGhIr8=",
+            "mime-version": "MIME-Version: 1.0",
+            "references": "References: <0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000@email.amazonses.com>",
+            "in-reply-to": "In-Reply-To: <0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000@email.amazonses.com>",
+            "from": "From: Alex Miles <alex@section.homes>",
+            "date": "Date: Fri, 6 Oct 2023 23:31:25 -0400",
+            "message-id": "Message-ID: <CAKA-mR93A=930Ov0arDKnkzTWhwiFt6Gi+6H1dnfpe3BnsOf-A@mail.gmail.com>",
+            "subject": "Subject: Fwd: New rental application submitted for 1113 Radcliffe Drive",
+            "to": "To: alex@imposbl.com",
+            "content-type": "Content-Type: multipart/alternative; boundary=\"00000000000089429f060717fe0d\""
+          },
+          "html": "<div dir=\"ltr\"><br><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">---------- Forwarded message ---------<br>From: <b class=\"gmail_sendername\" dir=\"auto\">DoorLoop Customer Success</b> <span dir=\"auto\">&lt;<a href=\"mailto:support@doorloop.com\">support@doorloop.com</a>&gt;</span><br>Date: Tue, Oct 3, 2023 at 12:23 AM<br>Subject: New rental application submitted for 1113 Radcliffe Drive<br>To:  &lt;alex@section.homes&gt;<br></div><br><br><div class=\"msg4676951076610502050\"><u></u>\n\n\n\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n\n\n<div style=\"word-spacing:normal;background-color:#2f3e83\">\n  <div style=\"background-color:#2f3e83\">\n    \n    <div style=\"background:transparent;background-color:transparent;margin:0px auto;max-width:600px\">\n      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:transparent;background-color:transparent;width:100%\">\n        <tbody>\n          <tr>\n            <td style=\"direction:ltr;font-size:0px;padding:100px 0px 0px 0px;padding-bottom:0px;padding-left:0px;padding-right:0px;padding-top:100px;text-align:center\">\n              \n              <div class=\"m_4676951076610502050mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"center\" style=\"background:#ffffff;font-size:0px;padding:50px 0px 40px 0px;padding-top:50px;padding-right:0px;padding-bottom:40px;padding-left:0px;word-break:break-word\">\n                        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:collapse;border-spacing:0px\">\n                          <tbody>\n                            <tr>\n                              <td style=\"width:147px\">\n                                <img alt=\"\" height=\"auto\" src=\"https://doorloop-pictures.s3.amazonaws.com/undefined/1690298891429_House.png\" style=\"border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px\" title=\"\" width=\"147\">\n                              </td>\n                            </tr>\n                          </tbody>\n                        </table>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    \n    <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px\">\n      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%\">\n        <tbody>\n          <tr>\n            <td style=\"direction:ltr;font-size:0px;padding:0px 0px 20px 0px;padding-left:0px;padding-right:0px;padding-top:0px;text-align:center\">\n              \n              <div class=\"m_4676951076610502050mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;word-break:break-word\">\n                        <div style=\"font-family:Arial,sans-serif;font-size:32px;letter-spacing:normal;line-height:1;text-align:left;color:#000000\">\n                          <p style=\"text-align:center;margin:10px 0;margin-top:10px;margin-bottom:10px\"><span style=\"color:#182c4c;font-family:Helvetica;font-size:32px\"><b>Rental Application Submitted</b></span></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    \n    <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px\">\n      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%\">\n        <tbody>\n          <tr>\n            <td style=\"direction:ltr;font-size:0px;padding:0px 0px 20px 0px;padding-left:0px;padding-right:0px;padding-top:0px;text-align:center\">\n              \n              <div class=\"m_4676951076610502050mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"left\" style=\"font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;word-break:break-word\">\n                        <div style=\"font-family:Arial,sans-serif;font-size:13px;letter-spacing:normal;line-height:1;text-align:left;color:#000000\">\n                          <p style=\"text-align:center;margin:10px 0;margin-top:10px;margin-bottom:10px\"><span style=\"font-family:Helvetica;font-size:16px\"><b>1113 Radcliffe Drive, </b></span></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    \n    <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px\">\n      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%\">\n        <tbody>\n          <tr>\n            <td style=\"direction:ltr;font-size:0px;padding:0px 50px 20px 50px;padding-bottom:20px;padding-left:50px;padding-right:50px;padding-top:0px;text-align:center\">\n              \n              <div class=\"m_4676951076610502050mj-column-per-50\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:bottom\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"left\" style=\"font-size:0px;padding:0px 5px 0px 0px;padding-top:0px;padding-right:5px;padding-bottom:0px;padding-left:0px;word-break:break-word\">\n                        <div style=\"font-family:Arial,sans-serif;font-size:13px;letter-spacing:normal;line-height:1;text-align:left;color:#000000\">\n                          <p style=\"margin:10px 0;margin-top:10px;margin-bottom:10px\"><span style=\"color:#182c4c;font-family:Helvetica;font-size:16px\">Received From</span></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n              <div class=\"m_4676951076610502050mj-column-per-50\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:bottom\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"left\" style=\"font-size:0px;padding:0px 0px 0px 5px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:5px;word-break:break-word\">\n                        <div style=\"font-family:Arial,sans-serif;font-size:13px;letter-spacing:normal;line-height:1;text-align:left;color:#000000\">\n                          <p style=\"text-align:right;margin:10px 0;margin-top:10px;margin-bottom:10px\"><span style=\"color:#182c4c;font-family:Helvetica;font-size:16px\">Markeisha N. Evans</span></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    \n    <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px\">\n      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%\">\n        <tbody>\n          <tr>\n            <td style=\"direction:ltr;font-size:0px;padding:0px 50px 20px 50px;padding-bottom:20px;padding-left:50px;padding-right:50px;padding-top:0px;text-align:center\">\n              \n              <div class=\"m_4676951076610502050mj-column-per-50\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:bottom\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"left\" style=\"font-size:0px;padding:0px 5px 0px 0px;padding-top:0px;padding-right:5px;padding-bottom:0px;padding-left:0px;word-break:break-word\">\n                        <div style=\"font-family:Arial,sans-serif;font-size:13px;letter-spacing:normal;line-height:1;text-align:left;color:#000000\">\n                          <p style=\"margin:10px 0;margin-top:10px;margin-bottom:10px\"><span style=\"color:#182c4c;font-family:Helvetica;font-size:16px\">Submitted Date</span></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n              <div class=\"m_4676951076610502050mj-column-per-50\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:bottom\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"left\" style=\"font-size:0px;padding:0px 0px 0px 5px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:5px;word-break:break-word\">\n                        <div style=\"font-family:Arial,sans-serif;font-size:13px;letter-spacing:normal;line-height:1;text-align:left;color:#000000\">\n                          <p style=\"text-align:right;margin:10px 0;margin-top:10px;margin-bottom:10px\"><span style=\"color:#182c4c;font-family:Helvetica;font-size:16px\"></span></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    \n    <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px\">\n      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%\">\n        <tbody>\n          <tr>\n            <td style=\"direction:ltr;font-size:0px;padding:0px 50px 20px 50px;padding-bottom:20px;padding-left:50px;padding-right:50px;padding-top:0px;text-align:center\">\n              \n              <div class=\"m_4676951076610502050mj-column-per-50\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:bottom\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"left\" style=\"font-size:0px;padding:0px 5px 0px 0px;padding-top:0px;padding-right:5px;padding-bottom:0px;padding-left:0px;word-break:break-word\">\n                        <div style=\"font-family:Arial,sans-serif;font-size:13px;letter-spacing:normal;line-height:1;text-align:left;color:#000000\">\n                          <p style=\"margin:10px 0;margin-top:10px;margin-bottom:10px\"><span style=\"color:#182c4c;font-family:Helvetica;font-size:16px\">Reference</span></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n              <div class=\"m_4676951076610502050mj-column-per-50\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:bottom\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"left\" style=\"font-size:0px;padding:0px 0px 0px 5px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:5px;word-break:break-word\">\n                        <div style=\"font-family:Arial,sans-serif;font-size:13px;letter-spacing:normal;line-height:1;text-align:left;color:#000000\">\n                          <p style=\"text-align:right;margin:10px 0;margin-top:10px;margin-bottom:10px\"><span style=\"color:#182c4c;font-family:Helvetica;font-size:16px\">1cc48b</span></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    \n    <div style=\"background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px\">\n      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#ffffff;background-color:#ffffff;width:100%\">\n        <tbody>\n          <tr>\n            <td style=\"direction:ltr;font-size:0px;padding:0px 0px 0px 0px;padding-bottom:0px;padding-left:0px;padding-right:0px;padding-top:0px;text-align:center\">\n              \n              <div class=\"m_4676951076610502050mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"center\" style=\"background:#f5f6fa;font-size:0px;padding:20px 50px 20px 50px;padding-top:20px;padding-right:50px;padding-bottom:20px;padding-left:50px;word-break:break-word\">\n                        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:separate;line-height:100%\">\n                          <tbody>\n                            <tr>\n                              <td align=\"center\" bgcolor=\"#01cc74\" role=\"presentation\" style=\"border:0px solid #ffffff;border-radius:30px;height:40px;background:#01cc74\" valign=\"top\">\n                                <a href=\"https://txn-emails.doorloop.com/CL0/https:%2F%2Fimposbl.app.doorloop.com%2Frental-applications%2F651b973b3aeaa3228666c684%2Foverview/1/0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000/nDLPcf9k3Jqwy1jGPFmiIHRlNn-4oBeMxYig-3muHE8=320\" style=\"display:inline-block;background:#01cc74;color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:15px 25px 15px 25px;border-radius:30px\" target=\"_blank\">\n                                  <span style=\"background-color:#01cc74;color:#ffffff;font-family:Helvetica;font-size:16px\">View Application</span>\n                                </a>\n                              </td>\n                            </tr>\n                          </tbody>\n                        </table>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    \n    <div style=\"margin:0px auto;max-width:600px\">\n      <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width:100%\">\n        <tbody>\n          <tr>\n            <td style=\"direction:ltr;font-size:0px;padding:20px 0px 50px 0px;padding-bottom:50px;padding-left:0px;padding-right:0px;padding-top:20px;text-align:center\">\n              \n              <div class=\"m_4676951076610502050mj-column-per-100\" style=\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%\">\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:top\" width=\"100%\">\n                  <tbody>\n                    <tr>\n                      <td align=\"left\" style=\"font-size:0px;padding:0px 50px 0px 50px;padding-top:0px;padding-right:50px;padding-bottom:0px;padding-left:50px;word-break:break-word\">\n                        <div style=\"font-family:Arial,sans-serif;font-size:13px;letter-spacing:normal;line-height:1;text-align:left;color:#000000\">\n                          <p style=\"text-align:center;margin:10px 0;margin-top:10px\"><span style=\"color:#979fc1;font-family:Arial;font-size:14px;line-height:18px\">929 Alton Rd, 5th Floor, Miami Beach, FL 33139, USA</span></p>\n                          <p style=\"text-align:center;margin:10px 0\"><span style=\"color:#979fc1;font-family:Arial;font-size:14px;line-height:18px\">Copyright © 2023 DoorLoop, LLC </span></p>\n                          <p style=\"text-align:center;margin:10px 0;margin-bottom:10px\"><span style=\"color:#979fc1;font-family:Arial;font-size:16px;line-height:18px\"> </span></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n              \n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    \n  </div>\n<img alt=\"\" src=\"http://txn-emails.doorloop.com/CI0/0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000/TjY9TvdhY4rbE47CapRoAsIOmeUrSpnt_CxhfYUPz38=320\" style=\"display:none;width:1px;height:1px\">\n</div>\n\n\n</div></div></div>\n",
+          "text": "---------- Forwarded message ---------\nFrom: DoorLoop Customer Success <support@doorloop.com>\nDate: Tue, Oct 3, 2023 at 12:23 AM\nSubject: New rental application submitted for 1113 Radcliffe Drive\nTo: <alex@section.homes>\n\n\n*Rental Application Submitted*\n\n*1113 Radcliffe Drive, *\n\nReceived From\n\nMarkeisha N. Evans\n\nSubmitted Date\n\nReference\n\n1cc48b\nView Application\n<https://txn-emails.doorloop.com/CL0/https:%2F%2Fimposbl.app.doorloop.com%2Frental-applications%2F651b973b3aeaa3228666c684%2Foverview/1/0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000/nDLPcf9k3Jqwy1jGPFmiIHRlNn-4oBeMxYig-3muHE8=320>\n\n929 Alton Rd, 5th Floor, Miami Beach, FL 33139, USA\n\nCopyright © 2023 DoorLoop, LLC\n",
+          "textAsHtml": "<p>---------- Forwarded message ---------<br/>From: DoorLoop Customer Success &lt;<a href=\"mailto:support@doorloop.com\">support@doorloop.com</a>&gt;<br/>Date: Tue, Oct 3, 2023 at 12:23&#x202F;AM<br/>Subject: New rental application submitted for 1113 Radcliffe Drive<br/>To: &lt;<a href=\"mailto:alex@section.homes\">alex@section.homes</a>&gt;</p><p>*Rental Application Submitted*</p><p>*1113 Radcliffe Drive, *</p><p>Received From</p><p>Markeisha N. Evans</p><p>Submitted Date</p><p>Reference</p><p>1cc48b<br/>View Application<br/>&lt;<a href=\"https://txn-emails.doorloop.com/CL0/https:%2F%2Fimposbl.app.doorloop.com%2Frental-applications%2F651b973b3aeaa3228666c684%2Foverview/1/0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000/nDLPcf9k3Jqwy1jGPFmiIHRlNn-4oBeMxYig-3muHE8=320\">https://txn-emails.doorloop.com/CL0/https:%2F%2Fimposbl.app.doorloop.com%2Frental-applications%2F651b973b3aeaa3228666c684%2Foverview/1/0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000/nDLPcf9k3Jqwy1jGPFmiIHRlNn-4oBeMxYig-3muHE8=320</a>&gt;</p><p>929 Alton Rd, 5th Floor, Miami Beach, FL 33139, USA</p><p>Copyright &copy; 2023 DoorLoop, LLC</p>",
+          "subject": "Fwd: New rental application submitted for 1113 Radcliffe Drive",
+          "references": "<0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000@email.amazonses.com>",
+          "date": "2023-10-07T03:31:25.000Z",
+          "to": {
+            "value": [
+              {
+                "address": "alex@imposbl.com",
+                "name": ""
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><a href=\"mailto:alex@imposbl.com\" class=\"mp_address_email\">alex@imposbl.com</a></span>",
+            "text": "alex@imposbl.com"
+          },
+          "from": {
+            "value": [
+              {
+                "address": "alex@section.homes",
+                "name": "Alex Miles"
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Alex Miles</span> &lt;<a href=\"mailto:alex@section.homes\" class=\"mp_address_email\">alex@section.homes</a>&gt;</span>",
+            "text": "Alex Miles <alex@section.homes>"
+          },
+          "messageId": "<CAKA-mR93A=930Ov0arDKnkzTWhwiFt6Gi+6H1dnfpe3BnsOf-A@mail.gmail.com>",
+          "inReplyTo": "<0100018af3c6d2ae-5992b0f5-87e4-45a7-8930-8ee92bbd0d11-000000@email.amazonses.com>"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Contact Exists?": [
+      {
+        "json": {
+          "result": "Match"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Gmail Trigger": {
+      "lastTimeChecked": 1703221197,
+      "possibleDuplicates": [
+        "18c8cbcb35b7f52d"
+      ]
+    },
+    "node:Job Applicants": {
+      "lastTimeChecked": 1703221196,
+      "possibleDuplicates": [
+        "18b1ecaff0bf0ee3"
+      ]
+    },
+    "node:Paid BG Application": {
+      "lastTimeChecked": 1696687338
+    },
+    "node:Doorloop Application": {
+      "lastTimeChecked": 1702845237,
+      "possibleDuplicates": [
+        "18c797c615398b60"
+      ]
+    },
+    "node:Job Applicants1": {
+      "lastTimeChecked": 1696776136
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2023-12-22T00:25:31.993Z",
+      "updatedAt": "2023-12-22T00:25:31.993Z",
+      "id": "Wsxt7hKM4Q6MFTmr",
+      "name": "Communications"
+    }
+  ],
+  "triggerCount": 3,
+  "updatedAt": "2023-12-22T04:59:57.380Z",
+  "versionId": "b26b7e68-6b80-4f7e-b25e-69a3f6a24fc6"
+}
