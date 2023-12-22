@@ -1248,8 +1248,15 @@
     "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2023-12-22T00:25:31.993Z",
+      "updatedAt": "2023-12-22T00:25:31.993Z",
+      "id": "Wsxt7hKM4Q6MFTmr",
+      "name": "Communications"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2023-12-17T07:14:02.835Z",
-  "versionId": "f8970ac0-2ab5-41b8-a93d-2e3285891342"
+  "updatedAt": "2023-12-22T00:25:51.923Z",
+  "versionId": "8647a3d0-3987-4862-a72f-07f693634192"
 }
