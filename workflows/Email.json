@@ -1349,12 +1349,16 @@
         "fields": {
           "values": [
             {
-              "name": "email_delivered_from",
-              "stringValue": "={{ $('Gmail Trigger').first().json.headers.from }}"
+              "name": "email_from",
+              "stringValue": "={{ $('Gmail Trigger').item.json.headers.from }}"
             },
             {
-              "name": "email_delivered_to",
-              "stringValue": "={{ $('Gmail Trigger').first().json.headers.to }}"
+              "name": "email_to",
+              "stringValue": "={{ $('Gmail Trigger').item.json.headers.to }}"
+            },
+            {
+              "name": "email_cc",
+              "stringValue": "={{ $('Gmail Trigger').item.json.headers.cc }}"
             },
             {
               "name": "email_subject",
@@ -1656,6 +1660,94 @@
           "result": "Match"
         }
       }
+    ],
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "18c8fe80209e6a39",
+          "threadId": "18c8fe80209e6a39",
+          "labelIds": [
+            "UNREAD",
+            "IMPORTANT",
+            "CATEGORY_PERSONAL",
+            "INBOX"
+          ],
+          "sizeEstimate": 5567,
+          "headers": {
+            "delivered-to": "Delivered-To: management@imposbl.com",
+            "received": "Received: from smtpclient.apple ([2600:1700:2540:7650:786a:e819:5b58:f611])\r\n        by smtp.gmail.com with ESMTPSA id o123-20020a0dcc81000000b005a7daa09f43sm1534009ywd.125.2023.12.21.21.03.14\r\n        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);\r\n        Thu, 21 Dec 2023 21:03:14 -0800 (PST)",
+            "x-received": "X-Received: by 2002:a0d:d5c2:0:b0:5d8:2b37:e085 with SMTP id x185-20020a0dd5c2000000b005d82b37e085mr825344ywd.20.1703221395274;\r\n        Thu, 21 Dec 2023 21:03:15 -0800 (PST)",
+            "arc-seal": "ARC-Seal: i=1; a=rsa-sha256; t=1703221396; cv=none;\r\n        d=google.com; s=arc-20160816;\r\n        b=g+OuXwLACpOOvp0uDEVe7ycDPG8S72ZV4YdztG2TAXqupK4lMxuv7ACiLcL1YyP6AK\r\n         yFLXDRN/1NHjksiryevs7MBEHk41hNja6VV/yO4d1PYMBYP/Tm+47H6bxj2/TDDbR1uZ\r\n         FBz3rNhdH2pbQUuY4TNvGalwatlDTtxt6hpDk1/IoU1CKpLJa7cGYclScrR6Vg5WC9iC\r\n         yCPYlzQPHSIB9qi63tt8yzEEZ8tIDQX8X8tCHYpwlNh7q5xM/M2Nkv8LiAp1xacO5ulI\r\n         h7ySX/X9nDhco0wHoxeRu26phjPInYOE+HztpU4bowBciFALL4oqMfSM3E8aVA+xDUaA\r\n         lZAg==",
+            "arc-message-signature": "ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;\r\n        h=to:cc:date:message-id:subject:mime-version\r\n         :content-transfer-encoding:from:dkim-signature;\r\n        bh=oP1pCLjq4jk6fcepZ4EHl1151AcD8tfmqjYbs349Mxo=;\r\n        fh=TChNsFNBcexkYD6WLMDBaGQ8q7MAo3ZFl0nEkmJAymQ=;\r\n        b=M4k71dFzuo8Ounmap2G9vEoGsf4uppAHzjMmRAfAhbk8ZgMtb9K5wF7HQX6EqTk6hM\r\n         KfsJA+MD7ZIQ/9gyMjWCjkx0Vs89Y38hmWb7yEbKyyZs38zOv/MZlfIS8q8gk6VQv+a9\r\n         GyVBi0sjRbra9Npf71RGM2R/nMlchbhckhgqGe0mAQtuT8uHxFDfHt5+mwVTRxRerm4B\r\n         s8QHwbg7BZD75+WFS7XKYjav9I+r8JNkhpWKR0jpsYgwHXbuZDLvjVhPc0jFhxB9p1Z/\r\n         gRTQi402FQoZ4b+SVzKSTjDsoxrqrufa7UVw9k1LeeyPTb7G5GAz+ENnSn9/htvK/QWX\r\n         59/Q==",
+            "arc-authentication-results": "ARC-Authentication-Results: i=1; mx.google.com;\r\n       dkim=pass header.i=@gmail.com header.s=20230601 header.b=K5jnU78D;\r\n       spf=pass (google.com: domain of milesalex11@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=milesalex11@gmail.com;\r\n       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com",
+            "return-path": "Return-Path: <milesalex11@gmail.com>",
+            "received-spf": "Received-SPF: pass (google.com: domain of milesalex11@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;",
+            "authentication-results": "Authentication-Results: mx.google.com;\r\n       dkim=pass header.i=@gmail.com header.s=20230601 header.b=K5jnU78D;\r\n       spf=pass (google.com: domain of milesalex11@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=milesalex11@gmail.com;\r\n       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com",
+            "dkim-signature": "DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=gmail.com; s=20230601; t=1703221395; x=1703826195; darn=imposbl.com;\r\n        h=to:cc:date:message-id:subject:mime-version\r\n         :content-transfer-encoding:from:from:to:cc:subject:date:message-id\r\n         :reply-to;\r\n        bh=oP1pCLjq4jk6fcepZ4EHl1151AcD8tfmqjYbs349Mxo=;\r\n        b=K5jnU78DOWGp+MCTxQ7jcxYXuH/sAWbP6dEICim5QULk/uJOha1qXD49KODMF/kdy2\r\n         sZ3zF7xJrqVacZ35FgaAAJdOM95vLJ+r1ZpljrbJ6e9AUn/AiJwQzvUjqREENbEEC4bU\r\n         Cw/EbTFk8XF7RN69nf87dy+P7JeB36jBCVYH80fpTqMIdeg2MWtV/Usv0x6ANZ9neaTb\r\n         LddLpElcHrcJOL+j0KwZHdoO1711X3H143xR91ogv5apptrZyZud/RocQYVKcRGQI3OG\r\n         2MS0vZGOxRvA0FMKyl0q9zmnv37Z6YKTf2bh7IihKD8X8TFBB/pydl9VWwVv3BMBhcS8\r\n         saIA==",
+            "x-google-dkim-signature": "X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=1e100.net; s=20230601; t=1703221395; x=1703826195;\r\n        h=to:cc:date:message-id:subject:mime-version\r\n         :content-transfer-encoding:from:x-gm-message-state:from:to:cc\r\n         :subject:date:message-id:reply-to;\r\n        bh=oP1pCLjq4jk6fcepZ4EHl1151AcD8tfmqjYbs349Mxo=;\r\n        b=GouyFeMzFZx0yh1LOwpgnzKCcO1pbbf3+V3ir63N4njcyU+QMvK7cGVI0Vsg8pRoWs\r\n         SeA13i0pZ12CLZr6DtF7wlJsDJVIkhrfjPdhZHHGccq/XRM+MxIP0EMSc2pbvMQkFVRK\r\n         eAvuuFOLVa8XEcc8f0tn1EgqSeOvoUuMJJeEP+fb7XKy7hNNgRBTc18TZ51gPFzbZt83\r\n         kySqQghX1a4nzjB3tg1eAPnX2UrIr5+4uHw38uGcr9p2EF+oDt0f5y1nwXpW4Q4S2o92\r\n         yDxgEfSRP5VKJUNZBJ5YAhOv1updVnKTTwoSrXHE62ChV5hTZfOUCVovXh/MGgJBM1Ps\r\n         keQA==",
+            "x-gm-message-state": "X-Gm-Message-State: AOJu0YzLy8M8o1mmnYeKdu2oR3oqoGPZ48HOLrkF6p7bMX4mhux4n/rA\r\n\tEgJUEmLxWETZsVDaH+DigGBVMJvw7Po=",
+            "x-google-smtp-source": "X-Google-Smtp-Source: AGHT+IFw490dOEkSbhRdc7GjrLepjkuW1/wVjvhBQOYXizq719K/xiwdVe+dO71Imvqb4Qo8KhuEKw==",
+            "from": "From: Alex Miles <milesalex11@gmail.com>",
+            "x-google-original-from": "X-Google-Original-From: Alex Miles <MilesAlex11@gmail.com>",
+            "content-type": "Content-Type: text/plain;\r\n\tcharset=us-ascii",
+            "content-transfer-encoding": "Content-Transfer-Encoding: 7bit",
+            "mime-version": "Mime-Version: 1.0 (Mac OS X Mail 16.0 \\(3774.300.61.1.2\\))",
+            "subject": "Subject: Test subject here",
+            "message-id": "Message-Id: <2D1EE100-E2A3-4022-AAC8-021F09AFE0B7@gmail.com>",
+            "date": "Date: Fri, 22 Dec 2023 00:03:04 -0500",
+            "cc": "Cc: Landlord Imposbl <management@imposbl.com>,\r\n Miles Alex <miles@abetterbid.com>",
+            "to": "To: Imposbl Landlord <landlord@imposbl.com>,\r\n Miles Alex <milesalex110@gmail.com>",
+            "x-mailer": "X-Mailer: Apple Mail (2.3774.300.61.1.2)"
+          },
+          "text": "Test body here\n",
+          "textAsHtml": "<p>Test body here</p>",
+          "subject": "Test subject here",
+          "date": "2023-12-22T05:03:04.000Z",
+          "to": {
+            "value": [
+              {
+                "address": "landlord@imposbl.com",
+                "name": "Imposbl Landlord"
+              },
+              {
+                "address": "milesalex110@gmail.com",
+                "name": "Miles Alex"
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Imposbl Landlord</span> &lt;<a href=\"mailto:landlord@imposbl.com\" class=\"mp_address_email\">landlord@imposbl.com</a>&gt;</span>, <span class=\"mp_address_group\"><span class=\"mp_address_name\">Miles Alex</span> &lt;<a href=\"mailto:milesalex110@gmail.com\" class=\"mp_address_email\">milesalex110@gmail.com</a>&gt;</span>",
+            "text": "Imposbl Landlord <landlord@imposbl.com>, Miles Alex <milesalex110@gmail.com>"
+          },
+          "from": {
+            "value": [
+              {
+                "address": "milesalex11@gmail.com",
+                "name": "Alex Miles"
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Alex Miles</span> &lt;<a href=\"mailto:milesalex11@gmail.com\" class=\"mp_address_email\">milesalex11@gmail.com</a>&gt;</span>",
+            "text": "Alex Miles <milesalex11@gmail.com>"
+          },
+          "cc": {
+            "value": [
+              {
+                "address": "management@imposbl.com",
+                "name": "Landlord Imposbl"
+              },
+              {
+                "address": "miles@abetterbid.com",
+                "name": "Miles Alex"
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Landlord Imposbl</span> &lt;<a href=\"mailto:management@imposbl.com\" class=\"mp_address_email\">management@imposbl.com</a>&gt;</span>, <span class=\"mp_address_group\"><span class=\"mp_address_name\">Miles Alex</span> &lt;<a href=\"mailto:miles@abetterbid.com\" class=\"mp_address_email\">miles@abetterbid.com</a>&gt;</span>",
+            "text": "Landlord Imposbl <management@imposbl.com>, Miles Alex <miles@abetterbid.com>"
+          },
+          "messageId": "<2D1EE100-E2A3-4022-AAC8-021F09AFE0B7@gmail.com>",
+          "html": false
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
     ]
   },
   "settings": {
@@ -1663,13 +1755,13 @@
   },
   "staticData": {
     "node:Gmail Trigger": {
-      "lastTimeChecked": 1703221197,
+      "lastTimeChecked": 1703260556,
       "possibleDuplicates": [
         "18c8cbcb35b7f52d"
       ]
     },
     "node:Job Applicants": {
-      "lastTimeChecked": 1703221196,
+      "lastTimeChecked": 1703260555,
       "possibleDuplicates": [
         "18b1ecaff0bf0ee3"
       ]
@@ -1696,6 +1788,6 @@
     }
   ],
   "triggerCount": 3,
-  "updatedAt": "2023-12-22T04:59:57.380Z",
-  "versionId": "b26b7e68-6b80-4f7e-b25e-69a3f6a24fc6"
+  "updatedAt": "2023-12-22T15:55:56.682Z",
+  "versionId": "f0e7de6c-d446-4037-bc8c-dd081fd3c0e5"
 }
