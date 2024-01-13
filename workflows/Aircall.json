@@ -1052,6 +1052,20 @@
           "name": "alex@section.homes"
         }
       }
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n\titem.json.myNewField = 1\nreturn _input.all()"
+      },
+      "id": "2deae8ed-b572-41d4-b89e-0b5a8dd77e1f",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        460
+      ]
     }
   ],
   "pinData": {
@@ -1257,6 +1271,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-12-22T00:25:51.923Z",
-  "versionId": "8647a3d0-3987-4862-a72f-07f693634192"
+  "updatedAt": "2024-01-13T03:51:44.203Z",
+  "versionId": "6383133d-b41b-41b7-9d31-5c80738aa68c"
 }
