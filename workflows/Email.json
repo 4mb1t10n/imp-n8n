@@ -1755,13 +1755,13 @@
   },
   "staticData": {
     "node:Gmail Trigger": {
-      "lastTimeChecked": 1706024655,
+      "lastTimeChecked": 1706308990,
       "possibleDuplicates": [
-        "18d36fe8c903777e"
+        "18d47f0fb10130e5"
       ]
     },
     "node:Job Applicants": {
-      "lastTimeChecked": 1706024670,
+      "lastTimeChecked": 1706309010,
       "possibleDuplicates": [
         "18b1ecaff0bf0ee3"
       ]
@@ -1770,7 +1770,7 @@
       "lastTimeChecked": 1696687338
     },
     "node:Doorloop Application": {
-      "lastTimeChecked": 1705523575,
+      "lastTimeChecked": 1706308989,
       "possibleDuplicates": [
         "18d19208e0385965"
       ]
@@ -1788,6 +1788,6 @@
     }
   ],
   "triggerCount": 3,
-  "updatedAt": "2024-01-23T15:44:59.733Z",
+  "updatedAt": "2024-01-26T22:44:00.233Z",
   "versionId": "f0e7de6c-d446-4037-bc8c-dd081fd3c0e5"
 }
