@@ -338,51 +338,7 @@
       "main": [
         [
           {
-            "node": "Telegram Notification",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Server.js Error": {
-      "main": [
-        [
-          {
-            "node": "Telegram",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Gmail Trigger": {
-      "main": [
-        [
-          {
-            "node": "Write Binary File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Write Binary File": {
-      "main": [
-        [
-          {
-            "node": "Save attachement Drive",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Save attachement Drive": {
-      "main": [
-        [
-          {
-            "node": "Airtable",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -487,29 +443,6 @@
         860
       ],
       "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "chatId": "-1001902244643",
-        "text": "=Error saving bank transactions into airtable. Check n8n execution ID:\n{{ $executionId }}",
-        "additionalFields": {
-          "parse_mode": "MarkdownV2"
-        }
-      },
-      "id": "7be52537-998e-4f0a-ad75-1507d885b8fb",
-      "name": "Telegram",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.1,
-      "position": [
-        1620,
-        -60
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "YtXrIMUbcoaS4RKx",
-          "name": "P0m0shnik11_Bot"
-        }
-      }
     },
     {
       "parameters": {
@@ -721,17 +654,17 @@
     },
     {
       "parameters": {
-        "content": "## Webhook from Airtable when Autocat button pushed or new record is created",
-        "height": 138.51026014708373,
-        "width": 445.9945504087194
+        "content": "## Autocat - new record created in Airtable",
+        "height": 205.35731131193012,
+        "width": 496.129838782354
       },
       "id": "5bc41111-4ae0-4e85-8c17-ded2b428da95",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        880,
-        660
+        1000,
+        620
       ]
     },
     {
@@ -2698,7 +2631,7 @@
     },
     {
       "parameters": {
-        "content": "## Webhook from Airtable when a new Autocat rule is created",
+        "content": "## Autocat - New rule created",
         "height": 257.2752043596731,
         "width": 445.9945504087194
       },
@@ -2710,59 +2643,6 @@
         1120,
         1300
       ]
-    },
-    {
-      "parameters": {
-        "chatId": "-1001902244643",
-        "text": "=New webhook from Plaid \nExecution ID: \"{{ $executionId }}\"",
-        "additionalFields": {
-          "appendAttribution": false
-        }
-      },
-      "id": "69df0abb-2be4-4fc6-a749-2c4432dec8ab",
-      "name": "Telegram Notification",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.1,
-      "position": [
-        1640,
-        160
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "YtXrIMUbcoaS4RKx",
-          "name": "P0m0shnik11_Bot"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "content": "## Error Notification\nSent by server.js if there is an issue with saving transactions into airtable",
-        "height": 146.3156649326342,
-        "width": 414.8057713651498
-      },
-      "id": "be31f803-6de6-4487-a28a-ba84509ff20d",
-      "name": "Sticky Note2",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        960,
-        -80
-      ]
-    },
-    {
-      "parameters": {
-        "path": "5e4a40fa-ff29-4cc4-91e1-c07482da4ed2",
-        "options": {}
-      },
-      "id": "c6018ca2-571f-4f79-a89b-957e5b448bb6",
-      "name": "Server.js Error",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        1420,
-        -60
-      ],
-      "webhookId": "5e4a40fa-ff29-4cc4-91e1-c07482da4ed2"
     },
     {
       "parameters": {
@@ -2781,207 +2661,24 @@
     },
     {
       "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
-        "simple": false,
-        "filters": {
-          "labelIds": [
-            "Label_3335012697489776127"
-          ]
-        },
-        "options": {
-          "downloadAttachments": true
-        }
-      },
-      "id": "6ee19f0f-c075-4bac-8201-c529a672bc22",
-      "name": "Gmail Trigger",
-      "type": "n8n-nodes-base.gmailTrigger",
-      "typeVersion": 1,
-      "position": [
-        1440,
-        2120
-      ],
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "ISacoa0FmHYN7ljX",
-          "name": "management@imposbl.com"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "create",
-        "base": {
-          "__rl": true,
-          "value": "appjjY9qVQZlWUkkj",
-          "mode": "list",
-          "cachedResultName": "Finances",
-          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tblJUtE1Qq3TV32La",
-          "mode": "list",
-          "cachedResultName": "Receipts",
-          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblJUtE1Qq3TV32La"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "receipt_drive_url": "={{ $json.webContentLink }}",
-            "drive_file_id": "={{ $json.id }}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "receipt_id",
-              "displayName": "receipt_id",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": true,
-              "removed": true
-            },
-            {
-              "id": "receipt_drive_url",
-              "displayName": "receipt_drive_url",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "receipt_total",
-              "displayName": "receipt_total",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": true
-            },
-            {
-              "id": "receipt_date",
-              "displayName": "receipt_date",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "dateTime",
-              "readOnly": false,
-              "removed": true
-            },
-            {
-              "id": "drive_file_id",
-              "displayName": "drive_file_id",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "created_time",
-              "displayName": "created_time",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": true,
-              "removed": true
-            },
-            {
-              "id": "receipt_pdf",
-              "displayName": "receipt_pdf",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "array",
-              "readOnly": false,
-              "removed": true
-            }
-          ]
-        },
+        "method": "POST",
+        "url": "2600:1700:2540:7650:79ca:be3b:efeb:2478/plaidUpdates",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ $json.headers }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
         "options": {}
       },
-      "id": "e7e0e2e6-8f13-4835-9be0-7347bd385d4f",
-      "name": "Airtable",
-      "type": "n8n-nodes-base.airtable",
-      "typeVersion": 2,
+      "id": "56b07400-1dff-4801-8603-5589580d911f",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
       "position": [
-        2100,
-        2120
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "ba9BL3rXOUDjb7P2",
-          "name": "alex@section.homes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "fileName": "attachment",
-        "dataPropertyName": "attachment_0",
-        "options": {}
-      },
-      "id": "b451d61a-820d-44c4-8b74-ae4ab932fd19",
-      "name": "Write Binary File",
-      "type": "n8n-nodes-base.writeBinaryFile",
-      "typeVersion": 1,
-      "position": [
-        1660,
-        2120
+        1640,
+        160
       ]
-    },
-    {
-      "parameters": {
-        "inputDataFieldName": "attachment_0",
-        "driveId": {
-          "__rl": true,
-          "value": "My Drive",
-          "mode": "list",
-          "cachedResultName": "My Drive",
-          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
-        },
-        "folderId": {
-          "__rl": true,
-          "value": "1gO3WF3QCamfq9dnyDeTu3fHUBTvvJXeD",
-          "mode": "list",
-          "cachedResultName": "Receipts",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1gO3WF3QCamfq9dnyDeTu3fHUBTvvJXeD"
-        },
-        "options": {}
-      },
-      "id": "c2fdc96b-4802-4f76-8336-f64393aa23c0",
-      "name": "Save attachement Drive",
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        1880,
-        2120
-      ],
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "nW7nlrz7YTdeOqB7",
-          "name": "4mb Account"
-        }
-      }
     }
   ],
   "pinData": {
@@ -3065,7 +2762,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 5,
-  "updatedAt": "2024-01-08T01:43:07.056Z",
-  "versionId": "6d2ea28f-b669-400a-82f8-b9fe6dc9a149"
+  "triggerCount": 3,
+  "updatedAt": "2024-02-07T15:53:33.522Z",
+  "versionId": "22e0a7cc-9567-44bd-bd07-05bd3c1d2d16"
 }
