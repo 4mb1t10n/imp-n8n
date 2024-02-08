@@ -338,7 +338,58 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Switch2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "personal": {
+      "main": [
+        [
+          {
+            "node": "/plaidUpdates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Imposbl": {
+      "main": [
+        [
+          {
+            "node": "/plaidUpdates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch2": {
+      "main": [
+        [
+          {
+            "node": "Imposbl",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "personal",
             "type": "main",
             "index": 0
           }
@@ -354,7 +405,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "e43a3317-2c43-41c6-b2de-3fb9419b17b7",
+        "path": "plaid-updates",
         "options": {}
       },
       "id": "fbe6bef2-1b3e-4e99-b57b-a83a493cbf57",
@@ -2662,21 +2713,160 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "2600:1700:2540:7650:79ca:be3b:efeb:2478/plaidUpdates",
+        "url": "https://www.imposbl.com/plaidUpdates",
         "sendHeaders": true,
-        "specifyHeaders": "json",
-        "jsonHeaders": "={{ $json.headers }}",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "plaid-verification",
+              "value": "={{ $('Webhook from Plaid').item.json.headers['plaid-verification'] }}"
+            },
+            {
+              "name": "x-request-id",
+              "value": "={{ $('Webhook from Plaid').item.json.headers['x-request-id'] }}"
+            }
+          ]
+        },
         "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ $json.body }}",
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "item_id",
+              "value": "={{ $('Webhook from Plaid').item.json.body.item_id }}"
+            },
+            {
+              "name": "webhook_code",
+              "value": "={{ $('Webhook from Plaid').item.json.body.webhook_code }}"
+            }
+          ]
+        },
         "options": {}
       },
       "id": "56b07400-1dff-4801-8603-5589580d911f",
-      "name": "HTTP Request",
+      "name": "/plaidUpdates",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
+        2380,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblcsKuArxwZJjJwv",
+          "mode": "list",
+          "cachedResultName": "Users",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblcsKuArxwZJjJwv"
+        },
+        "filterByFormula": "={item_id}='{{ $json.body.item_id }}'",
+        "returnAll": false,
+        "limit": 1,
+        "options": {
+          "fields": [
+            "user_email"
+          ]
+        }
+      },
+      "id": "a394a815-f58c-4bd2-87d0-6416f5794931",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
         1640,
+        160
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1002118068539",
+        "text": "test",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "MarkdownV2"
+        }
+      },
+      "id": "e4a8a2bd-1089-4d29-a9aa-e4e41ced3b2d",
+      "name": "personal",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        2100,
+        260
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1001902244643",
+        "text": "=New Plaid updates in [Airtable](https://airtable.com/appjjY9qVQZlWUkkj/pagVgFWWyAVyDGMbZ)\n{{ $('Webhook from Plaid').item.json.body.webhook_code }}\n{{ $('Webhook from Plaid').item.json.body.webhook_type }} ",
+        "additionalFields": {
+          "disable_web_page_preview": true,
+          "parse_mode": "MarkdownV2"
+        }
+      },
+      "id": "5e7ca0d5-d34d-443d-be68-cb8d4f640ac2",
+      "name": "Imposbl",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        2100,
+        80
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.user_email }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "contains",
+              "value2": "@imposbl.com",
+              "outputKey": "1"
+            },
+            {
+              "operation": "contains",
+              "value2": "milesalex11",
+              "outputKey": "2"
+            }
+          ]
+        }
+      },
+      "id": "0100b1f3-737b-4e9c-98e3-2f1d79f9a202",
+      "name": "Switch2",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [
+        1860,
         160
       ]
     }
@@ -2763,6 +2953,6 @@
   },
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2024-02-07T15:53:33.522Z",
-  "versionId": "22e0a7cc-9567-44bd-bd07-05bd3c1d2d16"
+  "updatedAt": "2024-02-07T22:19:02.255Z",
+  "versionId": "d3a27273-1591-49ec-80a6-973ad94cb480"
 }
