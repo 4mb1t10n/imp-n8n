@@ -2893,27 +2893,6 @@
         }
       }
     ],
-    "Webhook from Airtable": [
-      {
-        "json": {
-          "headers": {
-            "host": "imposbl.up.railway.app",
-            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
-            "x-airtable-source": "appjjY9qVQZlWUkkj/wflQgy1e4xNVx5HMD",
-            "accept": "*/*",
-            "accept-encoding": "gzip,deflate",
-            "x-forwarded-for": "54.237.109.38",
-            "x-forwarded-proto": "https",
-            "x-envoy-external-address": "54.237.109.38",
-            "x-request-id": "e204ebb7-5449-44c9-bc9b-fbff6bb9e7e9"
-          },
-          "params": {},
-          "query": {
-            "rec_id": "recjTA58Nr1hzzcUg"
-          }
-        }
-      }
-    ],
     "Webhook from Plaid": [
       {
         "json": {
@@ -2941,6 +2920,31 @@
           }
         }
       }
+    ],
+    "Webhook from Airtable": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "x-airtable-source": "appjjY9qVQZlWUkkj/wflKUbNbPPAcBgYqG",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-forwarded-for": "34.202.162.161",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "34.202.162.161",
+            "x-request-id": "996dc143-e52a-4935-b2d9-e02ea53d7b85"
+          },
+          "params": {},
+          "query": {
+            "rec_id": "reca1ENpvPCH7lCBO",
+            "db_id": "appjjY9qVQZlWUkkj"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
     ]
   },
   "settings": {
@@ -2953,6 +2957,6 @@
   },
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2024-02-07T22:19:02.255Z",
-  "versionId": "d3a27273-1591-49ec-80a6-973ad94cb480"
+  "updatedAt": "2024-02-09T00:32:52.527Z",
+  "versionId": "7b00bb8e-8b37-4bae-8c90-5877ad80b21a"
 }
