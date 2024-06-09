@@ -1,60 +1,63 @@
 {
   "active": false,
-  "connections": {},
-  "createdAt": "2023-07-24T15:46:44.849Z",
-  "id": "H8uHpWVCotAN5Vvx",
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-08T22:40:54.190Z",
+  "id": "3ypmy8nE1x2TIBR9",
+  "meta": null,
   "name": "My workflow",
   "nodes": [
     {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "s8-scrape-bank",
-        "options": {}
-      },
-      "id": "9e84b2cd-a64f-450b-a87a-699cd2b4039e",
-      "name": "Mailhook from Make.com",
-      "type": "n8n-nodes-base.webhook",
+      "parameters": {},
+      "id": "51ba64bd-e34c-4209-af5e-ef09a101a6cf",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        600,
-        420
+        620,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "test",
+        "additionalFields": {}
+      },
+      "id": "d1061e2d-3086-4307-bd93-477cf13e6bd3",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        840,
+        380
       ],
-      "webhookId": "7b7e6ea6-bc48-4b29-a66a-9b098bff676f"
-    }
-  ],
-  "pinData": {
-    "Mailhook from Make.com": [
-      {
-        "json": {
-          "headers": {
-            "host": "n8n-production-29d3.up.railway.app",
-            "content-type": "text/plain",
-            "user-agent": "Make/production",
-            "content-length": "16263",
-            "x-datadog-trace-id": "3021791404380198398",
-            "x-datadog-parent-id": "485895376493267609",
-            "x-datadog-sampling-priority": "0",
-            "traceparent": "00-000000000000000029ef8f45ab6915fe-06be3f4541e2ca99-00",
-            "tracestate": "dd=t.dm:1;s:0",
-            "x-forwarded-for": "54.161.178.114",
-            "x-forwarded-proto": "https",
-            "x-envoy-external-address": "54.161.178.114",
-            "x-request-id": "c9a3c9a1-3630-4966-82f6-525b2a42b4d1"
-          },
-          "params": {},
-          "query": {},
-          "body": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n<title></title>\n<style type=\"text/css\">\n* {\n\tline-height: normal !important;\n}\nstrong {\n\tfont-weight: bold !important;\n}\nem {\n\tfont-style: italic !important;\n}\nbody {\n\tbackground-color: #d7dbe0 !important;\n\t-webkit-text-size-adjust: none !important;\n}\n.ExternalClass * {\n\tline-height: 112%\n}\n.ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td {\n\tline-height: 112%\n}\ntd {\n\t-webkit-text-size-adjust: none;\n}\na[href^=tel] {\n\tcolor: inherit;\n\ttext-decoration: none;\n}\n.applelinksgray41 a {\n\tcolor: #414042 !important;\n\ttext-decoration: none;\n}\n.applelinksgray a {\n\tcolor: #717171 !important;\n\ttext-decoration: none;\n}\n.applelinksblack a {\n\tcolor: #000001 !important;\n\ttext-decoration: none;\n}\n.applelinkswhite a {\n\tcolor: #FFFFFE !important;\n\ttext-decoration: none;\n}\n.wordBreak {\n\toverflow-wrap: break-word;\n\tword-wrap: break-word;\n\tword-break: break-all;\n\tword-break: break-word;\n}\n\n@media screen and (max-width: 800px) {\n.fullWidth {\n\twidth: 100% !important;\n\tmin-width: 100% !important;\n\tmargin-left: auto !important;\n\tmargin-right: auto !important;\n\tpadding: 0px !important;\n\ttext-align: center !important;\n}\n.hero {\n\twidth: 100% !important;\n\theight: auto !important;\n}\n.moPad {\n\tpadding-right: 20px !important;\n\tpadding-left: 20px !important;\n}\n.zeroPad {\n\tpadding-right: 0px !important;\n\tpadding-left: 0px !important;\n}\n.font14 {\n\tfont-size: 14px !important;\n}\n.font24 {\n\tfont-size: 24px !important;\n}\n}\n\n@media print and (max-width: 800px) {\n.fullWidth {\n\twidth: 100% !important;\n\tmin-width: 100% !important;\n\tmargin-left: auto !important;\n\tmargin-right: auto !important;\n\tpadding: 0px !important;\n\ttext-align: center !important;\n}\n.hero {\n\twidth: 100% !important;\n\theight: auto !important;\n}\n.moPad {\n\tpadding-right: 20px !important;\n\tpadding-left: 20px !important;\n}\n.zeroPad {\n\tpadding-right: 0px !important;\n\tpadding-left: 0px !important;\n}\n.font14 {\n\tfont-size: 14px !important;\n}\n.font24 {\n\tfont-size: 24px !important;\n}\n}\n</style>\n</head>\n<body style=\"padding: 0px;margin: 0px; background-color:#d7dbe0;\">\n<table role=\"presentation\" align=\"center\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"min-width:800px; background-color:#d7dbe0;\" class=\"fullWidth\">\n  <tr>\n    <td align=\"center\" style=\"vertical-align:top; padding:0px 0px 20px 0px; min-width:800px; background-color:#d7dbe0;\" class=\"fullWidth\"><table role=\"presentation\" align=\"center\" width=\"800\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"fullWidth\" style=\"background-color:#FFFFFF;\">\n        <!-- Start of Content -->\n        <tr>\n          <td align=\"center\" style=\"vertical-align:top; padding: 23px 0px 0px;background-color: #005EB8;\"><table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n              <tr>\n                <td align=\"right\" style=\"vertical-align:bottom; padding:0px 0px; width:12px;\"><img src=\"https://www.chase.com/content/dam/email/images/blue-left.jpg\" width=\"12\" height=\"226\" border=\"0\" style=\"display:block;\" alt=\"\"/></td>\n                <td align=\"center\" style=\"vertical-align:bottom; padding: 0px 0px 0px;width:616px; background-color: #FFFFFF;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                    <tr>\n                      <td align=\"left\" style=\"vertical-align:top; padding: 0px 0px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                         <tr>\n                            <td align=\"left\" style=\"vertical-align:top;padding-left: 30px;\" class=\"moPad\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                                <tr>\n                                  <td align=\"left\" style=\"vertical-align:bottom; padding:36px 0px 20px;\"><img src=\"https://www.chase.com/content/dam/email/images/chase-logo-h-rgb.png\" width=\"104\" height=\"20\" border=\"0\" style=\"display:block;\" alt=\"Chase Logo\"/></td>\n                                </tr>\n                              </table></td>\n                          </tr>\n                          <tr>\n                            <td align=\"left\" style=\"vertical-align:top; padding: 20px 28px 0px;\" class=\"moPad\"><table role=\"presentation\" align=\"left\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                                <tr>\n                                  <td align=\"left\" style=\"vertical-align:top;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                                      <tr>\n                                        <td align=\"left\" style=\"vertical-align:top; padding:5px 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold; color:#414042; background-color:#D7DBE0; border-radius:20px; -moz-border-radius: 20px; -webkit-border-radius:20px; white-space: nowrap;\" class=\"font14\">Transaction alert</td>\n                                      </tr>\n                                    </table></td>\n                                </tr>\n                              </table></td>\n                          </tr>\n                          <tr>\n                            <td align=\"left\" style=\"vertical-align:top; padding: 20px 30px 28px;\" class=\"moPad\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                                <tr>\n                                  <td align=\"left\" style=\"vertical-align:top; padding:0px 150px 0px 0px; font-family:Arial, Helvetica, sans-serif; font-size:30px; font-weight: bold; color:#414042;\" class=\"zeroPad\">You made a debit card transaction of $10.78 with SOUK MEDITERRANEAN K</td>\n                                </tr>\n                              </table></td>\n                          </tr>\n                        </table></td>\n                    </tr>\n                  </table></td>\n                <td align=\"left\" style=\"vertical-align:bottom; padding:0px 0px;width:12px; \"><img src=\"https://www.chase.com/content/dam/email/images/blue-right.jpg \" width=\"12\" height=\"226\" border=\"0\" style=\"display:block;\" alt=\"\"/></td>\n              </tr>\n            </table></td>\n        </tr>\n        <tr>\n          <td align=\"center\" style=\"vertical-align:top; padding: 0px 0px 0px; background-color: #FFFFFF;\"><table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n              <tr>\n                <td align=\"right\" style=\"vertical-align:top; padding:0px 0px; width:12px;\"><img src=\"https://www.chase.com/content/dam/email/images/white-left.jpg\" width=\"12\" height=\"77\" border=\"0\" style=\"display:block;\" alt=\"\"/></td>\n                <td align=\"center\" style=\"vertical-align:top; padding: 0px 0px 0px;width:616px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                    <tr>\n                      <td align=\"left\" style=\"vertical-align:top; padding: 0px 150px 0px 30px;\" class=\"moPad\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                          <tr>\n                            <td align=\"left\" style=\"vertical-align:top; padding: 10px 0px;border-bottom: solid 1px #414042;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                                <tr>\n                                  <td align=\"left\" style=\"vertical-align:top; padding:0px 0px 0px 0px; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#414042;\" class=\"font14\">Account ending in</td>\n                                  <td align=\"right\" style=\"vertical-align:top; padding:0px 0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; color:#414042;\" class=\"font14\">(...3262)</td>\n                                </tr>\n                              </table></td>\n                          </tr>\n\n                          <tr>\n                            <td align=\"left\" style=\"vertical-align:top; padding: 10px 0px;border-bottom: solid 1px #414042;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                                <tr>\n                                  <td align=\"left\" style=\"vertical-align:top; padding:0px 0px 0px 0px; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#414042;\" class=\"font14\">Made on</td>\n                                  <td align=\"right\" style=\"vertical-align:top; padding:0px 0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; color:#414042;\" class=\"font14\"><span class=\"applelinksgray41\"><a style=\"color:#414042;text-decoration: none;\">Jul 11, 2023 at 3:02 PM ET</a></span></td>\n                                </tr>\n                              </table></td>\n                          </tr>\n\t\t\t\t\t\t  <tr>\n                            <td align=\"left\" style=\"vertical-align:top; padding: 10px 0px;border-bottom: solid 1px #414042;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                                <tr>\n                                  <td align=\"left\" style=\"vertical-align:top; padding:0px 0px 0px 0px; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#414042;\" class=\"font14\">Description</td>\n                                  <td align=\"right\" style=\"vertical-align:top; padding:0px 0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; color:#414042;\" class=\"font14\"><span class=\"applelinksgray41\"><a style=\"color:#414042;text-decoration: none;\">SOUK MEDITERRANEAN K</a></span></td>\n                                </tr>\n                              </table></td>\n                          </tr>\n                        <tr>\n                            <td align=\"left\" style=\"vertical-align:top; padding: 10px 0px;border-bottom: solid 1px #414042;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                                <tr>\n                                  <td align=\"left\" style=\"vertical-align:top; padding:0px 0px 0px 0px; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#414042;\" class=\"font14\">Amount</td>\n                                  <td align=\"right\" style=\"vertical-align:top; padding:0px 0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; color:#414042;\" class=\"font14\">$10.78</td>\n                                </tr>\n                              </table></td>\n                          </tr>\n\n                        </table></td>\n                    </tr>\n                   <tr>\n                      <td align=\"left\" style=\"vertical-align:top; padding:40px 150px 0 30px; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#414042;\" class=\"moPad\">You are receiving this alert because this transaction is more than the $0.01 limit you set. Visit <a style=\"text-decoration: underline; color:#0060F0;\" href=\"https://www.chase.com/personal/mobile-online-banking/login-alerts\" rel=\"noopener noreferrer\"  target=\"_blank\">chase.com/alerts</a> to view or manage your settings. </td>\n                    </tr>\n                    <tr>\n                      <td align=\"left\" style=\"padding:0px; vertical-align:top; padding: 60px 0px 60px 30px;\" class=\"moPad\"><table role=\"presentation\" align=\"left\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"vertical-align:top;\">\n                          <tr>\n                            <td role=\"button\" align=\"center\" style=\"background-color:#0060f0; color: #fffffe; font-size: 16px; font-family: Arial, Helvetica, sans-serif; padding: 10px 0px; border: 1px solid #0060f0; vertical-align:top; border-radius:4px; -moz-border-radius: 4px; -webkit-border-radius:4px;width: 168px;\"><a href=\"https://secure.chase.com/web/auth/nav?navKey=requestDashboard\" target=\"_blank\" style=\"color: #fffffe; text-decoration:none;\">Review&nbsp;account</a></td>\n                          </tr>\n                        </table></td>\n                    </tr>\n                    <tr>\n                      <td align=\"left\" style=\"vertical-align:top; padding:0px 30px 20px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#717171;\" class=\"moPad font14\">Securely access your accounts with the <a style=\"text-decoration: underline; color:#0060F0;\" href=\"https://www.chase.com/digital/mobile-banking\" rel=\"noopener noreferrer\"  target=\"_blank\">Chase&nbsp;Mobile<span style=\"font-size:70%; line-height:0; vertical-align:3px; text-decoration: none;\">&reg;</span> app</a> or <a style=\"text-decoration: underline; color:#0060F0;\" href=\"https://secure.chase.com/web/auth/nav?navKey=requestDashboard\" rel=\"noopener noreferrer\"  target=\"_blank\">chase.com</a>. </td>\n                    </tr>\n                    <tr>\n                      <td align=\"left\" style=\"vertical-align:top; padding: 0px 0px; background-color: #F6F6F6;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n                          <tr>\n                            <td align=\"left\" style=\"vertical-align:top; padding:20px 30px 60px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#717171;\" class=\"moPad font14\"><span role=\"heading\" style=\"text-transform: uppercase; font-weight: bold;\">About this message</span><br />\n                              <br />\n                              Chase&nbsp;Mobile<span style=\"font-size:70%; line-height:0; vertical-align:3px;\">&reg;</span> app is available  for select mobile devices. Message and data rates may apply.<br />\n                              <br />\n                              This service email was sent based on your alert settings. Use the Chase&nbsp;Mobile app or visit <a href=\"https://www.chase.com/personal/mobile-online-banking/login-alerts\" target=\"_blank\" style=\"text-decoration: underline; color:#0060F0;\" rel=\"noopener noreferrer\">chase.com/alerts</a> to view or manage your settings.<br />\n                              <br />\n                              Chase cannot guarantee the delivery of alerts and notifications. Wireless or internet service provider outages or other circumstances could delay them. You can always check <span class=\"applelinksgray\"><a style=\"color:#717171;text-decoration: none;\">chase.com</a></span> or the Chase&nbsp;Mobile app for the status of your account.<br />\n                              <br />\n                              To protect your personal information, please don't reply to this message. Chase won't ask for confidential information in an email. <br />\n                              <br />\n                              If you have concerns about the authenticity of this message or have questions about your account visit <a style=\"text-decoration: underline; color:#0060F0;\" href=\"https://www.chase.com/digital/customer-service\" target=\"_blank\" rel=\"noopener noreferrer\">chase.com/CustomerService</a> for ways to contact us.<br />\n                              <br />\n                              Your privacy is important to us. See our online <a style=\"text-decoration: underline; color:#0060F0;\" href=\"https://www.chase.com/digital/resources/privacy-security\" target=\"_blank\" rel=\"noopener noreferrer\">Security Center</a> to learn how to protect your information.<br />\n                              <br />\n                              JPMorgan Chase Bank, N.A. Member FDIC<br />\n                              <br />\n                              &copy; 2023 JPMorgan Chase &amp; Co. </td>\n                          </tr>\n                        </table></td>\n                    </tr>\n                  </table></td>\n                <td align=\"left\" style=\"vertical-align:top; padding:0px 0px; width:12px;\"><img src=\"https://www.chase.com/content/dam/email/images/white-right.jpg\" width=\"12\" height=\"77\" border=\"0\" style=\"display:block;\" alt=\"\"/></td>\n              </tr>\n            </table></td>\n        </tr>\n        <!--End of Content -->\n\n      </table></td>\n  </tr>\n</table>\n</body>\n</html>\n"
-        },
-        "pairedItem": {
-          "item": 0
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
         }
       }
-    ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
   },
-  "settings": {},
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-07-24T17:56:04.105Z",
-  "versionId": "a1ea4ebf-1f57-488b-9f21-cec942d76708"
+  "updatedAt": "2024-06-08T22:40:54.190Z",
+  "versionId": "1e509d0f-dac4-43b4-b687-74120fda81fe"
 }
