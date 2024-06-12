@@ -1,0 +1,93 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-12T13:15:24.644Z",
+  "id": "zl2Jyd0IFFsoHZ8a",
+  "meta": null,
+  "name": "Applicants",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "jotform",
+        "options": {}
+      },
+      "id": "c925cd4d-7d45-4df8-93d0-6bf049f3a6d6",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        640,
+        380
+      ],
+      "webhookId": "c4e168a8-28c1-4f4a-95f3-a28e8b64b6d4"
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "New Questionnaire Submitted",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "699b3aff-d250-4844-a423-272b1dd7b61f",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        840,
+        380
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "PostmanRuntime/7.37.3",
+            "accept": "*/*",
+            "postman-token": "0d1098a1-7f22-4362-bc75-7eb29903d5de",
+            "accept-encoding": "gzip, deflate, br",
+            "x-forwarded-for": "174.48.138.15",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "174.48.138.15",
+            "x-request-id": "062b2d86-d0b4-4624-9af1-9914d842eb33"
+          },
+          "params": {},
+          "query": {},
+          "body": {}
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-06-12T13:33:39.526Z",
+  "versionId": "13d7e597-b5b6-41e3-9258-ecbaed4b4162"
+}
