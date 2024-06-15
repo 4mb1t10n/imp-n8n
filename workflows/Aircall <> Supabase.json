@@ -1,0 +1,1273 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook from Aircall": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Count Results": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AH or PM": {
+      "main": [
+        [
+          {
+            "node": "Event Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable Create Contact": {
+      "main": [
+        [
+          {
+            "node": "new lead calling",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Airtable Create Contact",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "contact calling",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Event Type": {
+      "main": [
+        [
+          {
+            "node": "Call Created Search Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call Answered Search Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call Missed Search Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Created Search Airtable": {
+      "main": [
+        [
+          {
+            "node": "Count Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Answered Search Airtable": {
+      "main": [
+        [
+          {
+            "node": "Switch3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Missed Search Airtable": {
+      "main": [
+        [
+          {
+            "node": "Switch2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch2": {
+      "main": [
+        [
+          {
+            "node": "missed call - no name",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "missed call - known contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch3": {
+      "main": [
+        [
+          {
+            "node": "call answered",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "call answered1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-09-29T16:49:42.990Z",
+  "id": "uWneHz9iRswnZ48G",
+  "meta": null,
+  "name": "Aircall <> Supabase",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# Call comes into Aircall",
+        "height": 128.61626248216842,
+        "width": 238.0038022813688
+      },
+      "id": "d7969aae-0ac7-4c74-a078-84cb96455172",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1440,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "aircall-call-created",
+        "options": {}
+      },
+      "id": "d106bcad-4b00-4c16-92a7-37ff5211eaf8",
+      "name": "Webhook from Aircall",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -1100,
+        -420
+      ],
+      "webhookId": "710ee861-2765-4ed3-90e2-07e09ae9e472",
+      "notes": "[\n  {\n    \"headers\": {\n      \"host\": \"imposbl.up.railway.app\",\n      \"accept\": \"application/json, text/plain, */*\",\n      \"content-type\": \"application/json\",\n      \"user-agent\": \"axios/1.4.0\",\n      \"content-length\": \"1506\",\n      \"accept-encoding\": \"gzip, compress, deflate, br\",\n      \"x-datadog-trace-id\": \"6532107986381880222\",\n      \"x-datadog-parent-id\": \"2353119742856282780\",\n      \"x-datadog-sampling-priority\": \"0\",\n      \"traceparent\": \"00-00000000000000005aa6b59ae2c8bb9e-20a7f5f052e8429c-00\",\n      \"tracestate\": \"dd=s:0\",\n      \"x-forwarded-for\": \"54.200.88.37\",\n      \"x-forwarded-proto\": \"https\",\n      \"x-envoy-external-address\": \"54.200.88.37\",\n      \"x-request-id\": \"eee0e907-1ecf-4581-ac7e-7c79df7729ba\"\n    },\n    \"params\": {},\n    \"query\": {},\n    \"body\": {\n      \"resource\": \"call\",\n      \"event\": \"call.created\",\n      \"timestamp\": 1696441684,\n      \"token\": \"23012f4169554dbc9a2c0aebf0bcedae\",\n      \"data\": {\n        \"id\": 1612467508,\n        \"direct_link\": \"https://api.aircall.io/v1/calls/1612467508\",\n        \"direction\": \"inbound\",\n        \"call_uuid\": \"CAf6b2a48250306b3ac2bdea0f81936b0f\",\n        \"status\": \"initial\",\n        \"missed_call_reason\": null,\n        \"started_at\": 1696441684,\n        \"answered_at\": null,\n        \"ended_at\": null,\n        \"duration\": 0,\n        \"cost\": \"0\",\n        \"hangup_cause\": null,\n        \"voicemail\": null,\n        \"recording\": null,\n        \"asset\": null,\n        \"raw_digits\": \"+1 404-933-9056\",\n        \"number\": {\n          \"id\": 662394,\n          \"direct_link\": \"https://api.aircall.io/v1/numbers/662394\",\n          \"name\": \"AffordableHousing.com\",\n          \"digits\": \"+1 786-458-8682\",\n          \"country\": \"US\",\n          \"time_zone\": \"Etc/UTC\",\n          \"open\": true,\n          \"availability_status\": \"open\",\n          \"is_ivr\": false,\n          \"live_recording_activated\": true,\n          \"messages\": {\n            \"welcome\": \"https://media-web.aircall.io/tracks/tts/languages/en/voices/Joanna/85a54589f4bac4767f07c3adb4d5bad49602c0e4.mp3\",\n            \"waiting\": \"https://media-web.aircall.io/tracks/library/bensound-retrosoul.mp3\",\n            \"ivr\": \"https://media-web.aircall.io/tts/languages/en/voices/Joanna/5b2401096b75861108e2ceb6ccc4e4c81e03b525.mp3\",\n            \"voicemail\": \"https://media-web.aircall.io/tracks/tts/languages/en/voices/Joanna/74ce97ac9772be646ccf5583b92be7248930af18.mp3\",\n            \"closed\": \"https://media-web.aircall.io/tracks/tts/languages/en/voices/Joanna/e5bc465c2b0595ade98a98500aa6851cb557a663.mp3\",\n            \"callback_later\": \"https://media-web.aircall.io/tts/languages/en/voices/Joanna/a04a676e475a50791cccbea7faa349dab88c4f05.mp3\"\n          }\n        },\n        \"archived\": false,\n        \"teams\": [],\n        \"comments\": [],\n        \"tags\": []\n      }\n    }\n  }\n]"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblXUKKfwW6yBTZHD",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblXUKKfwW6yBTZHD"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone Input": "={{ $('Webhook from Aircall').first().json.body.data.raw_digits }}",
+            "Created Reason": "New Call Created "
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Rec ID",
+              "displayName": "Rec ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone Input",
+              "displayName": "Phone Input",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "runPipe",
+              "displayName": "runPipe",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Pipedrive ID",
+              "displayName": "Pipedrive ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Pipedrive",
+              "displayName": "Pipedrive",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Created Reason",
+              "displayName": "Created Reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New Call Created ",
+                  "value": "New Call Created "
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tags",
+              "displayName": "Tags",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "+1 305-707-7798",
+                  "value": "+1 305-707-7798"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "linkLead",
+              "displayName": "linkLead",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "linkQuestionnaire",
+              "displayName": "linkQuestionnaire",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "linkCRM",
+              "displayName": "linkCRM",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Created Time",
+              "displayName": "Created Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f157ca9b-e606-47a7-8f39-fbf912963221",
+      "name": "Airtable Create Contact",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        420,
+        -880
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "if (Object.keys(items[0].json).length === 0) {\n  return [\n     {\n       json: {\n         results: 0,\n       }\n      }\n  ]\n}\nreturn [\n  {\n    json: {\n      results: items.length,\n    }\n  }\n];\n"
+      },
+      "id": "9f81115f-7c06-4171-8798-e1dca13059ee",
+      "name": "Count Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        40,
+        -780
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $node[\"Webhook from Aircall\"].json.body.data.number.digits }}",
+              "value2": "+1 786-458-8682"
+            },
+            {
+              "value1": "={{ $node[\"Webhook from Aircall\"].json[\"body\"][\"data\"][\"number\"][\"digits\"] }}",
+              "value2": "+1 567-221-2515"
+            }
+          ]
+        },
+        "combineConditions": "OR"
+      },
+      "id": "18ae3e9c-d20f-4177-876d-ea1a6cae6276",
+      "name": "AH or PM",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "value1": "={{ $json.results }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "equal"
+            },
+            {
+              "operation": "largerEqual",
+              "value2": 1,
+              "output": 1
+            }
+          ]
+        }
+      },
+      "id": "48867139-5582-42ad-88a4-f9809c556179",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        200,
+        -780
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "=**📲 Incoming call!**\n{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"number\"][\"name\"] }}\nCall from a lead\n{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"raw_digits\"] }}\n",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "5423175e-1533-4229-8417-bbbb5d309181",
+      "name": "new lead calling",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -880
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "=**📲 Incoming call!**\n{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"number\"][\"name\"] }}\nCall from {{ $('Call Created Search Airtable').first().json[\"Full Name\"] }}\n{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"raw_digits\"] }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "a550b600-1cb9-4cfb-99ee-4842deb336ea",
+      "name": "contact calling",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -700
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "=✅ {{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"user\"][\"name\"] }}\nanswered call from\n{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"raw_digits\"] }}\non {{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"number\"][\"name\"] }}\nCall ID: {{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"call_uuid\"] }}\n\n",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "a4cd498c-343d-4c33-be8d-9692b788351f",
+      "name": "call answered",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -500
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.fields.a_event }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "call.created"
+            },
+            {
+              "value2": "call.answered",
+              "output": 1
+            },
+            {
+              "value2": "call.hungup",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "165165db-e4a0-460d-84cd-2cdb1091e827",
+      "name": "Event Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        -420
+      ],
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblXUKKfwW6yBTZHD",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblXUKKfwW6yBTZHD"
+        },
+        "filterByFormula": "={Phone}=\"{{ $('Webhook from Aircall').item.json[\"body\"][\"data\"][\"raw_digits\"] }}\"\n\n",
+        "options": {}
+      },
+      "id": "5f41f3e3-fee6-45fa-9162-e95d7af378f8",
+      "name": "Call Created Search Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        -780
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblXUKKfwW6yBTZHD",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblXUKKfwW6yBTZHD"
+        },
+        "filterByFormula": "={Phone}=\"{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"raw_digits\"] }}\"\n\n",
+        "options": {}
+      },
+      "id": "d532eb74-c36e-4070-8411-1336bf3955d6",
+      "name": "Call Answered Search Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        -420
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "=✅ {{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"user\"][\"name\"] }}\nanswered call from\n{{ $('Call Answered Search Airtable').first().json[\"Full Name\"] }}\n{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"raw_digits\"] }}\non {{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"number\"][\"name\"] }}\nCall ID: {{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"call_uuid\"] }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "21e6f940-f55f-4d68-9b9d-cf4e7c3f1bcf",
+      "name": "call answered1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -320
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "CRM",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblXUKKfwW6yBTZHD",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tblXUKKfwW6yBTZHD"
+        },
+        "filterByFormula": "={Phone}=\"{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"raw_digits\"] }}\"\n\n",
+        "options": {}
+      },
+      "id": "cf4580d9-e598-45ea-b8fe-422ca2820436",
+      "name": "Call Missed Search Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        -40
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json['Full Name'] }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "={{ \" \" }}"
+            },
+            {
+              "operation": "notEqual",
+              "value2": "={{ \" \" }}",
+              "output": 1
+            }
+          ]
+        }
+      },
+      "id": "3ec946ee-0a78-419b-8541-d1b79ac23321",
+      "name": "Switch2",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        200,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "=❌ Missed Call\n{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"raw_digits\"] }}\non {{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"number\"][\"name\"] }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "c7a880da-275b-46a6-b98f-edc3f238989e",
+      "name": "missed call - no name",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -120
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1001986847733",
+        "text": "=❌ Missed Call\n{{ $json[\"Full Name\"] }}\n{{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"raw_digits\"] }}\non {{ $('Webhook from Aircall').first().json[\"body\"][\"data\"][\"number\"][\"name\"] }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "4bee3598-8ecd-42d9-9063-708dc5c4dcae",
+      "name": "missed call - known contact",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        600,
+        60
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json['Full Name'] }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "={{ \" \" }}"
+            },
+            {
+              "operation": "notEqual",
+              "value2": "={{ \" \" }}",
+              "output": 1
+            }
+          ]
+        }
+      },
+      "id": "001917b1-f08d-4a25-bdb4-fd0cd6f99b8e",
+      "name": "Switch3",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        200,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appW0UJP0qQbIw5tS",
+          "mode": "list",
+          "cachedResultName": "All Contacts",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljz5cOvavbYIzkb",
+          "mode": "list",
+          "cachedResultName": "Aircall",
+          "cachedResultUrl": "https://airtable.com/appW0UJP0qQbIw5tS/tbljz5cOvavbYIzkb"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "n8n_exec_id": "={{ $execution.id }}",
+            "a_event": "={{ $json.body.event }}",
+            "a_resource": "={{ $json.body.resource }}",
+            "a_direction": "={{ $json.body.data.direction }}",
+            "a_call_uuid": "={{ $json.body.data.call_uuid }}",
+            "a_direct_link": "={{ $json.body.data.direct_link }}",
+            "a_status": "={{ $json.body.data.status }}",
+            "a_phone_their": "={{ $json.body.data.raw_digits }}",
+            "a_phone_our": "={{ $json.body.data.number.digits }}",
+            "a_hangup_cause": "={{ $json.body.data.hangup_cause }}",
+            "a_voicemail": "={{ $json.body.data.voicemail }}",
+            "a_asset": "={{ $json.body.data.asset }}",
+            "a_is_open": "={{ $json.body.data.number.open }}",
+            "a_availability_status": "={{ $json.body.data.number.availability_status }}",
+            "a_phone_our_name": "={{ $json.body.data.number.name }}"
+          },
+          "matchingColumns": [
+            "at_rec_id"
+          ],
+          "schema": [
+            {
+              "id": "at_rec_id",
+              "displayName": "at_rec_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "n8n_exec_id",
+              "displayName": "n8n_exec_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_event",
+              "displayName": "a_event",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_resource",
+              "displayName": "a_resource",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_direction",
+              "displayName": "a_direction",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_call_uuid",
+              "displayName": "a_call_uuid",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_direct_link",
+              "displayName": "a_direct_link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_status",
+              "displayName": "a_status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_phone_their",
+              "displayName": "a_phone_their",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_phone_our",
+              "displayName": "a_phone_our",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_phone_our_name",
+              "displayName": "a_phone_our_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_hangup_cause",
+              "displayName": "a_hangup_cause",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_voicemail",
+              "displayName": "a_voicemail",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_asset",
+              "displayName": "a_asset",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_is_open",
+              "displayName": "a_is_open",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "a_availability_status",
+              "displayName": "a_availability_status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ad83aaa1-9a5d-4187-a62c-c8976f8ee342",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -900,
+        -620
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "76deefc2-807e-475b-b9b3-b9196563c013",
+      "name": "Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        -420
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "milesalex11@gmail.com"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook from Aircall": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "user-agent": "axios/1.4.0",
+            "content-length": "1528",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "x-datadog-trace-id": "7300014735388397951",
+            "x-datadog-parent-id": "6649711904533456556",
+            "x-datadog-sampling-priority": "1",
+            "traceparent": "00-0000000000000000654edcb985f1517f-5c4885bed86726ac-01",
+            "tracestate": "dd=s:1",
+            "x-forwarded-for": "44.237.249.17",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "44.237.249.17",
+            "x-request-id": "a85aea66-b6c3-4322-a3a1-658bad0da1d5"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "resource": "call",
+            "event": "call.hungup",
+            "timestamp": 1701288678,
+            "token": "23012f4169554dbc9a2c0aebf0bcedae",
+            "data": {
+              "id": 1713291052,
+              "direct_link": "https://api.aircall.io/v1/calls/1713291052",
+              "direction": "inbound",
+              "call_uuid": "CA8c08413a70af333a2c2032523a547c2a",
+              "status": "done",
+              "missed_call_reason": "agents_did_not_answer",
+              "started_at": 1701288595,
+              "answered_at": null,
+              "ended_at": 1701288678,
+              "duration": 82,
+              "cost": "0",
+              "hangup_cause": null,
+              "voicemail": null,
+              "recording": null,
+              "asset": null,
+              "raw_digits": "+1 305-804-6505",
+              "number": {
+                "id": 662394,
+                "direct_link": "https://api.aircall.io/v1/numbers/662394",
+                "name": "AffordableHousing.com",
+                "digits": "+1 786-458-8682",
+                "country": "US",
+                "time_zone": "Etc/UTC",
+                "open": true,
+                "availability_status": "open",
+                "is_ivr": false,
+                "live_recording_activated": true,
+                "messages": {
+                  "welcome": "https://media-web.aircall.io/tracks/tts/languages/en/voices/Joanna/85a54589f4bac4767f07c3adb4d5bad49602c0e4.mp3",
+                  "waiting": "https://media-web.aircall.io/tracks/library/bensound-retrosoul.mp3",
+                  "ivr": "https://media-web.aircall.io/tts/languages/en/voices/Joanna/5b2401096b75861108e2ceb6ccc4e4c81e03b525.mp3",
+                  "voicemail": "https://media-web.aircall.io/tracks/tts/languages/en/voices/Joanna/74ce97ac9772be646ccf5583b92be7248930af18.mp3",
+                  "closed": "https://media-web.aircall.io/tracks/tts/languages/en/voices/Joanna/e5bc465c2b0595ade98a98500aa6851cb557a663.mp3",
+                  "callback_later": "https://media-web.aircall.io/tts/languages/en/voices/Joanna/a04a676e475a50791cccbea7faa349dab88c4f05.mp3"
+                }
+              },
+              "archived": false,
+              "teams": [],
+              "comments": [],
+              "tags": []
+            }
+          }
+        }
+      }
+    ],
+    "Airtable Create Contact": [
+      {
+        "json": {
+          "id": "recMF9ThITTgdkIW7",
+          "createdTime": "2023-11-29T18:43:03.000Z",
+          "fields": {
+            "Phone Input": "+1 404-933-9056",
+            "Created Reason": "New Call Created ",
+            "Rec Name": "Lead - recMF9ThITTgdkIW7",
+            "Rec ID": "recMF9ThITTgdkIW7",
+            "Created Time": "2023-11-29T18:43:03.000Z",
+            "Pipedrive Open": {
+              "label": "Open Pipedrive",
+              "url": ""
+            },
+            "Contacts Open": {
+              "label": "G Contact",
+              "url": ""
+            },
+            "SMS 1.1 Initial": "Sorry we missed your call. If you’re interested in any of our homes listed on AffordableHousing.com then please fill out this brief questionnaire to schedule a tour: ",
+            "SMS 3 Tour": "Hey , thanks for submitting your questionnaire! We currently have these homes available for rent: \n🏠 https://bit.ly/3126-126-Th-St \n🏠 https://bit.ly/1113-Radcliffe-Dr \n🏠 https://bit.ly/2202-Walnut-St \n\nPlease let me know which you are interested in, I will be happy to set up a tour. Thanks!",
+            "SMS 1.3 Followup": "Hey, are you still looking for an affordable home?",
+            "Phone": "+1 404-933-9056",
+            "Pipedrive Name": "Lead +1 404-933-9056",
+            "Email": "none@empty.com",
+            "Questionnaire URL": "https://form.jotform.com/sectionhomes/applicant-questionnaire?&phone=404-933-9056",
+            "SMS 1.2 Followup": "Are you still looking for an affordable home? We have these available:\n🏠 https://bit.ly/3126-126-Th-St \n🏠 https://bit.ly/1113-Radcliffe-Dr \n🏠 https://bit.ly/2202-Walnut-St \n\nIf you would like to schedule a tour then please fill out this brief questionnaire. It’s free and takes less than two minutes:\n➡️ ",
+            "SMS 2 Missing Info": "Hey, it looks like there is some info missing in the questionnaire. You can pick up where you last left off here 👉 ",
+            "Full Name": " "
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Call Missed Search Airtable": [
+      {
+        "json": {
+          "id": "recpo7FaJqGuL2tIS",
+          "createdTime": "2023-11-29T20:10:01.000Z",
+          "Phone Input": "+1 305-804-6505",
+          "Created Reason": "New Call Created ",
+          "Pipedrive ID": 168,
+          "Label": [
+            "recB9kPRgY4n6pBQi"
+          ],
+          "Questionnaire Short": "https://bit.ly/3N5jVvW",
+          "Rec Name": "Lead - recpo7FaJqGuL2tIS",
+          "Rec ID": "recpo7FaJqGuL2tIS",
+          "Created Time": "2023-11-29T20:10:01.000Z",
+          "Pipedrive Open": {
+            "label": "Open Pipedrive",
+            "url": "https://imposbl.pipedrive.com/person/168"
+          },
+          "Contacts Open": {
+            "label": "G Contact",
+            "url": ""
+          },
+          "SMS 1.1 Initial": "Sorry we missed your call. If you’re interested in any of our homes listed on AffordableHousing.com then please fill out this brief questionnaire to schedule a tour: https://bit.ly/3N5jVvW",
+          "SMS 3 Tour": "Hey , thanks for submitting your questionnaire! We currently have these homes available for rent: \n🏠 https://bit.ly/3126-126-Th-St \n🏠 https://bit.ly/1113-Radcliffe-Dr \n🏠 https://bit.ly/2202-Walnut-St \n\nPlease let me know which you are interested in, I will be happy to set up a tour. Thanks!",
+          "SMS 1.3 Followup": "Hey, are you still looking for an affordable home?",
+          "Phone": "+1 305-804-6505",
+          "Pipedrive Name": "Lead +1 305-804-6505",
+          "Label_ID": [
+            18
+          ],
+          "Email": "none@empty.com",
+          "Questionnaire URL": "https://form.jotform.com/sectionhomes/applicant-questionnaire?&phone=305-804-6505",
+          "SMS 1.2 Followup": "Are you still looking for an affordable home? We have these available:\n🏠 https://bit.ly/3126-126-Th-St \n🏠 https://bit.ly/1113-Radcliffe-Dr \n🏠 https://bit.ly/2202-Walnut-St \n\nIf you would like to schedule a tour then please fill out this brief questionnaire. It’s free and takes less than two minutes:\n➡️ https://bit.ly/3N5jVvW",
+          "SMS 2 Missing Info": "Hey, it looks like there is some info missing in the questionnaire. You can pick up where you last left off here 👉 https://bit.ly/3N5jVvW",
+          "Full Name": " Full Name "
+        }
+      }
+    ],
+    "Call Answered Search Airtable": [
+      {
+        "json": {
+          "id": "recPqnhWhQDTBxdkj",
+          "createdTime": "2023-11-30T13:36:31.000Z",
+          "Rec Name": "Lead - recPqnhWhQDTBxdkj",
+          "Phone Input": "+1 313-682-4851",
+          "Created Time": "2023-11-30T13:36:31.000Z",
+          "Created Reason": "New Call Created ",
+          "Phone": "+1 313-682-4851",
+          "Pipedrive Open": {
+            "label": "Open Pipedrive",
+            "url": ""
+          },
+          "Contacts Open": {
+            "label": "G Contact",
+            "url": ""
+          },
+          "SMS 1.1 Initial": "Sorry we missed your call. If you’re interested in any of our homes listed on AffordableHousing.com then please fill out this brief questionnaire to schedule a tour: https://bit.ly/3R5kNlv",
+          "SMS 3 Tour": "Hey , thanks for submitting your questionnaire! We currently have these homes available for rent: \n🏠 https://bit.ly/3126-126-Th-St \n🏠 https://bit.ly/1113-Radcliffe-Dr \n🏠 https://bit.ly/2202-Walnut-St \n\nPlease let me know which you are interested in, I will be happy to set up a tour. Thanks!",
+          "SMS 1.3 Followup": "Hey, are you still looking for an affordable home?",
+          "Pipedrive Name": "Lead +1 313-682-4851",
+          "Email": "none@empty.com",
+          "Label": [
+            "recB9kPRgY4n6pBQi"
+          ],
+          "Label_ID": [
+            18
+          ],
+          "Full Name": " ",
+          "Questionnaire URL": "https://form.jotform.com/sectionhomes/applicant-questionnaire?&phone=313-682-4851",
+          "Rec ID": "recPqnhWhQDTBxdkj",
+          "Questionnaire Short": "https://bit.ly/3R5kNlv",
+          "SMS 1.2 Followup": "Are you still looking for an affordable home? We have these available:\n🏠 https://bit.ly/3126-126-Th-St \n🏠 https://bit.ly/1113-Radcliffe-Dr \n🏠 https://bit.ly/2202-Walnut-St \n\nIf you would like to schedule a tour then please fill out this brief questionnaire. It’s free and takes less than two minutes:\n➡️ https://bit.ly/3R5kNlv",
+          "SMS 2 Missing Info": "Hey, it looks like there is some info missing in the questionnaire. You can pick up where you last left off here 👉 https://bit.ly/3R5kNlv"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-12-22T00:25:31.993Z",
+      "updatedAt": "2023-12-22T00:25:31.993Z",
+      "id": "Wsxt7hKM4Q6MFTmr",
+      "name": "Communications"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-06-15T21:57:59.329Z",
+  "versionId": "3dd5ae14-c288-4d83-ba01-d0f0158e433b"
+}
