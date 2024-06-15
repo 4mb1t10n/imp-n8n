@@ -1,0 +1,70 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Todoist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-15T21:36:51.506Z",
+  "id": "z6F3Lum7hdrkbp7l",
+  "meta": null,
+  "name": "Telegram <> Todoist",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "4b8be7a5-51cd-43ea-8c28-46aabdf733ff",
+        "options": {}
+      },
+      "id": "bd49426d-4815-4985-a1e4-4ae8915a26a8",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        380
+      ],
+      "webhookId": "4b8be7a5-51cd-43ea-8c28-46aabdf733ff"
+    },
+    {
+      "parameters": {
+        "project": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "id": "08162ef6-fa12-40ed-81ce-e20081015125",
+      "name": "Todoist",
+      "type": "n8n-nodes-base.todoist",
+      "typeVersion": 2,
+      "position": [
+        880,
+        380
+      ],
+      "credentials": {
+        "todoistApi": {
+          "id": "YqE7fVr9QwKZDpKJ",
+          "name": "S8 Todoist"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-06-15T21:48:45.743Z",
+  "versionId": "2fb08c7b-d565-4fe1-918e-e08927522daa"
+}
