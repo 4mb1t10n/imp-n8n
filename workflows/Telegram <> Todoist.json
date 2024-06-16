@@ -1,7 +1,18 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
       "main": [
         [
           {
@@ -20,7 +31,8 @@
   "nodes": [
     {
       "parameters": {
-        "path": "4b8be7a5-51cd-43ea-8c28-46aabdf733ff",
+        "httpMethod": "POST",
+        "path": "telegram",
         "options": {}
       },
       "id": "bd49426d-4815-4985-a1e4-4ae8915a26a8",
@@ -37,17 +49,22 @@
       "parameters": {
         "project": {
           "__rl": true,
+          "value": "2319521100",
           "mode": "list",
-          "value": ""
+          "cachedResultName": "Team Inbox"
         },
-        "options": {}
+        "labels": "=",
+        "content": "={{ $json.body.message.reply_to_message.text }}",
+        "options": {
+          "description": "={{ $json.body.message.chat.title }}"
+        }
       },
       "id": "08162ef6-fa12-40ed-81ce-e20081015125",
       "name": "Todoist",
       "type": "n8n-nodes-base.todoist",
       "typeVersion": 2,
       "position": [
-        880,
+        1160,
         380
       ],
       "credentials": {
@@ -56,15 +73,104 @@
           "name": "S8 Todoist"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.message.text }}",
+              "operation": "contains",
+              "value2": "/create_task@P0m0shnik11_Bot"
+            }
+          ]
+        }
+      },
+      "id": "9465023c-ee04-4731-91a2-7062fcc5858f",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        900,
+        380
+      ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "content-type": "application/json",
+            "content-length": "754",
+            "accept-encoding": "gzip, deflate",
+            "x-forwarded-for": "91.108.6.113",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "91.108.6.113",
+            "x-request-id": "5d8b5803-6759-4fe4-adb8-49a71cf9b198"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "update_id": 514756774,
+            "message": {
+              "message_id": 4181,
+              "from": {
+                "id": 384291172,
+                "is_bot": false,
+                "first_name": "Alex",
+                "last_name": "Miles",
+                "username": "AMOnition",
+                "language_code": "en",
+                "is_premium": true
+              },
+              "chat": {
+                "id": -1001684308574,
+                "title": "Boots on the ground 🥾",
+                "type": "supergroup"
+              },
+              "date": 1718490072,
+              "message_thread_id": 4173,
+              "reply_to_message": {
+                "message_id": 4173,
+                "from": {
+                  "id": 384291172,
+                  "is_bot": false,
+                  "first_name": "Alex",
+                  "last_name": "Miles",
+                  "username": "AMOnition",
+                  "language_code": "en",
+                  "is_premium": true
+                },
+                "chat": {
+                  "id": -1001684308574,
+                  "title": "Boots on the ground 🥾",
+                  "type": "supergroup"
+                },
+                "date": 1718489323,
+                "text": "testing creating a new task"
+              },
+              "text": "/create_task@P0m0shnik11_Bot",
+              "entities": [
+                {
+                  "offset": 0,
+                  "length": 28,
+                  "type": "bot_command"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-06-15T21:48:45.743Z",
-  "versionId": "2fb08c7b-d565-4fe1-918e-e08927522daa"
+  "triggerCount": 1,
+  "updatedAt": "2024-06-15T22:38:35.281Z",
+  "versionId": "ef9e684d-aca8-4038-b8b5-9283293c65b8"
 }
