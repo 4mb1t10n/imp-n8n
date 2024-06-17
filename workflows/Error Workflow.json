@@ -1,0 +1,68 @@
+{
+  "active": false,
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-17T16:30:29.894Z",
+  "id": "v2Gctj6G4inNJYnF",
+  "meta": null,
+  "name": "Error Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "chatId": "-1001902244643",
+        "text": "=<a href=\"{{ $json.execution.url }}\">Error with n8n workflow</a>",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "6090a9e0-4c8a-4213-b5c2-39cbfe06caee",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        920,
+        380
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "931dd3e3-05bd-44a4-b8f7-1e026f7cc1bc",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        700,
+        380
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-06-17T17:25:22.354Z",
+  "versionId": "af3f1eb3-da42-4250-bbbd-b359691b9daa"
+}
