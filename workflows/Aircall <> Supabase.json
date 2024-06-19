@@ -156,11 +156,6 @@
           }
         ]
       ]
-    },
-    "Airtable": {
-      "main": [
-        []
-      ]
     }
   },
   "createdAt": "2023-09-29T16:49:42.990Z",
@@ -1268,6 +1263,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-06-15T21:57:59.329Z",
-  "versionId": "3dd5ae14-c288-4d83-ba01-d0f0158e433b"
+  "updatedAt": "2024-06-19T12:49:19.895Z",
+  "versionId": "da9a8ba9-5c53-4d9b-a83d-bcccd25c519c"
 }
