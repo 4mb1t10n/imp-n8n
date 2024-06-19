@@ -1,7 +1,7 @@
 {
   "active": true,
   "connections": {
-    "Webhook": {
+    "JotForm Trigger": {
       "main": [
         [
           {
@@ -20,23 +20,8 @@
   "nodes": [
     {
       "parameters": {
-        "path": "jotform",
-        "options": {}
-      },
-      "id": "c925cd4d-7d45-4df8-93d0-6bf049f3a6d6",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1.1,
-      "position": [
-        640,
-        380
-      ],
-      "webhookId": "c4e168a8-28c1-4f4a-95f3-a28e8b64b6d4"
-    },
-    {
-      "parameters": {
         "chatId": "-1001986847733",
-        "text": "New Questionnaire Submitted",
+        "text": "=New Questionnaire! 📋\n{{ $json[\"Full Name\"][\"first\"] || \"\" }} {{ $json[\"Full Name\"][\"last\"] || \"\"  }}\nPhone: {{ $json[\"Phone\"][\"full\"] || \"\"  }}\nEmail: {{ $json[\"Email\"] || \"\"  }}\nVoucher: {{ $json[\"Do you have a Section 8 voucher? (section 8 welcome)\"] || \"\"  }}\nBedrooms: {{ $json[\"How many bedrooms is the Voucher for?\"] || \"\"}}\nRent: {{ $json[\"Your portion of the rent\"] || \"\" }}",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -55,26 +40,66 @@
           "name": "P0m0shnik11_Bot"
         }
       }
+    },
+    {
+      "parameters": {
+        "form": "232556747935065"
+      },
+      "id": "159e348d-3322-4bbb-832a-96ec4d5f6dfb",
+      "name": "JotForm Trigger",
+      "type": "n8n-nodes-base.jotFormTrigger",
+      "typeVersion": 1,
+      "position": [
+        600,
+        380
+      ],
+      "webhookId": "8fb10d68-2983-40da-bca0-e1d3f82533cf",
+      "credentials": {
+        "jotFormApi": {
+          "id": "fO127DvdwGgtk3H4",
+          "name": "Section Homes"
+        }
+      }
     }
   ],
   "pinData": {
-    "Webhook": [
+    "JotForm Trigger": [
       {
         "json": {
-          "headers": {
-            "host": "imposbl.up.railway.app",
-            "user-agent": "PostmanRuntime/7.37.3",
-            "accept": "*/*",
-            "postman-token": "0d1098a1-7f22-4362-bc75-7eb29903d5de",
-            "accept-encoding": "gzip, deflate, br",
-            "x-forwarded-for": "174.48.138.15",
-            "x-forwarded-proto": "https",
-            "x-envoy-external-address": "174.48.138.15",
-            "x-request-id": "062b2d86-d0b4-4624-9af1-9914d842eb33"
+          "Full Name": {
+            "first": "Alex",
+            "last": "Miles"
           },
-          "params": {},
-          "query": {},
-          "body": {}
+          "Email": "milesalex11@gmail.com",
+          "Phone": {
+            "full": "(305) 988-3912"
+          },
+          "How many pets do you have?": "2",
+          "How many pets are > 25 pounds?": "0",
+          "Pets": "2",
+          "Pets 25+": "",
+          "How many adults will live in your household? (including you)": "1",
+          "How many minors will live in your household?": "1",
+          "Adults": "1",
+          "Kids": "1",
+          "Yearly household income?": "100000",
+          "Total current monthly rent? (Including Section 8 if applicable)": "1000",
+          "How soon do you want to move?": {
+            "month": "06",
+            "day": "20",
+            "year": "2024"
+          },
+          "Why are you moving?": "cuz",
+          "Do you have a Section 8 voucher? (section 8 welcome)": "Yes",
+          "How many bedrooms is the Voucher for?": "3",
+          "Your portion of the rent": "0",
+          "Are you planning on receiving financial assistance with the security deposit? (Pathway or similar programs)": "No",
+          "Do you have evictions on your record? (If yes, please explain)": "No",
+          "Please explain any evictions": "",
+          "Have you ever been convicted of a crime? (If yes, please explain)": "No",
+          "Please explain conviction": "",
+          "Do you have collections over $1k in your credit history in the last 5 years?": "No",
+          "Your Credit Score": "5"
         },
         "pairedItem": {
           "item": 0
@@ -85,9 +110,13 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
+  "staticData": {
+    "node:JotForm Trigger": {
+      "webhookId": "0"
+    }
+  },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-06-12T13:33:39.526Z",
-  "versionId": "13d7e597-b5b6-41e3-9258-ecbaed4b4162"
+  "updatedAt": "2024-06-19T13:19:46.493Z",
+  "versionId": "827b1156-0a59-4c04-9d7a-dd7c4b94283b"
 }
