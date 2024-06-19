@@ -109,7 +109,7 @@
     {
       "parameters": {
         "chatId": "={{ $('Webhook').item.json.body.message.chat.id }}",
-        "text": "Task Added Successfully",
+        "text": "Task Added Successfully ✅",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -208,6 +208,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-06-17T17:25:49.403Z",
-  "versionId": "f019a635-b6a8-44b5-912b-551c5ec273dd"
+  "updatedAt": "2024-06-19T12:45:41.267Z",
+  "versionId": "cddca7de-41e7-4cf7-9d69-176949f5c667"
 }
