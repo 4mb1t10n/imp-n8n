@@ -27,7 +27,7 @@
       "main": [
         [
           {
-            "node": "Telegram",
+            "node": "Telegram Success",
             "type": "main",
             "index": 0
           }
@@ -78,6 +78,7 @@
         1160,
         380
       ],
+      "alwaysOutputData": false,
       "credentials": {
         "todoistApi": {
           "id": "YqE7fVr9QwKZDpKJ",
@@ -114,8 +115,8 @@
           "appendAttribution": false
         }
       },
-      "id": "fc4b8649-b816-48a7-8dab-854bfee9cacf",
-      "name": "Telegram",
+      "id": "f01f3d44-2bdc-4529-a362-91b313263cbb",
+      "name": "Telegram Success",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.1,
       "position": [
@@ -208,6 +209,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-06-19T12:45:41.267Z",
-  "versionId": "cddca7de-41e7-4cf7-9d69-176949f5c667"
+  "updatedAt": "2024-06-21T02:02:54.871Z",
+  "versionId": "478c087b-8cfa-417c-8754-21cf75a3596b"
 }
