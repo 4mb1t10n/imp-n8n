@@ -396,7 +396,7 @@
         ]
       ]
     },
-    "Webhook from Plaid (Personal)": {
+    "Plaid Updates": {
       "main": [
         [
           {
@@ -2883,28 +2883,12 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "plaid_personal_has_updates",
-        "options": {}
-      },
-      "id": "d1643e0d-8f8d-404e-853c-ca042fbf0546",
-      "name": "Webhook from Plaid (Personal)",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1.1,
-      "position": [
-        1420,
-        -220
-      ],
-      "webhookId": "68592fe3-4e28-4ed9-ae6d-fe636493ca66"
-    },
-    {
-      "parameters": {
         "chatId": "-1002118068539",
-        "text": "=personal Plaid webhook received\nN8N Exec ID: {{ $executionId }}\n{{ $execution.resumeUrl }}",
+        "text": "=Plaid Updates\nWorkflow: 0jh9kpsrP1m0UxJI\n<a href=\"{{ $execution.resumeUrl }}\">{{ $executionId }}</a>\n",
         "additionalFields": {
           "appendAttribution": false,
           "disable_web_page_preview": true,
-          "parse_mode": "MarkdownV2"
+          "parse_mode": "HTML"
         }
       },
       "id": "aa0f71be-2f4c-40f3-a5ca-18baf8efe2ff",
@@ -2921,6 +2905,37 @@
           "name": "P0m0shnik11_Bot"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "This will replace the other webhook. All plaid updates will be directed here, personal and all work related",
+        "height": 239.58007764836384,
+        "width": 555.7532113144762
+      },
+      "id": "d5ec67ad-2dea-47a0-afb1-2a46d9b3b1c6",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        -260
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "plaid_updates",
+        "options": {}
+      },
+      "id": "d1643e0d-8f8d-404e-853c-ca042fbf0546",
+      "name": "Plaid Updates",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        1420,
+        -220
+      ],
+      "webhookId": "68592fe3-4e28-4ed9-ae6d-fe636493ca66"
     }
   ],
   "pinData": {
@@ -2998,7 +3013,7 @@
         }
       }
     ],
-    "Webhook from Plaid (Personal)": [
+    "Plaid Updates": [
       {
         "json": {
           "headers": {
@@ -3037,6 +3052,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2024-06-26T21:53:55.551Z",
-  "versionId": "73a72dbe-75f0-485f-ab42-cbf45f8e19c1"
+  "updatedAt": "2024-06-27T15:13:27.077Z",
+  "versionId": "b21bcc81-7d39-40d4-922e-45247f6df805"
 }
