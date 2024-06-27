@@ -334,17 +334,6 @@
         ]
       ]
     },
-    "Webhook from Plaid": {
-      "main": [
-        [
-          {
-            "node": "Airtable",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Airtable": {
       "main": [
         [
@@ -395,6 +384,28 @@
           }
         ]
       ]
+    },
+    "Webhook from Plaid (Imposbl)": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook from Plaid (Personal)": {
+      "main": [
+        [
+          {
+            "node": "personal1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-11-09T14:57:03.032Z",
@@ -402,22 +413,6 @@
   "meta": null,
   "name": "Finances",
   "nodes": [
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "plaid-updates",
-        "options": {}
-      },
-      "id": "fbe6bef2-1b3e-4e99-b57b-a83a493cbf57",
-      "name": "Webhook from Plaid",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        1420,
-        160
-      ],
-      "webhookId": "e43a3317-2c43-41c6-b2de-3fb9419b17b7"
-    },
     {
       "parameters": {
         "path": "e08667ee-32aa-43df-a69a-8dfccd367f1c",
@@ -2719,11 +2714,11 @@
           "parameters": [
             {
               "name": "plaid-verification",
-              "value": "={{ $('Webhook from Plaid').item.json.headers['plaid-verification'] }}"
+              "value": "={{ $('Webhook from Plaid (Imposbl)').item.json.headers['plaid-verification'] }}"
             },
             {
               "name": "x-request-id",
-              "value": "={{ $('Webhook from Plaid').item.json.headers['x-request-id'] }}"
+              "value": "={{ $('Webhook from Plaid (Imposbl)').item.json.headers['x-request-id'] }}"
             }
           ]
         },
@@ -2733,11 +2728,11 @@
           "parameters": [
             {
               "name": "item_id",
-              "value": "={{ $('Webhook from Plaid').item.json.body.item_id }}"
+              "value": "={{ $('Webhook from Plaid (Imposbl)').item.json.body.item_id }}"
             },
             {
               "name": "webhook_code",
-              "value": "={{ $('Webhook from Plaid').item.json.body.webhook_code }}"
+              "value": "={{ $('Webhook from Plaid (Imposbl)').item.json.body.webhook_code }}"
             }
           ]
         },
@@ -2821,7 +2816,7 @@
     {
       "parameters": {
         "chatId": "-1001902244643",
-        "text": "=New Plaid updates in [Airtable](https://airtable.com/appjjY9qVQZlWUkkj/pagVgFWWyAVyDGMbZ)\n{{ $('Webhook from Plaid').item.json.body.webhook_code }}\n{{ $('Webhook from Plaid').item.json.body.webhook_type }} ",
+        "text": "=New Plaid updates in [Airtable](https://airtable.com/appjjY9qVQZlWUkkj/pagVgFWWyAVyDGMbZ)\n{{ $('Webhook from Plaid (Imposbl)').item.json.body.webhook_code }}\n{{ $('Webhook from Plaid (Imposbl)').item.json.body.webhook_type }} ",
         "additionalFields": {
           "disable_web_page_preview": true,
           "parse_mode": "MarkdownV2"
@@ -2869,6 +2864,63 @@
         1860,
         160
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "plaid-updates",
+        "options": {}
+      },
+      "id": "fbe6bef2-1b3e-4e99-b57b-a83a493cbf57",
+      "name": "Webhook from Plaid (Imposbl)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        160
+      ],
+      "webhookId": "e43a3317-2c43-41c6-b2de-3fb9419b17b7"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "plaid_personal_has_updates",
+        "options": {}
+      },
+      "id": "d1643e0d-8f8d-404e-853c-ca042fbf0546",
+      "name": "Webhook from Plaid (Personal)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        1420,
+        -220
+      ],
+      "webhookId": "68592fe3-4e28-4ed9-ae6d-fe636493ca66"
+    },
+    {
+      "parameters": {
+        "chatId": "-1002118068539",
+        "text": "=personal Plaid webhook received\nN8N Exec ID: {{ $executionId }}\n{{ $execution.resumeUrl }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "MarkdownV2"
+        }
+      },
+      "id": "aa0f71be-2f4c-40f3-a5ca-18baf8efe2ff",
+      "name": "personal1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        1640,
+        -220
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
     }
   ],
   "pinData": {
@@ -2889,34 +2941,6 @@
           "params": {},
           "query": {
             "rec_id": "rec4eau6QOJUgKIoH"
-          }
-        }
-      }
-    ],
-    "Webhook from Plaid": [
-      {
-        "json": {
-          "headers": {
-            "host": "imposbl.up.railway.app",
-            "content-type": "application/json",
-            "plaid-verification": "eyJhbGciOiJFUzI1NiIsImtpZCI6IjZmZDM2ZDA3LTExOTItNDM1Ni1hZWU4LTZmYTlkNWYyYTIwZCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDI3MjE0MzcsInJlcXVlc3RfYm9keV9zaGEyNTYiOiI5MmIzMTcxZTk1NGFhMjZiY2JlZjM3OTE3YTg5NDNiYTExMGM4ZjViM2JlM2ViOTBkMTlhMGY0MTdjMzZkZTA0In0.d6b6gy0y9sdv3csQ9urYoWmD1GEmClB_P8E8ywyrNq1fMU8aHLoTrJy1WKIQ5UVVpaPc7INN6SYY-idKIxXrYA",
-            "content-length": "239",
-            "accept-encoding": "gzip",
-            "user-agent": "Go-http-client/2.0",
-            "x-forwarded-for": "52.21.47.157",
-            "x-forwarded-proto": "https",
-            "x-envoy-external-address": "52.21.47.157",
-            "x-request-id": "a56c4aff-0aad-46d4-a680-fe9a863247c7"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "environment": "development",
-            "historical_update_complete": true,
-            "initial_update_complete": true,
-            "item_id": "xqrZgoe07QcxqRAxE1aycPeYem9ARbHMBmJno",
-            "webhook_code": "SYNC_UPDATES_AVAILABLE",
-            "webhook_type": "TRANSACTIONS"
           }
         }
       }
@@ -2945,6 +2969,62 @@
           "item": 0
         }
       }
+    ],
+    "Webhook from Plaid (Imposbl)": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "content-type": "application/json",
+            "plaid-verification": "eyJhbGciOiJFUzI1NiIsImtpZCI6IjZmZDM2ZDA3LTExOTItNDM1Ni1hZWU4LTZmYTlkNWYyYTIwZCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDI3MjE0MzcsInJlcXVlc3RfYm9keV9zaGEyNTYiOiI5MmIzMTcxZTk1NGFhMjZiY2JlZjM3OTE3YTg5NDNiYTExMGM4ZjViM2JlM2ViOTBkMTlhMGY0MTdjMzZkZTA0In0.d6b6gy0y9sdv3csQ9urYoWmD1GEmClB_P8E8ywyrNq1fMU8aHLoTrJy1WKIQ5UVVpaPc7INN6SYY-idKIxXrYA",
+            "content-length": "239",
+            "accept-encoding": "gzip",
+            "user-agent": "Go-http-client/2.0",
+            "x-forwarded-for": "52.21.47.157",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "52.21.47.157",
+            "x-request-id": "a56c4aff-0aad-46d4-a680-fe9a863247c7"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "environment": "development",
+            "historical_update_complete": true,
+            "initial_update_complete": true,
+            "item_id": "xqrZgoe07QcxqRAxE1aycPeYem9ARbHMBmJno",
+            "webhook_code": "SYNC_UPDATES_AVAILABLE",
+            "webhook_type": "TRANSACTIONS"
+          }
+        }
+      }
+    ],
+    "Webhook from Plaid (Personal)": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "content-type": "application/json",
+            "plaid-verification": "eyJhbGciOiJFUzI1NiIsImtpZCI6IjZmZDM2ZDA3LTExOTItNDM1Ni1hZWU4LTZmYTlkNWYyYTIwZCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDI3MjE0MzcsInJlcXVlc3RfYm9keV9zaGEyNTYiOiI5MmIzMTcxZTk1NGFhMjZiY2JlZjM3OTE3YTg5NDNiYTExMGM4ZjViM2JlM2ViOTBkMTlhMGY0MTdjMzZkZTA0In0.d6b6gy0y9sdv3csQ9urYoWmD1GEmClB_P8E8ywyrNq1fMU8aHLoTrJy1WKIQ5UVVpaPc7INN6SYY-idKIxXrYA",
+            "content-length": "239",
+            "accept-encoding": "gzip",
+            "user-agent": "Go-http-client/2.0",
+            "x-forwarded-for": "52.21.47.157",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "52.21.47.157",
+            "x-request-id": "a56c4aff-0aad-46d4-a680-fe9a863247c7"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "environment": "development",
+            "historical_update_complete": true,
+            "initial_update_complete": true,
+            "item_id": "xqrZgoe07QcxqRAxE1aycPeYem9ARbHMBmJno",
+            "webhook_code": "SYNC_UPDATES_AVAILABLE",
+            "webhook_type": "TRANSACTIONS"
+          }
+        }
+      }
     ]
   },
   "settings": {
@@ -2956,7 +3036,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2024-02-09T00:32:52.527Z",
-  "versionId": "7b00bb8e-8b37-4bae-8c90-5877ad80b21a"
+  "triggerCount": 4,
+  "updatedAt": "2024-06-26T21:53:55.551Z",
+  "versionId": "73a72dbe-75f0-485f-ab42-cbf45f8e19c1"
 }
