@@ -338,18 +338,7 @@
       "main": [
         [
           {
-            "node": "Switch2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "personal": {
-      "main": [
-        [
-          {
-            "node": "/plaidUpdates",
+            "node": "Imposbl",
             "type": "main",
             "index": 0
           }
@@ -361,24 +350,6 @@
         [
           {
             "node": "/plaidUpdates",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch2": {
-      "main": [
-        [
-          {
-            "node": "Imposbl",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "personal",
             "type": "main",
             "index": 0
           }
@@ -2743,7 +2714,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        2380,
+        2080,
         160
       ]
     },
@@ -2790,33 +2761,8 @@
     },
     {
       "parameters": {
-        "chatId": "-1002118068539",
-        "text": "test",
-        "additionalFields": {
-          "appendAttribution": false,
-          "disable_web_page_preview": true,
-          "parse_mode": "MarkdownV2"
-        }
-      },
-      "id": "e4a8a2bd-1089-4d29-a9aa-e4e41ced3b2d",
-      "name": "personal",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.1,
-      "position": [
-        2100,
-        260
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "YtXrIMUbcoaS4RKx",
-          "name": "P0m0shnik11_Bot"
-        }
-      }
-    },
-    {
-      "parameters": {
         "chatId": "-1001902244643",
-        "text": "=New Plaid updates in [Airtable](https://airtable.com/appjjY9qVQZlWUkkj/pagVgFWWyAVyDGMbZ)\n{{ $('Webhook from Plaid (Imposbl)').item.json.body.webhook_code }}\n{{ $('Webhook from Plaid (Imposbl)').item.json.body.webhook_type }} ",
+        "text": "=New Plaid updates in Airtable",
         "additionalFields": {
           "disable_web_page_preview": true,
           "parse_mode": "MarkdownV2"
@@ -2827,8 +2773,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.1,
       "position": [
-        2100,
-        80
+        1860,
+        160
       ],
       "credentials": {
         "telegramApi": {
@@ -2839,36 +2785,8 @@
     },
     {
       "parameters": {
-        "dataType": "string",
-        "value1": "={{ $json.user_email }}",
-        "rules": {
-          "rules": [
-            {
-              "operation": "contains",
-              "value2": "@imposbl.com",
-              "outputKey": "1"
-            },
-            {
-              "operation": "contains",
-              "value2": "milesalex11",
-              "outputKey": "2"
-            }
-          ]
-        }
-      },
-      "id": "0100b1f3-737b-4e9c-98e3-2f1d79f9a202",
-      "name": "Switch2",
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 2,
-      "position": [
-        1860,
-        160
-      ]
-    },
-    {
-      "parameters": {
         "httpMethod": "POST",
-        "path": "plaid-updates",
+        "path": "plaid-imposbl-updates",
         "options": {}
       },
       "id": "fbe6bef2-1b3e-4e99-b57b-a83a493cbf57",
@@ -3063,6 +2981,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2024-06-28T02:17:55.794Z",
-  "versionId": "b95b8a97-2f84-4b18-9b6d-dbaeef79797b"
+  "updatedAt": "2024-07-02T15:06:20.607Z",
+  "versionId": "68f5fcfc-1566-4705-a16d-2bea056851d4"
 }
