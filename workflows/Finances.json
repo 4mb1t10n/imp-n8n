@@ -371,7 +371,7 @@
       "main": [
         [
           {
-            "node": "personal1",
+            "node": "personal",
             "type": "main",
             "index": 0
           }
@@ -2716,7 +2716,8 @@
       "position": [
         2080,
         160
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -2757,7 +2758,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -2781,7 +2783,8 @@
           "id": "YtXrIMUbcoaS4RKx",
           "name": "P0m0shnik11_Bot"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -2797,32 +2800,8 @@
         1420,
         160
       ],
-      "webhookId": "e43a3317-2c43-41c6-b2de-3fb9419b17b7"
-    },
-    {
-      "parameters": {
-        "chatId": "-1002118068539",
-        "text": "={{ $json.body.p_amount }} {{ $json.body.p_iso_currency_code }}\n{{ $json.body.p_name_og }} \n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">{{ $execution.id }}</a>\n",
-        "additionalFields": {
-          "appendAttribution": false,
-          "disable_web_page_preview": true,
-          "parse_mode": "HTML"
-        }
-      },
-      "id": "aa0f71be-2f4c-40f3-a5ca-18baf8efe2ff",
-      "name": "personal1",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.1,
-      "position": [
-        1640,
-        -220
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "YtXrIMUbcoaS4RKx",
-          "name": "P0m0shnik11_Bot"
-        }
-      }
+      "webhookId": "e43a3317-2c43-41c6-b2de-3fb9419b17b7",
+      "disabled": true
     },
     {
       "parameters": {
@@ -2854,6 +2833,31 @@
         -220
       ],
       "webhookId": "68592fe3-4e28-4ed9-ae6d-fe636493ca66"
+    },
+    {
+      "parameters": {
+        "chatId": "-1002118068539",
+        "text": "={{ $json.body.p_amount*-1 }} {{ $json.body.p_iso_currency_code }}\n{{ $json.body.p_name_og }} \n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">{{ $execution.id }}</a>\n",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "aa0f71be-2f4c-40f3-a5ca-18baf8efe2ff",
+      "name": "personal",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        1640,
+        -220
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
     }
   ],
   "pinData": {
@@ -2980,7 +2984,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 4,
-  "updatedAt": "2024-07-02T15:06:20.607Z",
-  "versionId": "68f5fcfc-1566-4705-a16d-2bea056851d4"
+  "triggerCount": 3,
+  "updatedAt": "2024-07-02T18:11:32.554Z",
+  "versionId": "cea0818e-4a86-4f8c-8d8e-02e9e3f2ae42"
 }
