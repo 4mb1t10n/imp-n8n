@@ -5,6 +5,17 @@
       "main": [
         [
           {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
             "node": "Telegram",
             "type": "main",
             "index": 0
@@ -21,9 +32,10 @@
     {
       "parameters": {
         "chatId": "-1001986847733",
-        "text": "=New Questionnaire! 📋\n{{ $json[\"Full Name\"][\"first\"] || \"\" }} {{ $json[\"Full Name\"][\"last\"] || \"\"  }}\nPhone: {{ $json[\"Phone\"][\"full\"] || \"\"  }}\nEmail: {{ $json[\"Email\"] || \"\"  }}\nVoucher: {{ $json[\"Do you have a Section 8 voucher? (section 8 welcome)\"] || \"\"  }}\nBedrooms: {{ $json[\"How many bedrooms is the Voucher for?\"] || \"\"}}\nRent: {{ $json[\"Your portion of the rent\"] || \"\" }}",
+        "text": "=<b>New Questionnaire 📋</b>\n{{ $json[\"Full Name\"][\"first\"] || \"\" }} {{ $json[\"Full Name\"][\"last\"] || \"\"  }}\nPhone: {{ $json[\"Phone\"][\"full\"] || \"\"  }}\nEmail: {{ $json[\"Email\"] || \"\"  }}\nIncome: {{ $json[\"Yearly household income?\"] || \"\" }}\nVoucher: {{ $json[\"Do you have a Section 8 voucher? (section 8 welcome)\"] || \"\"  }}\nCase Worker: {{ $json[\"Case Workers Name\"][\"first\"] || \"\"   }} {{ $json[\"Case Workers Name\"][\"last\"] || \"\"  }}\nAdults: {{ $json[\"Adults\"] || \"\" }}\nKids: {{ $json[\"How many minors will live in your household?\"] || \"\"   }}\nBedrooms: {{ $json[\"How many bedrooms is the Voucher for?\"] || \"\"}}\nRent Portion: {{ $json[\"Your portion of the rent\"] || \"\" }} \nPets: {{ $json['How many pets do you have?'] }} Large Pets: {{ $json[\"How many pets are > 25 pounds?\"] || \"0\"}}\nCrime: {{ $json[\"Have you ever been convicted of a crime?\"] || \"\" }}\nEvictions: {{ $json[\"Do you have evictions on your record?\"] || \"\" }}\nCollections: {{ $json[\"Do you have collections on your credit history in the last 3 years?\"] || \"\"}}\nFound Us: {{ $('JotForm Trigger').item.json[\"How did you first notice of us?\"] }}",
         "additionalFields": {
-          "appendAttribution": false
+          "appendAttribution": false,
+          "parse_mode": "HTML"
         }
       },
       "id": "699b3aff-d250-4844-a423-272b1dd7b61f",
@@ -31,7 +43,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.1,
       "position": [
-        840,
+        1040,
         380
       ],
       "credentials": {
@@ -60,6 +72,32 @@
           "name": "Section Homes"
         }
       }
+    },
+    {
+      "parameters": {
+        "tableId": "apl_questionnaire",
+        "fieldsUi": {
+          "fieldValues": [
+            {},
+            {}
+          ]
+        }
+      },
+      "id": "3a618cb6-2cb8-45b6-b19e-8a8e2b39aed2",
+      "name": "Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        820,
+        380
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Imposbl Supabase"
+        }
+      },
+      "disabled": true
     }
   ],
   "pinData": {
@@ -67,42 +105,36 @@
       {
         "json": {
           "Full Name": {
-            "first": "Alex",
-            "last": "Miles"
+            "first": "alex",
+            "last": "miles"
           },
           "Email": "milesalex11@gmail.com",
           "Phone": {
             "full": "(305) 988-3912"
           },
-          "How many pets do you have?": "2",
-          "How many pets are > 25 pounds?": "0",
-          "Pets": "2",
+          "How many pets do you have?": "0",
+          "How many pets are > 25 pounds?": "",
+          "Pets": "",
           "Pets 25+": "",
-          "How many adults will live in your household? (including you)": "1",
-          "How many minors will live in your household?": "1",
-          "Adults": "1",
-          "Kids": "1",
-          "Yearly household income?": "100000",
-          "Total current monthly rent? (Including Section 8 if applicable)": "1000",
-          "How soon do you want to move?": {
-            "month": "06",
-            "day": "20",
-            "year": "2024"
-          },
-          "Why are you moving?": "cuz",
+          "How did you first notice of us?": "drove by",
+          "Yearly household income?": "10000",
+          "How many adults will live in your household? (including you)": "2",
+          "How many minors will live in your household?": "0",
+          "Adults": "2",
+          "Kids": "",
           "Do you have a Section 8 voucher? (section 8 welcome)": "Yes",
-          "How many bedrooms is the Voucher for?": "3",
+          "How many bedrooms is the Voucher for?": "1",
           "Your portion of the rent": "0",
+          "Case Workers Name": {
+            "first": "firstname",
+            "last": "lastname"
+          },
           "Are you planning on receiving financial assistance with the security deposit? (Pathway or similar programs)": "No",
-          "Do you have evictions on your record? (If yes, please explain)": "No",
-          "Please explain any evictions": "",
-          "Have you ever been convicted of a crime? (If yes, please explain)": "No",
+          "Do you have evictions on your record?": "No",
+          "Please explain evictions": "",
+          "Have you ever been convicted of a crime?": "No",
           "Please explain conviction": "",
-          "Do you have collections over $1k in your credit history in the last 5 years?": "No",
-          "Your Credit Score": "5"
-        },
-        "pairedItem": {
-          "item": 0
+          "Do you have collections on your credit history in the last 3 years?": "No"
         }
       }
     ]
@@ -117,6 +149,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-06-19T13:28:27.244Z",
-  "versionId": "a7d23c03-0b02-45f4-b030-772778b43e59"
+  "updatedAt": "2024-07-03T03:51:14.452Z",
+  "versionId": "f6c50af5-2b6f-408f-94b2-27424cbf91db"
 }
