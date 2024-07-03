@@ -1049,8 +1049,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -880,
-        -420
+        -900,
+        -280
       ],
       "credentials": {
         "supabaseApi": {
@@ -1263,6 +1263,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-06-19T12:49:19.895Z",
-  "versionId": "da9a8ba9-5c53-4d9b-a83d-bcccd25c519c"
+  "updatedAt": "2024-07-03T01:09:42.331Z",
+  "versionId": "e6353c7d-75cf-49fb-8997-c53cb719d3c8"
 }
