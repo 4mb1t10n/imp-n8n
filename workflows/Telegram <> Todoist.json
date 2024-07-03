@@ -27,7 +27,7 @@
       "main": [
         [
           {
-            "node": "Telegram Success",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -109,26 +109,21 @@
     },
     {
       "parameters": {
-        "chatId": "={{ $('Webhook').item.json.body.message.chat.id }}",
-        "text": "Task Added Successfully ✅",
-        "additionalFields": {
-          "appendAttribution": false
-        }
+        "method": "POST",
+        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/setMessageReaction",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"chat_id\": {{ $('Webhook').item.json[\"body\"][\"message\"][\"chat\"][\"id\"] }},\n  \"message_id\": {{ $('Webhook').item.json[\"body\"][\"message\"][\"message_id\"] }},\n  \"reaction\": [\n    {\n      \"type\": \"emoji\",\n      \"emoji\": \"👍\"\n    }\n  ]\n}",
+        "options": {}
       },
-      "id": "f01f3d44-2bdc-4529-a362-91b313263cbb",
-      "name": "Telegram Success",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.1,
+      "id": "ccf91817-4521-47cb-b770-bfd24dcaa4d1",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
       "position": [
-        1400,
+        1420,
         380
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "YtXrIMUbcoaS4RKx",
-          "name": "P0m0shnik11_Bot"
-        }
-      }
+      ]
     }
   ],
   "pinData": {
@@ -209,6 +204,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-06-21T02:02:54.871Z",
-  "versionId": "478c087b-8cfa-417c-8754-21cf75a3596b"
+  "updatedAt": "2024-07-03T01:05:34.739Z",
+  "versionId": "2e157086-5f18-46f0-8c78-242e8900cf42"
 }
