@@ -2821,7 +2821,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "plaid_updates",
+        "path": "notify_telegram",
         "options": {}
       },
       "id": "d1643e0d-8f8d-404e-853c-ca042fbf0546",
@@ -2987,6 +2987,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-07-05T22:31:53.610Z",
-  "versionId": "6a3a6284-9ef2-4a7a-9ff4-1c49169ce341"
+  "updatedAt": "2024-07-06T17:07:12.245Z",
+  "versionId": "75494037-5f84-43ef-942b-341df7549ddc"
 }
