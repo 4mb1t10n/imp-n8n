@@ -334,40 +334,7 @@
         ]
       ]
     },
-    "Airtable": {
-      "main": [
-        [
-          {
-            "node": "Imposbl",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Imposbl": {
-      "main": [
-        [
-          {
-            "node": "/plaidUpdates",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webhook from Plaid (Imposbl)": {
-      "main": [
-        [
-          {
-            "node": "Airtable",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Plaid Updates": {
+    "Personal - Plaid Added Tx": {
       "main": [
         [
           {
@@ -2663,182 +2630,23 @@
     },
     {
       "parameters": {
-        "content": "## Plaid has Updates\nSent by Plaid whenever there are updates",
-        "height": 146.3156649326342,
-        "width": 414.8057713651498
-      },
-      "id": "4068879c-6e2d-4fcb-b650-be6b1aa979d6",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        960,
-        140
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://www.imposbl.com/plaidUpdates",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "plaid-verification",
-              "value": "={{ $('Webhook from Plaid (Imposbl)').item.json.headers['plaid-verification'] }}"
-            },
-            {
-              "name": "x-request-id",
-              "value": "={{ $('Webhook from Plaid (Imposbl)').item.json.headers['x-request-id'] }}"
-            }
-          ]
-        },
-        "sendBody": true,
-        "contentType": "form-urlencoded",
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "item_id",
-              "value": "={{ $('Webhook from Plaid (Imposbl)').item.json.body.item_id }}"
-            },
-            {
-              "name": "webhook_code",
-              "value": "={{ $('Webhook from Plaid (Imposbl)').item.json.body.webhook_code }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "56b07400-1dff-4801-8603-5589580d911f",
-      "name": "/plaidUpdates",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
-      "position": [
-        2080,
-        160
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "operation": "search",
-        "base": {
-          "__rl": true,
-          "value": "appjjY9qVQZlWUkkj",
-          "mode": "list",
-          "cachedResultName": "Finances",
-          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tblcsKuArxwZJjJwv",
-          "mode": "list",
-          "cachedResultName": "Users",
-          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblcsKuArxwZJjJwv"
-        },
-        "filterByFormula": "={item_id}='{{ $json.body.item_id }}'",
-        "returnAll": false,
-        "limit": 1,
-        "options": {
-          "fields": [
-            "user_email"
-          ]
-        }
-      },
-      "id": "a394a815-f58c-4bd2-87d0-6416f5794931",
-      "name": "Airtable",
-      "type": "n8n-nodes-base.airtable",
-      "typeVersion": 2,
-      "position": [
-        1640,
-        160
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "ba9BL3rXOUDjb7P2",
-          "name": "alex@section.homes"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "chatId": "-1001902244643",
-        "text": "=New Plaid updates in Airtable",
-        "additionalFields": {
-          "disable_web_page_preview": true,
-          "parse_mode": "MarkdownV2"
-        }
-      },
-      "id": "5e7ca0d5-d34d-443d-be68-cb8d4f640ac2",
-      "name": "Imposbl",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.1,
-      "position": [
-        1860,
-        160
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "YtXrIMUbcoaS4RKx",
-          "name": "P0m0shnik11_Bot"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "plaid-imposbl-updates",
-        "options": {}
-      },
-      "id": "fbe6bef2-1b3e-4e99-b57b-a83a493cbf57",
-      "name": "Webhook from Plaid (Imposbl)",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        1420,
-        160
-      ],
-      "webhookId": "e43a3317-2c43-41c6-b2de-3fb9419b17b7",
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "content": "This will replace the other webhook. All plaid updates will be directed here, personal and all work related",
-        "height": 239.58007764836384,
-        "width": 555.7532113144762
+        "content": "## \"Added\" transactions from plaid [PERSONAL]",
+        "height": 80,
+        "width": 434.1260766582634
       },
       "id": "d5ec67ad-2dea-47a0-afb1-2a46d9b3b1c6",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1000,
-        -260
+        880,
+        -140
       ]
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "notify_telegram",
-        "options": {}
-      },
-      "id": "d1643e0d-8f8d-404e-853c-ca042fbf0546",
-      "name": "Plaid Updates",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1.1,
-      "position": [
-        1420,
-        -220
-      ],
-      "webhookId": "68592fe3-4e28-4ed9-ae6d-fe636493ca66",
-      "disabled": true
-    },
-    {
-      "parameters": {
         "chatId": "-1002118068539",
-        "text": "={{ $json.body.p_amount*-1 }} {{ $json.body.p_iso_currency_code }}\n{{ $json.body.p_name_og }} \n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">{{ $execution.id }}</a>\n",
+        "text": "={{ $json[\"body\"][\"p_amount\"]*-1 }} {{ $json[\"body\"][\"p_iso_currency_code\"] }}\n{{ $json[\"body\"][\"p_date\"] }}\n{{ $json[\"body\"][\"p_name_og\"] }} \n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>\n\n\n\n",
         "additionalFields": {
           "appendAttribution": false,
           "disable_web_page_preview": true,
@@ -2851,15 +2659,61 @@
       "typeVersion": 1.1,
       "position": [
         1640,
-        -220
+        -160
       ],
       "credentials": {
         "telegramApi": {
           "id": "YtXrIMUbcoaS4RKx",
           "name": "P0m0shnik11_Bot"
         }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## \"Removed\" transactions from plaid [PERSONAL]",
+        "height": 80,
+        "width": 434.1260766582634
       },
-      "disabled": true
+      "id": "4d14b0e2-564e-4b08-a262-8f8f78b10d28",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        880,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "added_transaction",
+        "options": {}
+      },
+      "id": "d1643e0d-8f8d-404e-853c-ca042fbf0546",
+      "name": "Personal - Plaid Added Tx",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        1420,
+        -160
+      ],
+      "webhookId": "68592fe3-4e28-4ed9-ae6d-fe636493ca66"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "removed_transaction",
+        "options": {}
+      },
+      "id": "014c3f76-9ca9-4dd9-a631-c71785b5b054",
+      "name": "Personal - Plaid Removed Tx",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        1420,
+        60
+      ],
+      "webhookId": "674edcea-7df6-4f9f-8d9b-15269b99c648"
     }
   ],
   "pinData": {
@@ -2909,69 +2763,33 @@
         }
       }
     ],
-    "Webhook from Plaid (Imposbl)": [
+    "Personal - Plaid Added Tx": [
       {
         "json": {
           "headers": {
             "host": "imposbl.up.railway.app",
-            "content-type": "application/json",
-            "plaid-verification": "eyJhbGciOiJFUzI1NiIsImtpZCI6IjZmZDM2ZDA3LTExOTItNDM1Ni1hZWU4LTZmYTlkNWYyYTIwZCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDI3MjE0MzcsInJlcXVlc3RfYm9keV9zaGEyNTYiOiI5MmIzMTcxZTk1NGFhMjZiY2JlZjM3OTE3YTg5NDNiYTExMGM4ZjViM2JlM2ViOTBkMTlhMGY0MTdjMzZkZTA0In0.d6b6gy0y9sdv3csQ9urYoWmD1GEmClB_P8E8ywyrNq1fMU8aHLoTrJy1WKIQ5UVVpaPc7INN6SYY-idKIxXrYA",
-            "content-length": "239",
-            "accept-encoding": "gzip",
-            "user-agent": "Go-http-client/2.0",
-            "x-forwarded-for": "52.21.47.157",
-            "x-forwarded-proto": "https",
-            "x-envoy-external-address": "52.21.47.157",
-            "x-request-id": "a56c4aff-0aad-46d4-a680-fe9a863247c7"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "environment": "development",
-            "historical_update_complete": true,
-            "initial_update_complete": true,
-            "item_id": "xqrZgoe07QcxqRAxE1aycPeYem9ARbHMBmJno",
-            "webhook_code": "SYNC_UPDATES_AVAILABLE",
-            "webhook_type": "TRANSACTIONS"
-          }
-        }
-      }
-    ],
-    "Plaid Updates": [
-      {
-        "json": {
-          "headers": {
-            "host": "imposbl.up.railway.app",
-            "content-type": "application/json",
+            "user-agent": "PostgreSQL 15.1 (Ubuntu 15.1-1.pgdg20.04+1) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, 64-bit",
             "accept": "*/*",
-            "content-length": "574",
-            "user-agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
-            "accept-encoding": "gzip,deflate",
-            "x-forwarded-for": "108.211.16.232",
+            "accept-encoding": "deflate, gzip, br",
+            "charsets": "utf-8",
+            "content-type": "application/json",
+            "content-length": "294",
+            "x-forwarded-for": "13.56.5.31",
             "x-forwarded-proto": "https",
-            "x-envoy-external-address": "108.211.16.232",
-            "x-request-id": "f99785ac-1ec1-4fd6-888a-d602b23eea61"
+            "x-envoy-external-address": "13.56.5.31",
+            "x-request-id": "eead54e7-4f5b-4b4e-b138-5d3b96432594"
           },
           "params": {},
           "query": {},
           "body": {
-            "p_transaction_id": "VmAAdVbV4Rh9mBrxNXerIv7Z06KQaPHnEgqAM",
-            "p_account_id": "QaQQEVMVAyFM4LJOEBaJHQbawLDBwYu9dLaZ8",
-            "p_amount": 409.59,
-            "p_iso_currency_code": "USD",
-            "p_category": "21006000",
-            "p_date": "2024-06-14",
-            "p_name_og": "ONLINE TRANSFER TO MILES VENTURES LLC REF #IB0NK5YCBG BUSINESS CHECKING EVERETT",
-            "p_name_guess": null,
-            "p_payment_channel": "other",
-            "p_pending": false,
-            "p_transaction_type": "special",
-            "p_entity_id": null,
-            "p_logo_url": null,
-            "p_updated": "2024-06-27T17:10:54.735Z",
-            "p_added_modified_removed": null,
-            "p_user_id": "267ff5c4-c64f-4c7c-908e-d2467a6289d7",
-            "source": "Plaid"
+            "id": "3adbd5ad-ac50-46ba-a48b-2d38b98b1a03",
+            "p_date": "2024-07-07",
+            "p_amount": 100.5,
+            "p_name_og": "name_og_example",
+            "p_user_id": "ef1fb02e-ae84-4fc7-b65f-d4754a66defd",
+            "created_at": "2024-07-07T12:34:56+00:00",
+            "p_transaction_id": "transaction_id_example",
+            "p_iso_currency_code": "USD"
           }
         }
       }
@@ -2986,7 +2804,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2024-07-06T17:07:12.245Z",
-  "versionId": "75494037-5f84-43ef-942b-341df7549ddc"
+  "triggerCount": 4,
+  "updatedAt": "2024-07-08T01:24:57.369Z",
+  "versionId": "e767407a-13ed-4b16-8cfa-a9bd4bbafa1b"
 }
