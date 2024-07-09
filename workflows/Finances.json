@@ -338,7 +338,47 @@
       "main": [
         [
           {
-            "node": "personal",
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Notify",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Duplicates",
             "type": "main",
             "index": 0
           }
@@ -2645,31 +2685,6 @@
     },
     {
       "parameters": {
-        "chatId": "-1002118068539",
-        "text": "={{ $json[\"body\"][\"p_amount\"]*-1 }} {{ $json[\"body\"][\"p_iso_currency_code\"] }}\n{{ $json[\"body\"][\"p_date\"] }}\n{{ $json[\"body\"][\"p_name_og\"] }} \n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>\n\n\n\n",
-        "additionalFields": {
-          "appendAttribution": false,
-          "disable_web_page_preview": true,
-          "parse_mode": "HTML"
-        }
-      },
-      "id": "aa0f71be-2f4c-40f3-a5ca-18baf8efe2ff",
-      "name": "personal",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.1,
-      "position": [
-        1640,
-        -160
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "YtXrIMUbcoaS4RKx",
-          "name": "P0m0shnik11_Bot"
-        }
-      }
-    },
-    {
-      "parameters": {
         "content": "## \"Removed\" transactions from plaid [PERSONAL]",
         "height": 80,
         "width": 434.1260766582634
@@ -2714,6 +2729,142 @@
         60
       ],
       "webhookId": "674edcea-7df6-4f9f-8d9b-15269b99c648"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "transactions",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "p_transaction_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.body.p_transaction_id }}"
+            }
+          ]
+        }
+      },
+      "id": "7a337490-30d7-46a7-971b-f18a5d1e3382",
+      "name": "Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        -160
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "supabaseApi": {
+          "id": "L3YlYYsR7qok4PBY",
+          "name": "MV FInancial"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "count",
+              "stringValue": "={{ $input.all().length }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "4d426599-a06e-49d3-9441-b53ecf0f1439",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1860,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "17fb6ad8-13a2-4d63-928c-6168e9d299f3",
+              "leftValue": "={{ $json.count }}",
+              "rightValue": "1",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "2370c85b-8e67-4239-939f-cb035d6ba636",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1002118068539",
+        "text": "=Duplicate Transactions Found\n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>\n\n\n\n",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "bc043e09-772f-4eb2-8e80-73d27ebea059",
+      "name": "Duplicates",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        2360,
+        -80
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1002118068539",
+        "text": "={{ $json[\"body\"][\"p_amount\"]*-1 }} {{ $json[\"body\"][\"p_iso_currency_code\"] }}\n{{ $json[\"body\"][\"p_date\"] }}\n{{ $json[\"body\"][\"p_name_og\"] }} \n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>\n\n\n\n",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "aa0f71be-2f4c-40f3-a5ca-18baf8efe2ff",
+      "name": "Notify",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        2360,
+        -280
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YtXrIMUbcoaS4RKx",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
     }
   ],
   "pinData": {
@@ -2768,35 +2919,44 @@
         "json": {
           "headers": {
             "host": "imposbl.up.railway.app",
-            "user-agent": "PostgreSQL 15.1 (Ubuntu 15.1-1.pgdg20.04+1) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, 64-bit",
-            "accept": "*/*",
-            "accept-encoding": "deflate, gzip, br",
-            "charsets": "utf-8",
             "content-type": "application/json",
-            "content-length": "294",
-            "x-forwarded-for": "13.56.5.31",
+            "accept": "*/*",
+            "content-length": "574",
+            "user-agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
+            "accept-encoding": "gzip,deflate",
+            "x-forwarded-for": "108.211.16.232",
             "x-forwarded-proto": "https",
-            "x-envoy-external-address": "13.56.5.31",
-            "x-request-id": "eead54e7-4f5b-4b4e-b138-5d3b96432594"
+            "x-envoy-external-address": "108.211.16.232",
+            "x-request-id": "f99785ac-1ec1-4fd6-888a-d602b23eea61"
           },
           "params": {},
           "query": {},
           "body": {
-            "id": "3adbd5ad-ac50-46ba-a48b-2d38b98b1a03",
-            "p_date": "2024-07-07",
-            "p_amount": 100.5,
-            "p_name_og": "name_og_example",
-            "p_user_id": "ef1fb02e-ae84-4fc7-b65f-d4754a66defd",
-            "created_at": "2024-07-07T12:34:56+00:00",
-            "p_transaction_id": "transaction_id_example",
-            "p_iso_currency_code": "USD"
+            "p_transaction_id": "VmAAdVbV4Rh9mBrxNXerIv7Z06KQaPHnEgqAM",
+            "p_account_id": "QaQQEVMVAyFM4LJOEBaJHQbawLDBwYu9dLaZ8",
+            "p_amount": 409.59,
+            "p_iso_currency_code": "USD",
+            "p_category": "21006000",
+            "p_date": "2024-06-14",
+            "p_name_og": "ONLINE TRANSFER TO MILES VENTURES LLC REF #IB0NK5YCBG BUSINESS CHECKING EVERETT",
+            "p_name_guess": null,
+            "p_payment_channel": "other",
+            "p_pending": false,
+            "p_transaction_type": "special",
+            "p_entity_id": null,
+            "p_logo_url": null,
+            "p_updated": "2024-06-27T17:10:54.735Z",
+            "p_added_modified_removed": null,
+            "p_user_id": "267ff5c4-c64f-4c7c-908e-d2467a6289d7",
+            "source": "Plaid"
           }
         }
       }
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": {
     "node:Gmail Trigger": {
@@ -2805,6 +2965,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2024-07-08T01:24:57.369Z",
-  "versionId": "e767407a-13ed-4b16-8cfa-a9bd4bbafa1b"
+  "updatedAt": "2024-07-09T03:11:54.170Z",
+  "versionId": "24fe0565-70d9-454c-8e34-6a1ecf4262e3"
 }
