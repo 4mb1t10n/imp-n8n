@@ -334,17 +334,6 @@
         ]
       ]
     },
-    "Supabase": {
-      "main": [
-        [
-          {
-            "node": "Notify",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Personal Plaid": {
       "main": [
         [
@@ -360,7 +349,51 @@
       "main": [
         [
           {
-            "node": "Supabase",
+            "node": "Get Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Notify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify": {
+      "main": [
+        [
+          {
+            "node": "insert telegram info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Row": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MF Finances Bot": {
+      "main": [
+        [
+          {
+            "node": "/getbalances",
             "type": "main",
             "index": 0
           }
@@ -2667,37 +2700,8 @@
     },
     {
       "parameters": {
-        "operation": "get",
-        "tableId": "transactions",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "keyValue": "={{ $json.body.record_id }}"
-            }
-          ]
-        }
-      },
-      "id": "7a337490-30d7-46a7-971b-f18a5d1e3382",
-      "name": "Supabase",
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        1920,
-        -260
-      ],
-      "alwaysOutputData": false,
-      "credentials": {
-        "supabaseApi": {
-          "id": "L3YlYYsR7qok4PBY",
-          "name": "MV FInancial"
-        }
-      }
-    },
-    {
-      "parameters": {
         "chatId": "-1002118068539",
-        "text": "={{ $json.p_amount*-1 }} {{ $json.p_iso_currency_code }}\n{{ $json.p_date }}\n{{ $json.p_name_og }} \n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>\n\n\n",
+        "text": "={{ $json.p_amount*-1 }} {{ $json.p_iso_currency_code }}\n{{ $json.p_date }}\n{{ $json.p_name_og }}\n------\n{{ $json[\"p_transaction_id\"] }}\n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>\n\n\n",
         "additionalFields": {
           "appendAttribution": false,
           "disable_web_page_preview": true,
@@ -2709,13 +2713,13 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.1,
       "position": [
-        2140,
+        2360,
         -260
       ],
       "credentials": {
         "telegramApi": {
-          "id": "YtXrIMUbcoaS4RKx",
-          "name": "P0m0shnik11_Bot"
+          "id": "0fQ1WNqKtNnjGFpt",
+          "name": "MV Finances Bot"
         }
       }
     },
@@ -2766,6 +2770,136 @@
       "position": [
         1640,
         -160
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.telegram_message_id }}",
+              "operation": "isEmpty"
+            },
+            {
+              "value1": "={{ $json.telegram_chat_id }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "f2a707a7-42be-42d6-8ce6-717390173b82",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        2140,
+        -260
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "transactions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Filter').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "telegram_message_id",
+              "fieldValue": "={{ $json.result.message_id }}"
+            },
+            {
+              "fieldId": "telegram_chat_id",
+              "fieldValue": "={{ $json.result.chat.id }}"
+            }
+          ]
+        }
+      },
+      "id": "99da632b-e8e4-4629-a0f2-d7ee89ad38f9",
+      "name": "insert telegram info",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2580,
+        -260
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "L3YlYYsR7qok4PBY",
+          "name": "MV FInancial"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "transactions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.body.record_id }}"
+            }
+          ]
+        }
+      },
+      "id": "7a337490-30d7-46a7-971b-f18a5d1e3382",
+      "name": "Get Row",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        -260
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "supabaseApi": {
+          "id": "L3YlYYsR7qok4PBY",
+          "name": "MV FInancial"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mv_financial_bot",
+        "options": {}
+      },
+      "id": "4d120a02-2b26-48ca-9485-3b50be89af39",
+      "name": "MF Finances Bot",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        1420,
+        120
+      ],
+      "webhookId": "84c50769-b5ac-4747-bded-805f4a2cf08e"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.message.text }}",
+              "value2": "/getbalances@mv_finances_bot"
+            }
+          ]
+        }
+      },
+      "id": "61b5dbb9-48b8-4db8-a6ec-9bb770c07723",
+      "name": "/getbalances",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        120
       ]
     }
   ],
@@ -2840,6 +2974,52 @@
           }
         }
       }
+    ],
+    "MF Finances Bot": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "content-type": "application/json",
+            "content-length": "363",
+            "accept-encoding": "gzip, deflate",
+            "x-forwarded-for": "91.108.6.5",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "91.108.6.5",
+            "x-request-id": "32716995-30d2-4cee-bcbe-453add0d74f6"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "update_id": 335753419,
+            "message": {
+              "message_id": 397,
+              "from": {
+                "id": 384291172,
+                "is_bot": false,
+                "first_name": "Alex",
+                "last_name": "Miles",
+                "username": "AMOnition",
+                "language_code": "en"
+              },
+              "chat": {
+                "id": -1002118068539,
+                "title": "MV Financial",
+                "type": "supergroup"
+              },
+              "date": 1720621272,
+              "text": "/getbalances@mv_finances_bot",
+              "entities": [
+                {
+                  "offset": 0,
+                  "length": 28,
+                  "type": "bot_command"
+                }
+              ]
+            }
+          }
+        }
+      }
     ]
   },
   "settings": {
@@ -2852,7 +3032,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2024-07-09T23:16:28.965Z",
-  "versionId": "d4d5fcc3-34bc-4cb4-8855-814e402ee197"
+  "triggerCount": 4,
+  "updatedAt": "2024-07-10T14:27:19.078Z",
+  "versionId": "64ffb251-4766-4eaa-b717-740108a73b87"
 }
