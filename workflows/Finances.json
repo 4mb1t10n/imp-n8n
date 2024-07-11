@@ -389,11 +389,55 @@
         ]
       ]
     },
-    "MF Finances Bot": {
+    "/getbalances": {
+      "main": [
+        [
+          {
+            "node": "/updateBalances",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/updateBalances": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Format",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MV Finances Bot": {
       "main": [
         [
           {
             "node": "/getbalances",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format": {
+      "main": [
+        [
+          {
+            "node": "Notify1",
             "type": "main",
             "index": 0
           }
@@ -2868,22 +2912,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "mv_financial_bot",
-        "options": {}
-      },
-      "id": "4d120a02-2b26-48ca-9485-3b50be89af39",
-      "name": "MF Finances Bot",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1.1,
-      "position": [
-        1420,
-        120
-      ],
-      "webhookId": "84c50769-b5ac-4747-bded-805f4a2cf08e"
-    },
-    {
-      "parameters": {
         "conditions": {
           "string": [
             {
@@ -2901,6 +2929,95 @@
         1640,
         120
       ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "plaid_accounts"
+      },
+      "id": "4c5475ca-c8db-4776-9541-bbd52f71ab3a",
+      "name": "Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        120
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "L3YlYYsR7qok4PBY",
+          "name": "MV FInancial"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://plaid-production.up.railway.app/updateBalances",
+        "options": {}
+      },
+      "id": "bd196ce4-6294-4682-8b09-07ed29eb40fa",
+      "name": "/updateBalances",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1860,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mv_financial_bot",
+        "options": {}
+      },
+      "id": "4d120a02-2b26-48ca-9485-3b50be89af39",
+      "name": "MV Finances Bot",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        1420,
+        120
+      ],
+      "webhookId": "84c50769-b5ac-4747-bded-805f4a2cf08e"
+    },
+    {
+      "parameters": {
+        "jsCode": "function generateAccountsHTML(items) {\n  let totalCredit = 0;\n  let totalDebit = 0;\n\n  // Sort items alphabetically by nickname\n  const sortedItems = items.sort((a, b) => {\n    const nicknameA = a.json.nickname || 'Unnamed Account';\n    const nicknameB = b.json.nickname || 'Unnamed Account';\n    return nicknameA.localeCompare(nicknameB);\n  });\n\n  const accountsHTML = sortedItems.map(item => {\n    const account = item.json;\n    const currentAmount = Number(account.p_current_amount) || 0;\n\n    if (account.type === 'depository') {\n      totalDebit += currentAmount;\n    } else if (account.type === 'credit') {\n      totalCredit += currentAmount;\n    }\n\n    return `<b>${account.nickname || 'Unnamed Account'}</b>\nCurrent: $${account.p_current_amount != null ? account.p_current_amount.toFixed(2) : 'N/A'}\nAvailable: $${account.p_available_amount != null ? account.p_available_amount.toFixed(2) : 'N/A'}\n\n`;\n  }).join('');\n\n  const totalCurrent = totalDebit - totalCredit;\n\n  const totalsHTML = `\n<b>Totals</b>\nTotal Credit: $${totalCredit.toFixed(2)}\nTotal Debit: $${totalDebit.toFixed(2)}\nCurrent: $${totalCurrent.toFixed(2)}`;\n\n  const htmlString = accountsHTML + totalsHTML;\n  return { html: htmlString };\n}\n\nreturn generateAccountsHTML($input.all());"
+      },
+      "id": "4d72fdd3-ac7d-4f0b-9f37-65ee8c463c89",
+      "name": "Format",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2300,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1002118068539",
+        "text": "={{ $json.html}}\n------\n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "1991726d-7a87-4d59-bec4-50e7da98b1dc",
+      "name": "Notify1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        2520,
+        120
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "0fQ1WNqKtNnjGFpt",
+          "name": "MV Finances Bot"
+        }
+      }
     }
   ],
   "pinData": {
@@ -2975,7 +3092,7 @@
         }
       }
     ],
-    "MF Finances Bot": [
+    "MV Finances Bot": [
       {
         "json": {
           "headers": {
@@ -3033,6 +3150,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2024-07-10T14:27:19.078Z",
-  "versionId": "64ffb251-4766-4eaa-b717-740108a73b87"
+  "updatedAt": "2024-07-10T19:43:09.886Z",
+  "versionId": "2873252e-635e-425e-ab6b-ed5045e35cda"
 }
