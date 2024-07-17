@@ -429,6 +429,11 @@
             "node": "/getbalances",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "/fetchTransactions",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -437,7 +442,18 @@
       "main": [
         [
           {
-            "node": "Notify1",
+            "node": "Send Balances",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/fetchTransactions": {
+      "main": [
+        [
+          {
+            "node": "/updateBalances1",
             "type": "main",
             "index": 0
           }
@@ -2888,7 +2904,7 @@
         "filters": {
           "conditions": [
             {
-              "keyName": "id",
+              "keyName": "p_transaction_id",
               "keyValue": "={{ $json.body.record_id }}"
             }
           ]
@@ -2977,7 +2993,7 @@
       "typeVersion": 1.1,
       "position": [
         1420,
-        120
+        220
       ],
       "webhookId": "84c50769-b5ac-4747-bded-805f4a2cf08e"
     },
@@ -2996,6 +3012,26 @@
     },
     {
       "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.message.text }}",
+              "value2": "/gettransactions@mv_finances_bot"
+            }
+          ]
+        }
+      },
+      "id": "064afd4c-cbca-4d76-8df6-00eee7d42e8c",
+      "name": "/fetchTransactions",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        320
+      ]
+    },
+    {
+      "parameters": {
         "chatId": "-1002118068539",
         "text": "={{ $json.html}}\n------\n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>",
         "additionalFields": {
@@ -3005,7 +3041,7 @@
         }
       },
       "id": "1991726d-7a87-4d59-bec4-50e7da98b1dc",
-      "name": "Notify1",
+      "name": "Send Balances",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.1,
       "position": [
@@ -3018,6 +3054,21 @@
           "name": "MV Finances Bot"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://plaid-production.up.railway.app/updateTransactions",
+        "options": {}
+      },
+      "id": "fce90505-93fe-4bc7-b723-0cfe05c2772a",
+      "name": "/updateBalances1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1860,
+        320
+      ]
     }
   ],
   "pinData": {
@@ -3075,18 +3126,18 @@
             "accept": "application/json, text/plain, */*",
             "content-type": "application/json",
             "user-agent": "axios/1.7.2",
-            "content-length": "99",
+            "content-length": "100",
             "accept-encoding": "gzip, compress, deflate, br",
             "x-forwarded-for": "174.48.138.15",
             "x-forwarded-proto": "https",
             "x-envoy-external-address": "174.48.138.15",
-            "x-request-id": "af011133-df9d-42f9-8710-d1fa4c0c3c9a"
+            "x-request-id": "7fa8fb04-e34d-4b94-860d-d21d06266f33"
           },
           "params": {},
           "query": {},
           "body": {
             "event": "transaction_updated",
-            "record_id": "b733f149-86f7-499a-8148-cdbe8b871df2",
+            "record_id": "EqJJ3gYgwXTdPv10nNV1i69jR1b3BNUdPRY0z",
             "status": "added"
           }
         }
@@ -3150,6 +3201,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2024-07-10T19:43:09.886Z",
-  "versionId": "2873252e-635e-425e-ab6b-ed5045e35cda"
+  "updatedAt": "2024-07-17T01:11:49.460Z",
+  "versionId": "0d881fae-c577-4a52-baf4-2ef9725daafc"
 }
