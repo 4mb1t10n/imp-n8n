@@ -453,7 +453,7 @@
       "main": [
         [
           {
-            "node": "/updateBalances1",
+            "node": "/updateTransactions",
             "type": "main",
             "index": 0
           }
@@ -2754,8 +2754,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        880,
-        -140
+        840,
+        -220
       ]
     },
     {
@@ -2773,8 +2773,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.1,
       "position": [
-        2360,
-        -260
+        2260,
+        -240
       ],
       "credentials": {
         "telegramApi": {
@@ -2794,8 +2794,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1.1,
       "position": [
-        1420,
-        -160
+        1380,
+        -240
       ],
       "webhookId": "68592fe3-4e28-4ed9-ae6d-fe636493ca66"
     },
@@ -2828,8 +2828,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1640,
-        -160
+        1600,
+        -240
       ]
     },
     {
@@ -2852,8 +2852,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 1,
       "position": [
-        2140,
-        -260
+        2040,
+        -240
       ]
     },
     {
@@ -2887,8 +2887,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2580,
-        -260
+        2480,
+        -240
       ],
       "credentials": {
         "supabaseApi": {
@@ -2915,8 +2915,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1920,
-        -260
+        1820,
+        -240
       ],
       "alwaysOutputData": false,
       "credentials": {
@@ -2942,8 +2942,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 1,
       "position": [
-        1640,
-        120
+        1600,
+        40
       ]
     },
     {
@@ -2956,8 +2956,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2080,
-        120
+        2040,
+        40
       ],
       "credentials": {
         "supabaseApi": {
@@ -2977,8 +2977,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1860,
-        120
+        1820,
+        40
       ]
     },
     {
@@ -2992,8 +2992,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1.1,
       "position": [
-        1420,
-        220
+        1380,
+        140
       ],
       "webhookId": "84c50769-b5ac-4747-bded-805f4a2cf08e"
     },
@@ -3006,8 +3006,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2300,
-        120
+        2260,
+        40
       ]
     },
     {
@@ -3016,7 +3016,7 @@
           "string": [
             {
               "value1": "={{ $json.body.message.text }}",
-              "value2": "/gettransactions@mv_finances_bot"
+              "value2": "/updatetransactions@mv_finances_bot"
             }
           ]
         }
@@ -3026,8 +3026,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 1,
       "position": [
-        1640,
-        320
+        1600,
+        240
       ]
     },
     {
@@ -3045,8 +3045,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.1,
       "position": [
-        2520,
-        120
+        2480,
+        40
       ],
       "credentials": {
         "telegramApi": {
@@ -3062,12 +3062,12 @@
         "options": {}
       },
       "id": "fce90505-93fe-4bc7-b723-0cfe05c2772a",
-      "name": "/updateBalances1",
+      "name": "/updateTransactions",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1860,
-        320
+        1820,
+        240
       ]
     }
   ],
@@ -3201,6 +3201,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2024-07-17T01:11:49.460Z",
-  "versionId": "0d881fae-c577-4a52-baf4-2ef9725daafc"
+  "updatedAt": "2024-07-17T12:49:32.936Z",
+  "versionId": "871298b4-7160-4cec-b0a0-da394563092b"
 }
