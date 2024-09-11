@@ -1,0 +1,32 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-09-10T21:40:49.082Z",
+  "id": "BjDbNeD2OZXPsw3M",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "property scout",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7e6e5be2-d96a-4f76-b087-5e776eabc751",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        580,
+        380
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-10T21:40:49.082Z",
+  "versionId": "ee064493-8eef-4592-bcf0-3cec24d1a567"
+}
