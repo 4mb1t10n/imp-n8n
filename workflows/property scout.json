@@ -1,6 +1,29 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2024-09-10T21:40:49.082Z",
   "id": "BjDbNeD2OZXPsw3M",
   "meta": {
@@ -14,10 +37,38 @@
       "name": "When clicking ‘Test workflow’",
       "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        580,
-        380
+        460,
+        400
       ],
       "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/GctCXDim0MXeLZegY/runs?token=",
+        "options": {}
+      },
+      "id": "2179a5f7-c7f6-472a-9e62-7c0fc5ca5f5e",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        860,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "id": "659bb957-e844-4614-98d7-4d001756fef7",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1080,
+        400
+      ]
     }
   ],
   "pinData": {},
@@ -27,6 +78,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-10T21:40:49.082Z",
-  "versionId": "ee064493-8eef-4592-bcf0-3cec24d1a567"
+  "updatedAt": "2024-09-12T16:32:09.055Z",
+  "versionId": "d0f3bb9f-9872-4502-bc23-66ca964958ec"
 }
