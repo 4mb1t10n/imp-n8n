@@ -1,0 +1,576 @@
+{
+  "active": true,
+  "connections": {
+    "created timestamp exists": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "\"Properties\" Table New Record": {
+      "main": [
+        [
+          {
+            "node": "created timestamp exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "has updates": {
+      "main": [
+        [
+          {
+            "node": "Create notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "compare data": {
+      "main": [
+        [
+          {
+            "node": "has updates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Input": {
+      "main": [
+        [
+          {
+            "node": "compare data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-10T21:40:49.082Z",
+  "id": "BjDbNeD2OZXPsw3M",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Imposbl App",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4564065f-ad57-4b35-bbaa-56282d4da130",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.body.record.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "timestamp_created",
+              "fieldValue": "={{ $json.body.record.timestamp_updated }}"
+            }
+          ]
+        }
+      },
+      "id": "80699d06-3906-48d2-b3c7-5999ce28337d",
+      "name": "Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        180
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Imposbl Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c513f015-0831-45a6-a5cb-c89110c34e41",
+              "leftValue": "={{ $json.body.record.timestamp_created }}",
+              "rightValue": "",
+              "operator": {
+                "type": "dateTime",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "37998805-05cd-431a-953f-af08ee8dc45e",
+      "name": "created timestamp exists",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        740,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "0c08a069-17fd-46ce-9996-c8aa650e729e",
+              "leftValue": "={{ $json.body.record.timestamp_created }}",
+              "rightValue": "",
+              "operator": {
+                "type": "dateTime",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "35e50be3-ab5c-433f-a209-a9b34c24acd2",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.1,
+      "position": [
+        1000,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7965cf91-4238-4d08-85e7-0ebc776417e0",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "40a91048-c4ba-4b9b-a0b1-2c141fea7ccb",
+      "name": "\"Properties\" Table New Record",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        520,
+        100
+      ],
+      "webhookId": "7965cf91-4238-4d08-85e7-0ebc776417e0",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "mk6V0TaWYGlLXgPM",
+          "name": "Supabase Imposbl Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5d92d5fe-9090-4ce7-b919-f8a190b9dc0a",
+              "name": "body",
+              "value": "={{ $json.body.record }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b9cce5cf-eb04-42f7-81a3-36f3141ace69",
+      "name": "newData",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        660,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d2d0424b-54f0-4c25-8227-573f094dae14",
+              "name": "body",
+              "value": "={{ $json.body.old_record }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "65e81027-f03c-4cc5-9f48-5938f1e411f8",
+      "name": "oldData",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "00f990c9-9187-4105-ad41-69a174a6145a",
+              "leftValue": "={{ $json.isDifferent }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8b23fe6f-afb1-4201-a078-8e6147cf377a",
+      "name": "has updates",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.1,
+      "position": [
+        960,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function findDifference(obj1, obj2) {\n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {\n      return {\n        isDifferent: true,\n        difference: key,\n        oldValue: obj2[key],\n        newValue: obj1[key]\n      };\n    }\n  }\n  return {\n    isDifferent: false,\n    difference: null,\n    oldValue: null,\n    newValue: null\n  };\n}\n\n// Assuming the JSON objects are in items[0].json.body and items[1].json.body\nconst newObject = $('Input').all()[0].json.body.record;\nconst oldObject = $('Input').all()[0].json.body.old_record;\n\nconsole.log(test);\n\nconst result = findDifference(newObject, oldObject);\n\n// Set the output to be the result object\nitems = [{json: result}];\n\nreturn items;"
+      },
+      "id": "4f9d7590-75a8-4d8b-8d48-c61bb6050d73",
+      "name": "compare data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        740,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "properties_notifications",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "fk_property_id",
+              "fieldValue": "={{ $('Input').first().json.body.record.id }}"
+            },
+            {
+              "fieldId": "updated_field",
+              "fieldValue": "={{ $json.difference }}"
+            },
+            {
+              "fieldId": "value_old",
+              "fieldValue": "={{ $json.oldValue }}"
+            },
+            {
+              "fieldId": "value_new",
+              "fieldValue": "={{ $json.newValue }}"
+            }
+          ]
+        }
+      },
+      "id": "d9e94d6d-09cd-4df8-b731-5ee72daa8f36",
+      "name": "Create notification",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        520
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Imposbl Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Input').all()[0].json.body.record"
+      },
+      "id": "33c35897-82cd-4c95-b3d8-76a8ab332c84",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        740,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "9589f431-7b1e-4585-9cec-35bd77bcdae0",
+      "name": "Input",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        520,
+        520
+      ],
+      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "mk6V0TaWYGlLXgPM",
+          "name": "Supabase Imposbl Header Auth"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "\"Properties\" Table New Record": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "pg_net/0.7.1",
+            "content-length": "917",
+            "accept": "*/*",
+            "content-type": "application/json",
+            "x-forwarded-for": "3.210.235.210",
+            "x-forwarded-host": "imposbl.up.railway.app",
+            "x-forwarded-proto": "https",
+            "x-railway-request-id": "xOJsq2T3Q0GPJ-gFNqar7g_1002618245",
+            "x-real-ip": "3.210.235.210",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "type": "INSERT",
+            "table": "properties",
+            "record": {
+              "id": 20,
+              "beds": null,
+              "sqft": null,
+              "baths": null,
+              "garage": null,
+              "lot_sqf": null,
+              "starred": false,
+              "stories": null,
+              "coord_lat": null,
+              "coord_lng": null,
+              "prop_size": null,
+              "prop_year": null,
+              "realtor_id": null,
+              "year_built": null,
+              "address_zip": null,
+              "realtor_url": null,
+              "address_city": null,
+              "county_tract": null,
+              "realtor_desc": null,
+              "address_state": null,
+              "county_parcel": null,
+              "address_street": "12 test 34",
+              "realtor_status": null,
+              "prop_struc_type": null,
+              "prop_cooking_type": null,
+              "prop_heating_type": null,
+              "timestamp_created": null,
+              "timestamp_updated": null,
+              "fk_status_property": "New",
+              "realtor_list_price": null,
+              "timestamp_followup": null,
+              "address_neighborhood": null,
+              "realtor_dwelling_type": null,
+              "realtor_last_sold_date": null,
+              "prop_water_heating_type": null,
+              "realtor_last_sold_price": null
+            },
+            "schema": "public",
+            "old_record": null
+          },
+          "webhookUrl": "https://imposbl.up.railway.app/webhook/7965cf91-4238-4d08-85e7-0ebc776417e0",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Input": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "pg_net/0.7.1",
+            "content-length": "2391",
+            "accept": "*/*",
+            "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
+            "content-type": "application/json",
+            "x-forwarded-for": "3.210.235.210",
+            "x-forwarded-host": "imposbl.up.railway.app",
+            "x-forwarded-proto": "https",
+            "x-railway-request-id": "6d45XGFHShyEAuYEbcdpeQ_1002618245",
+            "x-real-ip": "3.210.235.210",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "type": "UPDATE",
+            "table": "properties",
+            "record": {
+              "id": 26,
+              "beds": 4,
+              "sqft": 5100,
+              "baths": 4,
+              "garage": 4,
+              "lot_sqf": 6721,
+              "starred": false,
+              "stories": 2,
+              "coord_lat": 41.645194,
+              "coord_lng": -83.492662,
+              "prop_size": 5100,
+              "prop_year": 1925,
+              "realtor_id": 3196525515,
+              "year_built": 1925,
+              "address_zip": "43605",
+              "realtor_url": "https://www.realtor.com/realestateandhomes-detail/334-Van-Buren-Ave_Oregon_OH_43605_M31965-25515",
+              "address_city": "Toledo",
+              "county_tract": null,
+              "realtor_desc": "Rare opportunity to own this 4 unit in Oregon! No showings until accepted offer. Newer furnaces and water tanks. Updated electric and recently painted exterior!",
+              "address_state": "OH",
+              "county_parcel": null,
+              "address_street": "334 Van Buren Ave",
+              "realtor_status": "for_sale",
+              "prop_cooking_type": null,
+              "prop_heating_type": null,
+              "timestamp_created": "2024-09-22T22:40:21.459966+00:00",
+              "timestamp_updated": "2024-09-22T22:40:21.459966+00:00",
+              "fk_status_property": "New",
+              "realtor_list_price": 169900,
+              "timestamp_followup": null,
+              "address_neighborhood": "East Toledo",
+              "realtor_dwelling_type": "multi_family",
+              "realtor_last_sold_date": "2008-10-24",
+              "prop_water_heating_type": null,
+              "realtor_last_sold_price": 42500
+            },
+            "schema": "public",
+            "old_record": {
+              "id": 26,
+              "beds": 4,
+              "sqft": 5100,
+              "baths": 4,
+              "garage": 4,
+              "lot_sqf": 6721,
+              "starred": false,
+              "stories": 2,
+              "coord_lat": 41.645194,
+              "coord_lng": -83.492662,
+              "prop_size": 5100,
+              "prop_year": 1925,
+              "realtor_id": 3196525515,
+              "year_built": 1925,
+              "address_zip": "43605",
+              "realtor_url": "https://www.realtor.com/realestateandhomes-detail/334-Van-Buren-Ave_Oregon_OH_43605_M31965-25515",
+              "address_city": "Toledo",
+              "county_tract": null,
+              "realtor_desc": "Rare opportunity to own this 4 unit in Oregon! No showings until accepted offer. Newer furnaces and water tanks. Updated electric and recently painted exterior!",
+              "address_state": "OH",
+              "county_parcel": null,
+              "address_street": "334 Van Buren Ave",
+              "realtor_status": "for_sale",
+              "prop_cooking_type": null,
+              "prop_heating_type": null,
+              "timestamp_created": null,
+              "timestamp_updated": "2024-09-22T22:40:21.459966+00:00",
+              "fk_status_property": "New",
+              "realtor_list_price": 169900,
+              "timestamp_followup": null,
+              "address_neighborhood": "East Toledo",
+              "realtor_dwelling_type": "multi_family",
+              "realtor_last_sold_date": "2008-10-24",
+              "prop_water_heating_type": null,
+              "realtor_last_sold_price": 42500
+            }
+          },
+          "webhookUrl": "https://imposbl.up.railway.app/webhook/2ac3d1a9-7334-451c-aa4c-947182f598d5",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2024-09-22T23:42:16.847Z",
+  "versionId": "25ddbfeb-111d-4254-9ac7-2c31c2e847a6"
+}
