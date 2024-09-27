@@ -52,6 +52,17 @@
         ]
       ]
     },
+    "filter": {
+      "main": [
+        [
+          {
+            "node": "Create notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Input": {
       "main": [
         [
@@ -63,11 +74,11 @@
         ]
       ]
     },
-    "filter": {
+    "Trigger.dev Alert": {
       "main": [
         [
           {
-            "node": "Create notification",
+            "node": "Notify of Trigger.dev fail",
             "type": "main",
             "index": 0
           }
@@ -222,7 +233,7 @@
     },
     {
       "parameters": {
-        "jsCode": "function findDifference(obj1, obj2) {\n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {\n      return {\n        isDifferent: true,\n        difference: key,\n        oldValue: obj2[key],\n        newValue: obj1[key]\n      };\n    }\n  }\n  return {\n    isDifferent: false,\n    difference: null,\n    oldValue: null,\n    newValue: null\n  };\n}\n\n// Assuming the JSON objects are in items[0].json.body and items[1].json.body\nconst newObject = $('Input').all()[0].json.body.record;\nconst oldObject = $('Input').all()[0].json.body.old_record;\n\nconst result = findDifference(newObject, oldObject);\n\n// Set the output to be the result object\nitems = [{json: result}];\n\nreturn items;"
+        "jsCode": "function findDifferences(obj1, obj2) {\n  let differences = [];\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {\n      differences.push({\n        isDifferent: true,\n        difference: key,\n        oldValue: obj2[key],\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  // Check for keys in obj2 that are not in obj1\n  for (let key in obj2) {\n    if (!(key in obj1)) {\n      differences.push({\n        isDifferent: true,\n        difference: key,\n        oldValue: obj2[key],\n        newValue: undefined\n      });\n    }\n  }\n  \n  return differences;\n}\n\n// Assuming the JSON objects are in $('Input').all()[0].json.body\nconst newObject = $('Input').all()[0].json.body.record;\nconst oldObject = $('Input').all()[0].json.body.old_record;\n\nconst differences = findDifferences(newObject, oldObject);\n\n// Set the output to be an array of difference objects\nitems = differences.map(diff => ({ json: diff }));\n\nreturn items;"
       },
       "id": "4f9d7590-75a8-4d8b-8d48-c61bb6050d73",
       "name": "compare data",
@@ -235,7 +246,7 @@
     },
     {
       "parameters": {
-        "tableId": "properties_notifications",
+        "tableId": "properties_changelog",
         "fieldsUi": {
           "fieldValues": [
             {
@@ -253,6 +264,14 @@
             {
               "fieldId": "value_new",
               "fieldValue": "={{ $json.newValue }}"
+            },
+            {
+              "fieldId": "updated_by",
+              "fieldValue": "={{ $('Input').item.json.body.record.last_edited_by }}"
+            },
+            {
+              "fieldId": "timestamp_updated",
+              "fieldValue": "={{ $('Input').item.json.body.record.timestamp_updated }}"
             }
           ]
         }
@@ -269,29 +288,6 @@
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
           "name": "Imposbl Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
-        "authentication": "headerAuth",
-        "options": {}
-      },
-      "id": "9589f431-7b1e-4585-9cec-35bd77bcdae0",
-      "name": "Input",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        520,
-        520
-      ],
-      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "mk6V0TaWYGlLXgPM",
-          "name": "Supabase Imposbl Header Auth"
         }
       }
     },
@@ -325,8 +321,17 @@
             },
             {
               "id": "f87b8385-75c8-420b-9c11-35b5c8b2a9be",
-              "leftValue": "{{ $json.difference }}",
+              "leftValue": "={{ $json.difference }}",
               "rightValue": "timestamp_updated",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "52b907a1-ac31-47d6-8131-143d7524d204",
+              "leftValue": "={{ $json.difference }}",
+              "rightValue": "last_edited_by",
               "operator": {
                 "type": "string",
                 "operation": "notEquals"
@@ -345,6 +350,98 @@
         960,
         520
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "9589f431-7b1e-4585-9cec-35bd77bcdae0",
+      "name": "Input",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        520,
+        520
+      ],
+      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "mk6V0TaWYGlLXgPM",
+          "name": "Supabase Imposbl Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## New Property Created\n### Set created time to be same as updated time",
+        "height": 145.62196438101526
+      },
+      "id": "42113db4-2aae-49ea-98f6-c6e804a8fd98",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        200,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Property Updated\n### Log all changes to properties_notifications",
+        "height": 145.62196438101526
+      },
+      "id": "a946dccd-3737-4273-8388-6f5782351765",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        200,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "-1001902244643",
+        "text": "=Trigger.dev run failed\n------\n<a href=\"https://imposbl.up.railway.app/workflow/BjDbNeD2OZXPsw3M/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "8b4a8528-f70c-43ec-8f48-f76bfaf1a5b9",
+      "name": "Notify of Trigger.dev fail",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        740,
+        -360
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "0fQ1WNqKtNnjGFpt",
+          "name": "MV Finances Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "4e2721d3-88df-4aa7-99fe-531f846ad470",
+        "options": {}
+      },
+      "id": "4002c2e5-a702-46ba-8a8c-36e9d7a94e68",
+      "name": "Trigger.dev Alert",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        520,
+        -360
+      ],
+      "webhookId": "4e2721d3-88df-4aa7-99fe-531f846ad470"
     }
   ],
   "pinData": {
@@ -421,14 +518,14 @@
           "headers": {
             "host": "imposbl.up.railway.app",
             "user-agent": "pg_net/0.7.1",
-            "content-length": "2391",
+            "content-length": "2090",
             "accept": "*/*",
             "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
             "content-type": "application/json",
             "x-forwarded-for": "3.210.235.210",
             "x-forwarded-host": "imposbl.up.railway.app",
             "x-forwarded-proto": "https",
-            "x-railway-request-id": "6d45XGFHShyEAuYEbcdpeQ_1002618245",
+            "x-railway-request-id": "Zv59EdsWQ1GVfw43RVNDxQ_882434190",
             "x-real-ip": "3.210.235.210",
             "accept-encoding": "gzip"
           },
@@ -438,79 +535,81 @@
             "type": "UPDATE",
             "table": "properties",
             "record": {
-              "id": 26,
-              "beds": 4,
-              "sqft": 5100,
-              "baths": 4,
-              "garage": 4,
-              "lot_sqf": 6721,
-              "starred": false,
-              "stories": 2,
-              "coord_lat": 41.645194,
-              "coord_lng": -83.492662,
-              "prop_size": 5100,
-              "prop_year": 1925,
-              "realtor_id": 3196525515,
-              "year_built": 1925,
-              "address_zip": "43605",
-              "realtor_url": "https://www.realtor.com/realestateandhomes-detail/334-Van-Buren-Ave_Oregon_OH_43605_M31965-25515",
+              "id": 5,
+              "beds": null,
+              "sqft": null,
+              "baths": null,
+              "garage": null,
+              "lot_sqf": null,
+              "starred": true,
+              "stories": null,
+              "coord_lat": null,
+              "coord_lng": null,
+              "prop_size": 1350,
+              "prop_year": null,
+              "realtor_id": null,
+              "year_built": null,
+              "address_zip": "43612",
+              "realtor_url": "https://www.realtor.com/realestateandhomes-detail/M4876359256",
               "address_city": "Toledo",
-              "county_tract": null,
-              "realtor_desc": "Rare opportunity to own this 4 unit in Oregon! No showings until accepted offer. Newer furnaces and water tanks. Updated electric and recently painted exterior!",
+              "county_tract": "6.01",
+              "realtor_desc": null,
               "address_state": "OH",
-              "county_parcel": null,
-              "address_street": "334 Van Buren Ave",
-              "realtor_status": "for_sale",
+              "county_parcel": "0736911",
+              "address_street": "3528 Homewood Ave",
+              "last_edited_by": "5b9dc1df-4527-4c03-a425-81fcb2b4599e",
+              "realtor_status": null,
               "prop_cooking_type": null,
               "prop_heating_type": null,
-              "timestamp_created": "2024-09-22T22:40:21.459966+00:00",
-              "timestamp_updated": "2024-09-22T22:40:21.459966+00:00",
-              "fk_status_property": "New",
-              "realtor_list_price": 169900,
+              "timestamp_created": "2024-09-22T05:01:01+00:00",
+              "timestamp_updated": "2024-09-22T05:01:55+00:00",
+              "fk_status_property": "Rented",
+              "realtor_list_price": null,
               "timestamp_followup": null,
-              "address_neighborhood": "East Toledo",
-              "realtor_dwelling_type": "multi_family",
-              "realtor_last_sold_date": "2008-10-24",
+              "address_neighborhood": null,
+              "realtor_dwelling_type": null,
+              "realtor_last_sold_date": null,
               "prop_water_heating_type": null,
-              "realtor_last_sold_price": 42500
+              "realtor_last_sold_price": null
             },
             "schema": "public",
             "old_record": {
-              "id": 26,
-              "beds": 4,
-              "sqft": 5100,
-              "baths": 4,
-              "garage": 4,
-              "lot_sqf": 6721,
-              "starred": false,
-              "stories": 2,
-              "coord_lat": 41.645194,
-              "coord_lng": -83.492662,
-              "prop_size": 5100,
-              "prop_year": 1925,
-              "realtor_id": 3196525515,
-              "year_built": 1925,
-              "address_zip": "43605",
-              "realtor_url": "https://www.realtor.com/realestateandhomes-detail/334-Van-Buren-Ave_Oregon_OH_43605_M31965-25515",
+              "id": 5,
+              "beds": null,
+              "sqft": null,
+              "baths": null,
+              "garage": null,
+              "lot_sqf": null,
+              "starred": true,
+              "stories": null,
+              "coord_lat": null,
+              "coord_lng": null,
+              "prop_size": 1350,
+              "prop_year": null,
+              "realtor_id": null,
+              "year_built": null,
+              "address_zip": "43612",
+              "realtor_url": "https://www.realtor.com/realestateandhomes-detail/M4876359256",
               "address_city": "Toledo",
-              "county_tract": null,
-              "realtor_desc": "Rare opportunity to own this 4 unit in Oregon! No showings until accepted offer. Newer furnaces and water tanks. Updated electric and recently painted exterior!",
+              "county_tract": "6.01",
+              "realtor_desc": null,
               "address_state": "OH",
-              "county_parcel": null,
-              "address_street": "334 Van Buren Ave",
-              "realtor_status": "for_sale",
+              "county_parcel": "0736911",
+              "address_street": "3528 Homewood Ave",
+              "last_edited_by": "5b9dc1d81fcb2b4599e",
+              "realtor_status": null,
               "prop_cooking_type": null,
               "prop_heating_type": null,
-              "timestamp_created": null,
-              "timestamp_updated": "2024-09-22T22:40:21.459966+00:00",
-              "fk_status_property": "New",
-              "realtor_list_price": 169900,
-              "timestamp_followup": null,
-              "address_neighborhood": "East Toledo",
-              "realtor_dwelling_type": "multi_family",
-              "realtor_last_sold_date": "2008-10-24",
+              "timestamp_created": "2024-09-22T05:01:01+00:00",
+              "timestamp_updated": "2024-09-22T05:01:55+00:00",
+              "fk_status_property": "Construction",
+              "realtor_list_price": null,
+              "timestamp_followup": "2024-09-28T13:16:06.879+00:00",
+              "address_neighborhood": null,
+              "realtor_dwelling_type": null,
+              "realtor_last_sold_date": null,
               "prop_water_heating_type": null,
-              "realtor_last_sold_price": 42500
+              "realtor_last_sold_price": null
             }
           },
           "webhookUrl": "https://imposbl.up.railway.app/webhook/2ac3d1a9-7334-451c-aa4c-947182f598d5",
@@ -524,7 +623,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2024-09-23T22:34:17.226Z",
-  "versionId": "954d259d-5047-4e51-9c9c-6e90e6e0a408"
+  "triggerCount": 3,
+  "updatedAt": "2024-09-26T21:23:52.709Z",
+  "versionId": "2138ba82-d786-4bd4-ba7f-b0b7bfdae02c"
 }
