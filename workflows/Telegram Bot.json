@@ -1,0 +1,215 @@
+{
+  "active": false,
+  "connections": {
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "p0m0shnik": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-15T21:36:51.506Z",
+  "id": "z6F3Lum7hdrkbp7l",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Telegram Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.message.text }}",
+              "operation": "contains",
+              "value2": "/link@P0m0shnik11_Bot"
+            }
+          ]
+        }
+      },
+      "id": "9465023c-ee04-4731-91a2-7062fcc5858f",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        900,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/setMessageReaction",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"chat_id\": {{ $('p0m0shnik').item.json[\"body\"][\"message\"][\"chat\"][\"id\"] }},\n  \"message_id\": {{ $('p0m0shnik').item.json[\"body\"][\"message\"][\"message_id\"] }},\n  \"reaction\": [\n    {\n      \"type\": \"emoji\",\n      \"emoji\": \"👍\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "ccf91817-4521-47cb-b770-bfd24dcaa4d1",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1360,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dd0e0b16-dabf-4910-bf61-c64645c2f1ca",
+              "name": "=URL",
+              "value": "={{ \"https://t.me/c/\"+\"\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "99eefa06-bf11-4d8b-9fd4-4434c1c00ebb",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "telegram",
+        "options": {}
+      },
+      "id": "bd49426d-4815-4985-a1e4-4ae8915a26a8",
+      "name": "p0m0shnik",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        380
+      ],
+      "webhookId": "4b8be7a5-51cd-43ea-8c28-46aabdf733ff"
+    }
+  ],
+  "pinData": {
+    "p0m0shnik": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "content-length": "842",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "91.108.6.113",
+            "x-forwarded-host": "imposbl.up.railway.app",
+            "x-forwarded-proto": "https",
+            "x-railway-request-id": "lb9-Hgx7QwmBBHV9CTmZnQ_2207837401",
+            "x-real-ip": "91.108.6.113"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "update_id": 514764955,
+            "message": {
+              "message_id": 33,
+              "from": {
+                "id": 384291172,
+                "is_bot": false,
+                "first_name": "Alex",
+                "last_name": "Miles",
+                "username": "AMOnition",
+                "language_code": "en",
+                "is_premium": true
+              },
+              "chat": {
+                "id": -1002458954894,
+                "title": "415 Everett St",
+                "is_forum": true,
+                "type": "supergroup"
+              },
+              "date": 1729710609,
+              "message_thread_id": 18,
+              "reply_to_message": {
+                "message_id": 18,
+                "from": {
+                  "id": 384291172,
+                  "is_bot": false,
+                  "first_name": "Alex",
+                  "last_name": "Miles",
+                  "username": "AMOnition",
+                  "language_code": "en",
+                  "is_premium": true
+                },
+                "chat": {
+                  "id": -1002458954894,
+                  "title": "415 Everett St",
+                  "is_forum": true,
+                  "type": "supergroup"
+                },
+                "date": 1729707949,
+                "message_thread_id": 18,
+                "forum_topic_created": {
+                  "name": "Cancel Warranty",
+                  "icon_color": 13338331
+                },
+                "is_topic_message": true
+              },
+              "text": "/link@P0m0shnik11_Bot",
+              "entities": [
+                {
+                  "offset": 0,
+                  "length": 21,
+                  "type": "bot_command"
+                }
+              ],
+              "is_topic_message": true
+            }
+          },
+          "webhookUrl": "https://imposbl.up.railway.app/webhook/telegram",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "v2Gctj6G4inNJYnF"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-23T19:51:13.684Z",
+  "versionId": "6cb5aaa5-e678-4a9f-854a-8e8e4dcabb41"
+}
