@@ -74,17 +74,6 @@
         ]
       ]
     },
-    "Properties - Updated Record": {
-      "main": [
-        [
-          {
-            "node": "compare data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Auth.Users - New Record": {
       "main": [
         [
@@ -101,6 +90,17 @@
         [
           {
             "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Properties - Updated Record": {
+      "main": [
+        [
+          {
+            "node": "compare data",
             "type": "main",
             "index": 0
           }
@@ -455,29 +455,6 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
-        "authentication": "headerAuth",
-        "options": {}
-      },
-      "id": "9589f431-7b1e-4585-9cec-35bd77bcdae0",
-      "name": "Properties - Updated Record",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        520,
-        520
-      ],
-      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "mk6V0TaWYGlLXgPM",
-          "name": "Supabase Imposbl Header Auth"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
         "path": "65a7dcd1-3560-4632-ac79-1244f0c008af",
         "authentication": "headerAuth",
         "responseMode": "responseNode",
@@ -542,6 +519,29 @@
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
           "name": "Imposbl Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "9589f431-7b1e-4585-9cec-35bd77bcdae0",
+      "name": "Properties - Updated Record",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        520,
+        520
+      ],
+      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "mk6V0TaWYGlLXgPM",
+          "name": "Supabase Imposbl Header Auth"
         }
       }
     }
@@ -611,6 +611,78 @@
           },
           "webhookUrl": "https://imposbl.up.railway.app/webhook/7965cf91-4238-4d08-85e7-0ebc776417e0",
           "executionMode": "production"
+        }
+      }
+    ],
+    "Auth.Users - New Record": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "pg_net/0.7.1",
+            "content-length": "1174",
+            "accept": "*/*",
+            "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
+            "content-type": "application/json",
+            "x-forwarded-for": "3.210.235.210",
+            "x-forwarded-host": "imposbl.up.railway.app",
+            "x-forwarded-proto": "https",
+            "x-railway-request-id": "WwZvECiGTmyp5FgVnAUr2w_1002618245",
+            "x-real-ip": "3.210.235.210",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "type": "INSERT",
+            "table": "users",
+            "record": {
+              "id": "a01372dc-0e40-4570-8b36-4428db6e0f78",
+              "aud": "authenticated",
+              "role": "",
+              "email": "realtor@imposbl.com",
+              "phone": null,
+              "created_at": "2024-10-09T21:38:24.29224+00:00",
+              "deleted_at": null,
+              "invited_at": null,
+              "updated_at": "2024-10-09T21:38:24.29224+00:00",
+              "instance_id": "00000000-0000-0000-0000-000000000000",
+              "is_sso_user": false,
+              "banned_until": null,
+              "confirmed_at": null,
+              "email_change": "",
+              "is_anonymous": false,
+              "phone_change": "",
+              "is_super_admin": null,
+              "recovery_token": "",
+              "last_sign_in_at": null,
+              "recovery_sent_at": null,
+              "raw_app_meta_data": {
+                "provider": "email",
+                "providers": [
+                  "email"
+                ]
+              },
+              "confirmation_token": "",
+              "email_confirmed_at": null,
+              "encrypted_password": "$2a$10$QFhIdhSF3hgrIhqditXUdOAeLDEFp8SGsIQ9C3l89eZrUJACKx6l6",
+              "phone_change_token": "",
+              "phone_confirmed_at": null,
+              "raw_user_meta_data": {},
+              "confirmation_sent_at": null,
+              "email_change_sent_at": null,
+              "phone_change_sent_at": null,
+              "email_change_token_new": "",
+              "reauthentication_token": "",
+              "reauthentication_sent_at": null,
+              "email_change_token_current": "",
+              "email_change_confirm_status": 0
+            },
+            "schema": "auth",
+            "old_record": null
+          },
+          "webhookUrl": "https://imposbl.up.railway.app/webhook-test/65a7dcd1-3560-4632-ac79-1244f0c008af",
+          "executionMode": "test"
         }
       }
     ],
@@ -718,78 +790,6 @@
           "executionMode": "production"
         }
       }
-    ],
-    "Auth.Users - New Record": [
-      {
-        "json": {
-          "headers": {
-            "host": "imposbl.up.railway.app",
-            "user-agent": "pg_net/0.7.1",
-            "content-length": "1174",
-            "accept": "*/*",
-            "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
-            "content-type": "application/json",
-            "x-forwarded-for": "3.210.235.210",
-            "x-forwarded-host": "imposbl.up.railway.app",
-            "x-forwarded-proto": "https",
-            "x-railway-request-id": "WwZvECiGTmyp5FgVnAUr2w_1002618245",
-            "x-real-ip": "3.210.235.210",
-            "accept-encoding": "gzip"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "type": "INSERT",
-            "table": "users",
-            "record": {
-              "id": "a01372dc-0e40-4570-8b36-4428db6e0f78",
-              "aud": "authenticated",
-              "role": "",
-              "email": "realtor@imposbl.com",
-              "phone": null,
-              "created_at": "2024-10-09T21:38:24.29224+00:00",
-              "deleted_at": null,
-              "invited_at": null,
-              "updated_at": "2024-10-09T21:38:24.29224+00:00",
-              "instance_id": "00000000-0000-0000-0000-000000000000",
-              "is_sso_user": false,
-              "banned_until": null,
-              "confirmed_at": null,
-              "email_change": "",
-              "is_anonymous": false,
-              "phone_change": "",
-              "is_super_admin": null,
-              "recovery_token": "",
-              "last_sign_in_at": null,
-              "recovery_sent_at": null,
-              "raw_app_meta_data": {
-                "provider": "email",
-                "providers": [
-                  "email"
-                ]
-              },
-              "confirmation_token": "",
-              "email_confirmed_at": null,
-              "encrypted_password": "$2a$10$QFhIdhSF3hgrIhqditXUdOAeLDEFp8SGsIQ9C3l89eZrUJACKx6l6",
-              "phone_change_token": "",
-              "phone_confirmed_at": null,
-              "raw_user_meta_data": {},
-              "confirmation_sent_at": null,
-              "email_change_sent_at": null,
-              "phone_change_sent_at": null,
-              "email_change_token_new": "",
-              "reauthentication_token": "",
-              "reauthentication_sent_at": null,
-              "email_change_token_current": "",
-              "email_change_confirm_status": 0
-            },
-            "schema": "auth",
-            "old_record": null
-          },
-          "webhookUrl": "https://imposbl.up.railway.app/webhook-test/65a7dcd1-3560-4632-ac79-1244f0c008af",
-          "executionMode": "test"
-        }
-      }
     ]
   },
   "settings": {
@@ -798,6 +798,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2024-10-09T21:47:14.000Z",
-  "versionId": "5093e562-49c8-4bbe-a7c7-8e63ea5d3ba4"
+  "updatedAt": "2024-12-03T19:01:07.444Z",
+  "versionId": "dda2880b-11bb-4167-84c1-3b4dc1ad8f7c"
 }
