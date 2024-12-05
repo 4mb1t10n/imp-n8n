@@ -1,0 +1,48 @@
+{
+  "active": true,
+  "connections": {},
+  "createdAt": "2024-12-05T14:07:57.840Z",
+  "id": "1hZ2ClngeUsVullp",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Test",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "50173d37-2ea2-43f0-97b8-26f7f6373ebf",
+        "formTitle": "test Form title",
+        "formDescription": "Form descriptions here",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "image",
+              "fieldType": "file"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "0d102479-c81d-4e6e-ad53-4f9a5c44eb44",
+      "name": "n8n Form Trigger",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.1,
+      "position": [
+        640,
+        380
+      ],
+      "webhookId": "50173d37-2ea2-43f0-97b8-26f7f6373ebf"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2024-12-05T14:10:22.506Z",
+  "versionId": "63af30a0-1678-499d-983a-9dbe650f7bbb"
+}
