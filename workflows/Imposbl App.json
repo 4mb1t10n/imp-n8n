@@ -297,7 +297,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -798,6 +799,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2024-12-03T19:01:07.444Z",
-  "versionId": "dda2880b-11bb-4167-84c1-3b4dc1ad8f7c"
+  "updatedAt": "2025-01-14T15:26:21.632Z",
+  "versionId": "9291ecaa-b5df-4222-bed2-ebf845e08fc3"
 }
