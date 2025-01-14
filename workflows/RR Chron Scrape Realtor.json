@@ -14,20 +14,19 @@
     },
     "get properties with statuses": {
       "main": [
-        [
-          {
-            "node": "Rapid API",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Rapid API": {
       "main": [
+        []
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
         [
           {
-            "node": "Update Properties",
+            "node": "Rapid API",
             "type": "main",
             "index": 0
           }
@@ -55,7 +54,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        660,
+        680,
         380
       ]
     },
@@ -63,7 +62,7 @@
       "parameters": {
         "operation": "getAll",
         "tableId": "properties",
-        "returnAll": true,
+        "limit": 2,
         "filters": {
           "conditions": [
             {
@@ -101,6 +100,33 @@
     },
     {
       "parameters": {
+        "url": "https://realtor-search.p.rapidapi.com/properties/detail-url",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "=https://www.realtor.com/realestateandhomes-detail/9899-Balfour-Rd_Detroit_MI_48224_M40857-01817"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "realtor-search.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "6ba3b66dbamshc1928a7b00fd64bp146222jsn36479c7c5a77"
+            },
+            {
+              "name": "Host",
+              "value": "realtor-search.p.rapidapi.com"
+            }
+          ]
+        },
         "options": {}
       },
       "id": "dbab9e68-de9a-4a8b-acf3-8e0bd64aeced",
@@ -108,8 +134,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1120,
-        380
+        680,
+        160
       ]
     },
     {
@@ -121,8 +147,19 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1340,
-        380
+        900,
+        580
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "a4ae948b-9ac5-4765-80ab-311a11d8fd1f",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        480,
+        160
       ]
     }
   ],
@@ -133,6 +170,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-01-14T03:17:29.242Z",
-  "versionId": "859b845f-1a3d-4514-bc8d-ad4aa14dcecc"
+  "updatedAt": "2025-01-14T15:22:52.364Z",
+  "versionId": "8ef85a10-3795-4ebc-83fb-52fe2490a401"
 }
