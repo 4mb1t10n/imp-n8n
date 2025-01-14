@@ -1,0 +1,138 @@
+{
+  "active": false,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "get properties with statuses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get properties with statuses": {
+      "main": [
+        [
+          {
+            "node": "Rapid API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rapid API": {
+      "main": [
+        [
+          {
+            "node": "Update Properties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-14T00:46:36.585Z",
+  "id": "9gKSiEWb7oNggVi0",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RR Chron Scrape Realtor",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "b91432e0-4778-4ef4-bd80-8a644b475417",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        660,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "properties",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "fk_status_property",
+              "condition": "ilike",
+              "keyValue": "Monitor"
+            },
+            {
+              "keyName": "fk_status_property",
+              "condition": "ilike",
+              "keyValue": "Walkthrough"
+            },
+            {
+              "keyName": "fk_status_property",
+              "condition": "ilike",
+              "keyValue": "New"
+            }
+          ]
+        }
+      },
+      "id": "db2b8121-be11-4f09-9360-b795e09862b5",
+      "name": "get properties with statuses",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        900,
+        380
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Imposbl Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "dbab9e68-de9a-4a8b-acf3-8e0bd64aeced",
+      "name": "Rapid API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update"
+      },
+      "id": "3cd014f7-fd02-4588-9a04-b8c7d06b5b7a",
+      "name": "Update Properties",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        380
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-14T03:17:29.242Z",
+  "versionId": "859b845f-1a3d-4514-bc8d-ad4aa14dcecc"
+}
