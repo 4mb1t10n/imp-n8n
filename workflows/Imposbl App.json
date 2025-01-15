@@ -106,6 +106,99 @@
           }
         ]
       ]
+    },
+    "Appsmith Webhook Test": {
+      "main": [
+        [
+          {
+            "node": "validate URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Log Entry": {
+      "main": [
+        [
+          {
+            "node": "200 Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape via Rapid API": {
+      "main": [
+        [
+          {
+            "node": "Try finding existing properties",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Scrape Log Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "validate URL": {
+      "main": [
+        [
+          {
+            "node": "Scrape Log Entry",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error 400",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Try finding existing properties": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Supabase1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        []
+      ]
+    },
+    "200 Success": {
+      "main": [
+        [
+          {
+            "node": "Scrape via Rapid API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-10T21:40:49.082Z",
@@ -545,6 +638,415 @@
           "name": "Supabase Imposbl Header Auth"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "scrape-property-by-url",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        400,
+        -700
+      ],
+      "id": "07cfcb3d-a645-42b7-9d40-d2f513557809",
+      "name": "Appsmith Webhook Test",
+      "webhookId": "99326a1c-6822-47b3-99ce-00e411b5b4d0",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4eZkdxpH9D6RopSj",
+          "name": "RR Appsmith Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "properties_scrape_log",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "realtor_url",
+              "fieldValue": "={{ $json.query.url.split('?')[0] }}"
+            },
+            {
+              "fieldId": "requested_by",
+              "fieldValue": "={{ $json.query.user }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        840,
+        -840
+      ],
+      "id": "1978679d-b36a-4462-861c-f1b0a51be7ef",
+      "name": "Scrape Log Entry",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Imposbl Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://realtor-search.p.rapidapi.com/properties/detail-url",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "={{ $('Appsmith Webhook Test').item.json.query.url }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "realtor-search.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "6ba3b66dbamshc1928a7b00fd64bp146222jsn36479c7c5a77"
+            },
+            {
+              "name": "Host",
+              "value": "realtor-search.p.rapidapi.com"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1547e996-8b33-4027-9bb8-4fddc4f92f21",
+      "name": "Scrape via Rapid API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1240,
+        -840
+      ],
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties_scrape_log",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Scrape Log Entry').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "success",
+              "fieldValue": "=FALSE"
+            },
+            {
+              "fieldId": "error_desc",
+              "fieldValue": "={{ $json.message }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        -740
+      ],
+      "id": "738dd4f7-673e-4fb6-a322-1183117c869e",
+      "name": "Scrape Log Error",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Imposbl Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5ede02cb-3da8-4c6d-9409-2be082bdcf68",
+              "leftValue": "={{ $json.query.url }}",
+              "rightValue": "https://www.realtor.com/realestateandhomes-detail/",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        620,
+        -700
+      ],
+      "id": "4a0f5309-12c7-498b-8280-21e4a8835abb",
+      "name": "validate URL"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 400,
+          "responseKey": "Invalid Realtor.com URL"
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        840,
+        -600
+      ],
+      "id": "b5d18266-e130-40ba-a60c-3075ff9626f6",
+      "name": "Error 400"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2040,
+        -1140
+      ],
+      "id": "747e3026-5ac5-4a87-abd5-5ec8b8c25605",
+      "name": "Supabase1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Imposbl Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "properties",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "address_street",
+              "condition": "ilike",
+              "keyValue": "={{ $json.data.initialReduxState.propertyDetails.location.address.line }}"
+            },
+            {
+              "keyName": "address_city",
+              "condition": "eq",
+              "keyValue": "={{ $json.data.initialReduxState.propertyDetails.location.address.city }}"
+            },
+            {
+              "keyName": "address_state",
+              "condition": "eq",
+              "keyValue": "={{ $json.data.initialReduxState.propertyDetails.location.address.state }}"
+            },
+            {
+              "keyName": "address_zip",
+              "condition": "eq",
+              "keyValue": "={{ $json.data.initialReduxState.propertyDetails.location.address.postal_code }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        -940
+      ],
+      "id": "0fabec54-c7b4-43b4-b3a7-ae7149d0611a",
+      "name": "Try finding existing properties",
+      "executeOnce": false,
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Imposbl Supabase"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $input.first().json.isEmpty() }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "0 results"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3f836040-e20c-4c0b-84c5-e795339645c1",
+                    "leftValue": "={{ $input.first().json. }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "1 result"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a9a162e1-8772-458b-bb62-d29645ddf0ca",
+                    "leftValue": "={{ $input.all().length }}",
+                    "rightValue": 2,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gte"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "many results"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1760,
+        -940
+      ],
+      "id": "509889eb-565d-40be-986f-c63fb77a4cfe",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200,
+          "responseKey": "Added to queue"
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1040,
+        -840
+      ],
+      "id": "c3997a79-8023-435c-993a-449e45407cbb",
+      "name": "200 Success"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties_scrape_log",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Scrape Log Entry').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "success",
+              "fieldValue": "=FALSE"
+            },
+            {
+              "fieldId": "error_desc",
+              "fieldValue": "={{ $json.message }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        -940
+      ],
+      "id": "be50bfee-f532-4de9-b91a-302987f031a2",
+      "name": "Scrape Log Success",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Imposbl Supabase"
+        }
+      }
     }
   ],
   "pinData": {
@@ -791,14 +1293,1245 @@
           "executionMode": "production"
         }
       }
+    ],
+    "Appsmith Webhook Test": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "ReactorNetty/1.1.22",
+            "content-length": "0",
+            "accept": "*/*",
+            "accept-encoding": "gzip",
+            "authorization": "hX1z652MRiuk0RI4HlzWVDBlUPWSwE0LdtKZiccG27YsOj378kKaDBsPGrFBkJ02",
+            "content-type": "application/json",
+            "x-forwarded-for": "34.82.107.46",
+            "x-forwarded-host": "imposbl.up.railway.app",
+            "x-forwarded-proto": "https",
+            "x-railway-request-id": "hNdWRbOrQMW9ALaNsOGtAQ_1861343781",
+            "x-real-ip": "34.82.107.46",
+            "x-request-start": "1736958934546"
+          },
+          "params": {},
+          "query": {
+            "url": "https://www.realtor.com/realestateandhomes-detail/127-Diller-Rd_New-Cumberland_PA_17070_M43150-62229?from=srp-map-list",
+            "user": "alex+dev@imposbl.com"
+          },
+          "body": {},
+          "webhookUrl": "https://imposbl.up.railway.app/webhook-test/scrape-property-by-url",
+          "executionMode": "test"
+        }
+      }
+    ],
+    "Scrape via Rapid API": [
+      {
+        "json": {
+          "data": {
+            "initialReduxState": {
+              "query": {
+                "from": "srp-map-list",
+                "slug": [
+                  "127-Diller-Rd_New-Cumberland_PA_17070_M43150-62229"
+                ]
+              },
+              "claimModal": {
+                "trigger": null,
+                "initialView": null,
+                "visible": false,
+                "property": null,
+                "currentView": null
+              },
+              "loading": {
+                "claimLoading": false,
+                "unclaimLoading": false,
+                "nearbyHomesLoading": true,
+                "nearbyRentalsLoading": true,
+                "otherBuildingHomesLoading": true,
+                "nhCarouselLoading": true
+              },
+              "communityDetails": {},
+              "propertyDetails": {
+                "mortgage": null,
+                "advertisers": [
+                  {
+                    "team": {
+                      "name": "",
+                      "__typename": "AdvertiserTeam"
+                    },
+                    "state_license": "",
+                    "address": {
+                      "city": "Camp Hill",
+                      "country": "US",
+                      "line": "3815 Market Street",
+                      "postal_code": "17011",
+                      "state": "",
+                      "state_code": "PA",
+                      "__typename": "AdvertiserAddress"
+                    },
+                    "builder": null,
+                    "broker": {
+                      "accent_color": "#e35205",
+                      "designations": [],
+                      "fulfillment_id": "1624503",
+                      "name": "Teampete Realty Services, Inc - Broker",
+                      "logo": "http://p.rdcpix.com/v02/kb7c91800-c0l.gif",
+                      "__typename": "HomeAdvertiserBroker"
+                    },
+                    "email": "galiddell1@gmail.com",
+                    "fulfillment_id": "764185",
+                    "href": "http://www.thompsonwoodre.com",
+                    "mls_set": "A-PHPA-3232874",
+                    "name": "GEORGIA LIDDELL",
+                    "nrds_id": "725006968",
+                    "office": {
+                      "address": {
+                        "city": "Camp Hill",
+                        "coordinate": {
+                          "lat": null,
+                          "lon": null,
+                          "__typename": "SimpleCoordinate"
+                        },
+                        "country": "US",
+                        "line": "15 Central Boulevard",
+                        "postal_code": "17011",
+                        "state": "Pennsylvania",
+                        "state_code": "PA",
+                        "__typename": "AdvertiserAddress"
+                      },
+                      "application_url": null,
+                      "email": "admin@teampete.com",
+                      "lead_email": null,
+                      "fulfillment_id": "1624504",
+                      "hours": null,
+                      "href": "http://teampete.com/",
+                      "mls_set": "O-PHPA-TEAMPETEBR2",
+                      "out_of_community": null,
+                      "name": "TeamPete Realty Services, Inc.",
+                      "phones": [
+                        {
+                          "ext": "",
+                          "number": "7176977383",
+                          "primary": true,
+                          "trackable": null,
+                          "type": "Office",
+                          "__typename": "AdvertiserPhone"
+                        }
+                      ],
+                      "photo": {
+                        "href": "https://p.rdcpix.com/v03/ab8c91800-c0l.jpg",
+                        "__typename": "Href"
+                      },
+                      "slogan": "We Care More",
+                      "__typename": "HomeAdvertiserOffice"
+                    },
+                    "phones": [
+                      {
+                        "ext": "",
+                        "number": "7176977383",
+                        "primary": true,
+                        "trackable": null,
+                        "type": "Office",
+                        "__typename": "AdvertiserPhone"
+                      },
+                      {
+                        "ext": "",
+                        "number": "7175039793",
+                        "primary": true,
+                        "trackable": null,
+                        "type": "Mobile",
+                        "__typename": "AdvertiserPhone"
+                      }
+                    ],
+                    "photo": {
+                      "href": "https://ap.rdcpix.com/711511911/43a29d0bffc31d1d3e1cb2263aca136ca-c0l.jpg",
+                      "__typename": "Href"
+                    },
+                    "slogan": "",
+                    "type": "seller",
+                    "__typename": "HomeAdvertiser"
+                  }
+                ],
+                "builder": null,
+                "products": {
+                  "product_attributes": {
+                    "mlsRanks": [
+                      {
+                        "mls": "PHPA",
+                        "rank": 1
+                      }
+                    ]
+                  },
+                  "products": [
+                    "core.agent",
+                    "core.broker",
+                    "co_broke"
+                  ],
+                  "brand_name": "essentials",
+                  "__typename": "ProductSummary"
+                },
+                "promotions": null,
+                "consumer_advertisers": [
+                  {
+                    "advertiser_id": null,
+                    "agent_id": null,
+                    "broker_id": null,
+                    "office_id": null,
+                    "name": null,
+                    "type": "Office",
+                    "slogan": null,
+                    "phone": null,
+                    "href": null,
+                    "show_realtor_logo": null,
+                    "hours": null,
+                    "contact_name": null,
+                    "address": null,
+                    "photo": {
+                      "description": null,
+                      "href": null,
+                      "type": null,
+                      "__typename": "Photo"
+                    },
+                    "__typename": "ConsumerAdvertiser"
+                  }
+                ],
+                "buyers": null,
+                "community": null,
+                "days_on_market": null,
+                "move_in_date": null,
+                "description": {
+                  "baths": 1,
+                  "baths_3qtr": null,
+                  "baths_full": 1,
+                  "baths_half": null,
+                  "baths_max": null,
+                  "baths_min": null,
+                  "baths_total": null,
+                  "baths_consolidated": "1",
+                  "beds": 3,
+                  "beds_max": null,
+                  "beds_min": null,
+                  "construction": null,
+                  "cooling": null,
+                  "exterior": null,
+                  "fireplace": null,
+                  "garage": 1,
+                  "garage_max": null,
+                  "garage_min": null,
+                  "garage_type": null,
+                  "heating": null,
+                  "logo": null,
+                  "lot_sqft": 11761,
+                  "name": null,
+                  "pool": null,
+                  "roofing": null,
+                  "rooms": null,
+                  "sqft": 1118,
+                  "sqft_max": null,
+                  "sqft_min": null,
+                  "stories": 1,
+                  "styles": null,
+                  "sub_type": null,
+                  "text": null,
+                  "type": "single_family",
+                  "units": null,
+                  "year_built": 1958,
+                  "year_renovated": null,
+                  "zoning": null,
+                  "__typename": "HomeDescription"
+                },
+                "details": [
+                  {
+                    "category": "Bedrooms",
+                    "parent_category": "Interior",
+                    "text": [
+                      "Bedrooms: 3",
+                      "Bedroom 1 Level: Main",
+                      "Bedroom 2 Level: Main",
+                      "Bedroom 3 Level: Main",
+                      "Bedroom 1 Features: Flooring - Carpet, Ceiling Fan(s)",
+                      "Bedroom 2 Features: Flooring - Carpet, Ceiling Fan(s)",
+                      "Bedroom 3 Features: Flooring - Carpet, Ceiling Fan(s)"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Bathrooms",
+                    "parent_category": "Interior",
+                    "text": [
+                      "Total Bathrooms: 1",
+                      "Full Bathrooms: 1"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Interior Features",
+                    "parent_category": "Interior",
+                    "text": [
+                      "Attic",
+                      "Combination Kitchen/Dining",
+                      "Kitchen - Eat-In",
+                      "Carpet",
+                      "Ceiling Fan(s)",
+                      "Bathroom - Tub Shower",
+                      "Upgraded Countertops",
+                      "Basement"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Appliances",
+                    "parent_category": "Interior",
+                    "text": [
+                      "Cooktop",
+                      "Oven - Wall",
+                      "Refrigerator",
+                      "Built-In Microwave",
+                      "Dishwasher",
+                      "Disposal"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Heating and Cooling",
+                    "parent_category": "Interior",
+                    "text": [
+                      "Cooling Features: Central A/C",
+                      "Heating Features: Forced Air",
+                      "Heating: Yes"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Kitchen and Dining",
+                    "parent_category": "Interior",
+                    "text": [
+                      "Kitchen Features: Dining Area, Flooring - Luxury Vinyl Plank, Countertop(s) - Quartz",
+                      "Kitchen Level: Main"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Other Rooms",
+                    "parent_category": "Interior",
+                    "text": [
+                      "Living Room Level: Main",
+                      "Living Room Features: Fireplace - Wood Burning, Flooring - Luxury Vinyl Plank"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Land Info",
+                    "parent_category": "Exterior",
+                    "text": [
+                      "Lot Size Acres: 0.27",
+                      "Lot Size Square Feet: 11761"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Garage and Parking",
+                    "parent_category": "Exterior",
+                    "text": [
+                      "Garage Spaces: 1",
+                      "Garage Features: Garage - Front Entry",
+                      "Off Street Parking: 1",
+                      "Parking Features: Paved Driveway, Attached Garage Spaces: 1, Driveway Spaces: 4, Attached Garage, Off Street",
+                      "Parking Total: 6"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Homeowners Association",
+                    "parent_category": "Community",
+                    "text": [
+                      "Association: No",
+                      "Calculated Total Monthly Association Fees: 0"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "School Information",
+                    "parent_category": "Community",
+                    "text": [
+                      "High School: CEDAR CLIFF",
+                      "School District: WEST SHORE"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Other Property Info",
+                    "parent_category": "Listing",
+                    "text": [
+                      "Municipality: FAIRVIEW TWP",
+                      "Annual Tax Amount: 3209.0",
+                      "Source Listing Status: Pending",
+                      "County: YORK",
+                      "Disclaimer: Standard",
+                      "Ownership: Fee Simple",
+                      "Source Property Type: Residential",
+                      "Area: YORK",
+                      "Source Neighborhood: FAIRVIEW TERRACE",
+                      "Postal Code Plus 4: 2508",
+                      "Subdivision: FAIRVIEW TERRACE",
+                      "Source System Name: C2C"
+                    ],
+                    "__typename": "HomeDetails"
+                  },
+                  {
+                    "category": "Building and Construction",
+                    "parent_category": "Features",
+                    "text": [
+                      "Total Square Feet Living: 1118",
+                      "Year Built: 1958",
+                      "Above Grade Finished Area: 1118",
+                      "Construction Materials: Brick",
+                      "Property Age: 66",
+                      "Levels or Stories: 1",
+                      "Structure Type: Detached",
+                      "House Style: Ranch/Rambler",
+                      "Total Area Sqft: 1118"
+                    ],
+                    "__typename": "HomeDetails"
+                  }
+                ],
+                "other_listings": {
+                  "rdc": [
+                    {
+                      "listing_id": "2971097199",
+                      "status": "off_market",
+                      "listing_key": null,
+                      "sold_date": null,
+                      "primary": null,
+                      "unique": null,
+                      "__typename": "HomeOtherListing"
+                    },
+                    {
+                      "listing_id": "2969006870",
+                      "status": "off_market",
+                      "listing_key": null,
+                      "sold_date": null,
+                      "primary": null,
+                      "unique": null,
+                      "__typename": "HomeOtherListing"
+                    },
+                    {
+                      "listing_id": "2965079542",
+                      "status": "off_market",
+                      "listing_key": null,
+                      "sold_date": null,
+                      "primary": null,
+                      "unique": null,
+                      "__typename": "HomeOtherListing"
+                    },
+                    {
+                      "listing_id": "2950644032",
+                      "status": "off_market",
+                      "listing_key": null,
+                      "sold_date": null,
+                      "primary": null,
+                      "unique": null,
+                      "__typename": "HomeOtherListing"
+                    }
+                  ],
+                  "__typename": "HomeOtherListings"
+                },
+                "lead_attributes": {
+                  "show_contact_an_agent": true,
+                  "lead_type": "off_market",
+                  "market_type": "choice",
+                  "show_lead_form": true,
+                  "disclaimer_text": null,
+                  "is_tcpa_message_enabled": null,
+                  "show_text_leads": true,
+                  "opcity_lead_attributes": {
+                    "flip_the_market_enabled": false,
+                    "phones": null,
+                    "__typename": "OpCityLeadAttributes"
+                  },
+                  "ready_connect_mortgage": {
+                    "show_contact_a_lender": true,
+                    "show_veterans_united": true,
+                    "__typename": "ReadyConnectMortgage"
+                  },
+                  "__typename": "LeadAttributes"
+                },
+                "flags": {
+                  "is_coming_soon": null,
+                  "is_contingent": null,
+                  "is_foreclosure": null,
+                  "is_new_construction": null,
+                  "is_pending": true,
+                  "is_subdivision": null,
+                  "is_price_reduced": null,
+                  "is_new_listing": false,
+                  "is_short_sale": null,
+                  "is_price_excludes_land": null,
+                  "__typename": "HomeFlags"
+                },
+                "href": "https://www.realtor.com/realestateandhomes-detail/127-Diller-Rd_New-Cumberland_PA_17070_M43150-62229",
+                "last_sold_date": null,
+                "last_sold_price": null,
+                "list_date": "2024-08-23T04:23:19Z",
+                "list_price": 249900,
+                "last_price_change_amount": null,
+                "listing_id": "2971097199",
+                "location": {
+                  "street_view_url": "https://maps.googleapis.com/maps/api/streetview?channel=rdc-streetview&client=gme-movesalesinc&location=127%20Diller%20Rd%2C%20New%20Cumberland%2C%20PA%2017070&size=932x420&source=outdoor&signature=5FG2mtQD2qzj1czpuEJ05o-NiVk=",
+                  "street_view_metadata_url": "https://maps.googleapis.com/maps/api/streetview/metadata?channel=rdc-streetview&client=gme-movesalesinc&location=127%20Diller%20Rd%2C%20New%20Cumberland%2C%20PA%2017070&size=640x480&source=outdoor&signature=NuLILGWHf4TmHd0b-ZkuxbKO8Js=",
+                  "address": {
+                    "city": "New Cumberland",
+                    "coordinate": {
+                      "lat": 40.196332,
+                      "lon": -76.900122,
+                      "__typename": "HomeCoordinate"
+                    },
+                    "country": "USA",
+                    "line": "127 Diller Rd",
+                    "postal_code": "17070",
+                    "state": "Pennsylvania",
+                    "state_code": "PA",
+                    "street_direction": null,
+                    "street_name": "Diller",
+                    "street_number": "127",
+                    "street_post_direction": null,
+                    "street_suffix": "Rd",
+                    "unit": null,
+                    "validation_code": "121",
+                    "__typename": "HomeAddress"
+                  },
+                  "county": {
+                    "fips_code": "42133",
+                    "name": "York",
+                    "state_code": "PA",
+                    "__typename": "HomeCounty"
+                  },
+                  "neighborhoods": null,
+                  "search_areas": null,
+                  "city": null,
+                  "postal_code": {
+                    "geo_statistics": {
+                      "housing_market": {
+                        "hot_market_badge": null,
+                        "__typename": "HousingMarket"
+                      },
+                      "__typename": "GeoStatistics"
+                    },
+                    "__typename": "PostalCode"
+                  },
+                  "__typename": "HomeLocation"
+                },
+                "open_houses": null,
+                "permalink": "127-Diller-Rd_New-Cumberland_PA_17070_M43150-62229",
+                "photo_count": 1,
+                "photos": [
+                  {
+                    "title": null,
+                    "description": null,
+                    "href": "https://ap.rdcpix.com/1d9237e781e4f34a7ae020cce4a000d5l-m193013730s.jpg",
+                    "type": "realtordotcom_mls_listing_image",
+                    "tags": [
+                      {
+                        "label": "house_view",
+                        "__typename": "Tag"
+                      },
+                      {
+                        "label": "yard",
+                        "__typename": "Tag"
+                      },
+                      {
+                        "label": "back_side",
+                        "__typename": "Tag"
+                      },
+                      {
+                        "label": "complete",
+                        "__typename": "Tag"
+                      }
+                    ],
+                    "__typename": "HomePhoto"
+                  }
+                ],
+                "price_per_sqft": null,
+                "primary_photo": {
+                  "href": "https://ap.rdcpix.com/1d9237e781e4f34a7ae020cce4a000d5l-m193013730s.jpg",
+                  "__typename": "HomePhoto"
+                },
+                "hoa": {
+                  "fee": 0,
+                  "__typename": "HomeHOA"
+                },
+                "property_id": "4315062229",
+                "provider_url": null,
+                "source": {
+                  "days_on_mls": null,
+                  "agents": [
+                    {
+                      "agent_id": "3232874",
+                      "agent_name": "Georgia Liddell",
+                      "agent_email": null,
+                      "agent_phone": null,
+                      "id": "PHPA",
+                      "office_id": "TEAMPETEBR2",
+                      "office_name": "TeamPete Realty Services, Inc.",
+                      "office_phone": "7176977383",
+                      "type": "seller",
+                      "__typename": "MlsAgent"
+                    }
+                  ],
+                  "disclaimer": {
+                    "href": null,
+                    "logo": null,
+                    "text": "©2025 Bright MLS, Inc. All Rights Reserved.",
+                    "__typename": "MlsDisclaimer"
+                  },
+                  "copyrightnotice": null,
+                  "id": "PHPA",
+                  "plan_id": null,
+                  "listing_id": "PAYK2067110",
+                  "name": "BrightMLS",
+                  "raw": {
+                    "status": "Pending",
+                    "style": "Ranch/Rambler",
+                    "tax_amount": 3209,
+                    "__typename": "MlsRawData"
+                  },
+                  "type": "mls",
+                  "community_id": null,
+                  "__typename": "MlsSource"
+                },
+                "status": "off_market",
+                "suppression_flags": {
+                  "has_suppress_all_offmarket_photos_except_one": true
+                },
+                "tags": [
+                  "central_air",
+                  "dishwasher",
+                  "fireplace",
+                  "forced_air",
+                  "view",
+                  "basement",
+                  "single_story",
+                  "garage_1_or_more",
+                  "updated_kitchen",
+                  "farm",
+                  "ranch",
+                  "golf_course"
+                ],
+                "__typename": "Home"
+              },
+              "homesAroundData": [],
+              "homesAroundValueData": [],
+              "nearbyRentalsData": [],
+              "recentlySoldData": [],
+              "homesWithPoolsData": [],
+              "schoolsData": [],
+              "editorsPicks": [],
+              "clientDetails": {
+                "ip": "10.204.72.141",
+                "deviceType": "mobile",
+                "userAgent": "rdc_mobile_native,87.17.43,android"
+              },
+              "slug": "127-Diller-Rd_New-Cumberland_PA_17070_M43150-62229",
+              "housingMarketDetails": {
+                "isLoading": true
+              },
+              "nearbyGeos": {
+                "isLoading": true
+              },
+              "experiments": {},
+              "featureFlags": {},
+              "fullscreen": null,
+              "ctaModal": null,
+              "streetViewAvailable": {
+                "isLoading": true,
+                "isStreetViewAvailable": false
+              },
+              "tabbedModal": {
+                "type": "propertyDetails",
+                "visible": false,
+                "view": 0
+              },
+              "leadModal": {
+                "type": null,
+                "visible": false
+              },
+              "spotOffer": {},
+              "phaseOneCompleted": true,
+              "csrFetchesCompleted": false,
+              "neighborhoodMarketTrendsData": null,
+              "pageType": "PDP",
+              "heroActiveSlide": 0,
+              "emailSuccess": null,
+              "spotOfferState": {
+                "isLoading": false
+              },
+              "scrolledAccordion": {
+                "sectionName": ""
+              },
+              "floorPlanModalState": null,
+              "showShareModal": false,
+              "showBuilderPromotionModal": false,
+              "upNestParams": {},
+              "isUpNestEligible": false,
+              "similarHomesData": [],
+              "similarHomesImpressionToken": [],
+              "masonWebModalState": null,
+              "modals": {
+                "addToCalendar": {
+                  "isVisible": false,
+                  "date": ""
+                },
+                "requestPrivateShowing": {
+                  "isVisible": false
+                },
+                "anchorShareModal": {
+                  "isVisible": false
+                },
+                "movingQuoteModal": {
+                  "isVisible": false
+                },
+                "ctaModal": {
+                  "isVisible": false
+                }
+              },
+              "popularSearches": [],
+              "nearbyHomesForMap": [],
+              "noiseData": false,
+              "floodData": null,
+              "wildfireData": null,
+              "heatData": null,
+              "airData": null,
+              "windData": null,
+              "locationScoresData": null,
+              "heroMapPreview": {},
+              "isSpa": false,
+              "isNeighborhoodMapVisible": false,
+              "otherBuildingHomesData": [],
+              "floorplanDefaultSubTab": null,
+              "homeSavesData": false,
+              "cdpFullscreenLeftLeadFormHidden": false,
+              "petFriendlyRentalsData": [],
+              "rentalsWithGymData": [],
+              "rentalsWithUnitLaundryData": [],
+              "homesWithSimilarPaymentData": [],
+              "rentSpecialsData": [],
+              "similarNcCarouselData": [],
+              "photoGalleryCurrentTabContent": "photos",
+              "movingCostEstimate": {
+                "distance": 0,
+                "from": {
+                  "city": "",
+                  "postal_code": "",
+                  "state_code": ""
+                },
+                "price_estimate": {
+                  "max": "",
+                  "min": ""
+                },
+                "to": {
+                  "city": "",
+                  "postal_code": "",
+                  "state_code": ""
+                },
+                "weight": {
+                  "max": 0,
+                  "min": 0
+                }
+              },
+              "nearbyRentalsForMap": [],
+              "movingCostCalculatorModalState": {
+                "moveSize": "",
+                "showModal": false
+              },
+              "similarNcHomesImpressionToken": [],
+              "rentalsPMCWebsiteData": [],
+              "gameGenieOverrides": {},
+              "officeHoursModal": null,
+              "propertyEstimates": {
+                "current_values": [
+                  {
+                    "isbest_homevalue": false,
+                    "estimate": 258100,
+                    "estimate_high": 280100,
+                    "estimate_low": 236200,
+                    "date": "2024-12-09",
+                    "source": {
+                      "type": "corelogic",
+                      "name": "CoreLogic®",
+                      "__typename": "EstimateSource"
+                    },
+                    "__typename": "LatestEstimate"
+                  }
+                ],
+                "historical_values": [
+                  {
+                    "source": {
+                      "name": "CoreLogic®",
+                      "type": "corelogic",
+                      "__typename": "EstimateSource"
+                    },
+                    "estimates": [
+                      {
+                        "estimate": 258100,
+                        "date": "2024-12-09",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 257400,
+                        "date": "2024-11-04",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 258000,
+                        "date": "2024-10-07",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 252800,
+                        "date": "2024-09-09",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 234000,
+                        "date": "2024-08-05",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 248600,
+                        "date": "2024-07-08",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 239800,
+                        "date": "2024-06-10",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 232600,
+                        "date": "2024-05-06",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 222700,
+                        "date": "2024-04-01",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 237500,
+                        "date": "2024-03-04",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 208200,
+                        "date": "2024-02-05",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 231600,
+                        "date": "2024-01-08",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 204700,
+                        "date": "2023-12-04",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 204400,
+                        "date": "2023-11-06",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 209000,
+                        "date": "2023-10-09",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 204400,
+                        "date": "2023-09-28",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 200500,
+                        "date": "2023-08-29",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 202900,
+                        "date": "2023-07-26",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 202300,
+                        "date": "2023-06-29",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 204600,
+                        "date": "2023-05-29",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 204400,
+                        "date": "2023-04-26",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 204100,
+                        "date": "2023-03-16",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 202500,
+                        "date": "2023-02-24",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 203300,
+                        "date": "2023-01-30",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 203400,
+                        "date": "2022-12-26",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 230900,
+                        "date": "2022-11-30",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 226900,
+                        "date": "2022-10-26",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 222500,
+                        "date": "2022-09-21",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 215300,
+                        "date": "2022-08-25",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 213100,
+                        "date": "2022-07-30",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 207500,
+                        "date": "2022-06-25",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 206700,
+                        "date": "2022-05-25",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 194900,
+                        "date": "2022-04-30",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 195400,
+                        "date": "2022-03-28",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 187200,
+                        "date": "2022-02-22",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 184600,
+                        "date": "2022-01-20",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 184000,
+                        "date": "2021-12-29",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 182600,
+                        "date": "2021-11-28",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 183100,
+                        "date": "2021-10-25",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 186900,
+                        "date": "2021-09-28",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 185600,
+                        "date": "2021-08-25",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 190600,
+                        "date": "2021-07-31",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 184400,
+                        "date": "2021-06-28",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 183000,
+                        "date": "2021-05-25",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 167600,
+                        "date": "2021-04-30",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 166800,
+                        "date": "2021-03-26",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 162600,
+                        "date": "2021-02-28",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 173900,
+                        "date": "2021-01-23",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 173300,
+                        "date": "2020-12-28",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 175900,
+                        "date": "2020-11-25",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 181100,
+                        "date": "2020-10-31",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 185800,
+                        "date": "2020-09-28",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 179700,
+                        "date": "2020-08-08",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 179600,
+                        "date": "2020-07-30",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 175400,
+                        "date": "2020-06-26",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 174600,
+                        "date": "2020-05-28",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 174300,
+                        "date": "2020-04-29",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 175000,
+                        "date": "2020-03-23",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 175800,
+                        "date": "2020-02-22",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 178500,
+                        "date": "2020-01-24",
+                        "__typename": "EstimateRecord"
+                      }
+                    ],
+                    "__typename": "HistoricalEstimate"
+                  }
+                ],
+                "forecast_values": [
+                  {
+                    "source": {
+                      "name": "CoreLogic®",
+                      "type": "corelogic",
+                      "__typename": "EstimateSource"
+                    },
+                    "estimates": [
+                      {
+                        "estimate": 258205,
+                        "date": "2025-01-01",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 258430,
+                        "date": "2025-02-01",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 259004,
+                        "date": "2025-03-01",
+                        "__typename": "EstimateRecord"
+                      },
+                      {
+                        "estimate": 259809,
+                        "date": "2025-04-01",
+                        "__typename": "EstimateRecord"
+                      }
+                    ],
+                    "__typename": "ForecastEstimate"
+                  }
+                ],
+                "__typename": "HomeEstimates"
+              },
+              "galleryRecommendedSimilarHomesData": [],
+              "rentalsTopRealEstateMarkets": [],
+              "freeMovingQuoteModalStep": 1,
+              "isChatBotOpen": false,
+              "showListingActionSavePrompt": false,
+              "showGallerySavePrompt": false,
+              "isPromotedListing": false,
+              "rentSpecialModal": false,
+              "thankYouEmailLeadModal": false,
+              "availApplicationModal": {
+                "show": false,
+                "isStickyFooter": false,
+                "isGalleryApplication": false
+              },
+              "environmentDetails": {
+                "isLoading": true
+              },
+              "rentalsRecommendations": [],
+              "rentalsDynamicOfficeHours": {},
+              "isGuidedSearchModalOpen": false,
+              "augmentedGalleryCategory": {
+                "photo_categories": [
+                  {
+                    "key": "all_photos",
+                    "category": "All Photos",
+                    "detailedText": null,
+                    "photoCount": 1,
+                    "photos": [
+                      {
+                        "href": "https://ap.rdcpix.com/1d9237e781e4f34a7ae020cce4a000d5l-m193013730s.jpg",
+                        "tag": "exterior",
+                        "__typename": "PhotoTag"
+                      }
+                    ],
+                    "__typename": "PhotoCategories"
+                  },
+                  {
+                    "key": "exterior",
+                    "category": "Exterior",
+                    "detailedText": null,
+                    "photoCount": 1,
+                    "photos": [
+                      {
+                        "href": "https://ap.rdcpix.com/1d9237e781e4f34a7ae020cce4a000d5l-m193013730s.jpg",
+                        "tag": "exterior",
+                        "__typename": "PhotoTag"
+                      }
+                    ],
+                    "__typename": "PhotoCategories"
+                  }
+                ],
+                "__typename": "HomePhotoCategories"
+              },
+              "propertyAndTaxHistory": {},
+              "rentalsApplicationEligibilityStatus": "BLOCKED",
+              "nearbyHomesValuesTableData": [],
+              "virtualToursData": {},
+              "floorplanInteractive": [],
+              "communityPlanSpec": {},
+              "spotOfferEvaluationData": null,
+              "consentingParties": {},
+              "corporationCustomerSet": {},
+              "scheduleATourData": null,
+              "isLTKTeamsEligible": false,
+              "upnestAutomatchLiteData": {},
+              "rmnAgent": {}
+            },
+            "query": {
+              "from": "srp-map-list",
+              "slug": [
+                "127-Diller-Rd_New-Cumberland_PA_17070_M43150-62229"
+              ]
+            },
+            "geo": {
+              "geoDetails": {
+                "area_type": "postal_code",
+                "city": "New Cumberland",
+                "state_id": "PA",
+                "state_code": "PA",
+                "postal_code": "17070",
+                "slug_id": "17070"
+              }
+            },
+            "appShellProps": {
+              "shouldBrazeLoad": true,
+              "hoistAdsLibraryProps": {
+                "pageType": "LDP",
+                "tag": "defer"
+              },
+              "pageName": "PDP",
+              "hideFooter": true,
+              "headerProps": {
+                "isFullWidth": false
+              },
+              "savedPropertiesProps": {
+                "pageLimit": 1000
+              },
+              "appContextProps": {
+                "userAgent": "rdc_mobile_native,87.17.43,android"
+              }
+            },
+            "deviceType": "mobile",
+            "userAgent": "rdc_mobile_native,87.17.43,android",
+            "env": "production",
+            "cdnEnv": "prod",
+            "globalHoldoutTrackId": "GHFY25Q1:V1",
+            "tempFlags": {
+              "isApolloEnabled": true,
+              "isApolloEnabledSRP": true
+            }
+          },
+          "status": true,
+          "message": "Successful"
+        }
+      }
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 4,
-  "updatedAt": "2025-01-14T15:26:21.632Z",
-  "versionId": "9291ecaa-b5df-4222-bed2-ebf845e08fc3"
+  "triggerCount": 5,
+  "updatedAt": "2025-01-15T17:20:49.677Z",
+  "versionId": "ccc159d9-b5d2-4cbd-b555-ecd332b09b3e"
 }
