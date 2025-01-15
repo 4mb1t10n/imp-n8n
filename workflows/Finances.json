@@ -479,7 +479,8 @@
         1380,
         680
       ],
-      "webhookId": "e08667ee-32aa-43df-a69a-8dfccd367f1c"
+      "webhookId": "e08667ee-32aa-43df-a69a-8dfccd367f1c",
+      "disabled": true
     },
     {
       "parameters": {
@@ -493,7 +494,8 @@
       "position": [
         2520,
         760
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -519,7 +521,8 @@
       "position": [
         2720,
         760
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {},
@@ -530,7 +533,8 @@
         2940,
         660
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {},
@@ -541,11 +545,11 @@
         2940,
         860
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {
-        "operation": "get",
         "base": {
           "__rl": true,
           "value": "appjjY9qVQZlWUkkj",
@@ -577,7 +581,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -613,7 +618,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -628,11 +634,11 @@
       "position": [
         2320,
         760
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
-        "operation": "get",
         "base": {
           "__rl": true,
           "value": "appjjY9qVQZlWUkkj",
@@ -663,7 +669,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -693,7 +700,8 @@
       "position": [
         2000,
         780
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -723,7 +731,8 @@
       "position": [
         2160,
         560
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -749,7 +758,8 @@
       "position": [
         3400,
         660
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -764,7 +774,8 @@
       "position": [
         1000,
         620
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -779,11 +790,11 @@
         1420,
         1400
       ],
-      "webhookId": "876d9543-74bc-4e44-abdd-d68e102336d1"
+      "webhookId": "876d9543-74bc-4e44-abdd-d68e102336d1",
+      "disabled": true
     },
     {
       "parameters": {
-        "operation": "get",
         "base": {
           "__rl": true,
           "value": "appjjY9qVQZlWUkkj",
@@ -814,7 +825,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -857,7 +869,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -872,7 +885,8 @@
       "position": [
         2460,
         1500
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -886,7 +900,8 @@
       "position": [
         2660,
         1500
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -916,7 +931,8 @@
       "position": [
         2100,
         1500
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -946,7 +962,8 @@
       "position": [
         2280,
         1300
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -959,7 +976,8 @@
       "position": [
         1800,
         780
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -972,7 +990,8 @@
       "position": [
         1880,
         1500
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -998,7 +1017,8 @@
       "position": [
         2860,
         1500
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {},
@@ -1009,7 +1029,8 @@
         3100,
         1340
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {},
@@ -1020,7 +1041,8 @@
         3100,
         1540
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {
@@ -1773,7 +1795,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -1861,7 +1884,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -2594,7 +2618,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -2726,7 +2751,8 @@
           "id": "ba9BL3rXOUDjb7P2",
           "name": "alex@section.homes"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -2741,7 +2767,8 @@
       "position": [
         1120,
         1300
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -3200,7 +3227,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 4,
-  "updatedAt": "2024-07-17T12:49:32.936Z",
-  "versionId": "871298b4-7160-4cec-b0a0-da394563092b"
+  "triggerCount": 2,
+  "updatedAt": "2025-01-15T17:07:27.606Z",
+  "versionId": "f8187bea-3f78-41ea-9336-28c0fcbb04bd"
 }
