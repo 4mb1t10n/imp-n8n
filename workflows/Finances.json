@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Webhook from Airtable": {
       "main": [
@@ -3228,6 +3228,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-01-15T17:07:27.606Z",
+  "updatedAt": "2025-01-16T04:17:08.543Z",
   "versionId": "f8187bea-3f78-41ea-9336-28c0fcbb04bd"
 }
