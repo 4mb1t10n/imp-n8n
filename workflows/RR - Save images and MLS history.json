@@ -1,0 +1,55 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-16T04:47:42.775Z",
+  "id": "d3Pnoub0g8l1X3u1",
+  "meta": null,
+  "name": "RR - Save images and MLS history",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8eced2ec-6ffe-49ec-9f83-849dd5e89d75",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "9d569f68-3555-4ae5-979a-226d19e9d325",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-16T04:48:37.872Z",
+  "versionId": "88ccd1bd-0672-48cc-a536-1a2861205be2"
+}
