@@ -365,7 +365,7 @@
             },
             {
               "fieldId": "timestamp_updated",
-              "fieldValue": "={{ $('Updated Record').first().json.body.record.timestamp_updated }}"
+              "fieldValue": "={{ $('Updated Record').item.json.body.record.timestamp_updated }}"
             }
           ]
         }
@@ -460,16 +460,16 @@
           "headers": {
             "host": "imposbl.up.railway.app",
             "user-agent": "pg_net/0.7.1",
-            "content-length": "3521",
+            "content-length": "3563",
             "accept": "*/*",
             "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
             "content-type": "application/json",
             "x-forwarded-for": "3.210.235.210",
             "x-forwarded-host": "imposbl.up.railway.app",
             "x-forwarded-proto": "https",
-            "x-railway-request-id": "SnY4DxlWT8mZrv08CM4c9g_2020806880",
+            "x-railway-request-id": "g9qv8lLGQKak0uK6o1eahA_603524580",
             "x-real-ip": "3.210.235.210",
-            "x-request-start": "1737080521559",
+            "x-request-start": "1737130374147",
             "accept-encoding": "gzip"
           },
           "params": {},
@@ -502,11 +502,11 @@
               "is_short_sale": null,
               "scrape_source": "Realtor.com",
               "address_street": "319 N Detroit Ave",
-              "followup_notes": "Edit 4 :)",
+              "followup_notes": "edit 7 testing the timestamp",
               "is_foreclosure": null,
               "last_edited_by": "alex+dev@imposbl.com",
               "realtor_status": "for_sale",
-              "property_status": "New",
+              "property_status": "Auction",
               "prop_size_inside": 1341,
               "prop_cooking_type": null,
               "prop_size_outside": 5101,
@@ -548,7 +548,7 @@
               "is_short_sale": null,
               "scrape_source": "Realtor.com",
               "address_street": "319 N Detroit Ave",
-              "followup_notes": "Edit 3 :)",
+              "followup_notes": "edit 7 testing the timestamp",
               "is_foreclosure": null,
               "last_edited_by": "alex+dev@imposbl.com",
               "realtor_status": "for_sale",
@@ -581,6 +581,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-01-17T03:04:51.680Z",
-  "versionId": "85b70755-8c2e-4eb3-8d05-96a7e2131f64"
+  "updatedAt": "2025-01-17T16:42:52.997Z",
+  "versionId": "26b91e58-3fac-4a7e-b807-0f38d5219aea"
 }
