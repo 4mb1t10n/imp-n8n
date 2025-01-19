@@ -396,8 +396,7 @@
         "triggerTimes": {
           "item": [
             {
-              "mode": "everyX",
-              "value": 12
+              "mode": "everyX"
             }
           ]
         }
@@ -413,52 +412,8 @@
     },
     {
       "parameters": {
-        "content": "## Workflow Backups\nThis workflow will automatically backup your workflows to your Github account every 12 hours.\n\n### Setup\nOpen Globals and update the values below\n**repo.owner:** This is your Github username\n**repo.name:** This is the name of your repository\n**repo.path:** This is the folder to use within the repository, If it doesn't exist it will be created.\n\nIf your username was `n8n-io` and your repository was called `n8n-backups` and you wanted the workflows to go into a `workflows` folder you would set:\n\nrepo.owner - n8n-io\nrepo.name - n8n-backups\nrepo.path - workflows",
-        "height": 464.79920462713443,
-        "width": 389.78906250000017
-      },
-      "id": "4b5481a6-dbb3-4865-8891-afa7c8d46278",
-      "name": "Note",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        -1440,
-        580
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "content": "## Single Item Loop\nWe process each workflow item one at a time, We first check Github to see if a file exists then we merge the Github Data and the API item so we can check if the values match in the function node `isDiffOrNew` we then set a status of `same`, `different` or `new`",
-        "height": 424.04333333333386,
-        "width": 755.2349999999991
-      },
-      "id": "36803397-aca6-4b29-8c59-c7e2fead489b",
-      "name": "Note2",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        -380,
-        520
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "content": "## Save the data\nUsing the switch node we work out what to do based on the previous status,  If it is the same we do nothing, If it is different we update the file in Github and if it is new we create a new file. After this is done we loop back to the Split in Batches node (OneAtAtTime) to start the process again.",
-        "height": 693.9283333333326,
-        "width": 666.4416666666662
-      },
-      "id": "f7927e76-6d75-49d2-8bed-cc34ca4dd64f",
-      "name": "Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        460,
-        460
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "filters": {}
+        "filters": {},
+        "requestOptions": {}
       },
       "id": "42c824db-9e7e-4505-9953-e5b6b8de64ce",
       "name": "n8n",
@@ -500,7 +455,13 @@
       "typeVersion": 2
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Every 12 hours": [
+      {
+        "json": {}
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -514,6 +475,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-12-10T16:08:26.819Z",
-  "versionId": "8b286334-07e5-41ab-83ab-e2bab64e3d9b"
+  "updatedAt": "2025-01-19T00:59:26.614Z",
+  "versionId": "9572f0f6-1033-422a-94e5-c983bdbe4e92"
 }
