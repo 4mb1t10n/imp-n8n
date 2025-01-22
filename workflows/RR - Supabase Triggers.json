@@ -105,7 +105,29 @@
       "main": [
         [
           {
-            "node": "compare data2",
+            "node": "tag: update_media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image from Realtor.com": {
+      "main": [
+        [
+          {
+            "node": "Upload to Supabase Storage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tag: update_media": {
+      "main": [
+        [
+          {
+            "node": "Get Image from Realtor.com",
             "type": "main",
             "index": 0
           }
@@ -146,7 +168,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -160,
+        -180,
         200
       ],
       "alwaysOutputData": true,
@@ -221,7 +243,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.1,
       "position": [
-        -380,
+        -400,
         200
       ]
     },
@@ -636,16 +658,72 @@
     },
     {
       "parameters": {
-        "jsCode": "function findDifferences(obj1, obj2) {\n  let differences = [];\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_field: key,\n        oldValue: obj2[key],\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  // Check for keys in obj2 that are not in obj1\n  for (let key in obj2) {\n    if (!(key in obj1)) {\n      differences.push({\n        isDifferent: true,\n        updated_field: key,\n        oldValue: obj2[key],\n        newValue: undefined\n      });\n    }\n  }\n  \n  return differences;\n}\n\n// Assuming the JSON objects are in $('Updated Task Record').all()[0].json.body\nconst newObject = $('New photo to save').all()[0].json.body.record;\nconst oldObject = $('New photo to save').all()[0].json.body.old_record;\n\nconst differences = findDifferences(newObject, oldObject);\n\n// Set the output to be an array of difference objects\nitems = differences.map(diff => ({ json: diff }));\n\nreturn items;"
+        "url": "={{ $json.body.record.media_url_scraped.replace(/\\w\\.jpg/, 'x.jpg') }}",
+        "options": {}
       },
-      "id": "b6536ad2-f523-4478-a629-bfe636670520",
-      "name": "compare data2",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -400,
+        1080
+      ],
+      "id": "6b4c65b5-c5ac-4f67-b7ca-b6b914a79a90",
+      "name": "Get Image from Realtor.com"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "update_media"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
       "position": [
         -620,
         1080
-      ]
+      ],
+      "id": "e89d1817-bde6-4227-ae40-755ce147a616",
+      "name": "tag: update_media"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/properties/{{ $('New photo to save').first().json.body.record.property_id }}/{{ $('New photo to save').first().json.body.record.id }}.jpeg",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -180,
+        1080
+      ],
+      "id": "f958315e-505a-4c88-89af-be066e14030b",
+      "name": "Upload to Supabase Storage",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
     }
   ],
   "pinData": {
@@ -962,16 +1040,16 @@
           "headers": {
             "host": "imposbl.up.railway.app",
             "user-agent": "pg_net/0.7.1",
-            "content-length": "589",
+            "content-length": "583",
             "accept": "*/*",
             "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
             "content-type": "application/json",
             "x-forwarded-for": "3.210.235.210",
             "x-forwarded-host": "imposbl.up.railway.app",
             "x-forwarded-proto": "https",
-            "x-railway-request-id": "GzuNQmb5QvSUChVAJobFog_882434190",
+            "x-railway-request-id": "9OO7fs2FQd2811KR1k0qwQ_3165824431",
             "x-real-ip": "3.210.235.210",
-            "x-request-start": "1737575695224",
+            "x-request-start": "1737582296965",
             "accept-encoding": "gzip"
           },
           "params": {},
@@ -984,8 +1062,8 @@
               "media_url": null,
               "created_at": "2025-01-16T23:01:12.890607+00:00",
               "media_type": "photo",
-              "set_to_delete": true,
-              "fk_property_id": 618,
+              "property_id": 618,
+              "set_to_delete": null,
               "media_url_scraped": "https://ap.rdcpix.com/c42e31bebf7dfcd9bbdafa62da714140l-m4244222242s.jpg"
             },
             "schema": "public",
@@ -994,8 +1072,8 @@
               "media_url": null,
               "created_at": "2025-01-16T23:01:12.890607+00:00",
               "media_type": "photo",
-              "set_to_delete": null,
-              "fk_property_id": 618,
+              "property_id": 618,
+              "set_to_delete": true,
               "media_url_scraped": "https://ap.rdcpix.com/c42e31bebf7dfcd9bbdafa62da714140l-m4244222242s.jpg"
             }
           },
@@ -1011,6 +1089,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2025-01-22T20:02:03.511Z",
-  "versionId": "84f7df14-534e-4d4f-812b-9ee5154395e8"
+  "updatedAt": "2025-01-22T22:40:50.994Z",
+  "versionId": "292f3794-d5e6-4447-9990-b1b757ef5040"
 }
