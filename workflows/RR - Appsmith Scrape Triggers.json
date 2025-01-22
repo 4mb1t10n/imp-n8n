@@ -45,7 +45,7 @@
       "main": [
         [
           {
-            "node": "validate URL",
+            "node": "Extract URL",
             "type": "main",
             "index": 0
           }
@@ -189,6 +189,17 @@
           }
         ]
       ]
+    },
+    "Extract URL": {
+      "main": [
+        [
+          {
+            "node": "validate URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-10T21:40:49.082Z",
@@ -210,7 +221,7 @@
           "conditions": [
             {
               "id": "5ede02cb-3da8-4c6d-9409-2be082bdcf68",
-              "leftValue": "={{ $json.query.scrape_url }}",
+              "leftValue": "={{ $json.scrape_url }}",
               "rightValue": "https://www.realtor.com/realestateandhomes-detail/",
               "operator": {
                 "type": "string",
@@ -225,7 +236,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -980,
+        -760,
         -620
       ],
       "id": "4a0f5309-12c7-498b-8280-21e4a8835abb",
@@ -241,7 +252,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        -760,
+        -540,
         -420
       ],
       "id": "b5d18266-e130-40ba-a60c-3075ff9626f6",
@@ -257,7 +268,7 @@
             {
               "keyName": "realtor_url",
               "condition": "ilike",
-              "keyValue": "={{ $json.query.scrape_url.split(\"?\")[0] }}"
+              "keyValue": "={{ $json.scrape_url }}"
             }
           ]
         }
@@ -265,7 +276,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -760,
+        -540,
         -620
       ],
       "id": "6e11b654-83f6-4651-a950-ea8902a0134c",
@@ -274,7 +285,7 @@
       "credentials": {
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
-          "name": "Imposbl Supabase"
+          "name": "Rent Ready Supabase"
         }
       }
     },
@@ -285,7 +296,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -540,
+        -320,
         -620
       ],
       "id": "044893cf-f5c5-4c95-a877-29cdf6313870",
@@ -345,7 +356,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        -320,
+        -100,
         -620
       ],
       "id": "f98a1e55-7016-4295-a537-ee8f2b986a3c",
@@ -395,15 +406,15 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -20,
-        -700
+        120,
+        -760
       ],
       "id": "1978679d-b36a-4462-861c-f1b0a51be7ef",
       "name": "Create Scrape Log Entry",
       "credentials": {
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
-          "name": "Imposbl Supabase"
+          "name": "Rent Ready Supabase"
         }
       }
     },
@@ -506,8 +517,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.1,
       "position": [
-        400,
-        -560
+        560,
+        -620
       ],
       "id": "9f6ebf27-5d60-4dec-b8b8-f658f3c66110",
       "name": "Execute Workflow"
@@ -519,7 +530,7 @@
             {
               "id": "45dbfad9-d585-4b44-91c3-bbbfbb3266da",
               "name": "scrape_url",
-              "value": "={{ $('Appsmith Scrape Property').first().json.query.scrape_url }}",
+              "value": "={{ $('Extract URL').item.json.scrape_url }}",
               "type": "string"
             },
             {
@@ -531,7 +542,7 @@
             {
               "id": "a9a6ccb3-41a1-4dfa-964a-05637d023c97",
               "name": "scrape_log_id",
-              "value": "={{ $('Create Scrape Log Entry').first().json.id ? $('Create Scrape Log Entry').first().json.id : $('Check if URL is in Log').first().json.id }}",
+              "value": "={{ $('Create Scrape Log Entry').isExecuted ? \n$('Create Scrape Log Entry').first().json.id : \n$('Check if URL is in Log').first().json.id }}",
               "type": "string"
             }
           ]
@@ -541,11 +552,14 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        180,
-        -560
+        340,
+        -620
       ],
       "id": "e9ade47f-8ce5-426f-9f7e-b81b03064b6f",
-      "name": "Send these fields"
+      "name": "Send these fields",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -556,8 +570,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        620,
-        -560
+        780,
+        -620
       ],
       "id": "37b5efdd-87d0-4379-8e27-c2a761f417e6",
       "name": "Success 200"
@@ -636,7 +650,7 @@
       "credentials": {
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
-          "name": "Imposbl Supabase"
+          "name": "Rent Ready Supabase"
         }
       },
       "disabled": true
@@ -667,7 +681,7 @@
       "credentials": {
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
-          "name": "Imposbl Supabase"
+          "name": "Rent Ready Supabase"
         }
       },
       "disabled": true
@@ -764,6 +778,29 @@
       "id": "0aac8f2f-2039-4b5f-a1a3-afa87963e539",
       "name": "Send these fields2",
       "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f28c42cc-04fb-41a0-9105-bc856e49fbec",
+              "name": "scrape_url",
+              "value": "={{ $json.query.scrape_url.match(/https:\\/\\/www\\.realtor\\.com\\/realestateandhomes-detail\\/[0-9a-zA-Z_-]+/)[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -980,
+        -620
+      ],
+      "id": "3de277b6-4324-405f-b694-e804ec63aa61",
+      "name": "Extract URL"
     }
   ],
   "pinData": {
@@ -808,16 +845,18 @@
             "accept-encoding": "gzip",
             "authorization": "hX1z652MRiuk0RI4HlzWVDBlUPWSwE0LdtKZiccG27YsOj378kKaDBsPGrFBkJ02",
             "content-type": "application/json",
+            "scrape_url": "",
+            "user": "alex+dev@imposbl.com",
             "x-forwarded-for": "34.82.107.46",
             "x-forwarded-host": "imposbl.up.railway.app",
             "x-forwarded-proto": "https",
-            "x-railway-request-id": "IrcOaq2MTTyLXgYnop3c8g_1861343781",
+            "x-railway-request-id": "_Oc65snBRnuocsU6VxEYpg_3167001623",
             "x-real-ip": "34.82.107.46",
-            "x-request-start": "1737064338338"
+            "x-request-start": "1737556914616"
           },
           "params": {},
           "query": {
-            "scrape_url": "https://www.realtor.com/realestateandhomes-detail/2025-Nevada-St_Toledo_OH_43605_M48185-48407?from=srp-list-card",
+            "scrape_url": "{}testhttps://www.realtor.com/realestateandhomes-detail/1011-E-Manhattan-Blvd_Toledo_OH_43608_M36487-44579?from=srp-list-card, hello",
             "user": "alex+dev@imposbl.com"
           },
           "body": {},
@@ -845,6 +884,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-01-16T21:56:32.692Z",
-  "versionId": "84322df8-a9f7-4e0e-8235-2e48b57ed53d"
+  "updatedAt": "2025-01-22T15:52:06.263Z",
+  "versionId": "33d7a0d9-3271-4a2f-abf1-d9f7b7412005"
 }
