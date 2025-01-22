@@ -639,7 +639,7 @@
         "fieldsUi": {
           "fieldValues": [
             {
-              "fieldId": "fk_property_id",
+              "fieldId": "property_id",
               "fieldValue": "={{ $('Create Property').item.json.id }}"
             },
             {
@@ -883,6 +883,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-22T19:48:03.775Z",
-  "versionId": "02e32fc1-8863-4da1-9c93-4326c10ab2a1"
+  "updatedAt": "2025-01-22T21:42:42.107Z",
+  "versionId": "671f1ed7-99b3-43ca-892f-6cc2a3ba6de3"
 }
