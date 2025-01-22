@@ -100,6 +100,17 @@
           }
         ]
       ]
+    },
+    "New photo to save": {
+      "main": [
+        [
+          {
+            "node": "compare data2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-01-16T04:20:28.837Z",
@@ -142,7 +153,7 @@
       "credentials": {
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
-          "name": "Imposbl Supabase"
+          "name": "Rent Ready Supabase"
         }
       }
     },
@@ -391,7 +402,7 @@
       "credentials": {
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
-          "name": "Imposbl Supabase"
+          "name": "Rent Ready Supabase"
         }
       }
     },
@@ -535,7 +546,7 @@
       "credentials": {
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
-          "name": "Imposbl Supabase"
+          "name": "Rent Ready Supabase"
         }
       }
     },
@@ -584,6 +595,57 @@
           "name": "Supabase Imposbl Header Auth"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Photo to save\n### Triggered when supabase has a new row created in properties_media table. Take the external URL with a photo and save to supabase bucket",
+        "height": 146,
+        "width": 340
+      },
+      "id": "68418a95-a86e-41a5-8a3f-6bdaed718cb1",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1260,
+        1060
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "update-photos",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "a06cf3cd-c462-403a-947f-959156e139d7",
+      "name": "New photo to save",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -840,
+        1080
+      ],
+      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "mk6V0TaWYGlLXgPM",
+          "name": "Supabase Imposbl Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function findDifferences(obj1, obj2) {\n  let differences = [];\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_field: key,\n        oldValue: obj2[key],\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  // Check for keys in obj2 that are not in obj1\n  for (let key in obj2) {\n    if (!(key in obj1)) {\n      differences.push({\n        isDifferent: true,\n        updated_field: key,\n        oldValue: obj2[key],\n        newValue: undefined\n      });\n    }\n  }\n  \n  return differences;\n}\n\n// Assuming the JSON objects are in $('Updated Task Record').all()[0].json.body\nconst newObject = $('New photo to save').all()[0].json.body.record;\nconst oldObject = $('New photo to save').all()[0].json.body.old_record;\n\nconst differences = findDifferences(newObject, oldObject);\n\n// Set the output to be an array of difference objects\nitems = differences.map(diff => ({ json: diff }));\n\nreturn items;"
+      },
+      "id": "b6536ad2-f523-4478-a629-bfe636670520",
+      "name": "compare data2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -620,
+        1080
+      ]
     }
   ],
   "pinData": {
@@ -893,6 +955,54 @@
           "executionMode": "production"
         }
       }
+    ],
+    "New photo to save": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "pg_net/0.7.1",
+            "content-length": "589",
+            "accept": "*/*",
+            "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
+            "content-type": "application/json",
+            "x-forwarded-for": "3.210.235.210",
+            "x-forwarded-host": "imposbl.up.railway.app",
+            "x-forwarded-proto": "https",
+            "x-railway-request-id": "GzuNQmb5QvSUChVAJobFog_882434190",
+            "x-real-ip": "3.210.235.210",
+            "x-request-start": "1737575695224",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "type": "UPDATE",
+            "table": "properties_media",
+            "record": {
+              "id": 5623,
+              "media_url": null,
+              "created_at": "2025-01-16T23:01:12.890607+00:00",
+              "media_type": "photo",
+              "set_to_delete": true,
+              "fk_property_id": 618,
+              "media_url_scraped": "https://ap.rdcpix.com/c42e31bebf7dfcd9bbdafa62da714140l-m4244222242s.jpg"
+            },
+            "schema": "public",
+            "old_record": {
+              "id": 5623,
+              "media_url": null,
+              "created_at": "2025-01-16T23:01:12.890607+00:00",
+              "media_type": "photo",
+              "set_to_delete": null,
+              "fk_property_id": 618,
+              "media_url_scraped": "https://ap.rdcpix.com/c42e31bebf7dfcd9bbdafa62da714140l-m4244222242s.jpg"
+            }
+          },
+          "webhookUrl": "https://imposbl.up.railway.app/webhook-test/update-photos",
+          "executionMode": "test"
+        }
+      }
     ]
   },
   "settings": {
@@ -900,7 +1010,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2025-01-18T18:37:08.997Z",
-  "versionId": "5b18b1b9-2612-416b-b483-20b1693eedf0"
+  "triggerCount": 4,
+  "updatedAt": "2025-01-22T20:02:03.511Z",
+  "versionId": "84f7df14-534e-4d4f-812b-9ee5154395e8"
 }
