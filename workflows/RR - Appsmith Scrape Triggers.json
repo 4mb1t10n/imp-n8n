@@ -112,7 +112,7 @@
       "main": [
         [
           {
-            "node": "Execute Workflow",
+            "node": "Success 200",
             "type": "main",
             "index": 0
           }
@@ -121,13 +121,7 @@
     },
     "Execute Workflow": {
       "main": [
-        [
-          {
-            "node": "Success 200",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Execute Workflow2": {
@@ -195,6 +189,17 @@
         [
           {
             "node": "validate URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Success 200": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
             "type": "main",
             "index": 0
           }
@@ -517,7 +522,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.1,
       "position": [
-        560,
+        740,
         -620
       ],
       "id": "9f6ebf27-5d60-4dec-b8b8-f658f3c66110",
@@ -570,7 +575,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        780,
+        540,
         -620
       ],
       "id": "37b5efdd-87d0-4379-8e27-c2a761f417e6",
@@ -884,6 +889,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-01-22T15:52:06.263Z",
-  "versionId": "33d7a0d9-3271-4a2f-abf1-d9f7b7412005"
+  "updatedAt": "2025-01-22T17:46:51.933Z",
+  "versionId": "888ce25f-4e32-4a4a-8d3e-8e657221800f"
 }
