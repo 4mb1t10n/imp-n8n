@@ -145,73 +145,11 @@
         ]
       ]
     },
-    "Get Image from Realtor.com1": {
-      "main": [
-        [
-          {
-            "node": "Upload to Supabase Storage1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Upload to Supabase Storage1": {
-      "main": [
-        [
-          {
-            "node": "Update property media table1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items": {
-      "main": [
-        [
-          {
-            "node": "Done",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Get Image from Realtor.com1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update property media table1": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "tag: task_changelog": {
       "main": [
         [
           {
             "node": "compare data1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "get all from property_media": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -768,7 +706,7 @@
     },
     {
       "parameters": {
-        "url": "={{ $json.body.record.media_url_scraped.replace(/\\w\\.jpg/, 'x.jpg') }}",
+        "url": "={{ $json.body.record.media_url_scraped.replace(/\\w\\.jpg/, 'rd-w2048_h1536.jpg') }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -876,132 +814,6 @@
     },
     {
       "parameters": {
-        "url": "={{ $json.media_url_scraped.replace(/\\w\\.jpg/, 'x.jpg') }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -180,
-        1500
-      ],
-      "id": "7df6efdd-a9db-4cd4-b423-9f56d742269b",
-      "name": "Get Image from Realtor.com1"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/properties/{{ $json.property_id }}/{{ $json.id }}.jpeg",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "supabaseApi",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Content-Type",
-              "value": "image/jpeg"
-            }
-          ]
-        },
-        "sendBody": true,
-        "contentType": "binaryData",
-        "inputDataFieldName": "data",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        40,
-        1500
-      ],
-      "id": "b53f8d5f-5568-471a-9e09-1e8a177637f3",
-      "name": "Upload to Supabase Storage1",
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "Rent Ready Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "tableId": "properties_media",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "condition": "eq",
-              "keyValue": "={{ $('Get Image from Realtor.com1').item.json.id }}"
-            }
-          ]
-        },
-        "fieldsUi": {
-          "fieldValues": [
-            {
-              "fieldId": "media_url",
-              "fieldValue": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/{{ $json.Key }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        260,
-        1500
-      ],
-      "id": "611b92d7-bded-4f91-a851-c2b0819a712b",
-      "name": "Update property media table1",
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "Rent Ready Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        -400,
-        1340
-      ],
-      "id": "435c06b0-8869-460f-92ad-6a6b7415e36c",
-      "name": "Loop Over Items"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        -180,
-        1340
-      ],
-      "id": "1e2c5fae-855e-4082-b77c-bea52dbf5bcd",
-      "name": "Done"
-    },
-    {
-      "parameters": {
-        "content": "## Upload all \n### This loop is to convert realtor.com URL's from property_media table and upload them into supabase storage",
-        "height": 146,
-        "width": 340
-      },
-      "id": "48017025-6c5d-41f7-aad0-3e6febc9d444",
-      "name": "Sticky Note4",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -1260,
-        1320
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
         "dataToSave": {
           "values": [
             {
@@ -1019,36 +831,6 @@
       ],
       "id": "c09602b6-ef7c-41d0-9bd2-98cc17348cbd",
       "name": "tag: task_changelog"
-    },
-    {
-      "parameters": {
-        "operation": "getAll",
-        "tableId": "properties_media",
-        "returnAll": true,
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "media_url",
-              "condition": "is",
-              "keyValue": "={{ null }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -620,
-        1340
-      ],
-      "id": "d50106c8-46d5-403e-8593-3b2213d44d21",
-      "name": "get all from property_media",
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "Rent Ready Supabase"
-        }
-      }
     },
     {
       "parameters": {
@@ -1446,6 +1228,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2025-01-23T04:55:37.558Z",
-  "versionId": "3c109892-e051-4b72-9fa6-8e17ee922d19"
+  "updatedAt": "2025-01-23T05:03:58.719Z",
+  "versionId": "1d4b0c2e-a9f9-45f1-90f5-dd2775a0950a"
 }
