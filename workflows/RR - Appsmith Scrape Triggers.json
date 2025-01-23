@@ -81,22 +81,6 @@
         ]
       ]
     },
-    "Schedule Trigger": {
-      "main": [
-        []
-      ]
-    },
-    "When clicking ‘Test workflow’": {
-      "main": [
-        [
-          {
-            "node": "Get all statuses",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Appsmith Rescrape Queue": {
       "main": [
         [
@@ -134,50 +118,6 @@
         [
           {
             "node": "Execute Workflow2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get all statuses": {
-      "main": [
-        [
-          {
-            "node": "Filter",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter": {
-      "main": [
-        [
-          {
-            "node": "Supabase",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Supabase": {
-      "main": [
-        [
-          {
-            "node": "Send these fields2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Send these fields2": {
-      "main": [
-        [
-          {
-            "node": "Execute Workflow1",
             "type": "main",
             "index": 0
           }
@@ -455,36 +395,6 @@
     },
     {
       "parameters": {
-        "rule": {
-          "interval": [
-            {}
-          ]
-        }
-      },
-      "id": "670b0bfb-28b9-4992-9d2e-931af9761bad",
-      "name": "Schedule Trigger",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -1200,
-        60
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {},
-      "id": "e7876259-444f-4a94-b17d-f2ee3ee11236",
-      "name": "When clicking ‘Test workflow’",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -1200,
-        -140
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
         "httpMethod": "POST",
         "path": "rescrape-property",
         "authentication": "headerAuth",
@@ -639,153 +549,6 @@
     },
     {
       "parameters": {
-        "operation": "getAll",
-        "tableId": "options_property_status",
-        "returnAll": true,
-        "filterType": "none"
-      },
-      "id": "c4d4769b-0522-42ab-8342-19f28be37901",
-      "name": "Get all statuses",
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -960,
-        -40
-      ],
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "Rent Ready Supabase"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "operation": "getAll",
-        "tableId": "properties",
-        "returnAll": true,
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "property_status",
-              "condition": "eq",
-              "keyValue": "={{ $json.status }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -500,
-        -40
-      ],
-      "id": "4040ad1c-e43d-44d1-8174-ebb56677fb9b",
-      "name": "Supabase",
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "Rent Ready Supabase"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "25d7bdce-9e62-4e8e-9efe-e80bfc822a94",
-              "leftValue": "={{ $json.scrape }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.filter",
-      "typeVersion": 2.2,
-      "position": [
-        -740,
-        -40
-      ],
-      "id": "5c33b2ca-03ca-41c2-8ece-d91be592db30",
-      "name": "Filter",
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "value": "Dk5zxWqa5hfdmlVn",
-          "mode": "id"
-        },
-        "mode": "each",
-        "options": {
-          "waitForSubWorkflow": false
-        }
-      },
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.1,
-      "position": [
-        100,
-        -40
-      ],
-      "id": "d3f629f8-458b-4549-8a07-eeeafdcec4c3",
-      "name": "Execute Workflow1",
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "45dbfad9-d585-4b44-91c3-bbbfbb3266da",
-              "name": "scrape_url",
-              "value": "={{ $('Appsmith Scrape Property').first().json.query.scrape_url }}",
-              "type": "string"
-            },
-            {
-              "id": "939ad8b2-b284-4abb-bc63-01c5dae388c7",
-              "name": "user",
-              "value": "={{ $('Appsmith Scrape Property').first().json.query.user }}",
-              "type": "string"
-            },
-            {
-              "id": "a9a6ccb3-41a1-4dfa-964a-05637d023c97",
-              "name": "scrape_log_id",
-              "value": "={{ $('Create Scrape Log Entry').first().json.id ? $('Create Scrape Log Entry').first().json.id : $('Check if URL is in Log').first().json.id }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -120,
-        -40
-      ],
-      "id": "0aac8f2f-2039-4b5f-a1a3-afa87963e539",
-      "name": "Send these fields2",
-      "disabled": true
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -889,6 +652,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-01-22T17:46:51.933Z",
-  "versionId": "888ce25f-4e32-4a4a-8d3e-8e657221800f"
+  "updatedAt": "2025-01-23T06:00:21.665Z",
+  "versionId": "51446adc-e0bd-4a78-bf79-1fba69895714"
 }
