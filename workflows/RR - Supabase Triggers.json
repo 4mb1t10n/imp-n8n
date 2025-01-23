@@ -778,7 +778,9 @@
         1080
       ],
       "id": "6b4c65b5-c5ac-4f67-b7ca-b6b914a79a90",
-      "name": "Get Image from Realtor.com"
+      "name": "Get Image from Realtor.com",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
     },
     {
       "parameters": {
@@ -1403,42 +1405,34 @@
           "headers": {
             "host": "imposbl.up.railway.app",
             "user-agent": "pg_net/0.7.1",
-            "content-length": "583",
+            "content-length": "287",
             "accept": "*/*",
             "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
             "content-type": "application/json",
             "x-forwarded-for": "3.210.235.210",
             "x-forwarded-host": "imposbl.up.railway.app",
             "x-forwarded-proto": "https",
-            "x-railway-request-id": "9OO7fs2FQd2811KR1k0qwQ_3165824431",
+            "x-railway-request-id": "Ba--TAeQTW61QGLAPfdp1A_1002618245",
             "x-real-ip": "3.210.235.210",
-            "x-request-start": "1737582296965",
+            "x-request-start": "1737607945152",
             "accept-encoding": "gzip"
           },
           "params": {},
           "query": {},
           "body": {
-            "type": "UPDATE",
+            "type": "INSERT",
             "table": "properties_media",
             "record": {
-              "id": 5623,
+              "id": 5726,
               "media_url": null,
-              "created_at": "2025-01-16T23:01:12.890607+00:00",
+              "created_at": "2025-01-23T04:52:24.598467+00:00",
               "media_type": "photo",
-              "property_id": 618,
+              "property_id": 616,
               "set_to_delete": null,
-              "media_url_scraped": "https://ap.rdcpix.com/c42e31bebf7dfcd9bbdafa62da714140l-m4244222242s.jpg"
+              "media_url_scraped": "realtor.com/test"
             },
             "schema": "public",
-            "old_record": {
-              "id": 5623,
-              "media_url": null,
-              "created_at": "2025-01-16T23:01:12.890607+00:00",
-              "media_type": "photo",
-              "property_id": 618,
-              "set_to_delete": true,
-              "media_url_scraped": "https://ap.rdcpix.com/c42e31bebf7dfcd9bbdafa62da714140l-m4244222242s.jpg"
-            }
+            "old_record": null
           },
           "webhookUrl": "https://imposbl.up.railway.app/webhook-test/update-photos",
           "executionMode": "test"
@@ -1452,6 +1446,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2025-01-23T00:23:52.490Z",
-  "versionId": "72135275-f1eb-4637-b0f2-f8f9042c737a"
+  "updatedAt": "2025-01-23T04:55:37.558Z",
+  "versionId": "3c109892-e051-4b72-9fa6-8e17ee922d19"
 }
