@@ -1,0 +1,834 @@
+{
+  "active": true,
+  "connections": {
+    "Get Image from Realtor.com1": {
+      "main": [
+        [
+          {
+            "node": "Upload to Supabase Storage1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to Supabase Storage1": {
+      "main": [
+        [
+          {
+            "node": "Update property media table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update property media table1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Done",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Image from Realtor.com1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get all from property_media": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "tag: property_media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tag: property_media": {
+      "main": [
+        [
+          {
+            "node": "get all from property_media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get all statuses": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Property": {
+      "main": [
+        [
+          {
+            "node": "Extract Image URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Rapid API": {
+      "main": [
+        [
+          {
+            "node": "Update Property",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Image URLs": {
+      "main": [
+        [
+          {
+            "node": "Insert Photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger2": {
+      "main": [
+        [
+          {
+            "node": "tag: scrape_all",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Scrape Rapid API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tag: scrape_all": {
+      "main": [
+        [
+          {
+            "node": "Get all statuses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Photos": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "tag: scrape_all",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-14T00:46:36.585Z",
+  "id": "9gKSiEWb7oNggVi0",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RR - Cron Jobs",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "={{ $json.media_url_scraped.replace(/\\w\\.jpg/, 'rd-w2048_h1536.jpg') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        -360
+      ],
+      "id": "fa364cc7-9626-4558-a500-7fb11dbd0ec2",
+      "name": "Get Image from Realtor.com1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/properties/{{ $json.property_id }}/{{ $json.id }}.jpeg",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1400,
+        -360
+      ],
+      "id": "f641498c-43b0-4bcf-9db1-cb4d0c2a7926",
+      "name": "Upload to Supabase Storage1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties_media",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get Image from Realtor.com1').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "media_url",
+              "fieldValue": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/{{ $json.Key }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        -360
+      ],
+      "id": "41accc20-2f8a-4c43-96e6-153ddb6fa46d",
+      "name": "Update property media table1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        960,
+        -420
+      ],
+      "id": "d6ea6c6e-fb6b-4f13-8f6e-3630a29aeed6",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        -500
+      ],
+      "id": "077acc78-331a-4176-81b9-af11ba901ef1",
+      "name": "Done"
+    },
+    {
+      "parameters": {
+        "content": "## Upload property_media photos to storage\n### This loop is to convert realtor.com URL's from property_media table and upload them into supabase storage",
+        "height": 166,
+        "width": 340
+      },
+      "id": "b27c8ddb-eac3-4037-b2b2-352fac51bafd",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -440
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "properties_media",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "media_url",
+              "condition": "is",
+              "keyValue": "={{ null }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        740,
+        -420
+      ],
+      "id": "10933286-caaf-4dc1-a8e5-af7c9dae9906",
+      "name": "get all from property_media",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "76f2fd60-ec7e-4a86-8192-714e24210d0a",
+      "name": "Schedule Trigger1",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "property_media"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        520,
+        -420
+      ],
+      "id": "e5dce2e1-fc78-4e11-9fae-78a51d2b4ae2",
+      "name": "tag: property_media"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "options_property_status",
+        "returnAll": true,
+        "filterType": "none"
+      },
+      "id": "c25ebfe1-5b1e-40cf-9bc2-68f791f76ea7",
+      "name": "Get all statuses",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        740,
+        120
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "properties",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "property_status",
+              "condition": "eq",
+              "keyValue": "={{ $json.status }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        120
+      ],
+      "id": "50cac0bd-6199-4ec8-95a0-c679a0d593ef",
+      "name": "Supabase",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "25d7bdce-9e62-4e8e-9efe-e80bfc822a94",
+              "leftValue": "={{ $json.scrape }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        120
+      ],
+      "id": "11ad1d61-4dee-4a04-98ca-132b45b21594",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "8358d13a-58ed-4ca3-8075-9aece141893b",
+      "name": "Schedule Trigger2",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Loop Over Items1').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "prop_size_inside",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.sqft }}"
+            },
+            {
+              "fieldId": "prop_year",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.year_built }}"
+            },
+            {
+              "fieldId": "realtor_id",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.property_id }}"
+            },
+            {
+              "fieldId": "realtor_status",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.status }}"
+            },
+            {
+              "fieldId": "garage",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.garage }}"
+            },
+            {
+              "fieldId": "stories",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.stories }}"
+            },
+            {
+              "fieldId": "realtor_dwelling_type",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.type }}"
+            },
+            {
+              "fieldId": "realtor_last_sold_date",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.last_sold_date }}"
+            },
+            {
+              "fieldId": "realtor_last_sold_price",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.last_sold_price }}"
+            },
+            {
+              "fieldId": "realtor_list_price",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.list_price }}"
+            },
+            {
+              "fieldId": "address_neighborhood",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.neighborhoods[0].name }}"
+            },
+            {
+              "fieldId": "coord_lat",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.coordinate.lat }}"
+            },
+            {
+              "fieldId": "coord_lng",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.coordinate.lon }}"
+            },
+            {
+              "fieldId": "prop_size_outside",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.lot_sqft }}"
+            },
+            {
+              "fieldId": "timestamp_updated",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "last_edited_by",
+              "fieldValue": "=Bot@RentReadyS8.com"
+            },
+            {
+              "fieldId": "scrape_source",
+              "fieldValue": "Realtor.com"
+            },
+            {
+              "fieldId": "timestamp_scraped",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "realtor_desc",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.text }}"
+            },
+            {
+              "fieldId": "is_contingent",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_contingent }}"
+            },
+            {
+              "fieldId": "is_foreclosure",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_foreclosure }}"
+            },
+            {
+              "fieldId": "is_pending",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_pending }}"
+            },
+            {
+              "fieldId": "is_short_sale",
+              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_short_sale }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1860,
+        140
+      ],
+      "id": "651cf583-1f2b-47d2-9c97-e3daaaf007c1",
+      "name": "Update Property",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://realtor-search.p.rapidapi.com/properties/detail-url",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "={{ $json.realtor_url }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "realtor-search.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "6ba3b66dbamshc1928a7b00fd64bp146222jsn36479c7c5a77"
+            },
+            {
+              "name": "Host",
+              "value": "realtor-search.p.rapidapi.com"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "54fc4643-ae53-457e-9d87-550cc7d84065",
+      "name": "Scrape Rapid API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1620,
+        120
+      ],
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "function extractImageUrls() {\n    try {\n        const scrapeData = $('Scrape Rapid API').all();\n        \n        // Check if all required properties exist in the path\n        if (!scrapeData?.[0]?.json?.data?.initialReduxState?.propertyDetails?.photos) {\n            return []; // Return empty array if photos don't exist\n        }\n        \n        const photos = scrapeData[0].json.data.initialReduxState.propertyDetails.photos;\n        return photos.map(photo => ({\n            href: photo.href\n        }));\n    } catch (error) {\n        // Return empty array in case of any errors\n        return [];\n    }\n}\n\nreturn extractImageUrls();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2060,
+        140
+      ],
+      "id": "58903e98-91e2-49a1-848f-b3f9ae4ccbd6",
+      "name": "Extract Image URLs",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "tableId": "properties_media",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "property_id",
+              "fieldValue": "={{ $('Update Property').item.json.id }}"
+            },
+            {
+              "fieldId": "media_url_scraped",
+              "fieldValue": "={{ $json.href }}"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "photo"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        140
+      ],
+      "id": "76a15b4c-5378-4a38-bd8f-a91b22ad0e15",
+      "name": "Insert Photos",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1400,
+        120
+      ],
+      "id": "2fc4f54a-b5fd-4222-a46d-a976297e39ac",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "scrape_all"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        520,
+        120
+      ],
+      "id": "33e9c61a-159c-492d-b549-9cb6111683b6",
+      "name": "tag: scrape_all"
+    },
+    {
+      "parameters": {
+        "content": "## Scrape all properties\n### Only scrape properties that have a scrape status = true",
+        "height": 166,
+        "width": 340
+      },
+      "id": "b0ebf292-288f-400e-a1d4-886489cc3a48",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -20
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "path": "scrape-all",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        300,
+        220
+      ],
+      "id": "447a9b69-bece-4d85-bbf7-1fcf2e9bdf3e",
+      "name": "Webhook",
+      "webhookId": "cb20f011-6aae-49f7-ab9d-c8d82955ddb3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4eZkdxpH9D6RopSj",
+          "name": "RR Appsmith Header Auth"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger1": {
+      "recurrenceRules": []
+    },
+    "node:Schedule Trigger2": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2025-01-23T05:42:02.231Z",
+      "updatedAt": "2025-01-23T05:42:02.231Z",
+      "id": "rjGjotOoANtCYiV0",
+      "name": "Cron"
+    }
+  ],
+  "triggerCount": 3,
+  "updatedAt": "2025-01-23T05:59:45.576Z",
+  "versionId": "c1586111-c2d4-4879-a561-2b99a363e73c"
+}
