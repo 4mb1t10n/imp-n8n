@@ -50,7 +50,7 @@
       "main": [
         [
           {
-            "node": "created timestamp exists",
+            "node": "tag: task_changelog2",
             "type": "main",
             "index": 0
           }
@@ -83,7 +83,7 @@
       "main": [
         [
           {
-            "node": "compare data1",
+            "node": "tag: task_changelog",
             "type": "main",
             "index": 0
           }
@@ -94,7 +94,7 @@
       "main": [
         [
           {
-            "node": "compare data",
+            "node": "tag: task_changelog1",
             "type": "main",
             "index": 0
           }
@@ -128,6 +128,112 @@
         [
           {
             "node": "Get Image from Realtor.com",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to Supabase Storage": {
+      "main": [
+        [
+          {
+            "node": "Update property media table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image from Realtor.com1": {
+      "main": [
+        [
+          {
+            "node": "Upload to Supabase Storage1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to Supabase Storage1": {
+      "main": [
+        [
+          {
+            "node": "Update property media table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Done",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Image from Realtor.com1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update property media table1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tag: task_changelog": {
+      "main": [
+        [
+          {
+            "node": "compare data1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get all from property_media": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tag: task_changelog1": {
+      "main": [
+        [
+          {
+            "node": "compare data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tag: task_changelog2": {
+      "main": [
+        [
+          {
+            "node": "created timestamp exists",
             "type": "main",
             "index": 0
           }
@@ -168,8 +274,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -180,
-        200
+        40,
+        180
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -209,8 +315,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.1,
       "position": [
-        -620,
-        200
+        -400,
+        180
       ]
     },
     {
@@ -243,8 +349,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.1,
       "position": [
-        -400,
-        200
+        -180,
+        180
       ]
     },
     {
@@ -256,8 +362,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -620,
-        520
+        -400,
+        500
       ]
     },
     {
@@ -326,8 +432,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.1,
       "position": [
-        -400,
-        520
+        -180,
+        500
       ]
     },
     {
@@ -341,8 +447,9 @@
       "typeVersion": 1,
       "position": [
         -1160,
-        200
-      ]
+        180
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -355,8 +462,9 @@
       "typeVersion": 1,
       "position": [
         -1160,
-        500
-      ]
+        480
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -371,7 +479,7 @@
       "typeVersion": 2,
       "position": [
         -840,
-        200
+        180
       ],
       "webhookId": "7965cf91-4238-4d08-85e7-0ebc776417e0",
       "credentials": {
@@ -418,8 +526,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -180,
-        520
+        40,
+        500
       ],
       "credentials": {
         "supabaseApi": {
@@ -437,7 +545,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -620,
+        -400,
         800
       ]
     },
@@ -507,13 +615,13 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.1,
       "position": [
-        -400,
+        -180,
         800
       ]
     },
     {
       "parameters": {
-        "content": "## Task Updated\n### Log all changes to tasks_notifications",
+        "content": "## Task Updated\n### Log all changes to tasks_changelog",
         "height": 145.62196438101526
       },
       "id": "58f405c9-a553-4aaa-a2b3-32c50903e04a",
@@ -523,7 +631,8 @@
       "position": [
         -1160,
         780
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -562,7 +671,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -180,
+        40,
         800
       ],
       "credentials": {
@@ -608,7 +717,7 @@
       "typeVersion": 2,
       "position": [
         -840,
-        520
+        500
       ],
       "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
       "credentials": {
@@ -631,7 +740,8 @@
       "position": [
         -1260,
         1060
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -724,6 +834,259 @@
           "name": "Rent Ready Supabase"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties_media",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get Image from Realtor.com').item.json.body.record.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "media_url",
+              "fieldValue": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/{{ $json.Key }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        40,
+        1080
+      ],
+      "id": "d5f88f37-0a40-4811-bbea-0fa4374975e5",
+      "name": "Update property media table",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.media_url_scraped.replace(/\\w\\.jpg/, 'x.jpg') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -180,
+        1500
+      ],
+      "id": "7df6efdd-a9db-4cd4-b423-9f56d742269b",
+      "name": "Get Image from Realtor.com1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/properties/{{ $json.property_id }}/{{ $json.id }}.jpeg",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        40,
+        1500
+      ],
+      "id": "b53f8d5f-5568-471a-9e09-1e8a177637f3",
+      "name": "Upload to Supabase Storage1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties_media",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get Image from Realtor.com1').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "media_url",
+              "fieldValue": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/{{ $json.Key }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        260,
+        1500
+      ],
+      "id": "611b92d7-bded-4f91-a851-c2b0819a712b",
+      "name": "Update property media table1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -400,
+        1340
+      ],
+      "id": "435c06b0-8869-460f-92ad-6a6b7415e36c",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        1340
+      ],
+      "id": "1e2c5fae-855e-4082-b77c-bea52dbf5bcd",
+      "name": "Done"
+    },
+    {
+      "parameters": {
+        "content": "## Upload all \n### This loop is to convert realtor.com URL's from property_media table and upload them into supabase storage",
+        "height": 146,
+        "width": 340
+      },
+      "id": "48017025-6c5d-41f7-aad0-3e6febc9d444",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1260,
+        1320
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "task_changelog"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        800
+      ],
+      "id": "c09602b6-ef7c-41d0-9bd2-98cc17348cbd",
+      "name": "tag: task_changelog"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "properties_media",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "media_url",
+              "condition": "is",
+              "keyValue": "={{ null }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        1340
+      ],
+      "id": "d50106c8-46d5-403e-8593-3b2213d44d21",
+      "name": "get all from property_media",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "task_c"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        500
+      ],
+      "id": "c194264e-d0af-4af4-9fc4-78c18bc71537",
+      "name": "tag: task_changelog1"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "task_d"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        180
+      ],
+      "id": "17962850-8455-490f-bf46-116b01eae1ae",
+      "name": "tag: task_changelog2"
     }
   ],
   "pinData": {
@@ -1089,6 +1452,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2025-01-22T22:40:50.994Z",
-  "versionId": "292f3794-d5e6-4447-9990-b1b757ef5040"
+  "updatedAt": "2025-01-23T00:23:52.490Z",
+  "versionId": "72135275-f1eb-4637-b0f2-f8f9042c737a"
 }
