@@ -8,6 +8,11 @@
             "node": "Count",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -28,45 +33,11 @@
         ]
       ]
     },
-    "Update Property": {
-      "main": [
-        [
-          {
-            "node": "Update Scrape Log",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Extract Image URLs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Count": {
       "main": [
         [
           {
             "node": "Number of properties found",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Scrape Rapid API": {
-      "main": [
-        [
-          {
-            "node": "Try finding existing properties",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Scrape Log Error",
             "type": "main",
             "index": 0
           }
@@ -127,7 +98,41 @@
       "main": [
         [
           {
-            "node": "Scrape Rapid API",
+            "node": "Scrape Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Apify": {
+      "main": [
+        [
+          {
+            "node": "Try finding existing properties",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Scrape Log Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Property": {
+      "main": [
+        [
+          {
+            "node": "Extract Image URLs",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Update Scrape Log",
             "type": "main",
             "index": 0
           }
@@ -192,22 +197,22 @@
             {
               "keyName": "address_street",
               "condition": "ilike",
-              "keyValue": "={{ $json.data.initialReduxState.propertyDetails.location.address.line }}"
+              "keyValue": "={{ $json.address.street }}"
             },
             {
               "keyName": "address_city",
               "condition": "eq",
-              "keyValue": "={{ $json.data.initialReduxState.propertyDetails.location.address.city }}"
+              "keyValue": "={{ $json.neighborhood[0].city }}"
             },
             {
               "keyName": "address_state",
               "condition": "eq",
-              "keyValue": "={{ $json.data.initialReduxState.propertyDetails.location.address.state_code }}"
+              "keyValue": "={{ $json.neighborhood[0].state_code }}"
             },
             {
               "keyName": "address_zip",
               "condition": "eq",
-              "keyValue": "={{ $json.data.initialReduxState.propertyDetails.location.address.postal_code }}"
+              "keyValue": "={{ $json.address.postalCode }}"
             }
           ]
         }
@@ -278,87 +283,79 @@
           "fieldValues": [
             {
               "fieldId": "address_street",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.line }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.address.street }}"
             },
             {
               "fieldId": "address_city",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.city }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].city }}"
             },
             {
               "fieldId": "address_state",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.state_code }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].state_code }}"
             },
             {
               "fieldId": "address_zip",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.postal_code }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.address.postalCode }}"
             },
             {
               "fieldId": "prop_size_inside",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.sqft }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.sqft }}"
             },
             {
               "fieldId": "prop_year",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.year_built }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.year_built }}"
             },
             {
               "fieldId": "realtor_id",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.property_id }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.id }}"
             },
             {
               "fieldId": "realtor_url",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.href }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.url }}"
             },
             {
               "fieldId": "realtor_status",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.status }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.status }}"
             },
             {
               "fieldId": "beds",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.beds }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.beds }}"
             },
             {
               "fieldId": "baths",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.baths }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.baths }}"
             },
             {
               "fieldId": "garage",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.garage }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.garage }}"
             },
             {
               "fieldId": "stories",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.stories }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.stories }}"
             },
             {
               "fieldId": "realtor_dwelling_type",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.type }}"
-            },
-            {
-              "fieldId": "realtor_last_sold_date",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.last_sold_date }}"
-            },
-            {
-              "fieldId": "realtor_last_sold_price",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.last_sold_price }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.type }}"
             },
             {
               "fieldId": "realtor_list_price",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.list_price }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.listPrice }}"
             },
             {
               "fieldId": "address_neighborhood",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.neighborhoods[0].name }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].name }}"
             },
             {
               "fieldId": "coord_lat",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.coordinate.lat }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.coordinates.latitude }}"
             },
             {
               "fieldId": "coord_lng",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.coordinate.lon }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.coordinates.longitude }}"
             },
             {
               "fieldId": "prop_size_outside",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.lot_sqft }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.lot_sqft }}"
             },
             {
               "fieldId": "timestamp_updated",
@@ -373,32 +370,12 @@
               "fieldValue": "={{ $('Scrape Microservice').item.json.user }}"
             },
             {
-              "fieldId": "scrape_source",
-              "fieldValue": "Realtor.com"
-            },
-            {
               "fieldId": "timestamp_scraped",
               "fieldValue": "={{ $now }}"
             },
             {
               "fieldId": "realtor_desc",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.text }}"
-            },
-            {
-              "fieldId": "is_contingent",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_contingent }}"
-            },
-            {
-              "fieldId": "is_foreclosure",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_foreclosure }}"
-            },
-            {
-              "fieldId": "is_pending",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_pending }}"
-            },
-            {
-              "fieldId": "is_short_sale",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_short_sale }}"
+              "fieldValue": "={{ $('Scrape Apify').item.json.text }}"
             }
           ]
         }
@@ -411,151 +388,6 @@
       ],
       "id": "1f91a05b-fe23-4f66-a4b4-de118521df2f",
       "name": "Create Property",
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "Rent Ready Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "tableId": "properties",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "condition": "eq",
-              "keyValue": "={{ $('Try finding existing properties').item.json.id }}"
-            }
-          ]
-        },
-        "fieldsUi": {
-          "fieldValues": [
-            {
-              "fieldId": "prop_size_inside",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.sqft }}"
-            },
-            {
-              "fieldId": "prop_year",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.year_built }}"
-            },
-            {
-              "fieldId": "realtor_id",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.property_id }}"
-            },
-            {
-              "fieldId": "realtor_url",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.href }}"
-            },
-            {
-              "fieldId": "realtor_status",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.status }}"
-            },
-            {
-              "fieldId": "beds",
-              "fieldValue": "={{ $('Try finding existing properties').item.json.beds !== null \n  ? $('Try finding existing properties').item.json.beds\n  : $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.beds }}"
-            },
-            {
-              "fieldId": "baths",
-              "fieldValue": "={{ $('Try finding existing properties').item.json.baths !== null \n  ? $('Try finding existing properties').item.json.baths\n  : $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.baths }}"
-            },
-            {
-              "fieldId": "garage",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.garage }}"
-            },
-            {
-              "fieldId": "stories",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.stories }}"
-            },
-            {
-              "fieldId": "realtor_dwelling_type",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.type }}"
-            },
-            {
-              "fieldId": "realtor_last_sold_date",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.last_sold_date }}"
-            },
-            {
-              "fieldId": "realtor_last_sold_price",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.last_sold_price }}"
-            },
-            {
-              "fieldId": "realtor_list_price",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.list_price }}"
-            },
-            {
-              "fieldId": "address_neighborhood",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.neighborhoods[0].name }}"
-            },
-            {
-              "fieldId": "coord_lat",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.coordinate.lat }}"
-            },
-            {
-              "fieldId": "coord_lng",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.address.coordinate.lon }}"
-            },
-            {
-              "fieldId": "prop_size_outside",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.lot_sqft }}"
-            },
-            {
-              "fieldId": "timestamp_updated",
-              "fieldValue": "={{ $now }}"
-            },
-            {
-              "fieldId": "timestamp_created",
-              "fieldValue": "={{ $now }}"
-            },
-            {
-              "fieldId": "last_edited_by",
-              "fieldValue": "={{ $('Scrape Microservice').item.json.user }}"
-            },
-            {
-              "fieldId": "scrape_source",
-              "fieldValue": "Realtor.com"
-            },
-            {
-              "fieldId": "timestamp_scraped",
-              "fieldValue": "={{ $now }}"
-            },
-            {
-              "fieldId": "realtor_desc",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.description.text }}"
-            },
-            {
-              "fieldId": "address_neighborhood",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.location.neighborhoods[0].name }}"
-            },
-            {
-              "fieldId": "is_contingent",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_contingent }}"
-            },
-            {
-              "fieldId": "is_foreclosure",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_foreclosure }}"
-            },
-            {
-              "fieldId": "is_pending",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_pending }}"
-            },
-            {
-              "fieldId": "is_short_sale",
-              "fieldValue": "={{ $('Scrape Rapid API').item.json.data.initialReduxState.propertyDetails.flags.is_short_sale }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -220,
-        240
-      ],
-      "id": "49dfba4d-1c0f-459e-99c4-1a52e3a718d3",
-      "name": "Update Property",
       "credentials": {
         "supabaseApi": {
           "id": "tB73GetIJaJt8VPH",
@@ -578,50 +410,7 @@
     },
     {
       "parameters": {
-        "url": "https://realtor-search.p.rapidapi.com/properties/detail-url",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "url",
-              "value": "={{ $json.scrape_url }}"
-            }
-          ]
-        },
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "x-rapidapi-host",
-              "value": "realtor-search.p.rapidapi.com"
-            },
-            {
-              "name": "x-rapidapi-key",
-              "value": "6ba3b66dbamshc1928a7b00fd64bp146222jsn36479c7c5a77"
-            },
-            {
-              "name": "Host",
-              "value": "realtor-search.p.rapidapi.com"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "dca5a573-d65f-4433-9b6c-275e02625a68",
-      "name": "Scrape Rapid API",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -1120,
-        140
-      ],
-      "retryOnFail": true,
-      "waitBetweenTries": 3000,
-      "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
-        "jsCode": "function extractImageUrls() {\n    try {\n        const scrapeData = $('Scrape Rapid API').all();\n        \n        // Check if all required properties exist in the path\n        if (!scrapeData?.[0]?.json?.data?.initialReduxState?.propertyDetails?.photos) {\n            return []; // Return empty array if photos don't exist\n        }\n        \n        const photos = scrapeData[0].json.data.initialReduxState.propertyDetails.photos;\n        return photos.map(photo => ({\n            href: photo.href\n        }));\n    } catch (error) {\n        // Return empty array in case of any errors\n        return [];\n    }\n}\n\nreturn extractImageUrls();"
+        "jsCode": "function extractImageUrls() {\n   try {\n       const data = $('Scrape Apify').all();\n     console.log(data);\n       if (!json?.photos?.length) return [];\n       \n       return data.json.photos.map(photo => ({\n           href: photo.href\n       }));\n   } catch (error) {\n       return [];\n   }\n}\n\nreturn extractImageUrls();"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -631,7 +420,8 @@
       ],
       "id": "6ecc0441-b42c-4410-8838-7871a45502c7",
       "name": "Extract Image URLs",
-      "alwaysOutputData": false
+      "alwaysOutputData": false,
+      "executeOnce": true
     },
     {
       "parameters": {
@@ -817,58 +607,197 @@
       ],
       "id": "54d4220e-f506-4365-9bc3-d54a0b5ee296",
       "name": "Execution Data"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/epctex~realtor-scraper/run-sync-get-dataset-items",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "apify_api_eBcJIT4Z3eJhNHRL1UFtko2cVhff8i4fqE6a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"extendOutputFunction\": \"($) => { return {} }\",\n    \"includeFloorplans\": false,\n    \"mode\": \"BUY\",\n    \"proxy\": {\n        \"useApifyProxy\": true\n    },\n    \"startUrls\": [\n        \"{{ $('Scrape Microservice').item.json.scrape_url }}\"\n    ]\n}",
+        "options": {}
+      },
+      "id": "dca5a573-d65f-4433-9b6c-275e02625a68",
+      "name": "Scrape Apify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1120,
+        140
+      ],
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Try finding existing properties').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "address_street",
+              "fieldValue": "={{ $('Scrape Apify').item.json.address.street }}"
+            },
+            {
+              "fieldId": "address_city",
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].city }}"
+            },
+            {
+              "fieldId": "address_state",
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].state_code }}"
+            },
+            {
+              "fieldId": "address_zip",
+              "fieldValue": "={{ $('Scrape Apify').item.json.address.postalCode }}"
+            },
+            {
+              "fieldId": "prop_size_inside",
+              "fieldValue": "={{ $('Scrape Apify').item.json.sqft }}"
+            },
+            {
+              "fieldId": "prop_year",
+              "fieldValue": "={{ $('Scrape Apify').item.json.year_built }}"
+            },
+            {
+              "fieldId": "realtor_id",
+              "fieldValue": "={{ $('Scrape Apify').item.json.id }}"
+            },
+            {
+              "fieldId": "realtor_url",
+              "fieldValue": "={{ $('Scrape Apify').item.json.url }}"
+            },
+            {
+              "fieldId": "realtor_status",
+              "fieldValue": "={{ $('Scrape Apify').item.json.status }}"
+            },
+            {
+              "fieldId": "beds",
+              "fieldValue": "={{ $('Scrape Apify').item.json.beds }}"
+            },
+            {
+              "fieldId": "baths",
+              "fieldValue": "={{ $('Scrape Apify').item.json.baths }}"
+            },
+            {
+              "fieldId": "garage",
+              "fieldValue": "={{ $('Scrape Apify').item.json.garage }}"
+            },
+            {
+              "fieldId": "stories",
+              "fieldValue": "={{ $('Scrape Apify').item.json.stories }}"
+            },
+            {
+              "fieldId": "realtor_dwelling_type",
+              "fieldValue": "={{ $('Scrape Apify').item.json.type }}"
+            },
+            {
+              "fieldId": "realtor_list_price",
+              "fieldValue": "={{ $('Scrape Apify').item.json.listPrice }}"
+            },
+            {
+              "fieldId": "address_neighborhood",
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].name }}"
+            },
+            {
+              "fieldId": "coord_lat",
+              "fieldValue": "={{ $('Scrape Apify').item.json.coordinates.latitude }}"
+            },
+            {
+              "fieldId": "coord_lng",
+              "fieldValue": "={{ $('Scrape Apify').item.json.coordinates.longitude }}"
+            },
+            {
+              "fieldId": "prop_size_outside",
+              "fieldValue": "={{ $('Scrape Apify').item.json.lot_sqft }}"
+            },
+            {
+              "fieldId": "timestamp_updated",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "timestamp_created",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "last_edited_by",
+              "fieldValue": "={{ $('Scrape Microservice').item.json.user }}"
+            },
+            {
+              "fieldId": "timestamp_scraped",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "realtor_desc",
+              "fieldValue": "={{ $('Scrape Apify').item.json.text }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        240
+      ],
+      "id": "5ed402dc-db23-470d-8bdf-117963c71dad",
+      "name": "Update Property",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "88d8586b-5c01-4b8a-90cf-5fd04815ebcb",
+              "name": "photos[0].href",
+              "value": "={{ $('Scrape Apify').item.json.photos[0].href }}",
+              "type": "string"
+            },
+            {
+              "id": "730da157-eb7b-4fcd-8199-2c592e9fb261",
+              "name": "",
+              "value": "={{ $('Scrape Apify').item.json.photos[1].href }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -600,
+        -60
+      ],
+      "id": "0b4cc9b5-02cc-4763-912b-a77cb233f4d2",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {
-    "Create Property": [
-      {
-        "json": {
-          "id": 607,
-          "address_street": "5888 Marin Dr",
-          "address_city": "Toledo",
-          "address_state": "OH",
-          "address_zip": "43613",
-          "prop_size_inside": 2330,
-          "prop_year": 1993,
-          "county_parcel": null,
-          "county_tract": null,
-          "prop_heating_type_air": null,
-          "prop_cooking_type": null,
-          "prop_heating_type_water": null,
-          "property_status": "New",
-          "realtor_id": 3517732046,
-          "realtor_url": "https://www.realtor.com/realestateandhomes-detail/5888-Marin-Dr_Toledo_OH_43613_M35177-32046",
-          "realtor_status": "for_sale",
-          "beds": 3,
-          "baths": 3,
-          "garage": 2,
-          "stories": 2,
-          "realtor_desc": "Welcome to this spacious 3 bed/2.5 bath home located in Washington Local School District with over 2300 sq ft of living space. Featuring a huge remodeled kitchen with tons of cabinets with an island and quartz counters. First floor primary bedroom with a fully remodeled en suite with large double shower, double vanity with quartz, abundant cabinets & huge walk in closet. Dining room and family room with cathedral ceiling and fireplace and hardwood floors. Upper bedrooms feature huge walk-in closets and attic access. Family/Living room has access to new concrete patio. Full finished basement.",
-          "realtor_dwelling_type": "single_family",
-          "realtor_last_sold_date": "2015-12-31",
-          "realtor_last_sold_price": 190000,
-          "realtor_list_price": 325000,
-          "address_neighborhood": "Whitmer-Trilby",
-          "coord_lat": 41.723915,
-          "coord_lng": -83.592005,
-          "prop_size_outside": 8777,
-          "timestamp_updated": "2025-01-16T16:13:58.565+00:00",
-          "timestamp_created": "2025-01-16T16:13:58.565+00:00",
-          "timestamp_followup": null,
-          "starred": false,
-          "last_edited_by": "alex+dev@imposbl.com",
-          "followup_notes": null,
-          "scrape_source": "Realtor.com",
-          "offer_price": null,
-          "timestamp_scraped": "2025-01-16T16:13:58.565+00:00",
-          "is_off_market": null,
-          "is_contingent": null,
-          "is_foreclosure": null,
-          "is_pending": null,
-          "is_short_sale": null
-        }
-      }
-    ],
     "Scrape Microservice": [
       {
         "json": {
@@ -892,6 +821,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-23T15:50:46.612Z",
-  "versionId": "54214baf-77e0-4355-8bcf-810bf8c44b5b"
+  "updatedAt": "2025-01-23T20:48:51.340Z",
+  "versionId": "76cdab2f-00e4-45c8-bdb7-a1a51e20ca0e"
 }
