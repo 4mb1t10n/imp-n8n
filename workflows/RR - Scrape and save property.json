@@ -640,7 +640,7 @@
           "fieldValues": [
             {
               "fieldId": "property_id",
-              "fieldValue": "={{ $('Create Property').item.json.id }}"
+              "fieldValue": "={{ $('Create Property').first().json.id }}"
             },
             {
               "fieldId": "media_url_scraped",
@@ -868,6 +868,15 @@
           "is_short_sale": null
         }
       }
+    ],
+    "Scrape Microservice": [
+      {
+        "json": {
+          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/319-N-Detroit-Ave_Toledo_OH_43607_M30266-52828",
+          "user": "alex+dev@imposbl.com",
+          "scrape_log_id": "163"
+        }
+      }
     ]
   },
   "settings": {
@@ -883,6 +892,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-22T21:42:42.107Z",
-  "versionId": "671f1ed7-99b3-43ca-892f-6cc2a3ba6de3"
+  "updatedAt": "2025-01-22T23:44:13.933Z",
+  "versionId": "ef408d0a-e56b-4bcb-b54c-e5bb31bb66f5"
 }
