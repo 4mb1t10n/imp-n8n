@@ -767,7 +767,9 @@
         120
       ],
       "id": "33e9c61a-159c-492d-b549-9cb6111683b6",
-      "name": "tag: scrape_all"
+      "name": "tag: scrape_all",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -808,7 +810,25 @@
       }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Schedule Trigger2": [
+      {
+        "json": {
+          "timestamp": "2025-01-23T00:16:53.589-05:00",
+          "Readable date": "January 23rd 2025, 12:16:53 am",
+          "Readable time": "12:16:53 am",
+          "Day of week": "Thursday",
+          "Year": "2025",
+          "Month": "January",
+          "Day of month": "23",
+          "Hour": "00",
+          "Minute": "16",
+          "Second": "53",
+          "Timezone": "America/New_York (UTC-05:00)"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -829,6 +849,6 @@
     }
   ],
   "triggerCount": 3,
-  "updatedAt": "2025-01-23T05:59:45.576Z",
-  "versionId": "c1586111-c2d4-4879-a561-2b99a363e73c"
+  "updatedAt": "2025-01-23T12:58:53.416Z",
+  "versionId": "25bc9e23-d78b-4b01-bf5c-c0d79ea3d4a2"
 }
