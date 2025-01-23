@@ -203,7 +203,7 @@
         ]
       ]
     },
-    "Webhook": {
+    "Schedule Trigger": {
       "main": [
         [
           {
@@ -505,7 +505,9 @@
       "parameters": {
         "rule": {
           "interval": [
-            {}
+            {
+              "triggerAtHour": 6
+            }
           ]
         }
       },
@@ -514,8 +516,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        300,
-        20
+        280,
+        200
       ]
     },
     {
@@ -789,29 +791,43 @@
     },
     {
       "parameters": {
-        "path": "scrape-all",
-        "authentication": "headerAuth",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        300,
-        220
-      ],
-      "id": "447a9b69-bece-4d85-bbf7-1fcf2e9bdf3e",
-      "name": "Webhook",
-      "webhookId": "cb20f011-6aae-49f7-ab9d-c8d82955ddb3",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "4eZkdxpH9D6RopSj",
-          "name": "RR Appsmith Header Auth"
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 12
+            }
+          ]
         }
-      }
+      },
+      "id": "e8ad0f76-10d0-496a-815e-0e5047a39a54",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        280,
+        40
+      ]
     }
   ],
   "pinData": {
     "Schedule Trigger2": [
+      {
+        "json": {
+          "timestamp": "2025-01-23T00:16:53.589-05:00",
+          "Readable date": "January 23rd 2025, 12:16:53 am",
+          "Readable time": "12:16:53 am",
+          "Day of week": "Thursday",
+          "Year": "2025",
+          "Month": "January",
+          "Day of month": "23",
+          "Hour": "00",
+          "Minute": "16",
+          "Second": "53",
+          "Timezone": "America/New_York (UTC-05:00)"
+        }
+      }
+    ],
+    "Schedule Trigger": [
       {
         "json": {
           "timestamp": "2025-01-23T00:16:53.589-05:00",
@@ -838,6 +854,9 @@
     },
     "node:Schedule Trigger2": {
       "recurrenceRules": []
+    },
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
     }
   },
   "tags": [
@@ -849,6 +868,6 @@
     }
   ],
   "triggerCount": 3,
-  "updatedAt": "2025-01-23T12:58:53.416Z",
-  "versionId": "25bc9e23-d78b-4b01-bf5c-c0d79ea3d4a2"
+  "updatedAt": "2025-01-23T15:35:36.449Z",
+  "versionId": "ee373167-3868-46f3-9423-ed417aec9a42"
 }
