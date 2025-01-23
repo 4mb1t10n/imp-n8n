@@ -872,9 +872,9 @@
     "Scrape Microservice": [
       {
         "json": {
-          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/319-N-Detroit-Ave_Toledo_OH_43607_M30266-52828",
+          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/248-W-Crawford-Ave_Toledo_OH_43612_M36762-72738",
           "user": "alex+dev@imposbl.com",
-          "scrape_log_id": "163"
+          "scrape_log_id": "199"
         }
       }
     ]
@@ -892,6 +892,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-22T23:44:13.933Z",
-  "versionId": "ef408d0a-e56b-4bcb-b54c-e5bb31bb66f5"
+  "updatedAt": "2025-01-23T15:50:46.612Z",
+  "versionId": "54214baf-77e0-4355-8bcf-810bf8c44b5b"
 }
