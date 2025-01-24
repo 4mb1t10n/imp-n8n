@@ -1,0 +1,257 @@
+{
+  "active": false,
+  "connections": {
+    "upload photos": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image from Realtor.com": {
+      "main": [
+        [
+          {
+            "node": "Upload to Supabase Storage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to Supabase Storage": {
+      "main": [
+        [
+          {
+            "node": "Update property media table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Done",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "extract URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extract URL": {
+      "main": [
+        [
+          {
+            "node": "Get Image from Realtor.com",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-23T23:51:20.935Z",
+  "id": "fAKNIRVusSsHh3Vc",
+  "meta": null,
+  "name": "MICRO - Upload photos",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -20
+      ],
+      "id": "3e86dcf8-94e1-444b-afc4-f7e466e2c69c",
+      "name": "upload photos"
+    },
+    {
+      "parameters": {
+        "content": "## Input: urls\none or more URL's",
+        "width": 260
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -380,
+        -40
+      ],
+      "typeVersion": 1,
+      "id": "6e06c181-5e80-4e6b-9400-14a686d5f3d7",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        620,
+        -20
+      ],
+      "id": "d500ec69-7c2c-437a-b0ee-6257042b14fd",
+      "name": "Get Image from Realtor.com",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/properties/{{ $('New photo to save').first().json.body.record.property_id }}/{{ $('New photo to save').first().json.body.record.id }}.jpeg",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        840,
+        -20
+      ],
+      "id": "f9da7fa9-c33e-48a6-a3f4-3f4927885470",
+      "name": "Upload to Supabase Storage",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties_media",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get Image from Realtor.com').item.json.body.record.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "media_url",
+              "fieldValue": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/{{ $json.Key }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        -20
+      ],
+      "id": "c5dffc42-65e1-404c-8e8a-851365bd0b57",
+      "name": "Update property media table",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        160,
+        -20
+      ],
+      "id": "52321052-1edf-4009-864a-23c558955677",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b348f47c-89ad-4eff-9ed2-f7ef420779d0",
+              "name": "url",
+              "value": "={{ $input.first().json.values()[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        -20
+      ],
+      "id": "260325ac-162a-4612-8bd4-9fc30d2194d1",
+      "name": "extract URL"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -200
+      ],
+      "id": "506f3be8-678a-47da-8bb3-576465f23146",
+      "name": "Done"
+    }
+  ],
+  "pinData": {
+    "upload photos": [
+      {
+        "json": {
+          "href": "http://ap.rdcpix.com/859d0aa6b99434c2c6775c0aff5ed09fl-m3838807998od-w480_h360_x2.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-16T15:30:08.032Z",
+      "updatedAt": "2025-01-16T15:30:08.032Z",
+      "id": "s9eEaRLrT4Knsh6d",
+      "name": "microservice"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-24T00:50:30.180Z",
+  "versionId": "0bde3e9c-5cd0-4572-b6b6-b76d8a5f22ed"
+}
