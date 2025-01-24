@@ -101,50 +101,6 @@
         ]
       ]
     },
-    "New photo to save": {
-      "main": [
-        [
-          {
-            "node": "tag: update_media",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Image from Realtor.com": {
-      "main": [
-        [
-          {
-            "node": "Upload to Supabase Storage",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "tag: update_media": {
-      "main": [
-        [
-          {
-            "node": "Get Image from Realtor.com",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Upload to Supabase Storage": {
-      "main": [
-        [
-          {
-            "node": "Update property media table",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "tag: task_changelog": {
       "main": [
         [
@@ -667,153 +623,6 @@
     },
     {
       "parameters": {
-        "content": "## Photo to save\n### Triggered when supabase has a new row created in properties_media table. Take the external URL with a photo and save to supabase bucket",
-        "height": 146,
-        "width": 340
-      },
-      "id": "68418a95-a86e-41a5-8a3f-6bdaed718cb1",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -1260,
-        1060
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "update-photos",
-        "authentication": "headerAuth",
-        "options": {}
-      },
-      "id": "a06cf3cd-c462-403a-947f-959156e139d7",
-      "name": "New photo to save",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -840,
-        1080
-      ],
-      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "mk6V0TaWYGlLXgPM",
-          "name": "Supabase Imposbl Header Auth"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "url": "={{ $json.body.record.media_url_scraped.replace(/\\w\\.jpg/, 'rd-w2048_h1536.jpg') }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -400,
-        1080
-      ],
-      "id": "6b4c65b5-c5ac-4f67-b7ca-b6b914a79a90",
-      "name": "Get Image from Realtor.com",
-      "retryOnFail": true,
-      "waitBetweenTries": 5000
-    },
-    {
-      "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "workflow",
-              "value": "update_media"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
-      "position": [
-        -620,
-        1080
-      ],
-      "id": "e89d1817-bde6-4227-ae40-755ce147a616",
-      "name": "tag: update_media"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/properties/{{ $('New photo to save').first().json.body.record.property_id }}/{{ $('New photo to save').first().json.body.record.id }}.jpeg",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "supabaseApi",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Content-Type",
-              "value": "image/jpeg"
-            }
-          ]
-        },
-        "sendBody": true,
-        "contentType": "binaryData",
-        "inputDataFieldName": "data",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -180,
-        1080
-      ],
-      "id": "f958315e-505a-4c88-89af-be066e14030b",
-      "name": "Upload to Supabase Storage",
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "Rent Ready Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "tableId": "properties_media",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "condition": "eq",
-              "keyValue": "={{ $('Get Image from Realtor.com').item.json.body.record.id }}"
-            }
-          ]
-        },
-        "fieldsUi": {
-          "fieldValues": [
-            {
-              "fieldId": "media_url",
-              "fieldValue": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/{{ $json.Key }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        40,
-        1080
-      ],
-      "id": "d5f88f37-0a40-4811-bbea-0fa4374975e5",
-      "name": "Update property media table",
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "Rent Ready Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
         "dataToSave": {
           "values": [
             {
@@ -1180,54 +989,21 @@
           "executionMode": "production"
         }
       }
-    ],
-    "New photo to save": [
-      {
-        "json": {
-          "headers": {
-            "host": "imposbl.up.railway.app",
-            "user-agent": "pg_net/0.7.1",
-            "content-length": "287",
-            "accept": "*/*",
-            "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
-            "content-type": "application/json",
-            "x-forwarded-for": "3.210.235.210",
-            "x-forwarded-host": "imposbl.up.railway.app",
-            "x-forwarded-proto": "https",
-            "x-railway-request-id": "Ba--TAeQTW61QGLAPfdp1A_1002618245",
-            "x-real-ip": "3.210.235.210",
-            "x-request-start": "1737607945152",
-            "accept-encoding": "gzip"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "type": "INSERT",
-            "table": "properties_media",
-            "record": {
-              "id": 5726,
-              "media_url": null,
-              "created_at": "2025-01-23T04:52:24.598467+00:00",
-              "media_type": "photo",
-              "property_id": 616,
-              "set_to_delete": null,
-              "media_url_scraped": "realtor.com/test"
-            },
-            "schema": "public",
-            "old_record": null
-          },
-          "webhookUrl": "https://imposbl.up.railway.app/webhook-test/update-photos",
-          "executionMode": "test"
-        }
-      }
     ]
   },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
-  "triggerCount": 4,
-  "updatedAt": "2025-01-23T05:03:58.719Z",
-  "versionId": "1d4b0c2e-a9f9-45f1-90f5-dd2775a0950a"
+  "tags": [
+    {
+      "createdAt": "2025-01-16T15:30:13.763Z",
+      "updatedAt": "2025-01-16T15:30:13.763Z",
+      "id": "QPciqp9Oaqj30b6L",
+      "name": "trigger"
+    }
+  ],
+  "triggerCount": 3,
+  "updatedAt": "2025-01-24T00:49:58.502Z",
+  "versionId": "d6f7a9a8-c5ed-4765-9702-0464d6e92c28"
 }
