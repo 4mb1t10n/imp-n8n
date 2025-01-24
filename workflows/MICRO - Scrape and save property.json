@@ -125,17 +125,6 @@
         ]
       ]
     },
-    "Extract History": {
-      "main": [
-        [
-          {
-            "node": "Execute Workflow3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Upload photos": {
       "main": [
         []
@@ -588,7 +577,9 @@
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={\n    \"extendOutputFunction\": \"($) => { return {} }\",\n    \"includeFloorplans\": false,\n    \"mode\": \"BUY\",\n    \"proxy\": {\n        \"useApifyProxy\": true\n    },\n    \"startUrls\": [\n        \"{{ $('Scrape Microservice').item.json.scrape_url }}\"\n    ]\n}",
-        "options": {}
+        "options": {
+          "timeout": 120000
+        }
       },
       "id": "dca5a573-d65f-4433-9b6c-275e02625a68",
       "name": "Scrape Apify",
@@ -733,19 +724,6 @@
     },
     {
       "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.1,
-      "position": [
-        460,
-        460
-      ],
-      "id": "3d622943-7824-4022-b8c6-7ff5d8f1e646",
-      "name": "Execute Workflow3"
-    },
-    {
-      "parameters": {
         "workflowId": {
           "__rl": true,
           "value": "fAKNIRVusSsHh3Vc",
@@ -776,19 +754,6 @@
       ],
       "id": "1a10c5b8-0d52-4e3f-ac30-98556e8a3b34",
       "name": "Extract Photos"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        220,
-        460
-      ],
-      "id": "bfcdbbd5-15a7-43e6-b2f8-e35fdfc6cde0",
-      "name": "Extract History"
     },
     {
       "parameters": {
@@ -883,93 +848,12 @@
     }
   ],
   "pinData": {
-    "Update Property": [
-      {
-        "json": {
-          "id": 624,
-          "address_street": "248 W Crawford Ave",
-          "address_city": "Toledo",
-          "address_state": "OH",
-          "address_zip": "43612",
-          "prop_size_inside": 1152,
-          "prop_year": 1927,
-          "county_parcel": null,
-          "county_tract": null,
-          "property_status": "New",
-          "realtor_id": 3676272738,
-          "realtor_url": "https://www.realtor.com/realestateandhomes-detail/248-W-Crawford-Ave_Toledo_OH_43612_M36762-72738",
-          "realtor_status": "for_sale",
-          "beds": 3,
-          "baths": 2,
-          "garage": 2,
-          "stories": 2,
-          "realtor_desc": "This 3-bedroom single-family home is ready for your personal touch. With 1, 100 square feet of living space, this property offers plenty of room for reimagining and customization. It features solid construction and endless potential, including hardwood floors, a spacious living room, a roomy kitchen, a detached 2-car garage, and a large yard that includes a double lot.",
-          "realtor_dwelling_type": "single_family",
-          "realtor_list_price": 99900,
-          "address_neighborhood": "Five Points - Library Village",
-          "coord_lat": 41.70695,
-          "coord_lng": -83.552477,
-          "prop_size_outside": 4800,
-          "timestamp_updated": "2025-01-24T00:06:31.883+00:00",
-          "timestamp_created": "2025-01-24T00:06:31.883+00:00",
-          "starred": false,
-          "last_edited_by": "alex+dev@imposbl.com",
-          "followup_notes": null,
-          "scrape_source": null,
-          "offer_price": null,
-          "timestamp_scraped": "2025-01-24T00:06:31.884+00:00"
-        }
-      }
-    ],
     "Scrape Microservice": [
       {
         "json": {
-          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/40-E-Oakland-St_Toledo_OH_43608_M38301-43815",
+          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/M3865669630",
           "user": "alex+dev@imposbl.com",
-          "scrape_log_id": "201"
-        }
-      }
-    ],
-    "Try finding existing properties": [
-      {
-        "json": {}
-      }
-    ],
-    "Create Property": [
-      {
-        "json": {
-          "id": 625,
-          "address_street": "40 E Oakland St",
-          "address_city": "Toledo",
-          "address_state": "OH",
-          "address_zip": "43608",
-          "prop_size_inside": 1110,
-          "prop_year": 1902,
-          "county_parcel": null,
-          "county_tract": null,
-          "property_status": "New",
-          "realtor_id": 3830143815,
-          "realtor_url": "https://www.realtor.com/realestateandhomes-detail/40-E-Oakland-St_Toledo_OH_43608_M38301-43815",
-          "realtor_status": "for_sale",
-          "beds": 3,
-          "baths": 1,
-          "garage": 2,
-          "stories": 2,
-          "realtor_desc": "Check this out! Perfect for an investor or first-time homeowner. Large detached 2.5 car garage and full basement gives this house tons of storage space. Large living room and kitchen with a newer dishwasher included! Backyard is completely fenced in- perfect for the pets. Set up a time to see today!",
-          "realtor_dwelling_type": "single_family",
-          "realtor_list_price": 69900,
-          "address_neighborhood": "Lagrange",
-          "coord_lat": 41.681935,
-          "coord_lng": -83.544437,
-          "prop_size_outside": 3698,
-          "timestamp_updated": "2025-01-24T02:21:36.881+00:00",
-          "timestamp_created": "2025-01-24T02:21:36.881+00:00",
-          "starred": false,
-          "last_edited_by": "alex+dev@imposbl.com",
-          "followup_notes": null,
-          "scrape_source": null,
-          "offer_price": null,
-          "timestamp_scraped": "2025-01-24T02:21:36.882+00:00"
+          "scrape_log_id": "200"
         }
       }
     ]
@@ -987,6 +871,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-24T02:26:24.486Z",
-  "versionId": "c9bb88e3-e5dd-4506-b855-1167cf321294"
+  "updatedAt": "2025-01-24T03:50:53.759Z",
+  "versionId": "a6eb97c6-f6c5-4044-b199-dd67bef962d6"
 }
