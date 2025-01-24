@@ -76,7 +76,13 @@
     },
     "Scrape Log Success": {
       "main": [
-        []
+        [
+          {
+            "node": "Extract Photos1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Scrape Apify": {
@@ -112,7 +118,7 @@
       "main": [
         [
           {
-            "node": "Upload photos",
+            "node": "set url and property id",
             "type": "main",
             "index": 0
           }
@@ -124,6 +130,44 @@
         [
           {
             "node": "Execute Workflow3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload photos": {
+      "main": [
+        []
+      ]
+    },
+    "set url and property id": {
+      "main": [
+        [
+          {
+            "node": "Upload photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Photos1": {
+      "main": [
+        [
+          {
+            "node": "set url and property id1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set url and property id1": {
+      "main": [
+        [
+          {
+            "node": "Upload photos1",
             "type": "main",
             "index": 0
           }
@@ -695,7 +739,7 @@
       "typeVersion": 1.1,
       "position": [
         460,
-        420
+        460
       ],
       "id": "3d622943-7824-4022-b8c6-7ff5d8f1e646",
       "name": "Execute Workflow3"
@@ -707,7 +751,6 @@
           "value": "fAKNIRVusSsHh3Vc",
           "mode": "id"
         },
-        "mode": "each",
         "options": {
           "waitForSubWorkflow": false
         }
@@ -715,7 +758,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.1,
       "position": [
-        460,
+        700,
         240
       ],
       "id": "8078e945-4cda-4708-8abe-62ad0d695f6d",
@@ -728,7 +771,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        240,
+        220,
         240
       ],
       "id": "1a10c5b8-0d52-4e3f-ac30-98556e8a3b34",
@@ -741,783 +784,192 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        240,
-        420
+        220,
+        460
       ],
       "id": "bfcdbbd5-15a7-43e6-b2f8-e35fdfc6cde0",
       "name": "Extract History"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "28758a61-4698-4aac-a6a8-a6ae1911a7a8",
+              "name": "url",
+              "value": "={{ $json.href }}",
+              "type": "string"
+            },
+            {
+              "id": "9cd1271d-cb54-44bc-ae07-44c6071729a3",
+              "name": "property_id",
+              "value": "={{ $('Update Property').first().json.id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        240
+      ],
+      "id": "6767736c-2972-4345-8d97-deb15b075ce9",
+      "name": "set url and property id"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "fAKNIRVusSsHh3Vc",
+          "mode": "id"
+        },
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        700,
+        0
+      ],
+      "id": "44c56aac-707e-46d7-8ad5-92da46bd2056",
+      "name": "Upload photos1"
+    },
+    {
+      "parameters": {
+        "jsCode": "function extractImageUrls() {\n    try {\n        const scrapeData = $('Scrape Apify').all();\n        console.log('Scrape data:', scrapeData);\n      \n        if (!scrapeData?.[0]?.json?.photos) {\n            console.log('No photos found in data structure');\n            return []; \n        }\n        \n        const photos = scrapeData[0].json.photos;\n        console.log('Photos array:', photos);\n        \n        const urls = photos.map(photo => ({\n            href: photo.href\n        }));\n        console.log('Extracted URLs:', urls);\n        return urls;\n    } catch (error) {\n        console.log('Error:', error);\n        return [];\n    }\n}\nreturn extractImageUrls();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "a66e2ebc-a1fc-461d-b97e-5324b3ffbe0a",
+      "name": "Extract Photos1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "28758a61-4698-4aac-a6a8-a6ae1911a7a8",
+              "name": "url",
+              "value": "={{ $json.href }}",
+              "type": "string"
+            },
+            {
+              "id": "9cd1271d-cb54-44bc-ae07-44c6071729a3",
+              "name": "property_id",
+              "value": "={{ $('Create Property').first().json.id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        0
+      ],
+      "id": "0942ef97-cf65-458c-acf3-a8a1bad2b5d9",
+      "name": "set url and property id1"
     }
   ],
   "pinData": {
-    "Scrape Microservice": [
+    "Update Property": [
       {
         "json": {
-          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/248-W-Crawford-Ave_Toledo_OH_43612_M36762-72738",
-          "user": "alex+dev@imposbl.com",
-          "scrape_log_id": "199"
+          "id": 624,
+          "address_street": "248 W Crawford Ave",
+          "address_city": "Toledo",
+          "address_state": "OH",
+          "address_zip": "43612",
+          "prop_size_inside": 1152,
+          "prop_year": 1927,
+          "county_parcel": null,
+          "county_tract": null,
+          "property_status": "New",
+          "realtor_id": 3676272738,
+          "realtor_url": "https://www.realtor.com/realestateandhomes-detail/248-W-Crawford-Ave_Toledo_OH_43612_M36762-72738",
+          "realtor_status": "for_sale",
+          "beds": 3,
+          "baths": 2,
+          "garage": 2,
+          "stories": 2,
+          "realtor_desc": "This 3-bedroom single-family home is ready for your personal touch. With 1, 100 square feet of living space, this property offers plenty of room for reimagining and customization. It features solid construction and endless potential, including hardwood floors, a spacious living room, a roomy kitchen, a detached 2-car garage, and a large yard that includes a double lot.",
+          "realtor_dwelling_type": "single_family",
+          "realtor_list_price": 99900,
+          "address_neighborhood": "Five Points - Library Village",
+          "coord_lat": 41.70695,
+          "coord_lng": -83.552477,
+          "prop_size_outside": 4800,
+          "timestamp_updated": "2025-01-24T00:06:31.883+00:00",
+          "timestamp_created": "2025-01-24T00:06:31.883+00:00",
+          "starred": false,
+          "last_edited_by": "alex+dev@imposbl.com",
+          "followup_notes": null,
+          "scrape_source": null,
+          "offer_price": null,
+          "timestamp_scraped": "2025-01-24T00:06:31.884+00:00"
         }
       }
     ],
-    "Scrape Apify": [
+    "Scrape Microservice": [
       {
         "json": {
-          "url": "https://www.realtor.com/realestateandhomes-detail/248-W-Crawford-Ave_Toledo_OH_43612_M36762-72738",
-          "status": "for_sale",
-          "id": "3676272738",
-          "soldOn": "1994-08-30",
-          "lastSoldPrice": 61000,
-          "listPrice": 99900,
-          "baths": 2,
-          "baths_3qtr": null,
-          "baths_full": 1,
-          "baths_full_calc": 1,
-          "baths_half": 1,
-          "baths_max": null,
-          "baths_min": null,
-          "baths_partial_calc": 1,
-          "baths_total": null,
+          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/40-E-Oakland-St_Toledo_OH_43608_M38301-43815",
+          "user": "alex+dev@imposbl.com",
+          "scrape_log_id": "201"
+        }
+      }
+    ],
+    "Try finding existing properties": [
+      {
+        "json": {}
+      }
+    ],
+    "Create Property": [
+      {
+        "json": {
+          "id": 625,
+          "address_street": "40 E Oakland St",
+          "address_city": "Toledo",
+          "address_state": "OH",
+          "address_zip": "43608",
+          "prop_size_inside": 1110,
+          "prop_year": 1902,
+          "county_parcel": null,
+          "county_tract": null,
+          "property_status": "New",
+          "realtor_id": 3830143815,
+          "realtor_url": "https://www.realtor.com/realestateandhomes-detail/40-E-Oakland-St_Toledo_OH_43608_M38301-43815",
+          "realtor_status": "for_sale",
           "beds": 3,
-          "beds_max": null,
-          "beds_min": null,
-          "construction": null,
-          "cooling": null,
-          "exterior": null,
-          "fireplace": null,
+          "baths": 1,
           "garage": 2,
-          "garage_max": null,
-          "garage_min": null,
-          "garage_type": null,
-          "heating": null,
-          "logo": null,
-          "lot_sqft": 4800,
-          "name": null,
-          "pool": null,
-          "roofing": null,
-          "rooms": null,
-          "sqft": 1152,
-          "sqft_max": null,
-          "sqft_min": null,
           "stories": 2,
-          "styles": null,
-          "sub_type": null,
-          "text": "This 3-bedroom single-family home is ready for your personal touch. With 1, 100 square feet of living space, this property offers plenty of room for reimagining and customization. It features solid construction and endless potential, including hardwood floors, a spacious living room, a roomy kitchen, a detached 2-car garage, and a large yard that includes a double lot.",
-          "type": "single_family",
-          "units": null,
-          "year_built": 1927,
-          "year_renovated": null,
-          "zoning": null,
-          "coordinates": {
-            "latitude": 41.70695,
-            "longitude": -83.552477
-          },
-          "address": {
-            "street": "248 W Crawford Ave",
-            "locality": "Toledo",
-            "region": "OH",
-            "postalCode": "43612"
-          },
-          "photos": [
-            {
-              "tags": [
-                {
-                  "label": "house_view"
-                },
-                {
-                  "label": "yard"
-                },
-                {
-                  "label": "house_view"
-                },
-                {
-                  "label": "house_view"
-                }
-              ],
-              "title": null,
-              "description": null,
-              "href": "http://ap.rdcpix.com/859d0aa6b99434c2c6775c0aff5ed09fl-m3765305969od-w480_h360_x2.webp",
-              "type": "realtordotcom_mls_listing_image"
-            },
-            {
-              "tags": [
-                {
-                  "label": "house_view"
-                },
-                {
-                  "label": "road_view"
-                },
-                {
-                  "label": "house_view"
-                },
-                {
-                  "label": "house_view"
-                }
-              ],
-              "title": null,
-              "description": null,
-              "href": "http://ap.rdcpix.com/859d0aa6b99434c2c6775c0aff5ed09fl-m3838807998od-w480_h360_x2.webp",
-              "type": "realtordotcom_mls_listing_image"
-            }
-          ],
-          "nearbySchools": {
-            "schools": [
-              {
-                "coordinate": {
-                  "lat": 41.69602,
-                  "lon": -83.564908
-                },
-                "distance_in_miles": 1,
-                "district": {
-                  "id": "06198573701",
-                  "name": "Toledo City School District"
-                },
-                "education_levels": [
-                  "elementary",
-                  "middle"
-                ],
-                "funding_type": "public",
-                "grades": [
-                  "K",
-                  "1",
-                  "2",
-                  "3",
-                  "4",
-                  "5",
-                  "6",
-                  "7",
-                  "8"
-                ],
-                "greatschools_id": "3901554",
-                "id": "0755736461",
-                "name": "Whittier Elementary School",
-                "nces_code": "390449001843",
-                "parent_rating": 3,
-                "rating": 3,
-                "review_count": 3,
-                "slug_id": "Whittier-Elementary-School-0755736461",
-                "student_count": 599
-              },
-              {
-                "coordinate": {
-                  "lat": 41.700498,
-                  "lon": -83.59291
-                },
-                "distance_in_miles": 2.1,
-                "district": {
-                  "id": "06198573701",
-                  "name": "Toledo City School District"
-                },
-                "education_levels": [
-                  "high"
-                ],
-                "funding_type": "public",
-                "grades": [
-                  "9",
-                  "10",
-                  "11",
-                  "12"
-                ],
-                "greatschools_id": "3901549",
-                "id": "0755736411",
-                "name": "Start High School",
-                "nces_code": "390449001835",
-                "parent_rating": null,
-                "rating": 2,
-                "review_count": 0,
-                "slug_id": "Start-High-School-0755736411",
-                "student_count": 1381
-              },
-              {
-                "coordinate": {
-                  "lat": 41.716352,
-                  "lon": -83.559768
-                },
-                "distance_in_miles": 0.8,
-                "district": {
-                  "id": "06198571421",
-                  "name": null
-                },
-                "education_levels": [
-                  "elementary",
-                  "middle"
-                ],
-                "funding_type": "private",
-                "grades": [
-                  "K",
-                  "1",
-                  "2",
-                  "3",
-                  "4",
-                  "5",
-                  "6",
-                  "7",
-                  "8"
-                ],
-                "greatschools_id": "3903200",
-                "id": "0755760001",
-                "name": "Regina Coeli School",
-                "nces_code": "01061481",
-                "parent_rating": 4,
-                "rating": null,
-                "review_count": 4,
-                "slug_id": "Regina-Coeli-School-0755760001",
-                "student_count": 193
-              }
-            ]
-          },
-          "neighborhood": [
-            {
-              "city": "Toledo",
-              "id": "e7234da7-bb8b-558b-b857-f8fb7dfba762",
-              "level": "neighborhood",
-              "name": "Five Points - Library Village",
-              "state_code": "OH",
-              "slug_id": "Five-Points-Library-Village_Toledo_OH"
-            }
-          ],
-          "local": {
-            "flood": {
-              "firststreet_url": null,
-              "fsid": "391761672",
-              "flood_factor_score": 1,
-              "flood_factor_severity": "minimal",
-              "environmental_risk": 1,
-              "trend_direction": null,
-              "fema_zone": [
-                "X (unshaded)"
-              ],
-              "insurance_requirement": "recommended",
-              "flood_trend": "This property’s flood risk is not changing.",
-              "flood_trend_paragraph": "This property’s risk of flood is <b>not changing</b>.",
-              "flood_insurance_text": null,
-              "insurance_rates": null
-            },
-            "noise": {
-              "score": 75,
-              "noise_categories": [
-                {
-                  "text": "Low",
-                  "type": "airport"
-                },
-                {
-                  "text": "Medium",
-                  "type": "traffic"
-                },
-                {
-                  "text": "Low",
-                  "type": "local"
-                },
-                {
-                  "text": "Medium",
-                  "type": "score"
-                }
-              ]
-            },
-            "wildfire": {
-              "fsid": "391761672",
-              "fire_factor_score": 1,
-              "fire_factor_severity": "Minimal",
-              "fire_cumulative_30": null,
-              "fire_trend": "This property’s wildfire risk is not changing.",
-              "fire_trend_paragraph": "This property's risk of wildfire is <b>not changing</b>.",
-              "usfs_relative_risk": "This property is located in a county with an average wildfire risk greater than 7.9% counties in the US.",
-              "firststreet_url": null,
-              "fire_insurance_text": null,
-              "insurance_rates": null
-            }
-          },
-          "history": [
-            {
-              "date": "2025-01-14",
-              "event_name": "Listed",
-              "price": 99900,
-              "price_sqft": 86.71875,
-              "source_listing_id": "6124917",
-              "source_name": "NWOhio",
-              "listing": null
-            },
-            {
-              "date": "1994-08-30",
-              "event_name": "Sold",
-              "price": 61000,
-              "price_sqft": 52.951388888888886,
-              "source_listing_id": null,
-              "source_name": "Public Record",
-              "listing": null
-            },
-            {
-              "date": "1988-07-01",
-              "event_name": "Sold",
-              "price": 48500,
-              "price_sqft": 42.10069444444444,
-              "source_listing_id": null,
-              "source_name": "Public Record",
-              "listing": null
-            }
-          ],
-          "taxHistory": [
-            {
-              "assessment": {
-                "building": 18235,
-                "land": 2625,
-                "total": 20860
-              },
-              "market": {
-                "building": 52100,
-                "land": 7500,
-                "total": 59600
-              },
-              "tax": 1361,
-              "year": 2022
-            },
-            {
-              "assessment": {
-                "building": 18235,
-                "land": 2625,
-                "total": 20860
-              },
-              "market": {
-                "building": 52100,
-                "land": 7500,
-                "total": 59600
-              },
-              "tax": 1394,
-              "year": 2021
-            },
-            {
-              "assessment": {
-                "building": 16450,
-                "land": 2415,
-                "total": 18865
-              },
-              "market": {
-                "building": 47000,
-                "land": 6900,
-                "total": 53900
-              },
-              "tax": 1385,
-              "year": 2019
-            },
-            {
-              "assessment": {
-                "building": 16450,
-                "land": 2415,
-                "total": 18865
-              },
-              "market": {
-                "building": 47000,
-                "land": 6900,
-                "total": 53900
-              },
-              "tax": 1392,
-              "year": 2018
-            },
-            {
-              "assessment": {
-                "building": 13825,
-                "land": 2625,
-                "total": 16450
-              },
-              "market": {
-                "building": 39500,
-                "land": 7500,
-                "total": 47000
-              },
-              "tax": 1285,
-              "year": 2017
-            },
-            {
-              "assessment": {
-                "building": 13825,
-                "land": 2625,
-                "total": 16450
-              },
-              "market": {
-                "building": 39500,
-                "land": 7500,
-                "total": 47000
-              },
-              "tax": 1288,
-              "year": 2016
-            },
-            {
-              "assessment": {
-                "building": 13825,
-                "land": 2625,
-                "total": 16450
-              },
-              "market": {
-                "building": 39500,
-                "land": 7500,
-                "total": 47000
-              },
-              "tax": 1277,
-              "year": 2015
-            },
-            {
-              "assessment": {
-                "building": 13830,
-                "land": 2630,
-                "total": 16460
-              },
-              "market": {
-                "building": 39514,
-                "land": 7514,
-                "total": 47028
-              },
-              "tax": 1254,
-              "year": 2014
-            },
-            {
-              "assessment": {
-                "building": 13830,
-                "land": 2630,
-                "total": 16460
-              },
-              "market": {
-                "building": 39514,
-                "land": 7514,
-                "total": 47028
-              },
-              "tax": 1154,
-              "year": 2013
-            },
-            {
-              "assessment": {
-                "building": 18730,
-                "land": 2630,
-                "total": 21360
-              },
-              "market": {
-                "building": 53514,
-                "land": 7514,
-                "total": 61028
-              },
-              "tax": 1413,
-              "year": 2012
-            },
-            {
-              "assessment": {
-                "building": 23030,
-                "land": 4900,
-                "total": 27930
-              },
-              "market": {
-                "building": 65800,
-                "land": 14000,
-                "total": 79800
-              },
-              "tax": 1572,
-              "year": 2011
-            },
-            {
-              "assessment": {
-                "building": 23030,
-                "land": 4900,
-                "total": 27930
-              },
-              "market": {
-                "building": 65800,
-                "land": 14000,
-                "total": 79800
-              },
-              "tax": 1569,
-              "year": 2010
-            },
-            {
-              "assessment": {
-                "building": 23030,
-                "land": 4900,
-                "total": 27930
-              },
-              "market": {
-                "building": 65800,
-                "land": 14000,
-                "total": 79800
-              },
-              "tax": 1596,
-              "year": 2009
-            },
-            {
-              "assessment": {
-                "building": 26780,
-                "land": 5710,
-                "total": 32490
-              },
-              "market": {
-                "building": 76514,
-                "land": 16314,
-                "total": 92829
-              },
-              "tax": 1678,
-              "year": 2008
-            },
-            {
-              "assessment": {
-                "building": 26780,
-                "land": 5710,
-                "total": 32490
-              },
-              "market": {
-                "building": 76514,
-                "land": 16314,
-                "total": 92828
-              },
-              "tax": 1605,
-              "year": 2007
-            },
-            {
-              "assessment": {
-                "building": 27020,
-                "land": 6270,
-                "total": 33290
-              },
-              "market": {
-                "building": 77200,
-                "land": 17914,
-                "total": 95114
-              },
-              "tax": 1537,
-              "year": 2006
-            }
-          ],
-          "advertisers": [
-            {
-              "team_name": null,
-              "address": {
-                "city": "MAUMEE",
-                "country": "USA",
-                "line": "3555 BRIARFIELD BLVD",
-                "postal_code": "43537",
-                "state": "OH",
-                "state_code": null
-              },
-              "builder": null,
-              "broker": {
-                "accent_color": "Transparent",
-                "designations": [],
-                "fulfillment_id": "3387570",
-                "name": "The Danberry Co., REALTORS - Broker",
-                "logo": ""
-              },
-              "email": "",
-              "fulfillment_id": "3489383",
-              "href": null,
-              "mls_set": "A-NWOH-1GANTAL",
-              "name": "Alisha M Gant",
-              "nrds_id": null,
-              "office": {
-                "address": {
-                  "city": "MAUMEE",
-                  "coordinate": {
-                    "lat": null,
-                    "lon": null
-                  },
-                  "country": "US",
-                  "line": "3555 BRIARFIELD BLVD",
-                  "postal_code": "43537",
-                  "state": null,
-                  "state_code": "OH"
-                },
-                "application_url": null,
-                "email": "dan01@danberry.com",
-                "lead_email": null,
-                "fulfillment_id": "2423033",
-                "hours": null,
-                "href": null,
-                "mls_set": "O-NWOH-DAN01",
-                "out_of_community": null,
-                "name": "The Danberry Co",
-                "phones": [
-                  {
-                    "ext": "",
-                    "number": "4198668888",
-                    "primary": true,
-                    "trackable": null,
-                    "type": "Office"
-                  }
-                ],
-                "photo": {
-                  "href": "https://ap.rdcpix.com/64f0a01be3d4552cbf97550005f412d5o-c1114254682l.jpg"
-                },
-                "slogan": ""
-              },
-              "phones": [
-                {
-                  "ext": "",
-                  "number": "4193600875",
-                  "primary": true,
-                  "trackable": null,
-                  "type": "office"
-                }
-              ],
-              "photo": null,
-              "slogan": null,
-              "type": "seller"
-            }
-          ],
-          "details": [
-            {
-              "category": "Bedrooms",
-              "parent_category": "Interior",
-              "text": [
-                "Bedrooms: 3",
-                "Primary Bedroom Dimensions: 10 x 12",
-                "Primary Bedroom Level: Upper",
-                "Primary Bedroom Features: Primary Bedroom"
-              ]
-            },
-            {
-              "category": "Other Rooms",
-              "parent_category": "Interior",
-              "text": [
-                "Total Rooms: 8",
-                "UtilityRoom: 11 x 11 x Lower",
-                "UtilityRoom Desc: Utl-Laundry",
-                "Bedroom: 8 x 10",
-                "Bedroom Level: Upper",
-                "Bedroom Desc: Bedroom",
-                "Bedroom: 11 x 11",
-                "Bedroom Level: Upper",
-                "Bedroom Desc: Bedroom",
-                "Basement Features: Finished Basement",
-                "Basement Dimensions: 20 x 11",
-                "Living Room Dimensions: 11 x 18",
-                "Living Room Level: Main",
-                "Living Room Features: Living Room",
-                "Basement Description: Full"
-              ]
-            },
-            {
-              "category": "Bathrooms",
-              "parent_category": "Interior",
-              "text": [
-                "Total Bathrooms: 2",
-                "Full Bathrooms: 1",
-                "1/2 Bathrooms: 1",
-                "Bathrooms On Main Level: 1"
-              ]
-            },
-            {
-              "category": "Appliances",
-              "parent_category": "Interior",
-              "text": [
-                "GasWaterHeater",
-                "Oven",
-                "Range",
-                "Refrigerator",
-                "Laundry Features: GasDryerHookup"
-              ]
-            },
-            {
-              "category": "Heating and Cooling",
-              "parent_category": "Interior",
-              "text": [
-                "Cooling Features: CentralAir",
-                "Heating Features: ForcedAir, NaturalGas",
-                "Heating: Yes"
-              ]
-            },
-            {
-              "category": "Kitchen and Dining",
-              "parent_category": "Interior",
-              "text": [
-                "Dining Room Dimensions: 11 x 11",
-                "Dining Room Features: Dining Room",
-                "Dining Room Level: Main",
-                "Kitchen Dimensions: 15 x 16",
-                "Kitchen Features: Kitchen",
-                "Kitchen Level: Main"
-              ]
-            },
-            {
-              "category": "Exterior and Lot Features",
-              "parent_category": "Exterior",
-              "text": [
-                "Patio And Porch Features: Deck"
-              ]
-            },
-            {
-              "category": "Land Info",
-              "parent_category": "Exterior",
-              "text": [
-                "Lot Description: RectangularLot",
-                "Lot Size Acres: 0.1102",
-                "Lot Size Dimensions: 4, 800",
-                "Lot Size Square Feet: 4800"
-              ]
-            },
-            {
-              "category": "Garage and Parking",
-              "parent_category": "Exterior",
-              "text": [
-                "Garage Spaces: 2",
-                "Other Parking: Detached, Garage",
-                "Parking Features: Concrete, Driveway, Detached, Garage",
-                "Parking Total: 2"
-              ]
-            },
-            {
-              "category": "Homeowners Association",
-              "parent_category": "Community",
-              "text": [
-                "Association: No",
-                "Calculated Total Monthly Association Fees: 0"
-              ]
-            },
-            {
-              "category": "School Information",
-              "parent_category": "Community",
-              "text": [
-                "Elementary School: Whittier",
-                "Elementary School District: Toledo",
-                "High School: Start",
-                "High School District: Toledo",
-                "Middle or Junior School District: Toledo"
-              ]
-            },
-            {
-              "category": "Other Property Info",
-              "parent_category": "Listing",
-              "text": [
-                "Source Listing Status: Active",
-                "County: Lucas",
-                "Directions: Bennett to E on Crawford",
-                "Source Property Type: Residential",
-                "Inclusions: ,",
-                "Source Neighborhood: Collingwood Park",
-                "Parcel Number: 11-26014",
-                "Postal City: Toledo",
-                "Postal Code Plus 4: 3421",
-                "Subdivision: Collingwood Park",
-                "Property Subtype: SingleFamilyResidence",
-                "Source System Name: C2C"
-              ]
-            },
-            {
-              "category": "Building and Construction",
-              "parent_category": "Features",
-              "text": [
-                "Total Square Feet Living: 1152",
-                "Year Built: 1927",
-                "Construction Materials: AluminumSiding, SteelSiding",
-                "Foundation Details: Basement",
-                "Levels: OneAndOneHalf",
-                "Living Area Source: PublicRecords",
-                "Property Age: 98",
-                "Roof: Shingle",
-                "Architectural Style: Traditional"
-              ]
-            },
-            {
-              "category": "Utilities",
-              "parent_category": "Features",
-              "text": [
-                "Electric: CircuitBreakers",
-                "Sewer: Sanitary",
-                "Water Source: Public"
-              ]
-            }
-          ]
+          "realtor_desc": "Check this out! Perfect for an investor or first-time homeowner. Large detached 2.5 car garage and full basement gives this house tons of storage space. Large living room and kitchen with a newer dishwasher included! Backyard is completely fenced in- perfect for the pets. Set up a time to see today!",
+          "realtor_dwelling_type": "single_family",
+          "realtor_list_price": 69900,
+          "address_neighborhood": "Lagrange",
+          "coord_lat": 41.681935,
+          "coord_lng": -83.544437,
+          "prop_size_outside": 3698,
+          "timestamp_updated": "2025-01-24T02:21:36.881+00:00",
+          "timestamp_created": "2025-01-24T02:21:36.881+00:00",
+          "starred": false,
+          "last_edited_by": "alex+dev@imposbl.com",
+          "followup_notes": null,
+          "scrape_source": null,
+          "offer_price": null,
+          "timestamp_scraped": "2025-01-24T02:21:36.882+00:00"
         }
       }
     ]
@@ -1535,6 +987,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-24T00:13:10.672Z",
-  "versionId": "351b2edf-5ca1-450f-bdd7-55bf8b443e69"
+  "updatedAt": "2025-01-24T02:26:24.486Z",
+  "versionId": "c9bb88e3-e5dd-4506-b855-1167cf321294"
 }
