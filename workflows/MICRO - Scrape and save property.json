@@ -1,0 +1,1540 @@
+{
+  "active": false,
+  "connections": {
+    "Try finding existing properties": {
+      "main": [
+        [
+          {
+            "node": "Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Property": {
+      "main": [
+        [
+          {
+            "node": "Scrape Log Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Count": {
+      "main": [
+        [
+          {
+            "node": "Number of properties found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Microservice": {
+      "main": [
+        [
+          {
+            "node": "Scrape Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Scrape Log": {
+      "main": [
+        [
+          {
+            "node": "Extract Photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Number of properties found": {
+      "main": [
+        [
+          {
+            "node": "Create Property",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Log Success": {
+      "main": [
+        []
+      ]
+    },
+    "Scrape Apify": {
+      "main": [
+        [
+          {
+            "node": "Try finding existing properties",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Scrape Log Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Property": {
+      "main": [
+        [
+          {
+            "node": "Update Scrape Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Photos": {
+      "main": [
+        [
+          {
+            "node": "Upload photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract History": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-16T15:29:49.302Z",
+  "id": "Dk5zxWqa5hfdmlVn",
+  "meta": null,
+  "name": "MICRO - Scrape and save property",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties_scrape_log",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Scrape Microservice').item.json.scrape_log_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "success",
+              "fieldValue": "=FALSE"
+            },
+            {
+              "fieldId": "error_desc",
+              "fieldValue": "={{ $json.error.code }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        240
+      ],
+      "id": "dff6dbe9-ef62-4727-b51e-50a8f0ee98f6",
+      "name": "Scrape Log Error",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "properties",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "address_street",
+              "condition": "ilike",
+              "keyValue": "={{ $json.address.street }}"
+            },
+            {
+              "keyName": "address_city",
+              "condition": "eq",
+              "keyValue": "={{ $json.neighborhood[0].city }}"
+            },
+            {
+              "keyName": "address_state",
+              "condition": "eq",
+              "keyValue": "={{ $json.neighborhood[0].state_code }}"
+            },
+            {
+              "keyName": "address_zip",
+              "condition": "eq",
+              "keyValue": "={{ $json.address.postalCode }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        40
+      ],
+      "id": "5a0add78-48ec-4101-a76c-31d53ebfde16",
+      "name": "Try finding existing properties",
+      "executeOnce": false,
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties_scrape_log",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Scrape Microservice').item.json.scrape_log_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "success",
+              "fieldValue": "={{ \"TRUE\" }}"
+            },
+            {
+              "fieldId": "error_desc",
+              "fieldValue": "=Scraped successfully"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b9583a2a-dfb7-4e81-9df5-40368507689b",
+      "name": "Scrape Log Success",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "properties",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "address_street",
+              "fieldValue": "={{ $('Scrape Apify').item.json.address.street }}"
+            },
+            {
+              "fieldId": "address_city",
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].city }}"
+            },
+            {
+              "fieldId": "address_state",
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].state_code }}"
+            },
+            {
+              "fieldId": "address_zip",
+              "fieldValue": "={{ $('Scrape Apify').item.json.address.postalCode }}"
+            },
+            {
+              "fieldId": "prop_size_inside",
+              "fieldValue": "={{ $('Scrape Apify').item.json.sqft }}"
+            },
+            {
+              "fieldId": "prop_year",
+              "fieldValue": "={{ $('Scrape Apify').item.json.year_built }}"
+            },
+            {
+              "fieldId": "realtor_id",
+              "fieldValue": "={{ $('Scrape Apify').item.json.id }}"
+            },
+            {
+              "fieldId": "realtor_url",
+              "fieldValue": "={{ $('Scrape Apify').item.json.url }}"
+            },
+            {
+              "fieldId": "realtor_status",
+              "fieldValue": "={{ $('Scrape Apify').item.json.status }}"
+            },
+            {
+              "fieldId": "beds",
+              "fieldValue": "={{ $('Scrape Apify').item.json.beds }}"
+            },
+            {
+              "fieldId": "baths",
+              "fieldValue": "={{ $('Scrape Apify').item.json.baths }}"
+            },
+            {
+              "fieldId": "garage",
+              "fieldValue": "={{ $('Scrape Apify').item.json.garage }}"
+            },
+            {
+              "fieldId": "stories",
+              "fieldValue": "={{ $('Scrape Apify').item.json.stories }}"
+            },
+            {
+              "fieldId": "realtor_dwelling_type",
+              "fieldValue": "={{ $('Scrape Apify').item.json.type }}"
+            },
+            {
+              "fieldId": "realtor_list_price",
+              "fieldValue": "={{ $('Scrape Apify').item.json.listPrice }}"
+            },
+            {
+              "fieldId": "address_neighborhood",
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].name }}"
+            },
+            {
+              "fieldId": "coord_lat",
+              "fieldValue": "={{ $('Scrape Apify').item.json.coordinates.latitude }}"
+            },
+            {
+              "fieldId": "coord_lng",
+              "fieldValue": "={{ $('Scrape Apify').item.json.coordinates.longitude }}"
+            },
+            {
+              "fieldId": "prop_size_outside",
+              "fieldValue": "={{ $('Scrape Apify').item.json.lot_sqft }}"
+            },
+            {
+              "fieldId": "timestamp_updated",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "timestamp_created",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "last_edited_by",
+              "fieldValue": "={{ $('Scrape Microservice').item.json.user }}"
+            },
+            {
+              "fieldId": "timestamp_scraped",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "realtor_desc",
+              "fieldValue": "={{ $('Scrape Apify').item.json.text }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        0
+      ],
+      "id": "1f91a05b-fe23-4f66-a4b4-de118521df2f",
+      "name": "Create Property",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "if (Object.keys(items[0].json).length === 0) {\nreturn [\n\t{\n\t\tjson: {\n\t\t\tresults: 0,\n\t\t}\n\t}\n]\n}\nreturn [\n\t{\n\t\tjson: {\n\t\t\tresults: items.length,\n\t\t}\n\t}\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -640,
+        140
+      ],
+      "id": "70545f2d-1648-42b4-b5c8-cbb65c121aaa",
+      "name": "Count"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1340,
+        140
+      ],
+      "id": "f73dc483-0bd5-4596-a565-b85bd6af9a3e",
+      "name": "Scrape Microservice"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties_scrape_log",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Scrape Microservice').item.json.scrape_log_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "success",
+              "fieldValue": "={{ \"TRUE\" }}"
+            },
+            {
+              "fieldId": "error_desc",
+              "fieldValue": "=Existing record updated"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        0,
+        240
+      ],
+      "id": "f77fa921-5035-4b9e-87ea-c3b0fe6f4205",
+      "name": "Update Scrape Log",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Inputs\nscrape_url\nuser (email)\nscrape_log_id"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1620,
+        120
+      ],
+      "typeVersion": 1,
+      "id": "1928987c-0446-4391-ab46-cf85c81031b4",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.results }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "0 results"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3f836040-e20c-4c0b-84c5-e795339645c1",
+                    "leftValue": "={{ $json.results }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "1 result"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -440,
+        140
+      ],
+      "id": "4d714abe-e621-4d80-ab4e-21b0a80155c5",
+      "name": "Number of properties found"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/epctex~realtor-scraper/run-sync-get-dataset-items",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "apify_api_eBcJIT4Z3eJhNHRL1UFtko2cVhff8i4fqE6a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"extendOutputFunction\": \"($) => { return {} }\",\n    \"includeFloorplans\": false,\n    \"mode\": \"BUY\",\n    \"proxy\": {\n        \"useApifyProxy\": true\n    },\n    \"startUrls\": [\n        \"{{ $('Scrape Microservice').item.json.scrape_url }}\"\n    ]\n}",
+        "options": {}
+      },
+      "id": "dca5a573-d65f-4433-9b6c-275e02625a68",
+      "name": "Scrape Apify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1120,
+        140
+      ],
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Try finding existing properties').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "address_street",
+              "fieldValue": "={{ $('Scrape Apify').item.json.address.street }}"
+            },
+            {
+              "fieldId": "address_city",
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].city }}"
+            },
+            {
+              "fieldId": "address_state",
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].state_code }}"
+            },
+            {
+              "fieldId": "address_zip",
+              "fieldValue": "={{ $('Scrape Apify').item.json.address.postalCode }}"
+            },
+            {
+              "fieldId": "prop_size_inside",
+              "fieldValue": "={{ $('Scrape Apify').item.json.sqft }}"
+            },
+            {
+              "fieldId": "prop_year",
+              "fieldValue": "={{ $('Scrape Apify').item.json.year_built }}"
+            },
+            {
+              "fieldId": "realtor_id",
+              "fieldValue": "={{ $('Scrape Apify').item.json.id }}"
+            },
+            {
+              "fieldId": "realtor_url",
+              "fieldValue": "={{ $('Scrape Apify').item.json.url }}"
+            },
+            {
+              "fieldId": "realtor_status",
+              "fieldValue": "={{ $('Scrape Apify').item.json.status }}"
+            },
+            {
+              "fieldId": "beds",
+              "fieldValue": "={{ $('Scrape Apify').item.json.beds }}"
+            },
+            {
+              "fieldId": "baths",
+              "fieldValue": "={{ $('Scrape Apify').item.json.baths }}"
+            },
+            {
+              "fieldId": "garage",
+              "fieldValue": "={{ $('Scrape Apify').item.json.garage }}"
+            },
+            {
+              "fieldId": "stories",
+              "fieldValue": "={{ $('Scrape Apify').item.json.stories }}"
+            },
+            {
+              "fieldId": "realtor_dwelling_type",
+              "fieldValue": "={{ $('Scrape Apify').item.json.type }}"
+            },
+            {
+              "fieldId": "realtor_list_price",
+              "fieldValue": "={{ $('Scrape Apify').item.json.listPrice }}"
+            },
+            {
+              "fieldId": "address_neighborhood",
+              "fieldValue": "={{ $('Scrape Apify').item.json.neighborhood[0].name }}"
+            },
+            {
+              "fieldId": "coord_lat",
+              "fieldValue": "={{ $('Scrape Apify').item.json.coordinates.latitude }}"
+            },
+            {
+              "fieldId": "coord_lng",
+              "fieldValue": "={{ $('Scrape Apify').item.json.coordinates.longitude }}"
+            },
+            {
+              "fieldId": "prop_size_outside",
+              "fieldValue": "={{ $('Scrape Apify').item.json.lot_sqft }}"
+            },
+            {
+              "fieldId": "timestamp_updated",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "timestamp_created",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "last_edited_by",
+              "fieldValue": "={{ $('Scrape Microservice').item.json.user }}"
+            },
+            {
+              "fieldId": "timestamp_scraped",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldId": "realtor_desc",
+              "fieldValue": "={{ $('Scrape Apify').item.json.text }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        240
+      ],
+      "id": "5ed402dc-db23-470d-8bdf-117963c71dad",
+      "name": "Update Property",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        460,
+        420
+      ],
+      "id": "3d622943-7824-4022-b8c6-7ff5d8f1e646",
+      "name": "Execute Workflow3"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "fAKNIRVusSsHh3Vc",
+          "mode": "id"
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        460,
+        240
+      ],
+      "id": "8078e945-4cda-4708-8abe-62ad0d695f6d",
+      "name": "Upload photos"
+    },
+    {
+      "parameters": {
+        "jsCode": "function extractImageUrls() {\n    try {\n        const scrapeData = $('Scrape Apify').all();\n        console.log('Scrape data:', scrapeData);\n      \n        if (!scrapeData?.[0]?.json?.photos) {\n            console.log('No photos found in data structure');\n            return []; \n        }\n        \n        const photos = scrapeData[0].json.photos;\n        console.log('Photos array:', photos);\n        \n        const urls = photos.map(photo => ({\n            href: photo.href\n        }));\n        console.log('Extracted URLs:', urls);\n        return urls;\n    } catch (error) {\n        console.log('Error:', error);\n        return [];\n    }\n}\nreturn extractImageUrls();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        240
+      ],
+      "id": "1a10c5b8-0d52-4e3f-ac30-98556e8a3b34",
+      "name": "Extract Photos"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        420
+      ],
+      "id": "bfcdbbd5-15a7-43e6-b2f8-e35fdfc6cde0",
+      "name": "Extract History"
+    }
+  ],
+  "pinData": {
+    "Scrape Microservice": [
+      {
+        "json": {
+          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/248-W-Crawford-Ave_Toledo_OH_43612_M36762-72738",
+          "user": "alex+dev@imposbl.com",
+          "scrape_log_id": "199"
+        }
+      }
+    ],
+    "Scrape Apify": [
+      {
+        "json": {
+          "url": "https://www.realtor.com/realestateandhomes-detail/248-W-Crawford-Ave_Toledo_OH_43612_M36762-72738",
+          "status": "for_sale",
+          "id": "3676272738",
+          "soldOn": "1994-08-30",
+          "lastSoldPrice": 61000,
+          "listPrice": 99900,
+          "baths": 2,
+          "baths_3qtr": null,
+          "baths_full": 1,
+          "baths_full_calc": 1,
+          "baths_half": 1,
+          "baths_max": null,
+          "baths_min": null,
+          "baths_partial_calc": 1,
+          "baths_total": null,
+          "beds": 3,
+          "beds_max": null,
+          "beds_min": null,
+          "construction": null,
+          "cooling": null,
+          "exterior": null,
+          "fireplace": null,
+          "garage": 2,
+          "garage_max": null,
+          "garage_min": null,
+          "garage_type": null,
+          "heating": null,
+          "logo": null,
+          "lot_sqft": 4800,
+          "name": null,
+          "pool": null,
+          "roofing": null,
+          "rooms": null,
+          "sqft": 1152,
+          "sqft_max": null,
+          "sqft_min": null,
+          "stories": 2,
+          "styles": null,
+          "sub_type": null,
+          "text": "This 3-bedroom single-family home is ready for your personal touch. With 1, 100 square feet of living space, this property offers plenty of room for reimagining and customization. It features solid construction and endless potential, including hardwood floors, a spacious living room, a roomy kitchen, a detached 2-car garage, and a large yard that includes a double lot.",
+          "type": "single_family",
+          "units": null,
+          "year_built": 1927,
+          "year_renovated": null,
+          "zoning": null,
+          "coordinates": {
+            "latitude": 41.70695,
+            "longitude": -83.552477
+          },
+          "address": {
+            "street": "248 W Crawford Ave",
+            "locality": "Toledo",
+            "region": "OH",
+            "postalCode": "43612"
+          },
+          "photos": [
+            {
+              "tags": [
+                {
+                  "label": "house_view"
+                },
+                {
+                  "label": "yard"
+                },
+                {
+                  "label": "house_view"
+                },
+                {
+                  "label": "house_view"
+                }
+              ],
+              "title": null,
+              "description": null,
+              "href": "http://ap.rdcpix.com/859d0aa6b99434c2c6775c0aff5ed09fl-m3765305969od-w480_h360_x2.webp",
+              "type": "realtordotcom_mls_listing_image"
+            },
+            {
+              "tags": [
+                {
+                  "label": "house_view"
+                },
+                {
+                  "label": "road_view"
+                },
+                {
+                  "label": "house_view"
+                },
+                {
+                  "label": "house_view"
+                }
+              ],
+              "title": null,
+              "description": null,
+              "href": "http://ap.rdcpix.com/859d0aa6b99434c2c6775c0aff5ed09fl-m3838807998od-w480_h360_x2.webp",
+              "type": "realtordotcom_mls_listing_image"
+            }
+          ],
+          "nearbySchools": {
+            "schools": [
+              {
+                "coordinate": {
+                  "lat": 41.69602,
+                  "lon": -83.564908
+                },
+                "distance_in_miles": 1,
+                "district": {
+                  "id": "06198573701",
+                  "name": "Toledo City School District"
+                },
+                "education_levels": [
+                  "elementary",
+                  "middle"
+                ],
+                "funding_type": "public",
+                "grades": [
+                  "K",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8"
+                ],
+                "greatschools_id": "3901554",
+                "id": "0755736461",
+                "name": "Whittier Elementary School",
+                "nces_code": "390449001843",
+                "parent_rating": 3,
+                "rating": 3,
+                "review_count": 3,
+                "slug_id": "Whittier-Elementary-School-0755736461",
+                "student_count": 599
+              },
+              {
+                "coordinate": {
+                  "lat": 41.700498,
+                  "lon": -83.59291
+                },
+                "distance_in_miles": 2.1,
+                "district": {
+                  "id": "06198573701",
+                  "name": "Toledo City School District"
+                },
+                "education_levels": [
+                  "high"
+                ],
+                "funding_type": "public",
+                "grades": [
+                  "9",
+                  "10",
+                  "11",
+                  "12"
+                ],
+                "greatschools_id": "3901549",
+                "id": "0755736411",
+                "name": "Start High School",
+                "nces_code": "390449001835",
+                "parent_rating": null,
+                "rating": 2,
+                "review_count": 0,
+                "slug_id": "Start-High-School-0755736411",
+                "student_count": 1381
+              },
+              {
+                "coordinate": {
+                  "lat": 41.716352,
+                  "lon": -83.559768
+                },
+                "distance_in_miles": 0.8,
+                "district": {
+                  "id": "06198571421",
+                  "name": null
+                },
+                "education_levels": [
+                  "elementary",
+                  "middle"
+                ],
+                "funding_type": "private",
+                "grades": [
+                  "K",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8"
+                ],
+                "greatschools_id": "3903200",
+                "id": "0755760001",
+                "name": "Regina Coeli School",
+                "nces_code": "01061481",
+                "parent_rating": 4,
+                "rating": null,
+                "review_count": 4,
+                "slug_id": "Regina-Coeli-School-0755760001",
+                "student_count": 193
+              }
+            ]
+          },
+          "neighborhood": [
+            {
+              "city": "Toledo",
+              "id": "e7234da7-bb8b-558b-b857-f8fb7dfba762",
+              "level": "neighborhood",
+              "name": "Five Points - Library Village",
+              "state_code": "OH",
+              "slug_id": "Five-Points-Library-Village_Toledo_OH"
+            }
+          ],
+          "local": {
+            "flood": {
+              "firststreet_url": null,
+              "fsid": "391761672",
+              "flood_factor_score": 1,
+              "flood_factor_severity": "minimal",
+              "environmental_risk": 1,
+              "trend_direction": null,
+              "fema_zone": [
+                "X (unshaded)"
+              ],
+              "insurance_requirement": "recommended",
+              "flood_trend": "This property’s flood risk is not changing.",
+              "flood_trend_paragraph": "This property’s risk of flood is <b>not changing</b>.",
+              "flood_insurance_text": null,
+              "insurance_rates": null
+            },
+            "noise": {
+              "score": 75,
+              "noise_categories": [
+                {
+                  "text": "Low",
+                  "type": "airport"
+                },
+                {
+                  "text": "Medium",
+                  "type": "traffic"
+                },
+                {
+                  "text": "Low",
+                  "type": "local"
+                },
+                {
+                  "text": "Medium",
+                  "type": "score"
+                }
+              ]
+            },
+            "wildfire": {
+              "fsid": "391761672",
+              "fire_factor_score": 1,
+              "fire_factor_severity": "Minimal",
+              "fire_cumulative_30": null,
+              "fire_trend": "This property’s wildfire risk is not changing.",
+              "fire_trend_paragraph": "This property's risk of wildfire is <b>not changing</b>.",
+              "usfs_relative_risk": "This property is located in a county with an average wildfire risk greater than 7.9% counties in the US.",
+              "firststreet_url": null,
+              "fire_insurance_text": null,
+              "insurance_rates": null
+            }
+          },
+          "history": [
+            {
+              "date": "2025-01-14",
+              "event_name": "Listed",
+              "price": 99900,
+              "price_sqft": 86.71875,
+              "source_listing_id": "6124917",
+              "source_name": "NWOhio",
+              "listing": null
+            },
+            {
+              "date": "1994-08-30",
+              "event_name": "Sold",
+              "price": 61000,
+              "price_sqft": 52.951388888888886,
+              "source_listing_id": null,
+              "source_name": "Public Record",
+              "listing": null
+            },
+            {
+              "date": "1988-07-01",
+              "event_name": "Sold",
+              "price": 48500,
+              "price_sqft": 42.10069444444444,
+              "source_listing_id": null,
+              "source_name": "Public Record",
+              "listing": null
+            }
+          ],
+          "taxHistory": [
+            {
+              "assessment": {
+                "building": 18235,
+                "land": 2625,
+                "total": 20860
+              },
+              "market": {
+                "building": 52100,
+                "land": 7500,
+                "total": 59600
+              },
+              "tax": 1361,
+              "year": 2022
+            },
+            {
+              "assessment": {
+                "building": 18235,
+                "land": 2625,
+                "total": 20860
+              },
+              "market": {
+                "building": 52100,
+                "land": 7500,
+                "total": 59600
+              },
+              "tax": 1394,
+              "year": 2021
+            },
+            {
+              "assessment": {
+                "building": 16450,
+                "land": 2415,
+                "total": 18865
+              },
+              "market": {
+                "building": 47000,
+                "land": 6900,
+                "total": 53900
+              },
+              "tax": 1385,
+              "year": 2019
+            },
+            {
+              "assessment": {
+                "building": 16450,
+                "land": 2415,
+                "total": 18865
+              },
+              "market": {
+                "building": 47000,
+                "land": 6900,
+                "total": 53900
+              },
+              "tax": 1392,
+              "year": 2018
+            },
+            {
+              "assessment": {
+                "building": 13825,
+                "land": 2625,
+                "total": 16450
+              },
+              "market": {
+                "building": 39500,
+                "land": 7500,
+                "total": 47000
+              },
+              "tax": 1285,
+              "year": 2017
+            },
+            {
+              "assessment": {
+                "building": 13825,
+                "land": 2625,
+                "total": 16450
+              },
+              "market": {
+                "building": 39500,
+                "land": 7500,
+                "total": 47000
+              },
+              "tax": 1288,
+              "year": 2016
+            },
+            {
+              "assessment": {
+                "building": 13825,
+                "land": 2625,
+                "total": 16450
+              },
+              "market": {
+                "building": 39500,
+                "land": 7500,
+                "total": 47000
+              },
+              "tax": 1277,
+              "year": 2015
+            },
+            {
+              "assessment": {
+                "building": 13830,
+                "land": 2630,
+                "total": 16460
+              },
+              "market": {
+                "building": 39514,
+                "land": 7514,
+                "total": 47028
+              },
+              "tax": 1254,
+              "year": 2014
+            },
+            {
+              "assessment": {
+                "building": 13830,
+                "land": 2630,
+                "total": 16460
+              },
+              "market": {
+                "building": 39514,
+                "land": 7514,
+                "total": 47028
+              },
+              "tax": 1154,
+              "year": 2013
+            },
+            {
+              "assessment": {
+                "building": 18730,
+                "land": 2630,
+                "total": 21360
+              },
+              "market": {
+                "building": 53514,
+                "land": 7514,
+                "total": 61028
+              },
+              "tax": 1413,
+              "year": 2012
+            },
+            {
+              "assessment": {
+                "building": 23030,
+                "land": 4900,
+                "total": 27930
+              },
+              "market": {
+                "building": 65800,
+                "land": 14000,
+                "total": 79800
+              },
+              "tax": 1572,
+              "year": 2011
+            },
+            {
+              "assessment": {
+                "building": 23030,
+                "land": 4900,
+                "total": 27930
+              },
+              "market": {
+                "building": 65800,
+                "land": 14000,
+                "total": 79800
+              },
+              "tax": 1569,
+              "year": 2010
+            },
+            {
+              "assessment": {
+                "building": 23030,
+                "land": 4900,
+                "total": 27930
+              },
+              "market": {
+                "building": 65800,
+                "land": 14000,
+                "total": 79800
+              },
+              "tax": 1596,
+              "year": 2009
+            },
+            {
+              "assessment": {
+                "building": 26780,
+                "land": 5710,
+                "total": 32490
+              },
+              "market": {
+                "building": 76514,
+                "land": 16314,
+                "total": 92829
+              },
+              "tax": 1678,
+              "year": 2008
+            },
+            {
+              "assessment": {
+                "building": 26780,
+                "land": 5710,
+                "total": 32490
+              },
+              "market": {
+                "building": 76514,
+                "land": 16314,
+                "total": 92828
+              },
+              "tax": 1605,
+              "year": 2007
+            },
+            {
+              "assessment": {
+                "building": 27020,
+                "land": 6270,
+                "total": 33290
+              },
+              "market": {
+                "building": 77200,
+                "land": 17914,
+                "total": 95114
+              },
+              "tax": 1537,
+              "year": 2006
+            }
+          ],
+          "advertisers": [
+            {
+              "team_name": null,
+              "address": {
+                "city": "MAUMEE",
+                "country": "USA",
+                "line": "3555 BRIARFIELD BLVD",
+                "postal_code": "43537",
+                "state": "OH",
+                "state_code": null
+              },
+              "builder": null,
+              "broker": {
+                "accent_color": "Transparent",
+                "designations": [],
+                "fulfillment_id": "3387570",
+                "name": "The Danberry Co., REALTORS - Broker",
+                "logo": ""
+              },
+              "email": "",
+              "fulfillment_id": "3489383",
+              "href": null,
+              "mls_set": "A-NWOH-1GANTAL",
+              "name": "Alisha M Gant",
+              "nrds_id": null,
+              "office": {
+                "address": {
+                  "city": "MAUMEE",
+                  "coordinate": {
+                    "lat": null,
+                    "lon": null
+                  },
+                  "country": "US",
+                  "line": "3555 BRIARFIELD BLVD",
+                  "postal_code": "43537",
+                  "state": null,
+                  "state_code": "OH"
+                },
+                "application_url": null,
+                "email": "dan01@danberry.com",
+                "lead_email": null,
+                "fulfillment_id": "2423033",
+                "hours": null,
+                "href": null,
+                "mls_set": "O-NWOH-DAN01",
+                "out_of_community": null,
+                "name": "The Danberry Co",
+                "phones": [
+                  {
+                    "ext": "",
+                    "number": "4198668888",
+                    "primary": true,
+                    "trackable": null,
+                    "type": "Office"
+                  }
+                ],
+                "photo": {
+                  "href": "https://ap.rdcpix.com/64f0a01be3d4552cbf97550005f412d5o-c1114254682l.jpg"
+                },
+                "slogan": ""
+              },
+              "phones": [
+                {
+                  "ext": "",
+                  "number": "4193600875",
+                  "primary": true,
+                  "trackable": null,
+                  "type": "office"
+                }
+              ],
+              "photo": null,
+              "slogan": null,
+              "type": "seller"
+            }
+          ],
+          "details": [
+            {
+              "category": "Bedrooms",
+              "parent_category": "Interior",
+              "text": [
+                "Bedrooms: 3",
+                "Primary Bedroom Dimensions: 10 x 12",
+                "Primary Bedroom Level: Upper",
+                "Primary Bedroom Features: Primary Bedroom"
+              ]
+            },
+            {
+              "category": "Other Rooms",
+              "parent_category": "Interior",
+              "text": [
+                "Total Rooms: 8",
+                "UtilityRoom: 11 x 11 x Lower",
+                "UtilityRoom Desc: Utl-Laundry",
+                "Bedroom: 8 x 10",
+                "Bedroom Level: Upper",
+                "Bedroom Desc: Bedroom",
+                "Bedroom: 11 x 11",
+                "Bedroom Level: Upper",
+                "Bedroom Desc: Bedroom",
+                "Basement Features: Finished Basement",
+                "Basement Dimensions: 20 x 11",
+                "Living Room Dimensions: 11 x 18",
+                "Living Room Level: Main",
+                "Living Room Features: Living Room",
+                "Basement Description: Full"
+              ]
+            },
+            {
+              "category": "Bathrooms",
+              "parent_category": "Interior",
+              "text": [
+                "Total Bathrooms: 2",
+                "Full Bathrooms: 1",
+                "1/2 Bathrooms: 1",
+                "Bathrooms On Main Level: 1"
+              ]
+            },
+            {
+              "category": "Appliances",
+              "parent_category": "Interior",
+              "text": [
+                "GasWaterHeater",
+                "Oven",
+                "Range",
+                "Refrigerator",
+                "Laundry Features: GasDryerHookup"
+              ]
+            },
+            {
+              "category": "Heating and Cooling",
+              "parent_category": "Interior",
+              "text": [
+                "Cooling Features: CentralAir",
+                "Heating Features: ForcedAir, NaturalGas",
+                "Heating: Yes"
+              ]
+            },
+            {
+              "category": "Kitchen and Dining",
+              "parent_category": "Interior",
+              "text": [
+                "Dining Room Dimensions: 11 x 11",
+                "Dining Room Features: Dining Room",
+                "Dining Room Level: Main",
+                "Kitchen Dimensions: 15 x 16",
+                "Kitchen Features: Kitchen",
+                "Kitchen Level: Main"
+              ]
+            },
+            {
+              "category": "Exterior and Lot Features",
+              "parent_category": "Exterior",
+              "text": [
+                "Patio And Porch Features: Deck"
+              ]
+            },
+            {
+              "category": "Land Info",
+              "parent_category": "Exterior",
+              "text": [
+                "Lot Description: RectangularLot",
+                "Lot Size Acres: 0.1102",
+                "Lot Size Dimensions: 4, 800",
+                "Lot Size Square Feet: 4800"
+              ]
+            },
+            {
+              "category": "Garage and Parking",
+              "parent_category": "Exterior",
+              "text": [
+                "Garage Spaces: 2",
+                "Other Parking: Detached, Garage",
+                "Parking Features: Concrete, Driveway, Detached, Garage",
+                "Parking Total: 2"
+              ]
+            },
+            {
+              "category": "Homeowners Association",
+              "parent_category": "Community",
+              "text": [
+                "Association: No",
+                "Calculated Total Monthly Association Fees: 0"
+              ]
+            },
+            {
+              "category": "School Information",
+              "parent_category": "Community",
+              "text": [
+                "Elementary School: Whittier",
+                "Elementary School District: Toledo",
+                "High School: Start",
+                "High School District: Toledo",
+                "Middle or Junior School District: Toledo"
+              ]
+            },
+            {
+              "category": "Other Property Info",
+              "parent_category": "Listing",
+              "text": [
+                "Source Listing Status: Active",
+                "County: Lucas",
+                "Directions: Bennett to E on Crawford",
+                "Source Property Type: Residential",
+                "Inclusions: ,",
+                "Source Neighborhood: Collingwood Park",
+                "Parcel Number: 11-26014",
+                "Postal City: Toledo",
+                "Postal Code Plus 4: 3421",
+                "Subdivision: Collingwood Park",
+                "Property Subtype: SingleFamilyResidence",
+                "Source System Name: C2C"
+              ]
+            },
+            {
+              "category": "Building and Construction",
+              "parent_category": "Features",
+              "text": [
+                "Total Square Feet Living: 1152",
+                "Year Built: 1927",
+                "Construction Materials: AluminumSiding, SteelSiding",
+                "Foundation Details: Basement",
+                "Levels: OneAndOneHalf",
+                "Living Area Source: PublicRecords",
+                "Property Age: 98",
+                "Roof: Shingle",
+                "Architectural Style: Traditional"
+              ]
+            },
+            {
+              "category": "Utilities",
+              "parent_category": "Features",
+              "text": [
+                "Electric: CircuitBreakers",
+                "Sewer: Sanitary",
+                "Water Source: Public"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-16T15:30:08.032Z",
+      "updatedAt": "2025-01-16T15:30:08.032Z",
+      "id": "s9eEaRLrT4Knsh6d",
+      "name": "microservice"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-01-24T00:13:10.672Z",
+  "versionId": "351b2edf-5ca1-450f-bdd7-55bf8b443e69"
+}
