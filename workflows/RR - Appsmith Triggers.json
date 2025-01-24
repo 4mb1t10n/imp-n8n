@@ -41,17 +41,6 @@
         ]
       ]
     },
-    "Appsmith Scrape Property": {
-      "main": [
-        [
-          {
-            "node": "Extract URL",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Create Scrape Log Entry": {
       "main": [
         [
@@ -75,17 +64,6 @@
         [
           {
             "node": "Send these fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Appsmith Rescrape Queue": {
-      "main": [
-        [
-          {
-            "node": "Send these fields1",
             "type": "main",
             "index": 0
           }
@@ -146,6 +124,50 @@
         [
           {
             "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Log": {
+      "main": [
+        [
+          {
+            "node": "tag: Scrape Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tag: Scrape Log": {
+      "main": [
+        [
+          {
+            "node": "Send these fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape new property": {
+      "main": [
+        [
+          {
+            "node": "tag: New property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tag: New property": {
+      "main": [
+        [
+          {
+            "node": "Extract URL",
             "type": "main",
             "index": 0
           }
@@ -315,41 +337,16 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "scrape-property-by-url",
-        "authentication": "headerAuth",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -1200,
-        -620
-      ],
-      "id": "07cfcb3d-a645-42b7-9d40-d2f513557809",
-      "name": "Appsmith Scrape Property",
-      "webhookId": "99326a1c-6822-47b3-99ce-00e411b5b4d0",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "4eZkdxpH9D6RopSj",
-          "name": "RR Appsmith Header Auth"
-        }
-      },
-      "notes": "Incoming webhook from appsmith. Used when adding a new property by Realtor URL."
-    },
-    {
-      "parameters": {
         "tableId": "properties_scrape_log",
         "fieldsUi": {
           "fieldValues": [
             {
               "fieldId": "realtor_url",
-              "fieldValue": "={{ $('Appsmith Scrape Property').item.json.query.scrape_url.split(\"?\")[0] }}"
+              "fieldValue": "={{ $('Scrape new property').item.json.query.scrape_url.split(\"?\")[0] }}"
             },
             {
               "fieldId": "requested_by",
-              "fieldValue": "={{ $('Appsmith Scrape Property').item.json.query.user }}"
+              "fieldValue": "={{ $('Scrape new property').item.json.query.user }}"
             }
           ]
         }
@@ -377,7 +374,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1500,
+        -1740,
         -1020
       ],
       "typeVersion": 1,
@@ -392,36 +389,12 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1500,
+        -1740,
         -660
       ],
       "typeVersion": 1,
       "id": "b074ad82-60ee-4557-bf59-c77d6fb7540d",
       "name": "Sticky Note3"
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "rescrape-property",
-        "authentication": "headerAuth",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -1200,
-        -1000
-      ],
-      "id": "cadeaa97-2f80-4192-9f2a-28c6dbe3b63e",
-      "name": "Appsmith Rescrape Queue",
-      "webhookId": "99326a1c-6822-47b3-99ce-00e411b5b4d0",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "4eZkdxpH9D6RopSj",
-          "name": "RR Appsmith Header Auth"
-        }
-      }
     },
     {
       "parameters": {
@@ -436,7 +409,7 @@
             {
               "id": "939ad8b2-b284-4abb-bc63-01c5dae388c7",
               "name": "user",
-              "value": "={{ $('Appsmith Scrape Property').first().json.query.user }}",
+              "value": "={{ $('Scrape new property').first().json.query.user }}",
               "type": "string"
             },
             {
@@ -593,10 +566,99 @@
       ],
       "id": "f49b2ec8-f344-4185-9b11-fcdf3c672e43",
       "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "rescrape-property",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1440,
+        -1000
+      ],
+      "id": "cadeaa97-2f80-4192-9f2a-28c6dbe3b63e",
+      "name": "Scrape Log",
+      "webhookId": "99326a1c-6822-47b3-99ce-00e411b5b4d0",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4eZkdxpH9D6RopSj",
+          "name": "RR Appsmith Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "Scrape Log"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        -1000
+      ],
+      "id": "e98803f7-1a20-4b9c-91a4-9e9e8f182909",
+      "name": "tag: Scrape Log"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "scrape-property-by-url",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1440,
+        -620
+      ],
+      "id": "07cfcb3d-a645-42b7-9d40-d2f513557809",
+      "name": "Scrape new property",
+      "webhookId": "99326a1c-6822-47b3-99ce-00e411b5b4d0",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4eZkdxpH9D6RopSj",
+          "name": "RR Appsmith Header Auth"
+        }
+      },
+      "notes": "Incoming webhook from appsmith. Used when adding a new property by Realtor URL."
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "New property"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        -620
+      ],
+      "id": "e53b153d-2bed-4e43-b67d-0583e698c954",
+      "name": "tag: New property"
     }
   ],
   "pinData": {
-    "Appsmith Rescrape Queue": [
+    "Scrape Log": [
       {
         "json": {
           "headers": {
@@ -626,7 +688,7 @@
         }
       }
     ],
-    "Appsmith Scrape Property": [
+    "Scrape new property": [
       {
         "json": {
           "headers": {
@@ -676,6 +738,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-01-24T03:28:18.829Z",
-  "versionId": "7e0ed5a3-1c3e-4527-b0a7-de0591359449"
+  "updatedAt": "2025-01-24T18:57:00.242Z",
+  "versionId": "ed73ae80-31fc-46fe-99d2-e470d1063050"
 }
