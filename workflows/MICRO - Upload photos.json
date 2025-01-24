@@ -34,15 +34,19 @@
         ]
       ]
     },
-    "Loop Over Items": {
+    "extract URL": {
       "main": [
         [
           {
-            "node": "Done",
+            "node": "create media record",
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
         [
           {
             "node": "extract URL",
@@ -52,8 +56,49 @@
         ]
       ]
     },
-    "extract URL": {
+    "Update property media table": {
       "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create media record": {
+      "main": [
+        [
+          {
+            "node": "error?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "error?": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "Get Image from Realtor.com",
@@ -82,7 +127,7 @@
     },
     {
       "parameters": {
-        "content": "## Input: urls\none or more URL's",
+        "content": "## Inputs\nurl\nproperty_id",
         "width": 260
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -96,13 +141,13 @@
     },
     {
       "parameters": {
-        "url": "={{ $json.url }}",
+        "url": "={{ $json.media_url_scraped }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        620,
+        1320,
         -20
       ],
       "id": "d500ec69-7c2c-437a-b0ee-6257042b14fd",
@@ -113,7 +158,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/properties/{{ $('New photo to save').first().json.body.record.property_id }}/{{ $('New photo to save').first().json.body.record.id }}.jpeg",
+        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/properties/{{ $('Filter').item.json.property_id }}/photos/{{ $('create media record').item.json.id }}.jpeg",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "supabaseApi",
         "sendHeaders": true,
@@ -133,7 +178,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        840,
+        1540,
         -20
       ],
       "id": "f9da7fa9-c33e-48a6-a3f4-3f4927885470",
@@ -154,15 +199,31 @@
             {
               "keyName": "id",
               "condition": "eq",
-              "keyValue": "={{ $('Get Image from Realtor.com').item.json.body.record.id }}"
+              "keyValue": "={{ $('create media record').item.json.id }}"
             }
           ]
         },
         "fieldsUi": {
           "fieldValues": [
             {
-              "fieldId": "media_url",
+              "fieldId": "storage_url",
               "fieldValue": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/{{ $json.Key }}"
+            },
+            {
+              "fieldId": "property_id",
+              "fieldValue": "={{ $('Filter').item.json.property_id }}"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "photo"
+            },
+            {
+              "fieldId": "storage_url",
+              "fieldValue": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/{{ $json.Key }}"
+            },
+            {
+              "fieldId": "storage_id",
+              "fieldValue": "={{ $json.Id }}"
             }
           ]
         }
@@ -170,7 +231,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1060,
+        1760,
         -20
       ],
       "id": "c5dffc42-65e1-404c-8e8a-851365bd0b57",
@@ -184,25 +245,12 @@
     },
     {
       "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        160,
-        -20
-      ],
-      "id": "52321052-1edf-4009-864a-23c558955677",
-      "name": "Loop Over Items"
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
               "id": "b348f47c-89ad-4eff-9ed2-f7ef420779d0",
               "name": "url",
-              "value": "={{ $input.first().json.values()[0] }}",
+              "value": "={{ $input.first().json.values()[0].match(/.+\\.com\\/[\\d\\w]+-m\\d+/)[0] }}o.jpg",
               "type": "string"
             }
           ]
@@ -212,29 +260,145 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        400,
+        600,
         -20
       ],
       "id": "260325ac-162a-4612-8bd4-9fc30d2194d1",
       "name": "extract URL"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "15ff9868-039b-449d-a2d0-47a10cd94dd2",
+              "leftValue": "={{ $json.url }}",
+              "rightValue": "rdcpix\\.com",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            },
+            {
+              "id": "9d30cad2-6563-4a36-b6c2-17169c8e7ee8",
+              "leftValue": "={{ $json.property_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        380,
+        -20
+      ],
+      "id": "c00a8a43-ad4d-45ce-9236-fc585d622fe9",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "tableId": "properties_media",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "property_id",
+              "fieldValue": "={{ $('Filter').item.json.property_id }}"
+            },
+            {
+              "fieldId": "media_url_scraped",
+              "fieldValue": "={{ $json.url }}"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "photo"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        400,
-        -200
+        820,
+        -20
       ],
-      "id": "506f3be8-678a-47da-8bb3-576465f23146",
-      "name": "Done"
+      "id": "492a2acb-a849-4954-848b-1fd0d61019fc",
+      "name": "create media record",
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        160,
+        -20
+      ],
+      "id": "289f1ef4-deef-4115-b6c1-fb6e07399eed",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3b5ec5ae-d550-4d6b-8c37-2cac889ddcad",
+              "leftValue": "={{ $json.hasField('error') }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1060,
+        -20
+      ],
+      "id": "d7cee6d8-a6ec-4c5b-bba1-88bbf52ebaae",
+      "name": "error?"
     }
   ],
   "pinData": {
     "upload photos": [
       {
         "json": {
-          "href": "http://ap.rdcpix.com/859d0aa6b99434c2c6775c0aff5ed09fl-m3838807998od-w480_h360_x2.webp"
+          "url": "http://ap.rdcpix.com/859d0aa6b99434c2c6775c0aff5ed09fl-m3838807998od-w480_h360_x2.webp",
+          "property_id": 624
         }
       }
     ]
@@ -252,6 +416,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-24T00:50:30.180Z",
-  "versionId": "0bde3e9c-5cd0-4572-b6b6-b76d8a5f22ed"
+  "updatedAt": "2025-01-24T02:17:24.757Z",
+  "versionId": "0ff17034-c5dc-4209-bd03-af9aeff476c9"
 }
