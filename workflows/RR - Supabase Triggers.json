@@ -38,7 +38,7 @@
       "main": [
         [
           {
-            "node": "task_changelog_2",
+            "node": "changelog",
             "type": "main",
             "index": 0
           }
@@ -78,34 +78,11 @@
         ]
       ]
     },
-    "Request Type": {
-      "main": [
-        [
-          {
-            "node": "task_insert",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
-      ]
-    },
     "task_update": {
       "main": [
         [
           {
             "node": "compare data1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "task_insert": {
-      "main": [
-        [
-          {
-            "node": "task_changelog_1",
             "type": "main",
             "index": 0
           }
@@ -306,15 +283,6 @@
               }
             },
             {
-              "id": "83c73ac8-f765-472b-a762-f308f787848e",
-              "leftValue": "={{ $json.updated_column }}",
-              "rightValue": "timestamp_created",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
               "id": "f87b8385-75c8-420b-9c11-35b5c8b2a9be",
               "leftValue": "={{ $json.updated_column }}",
               "rightValue": "timestamp_updated",
@@ -326,16 +294,7 @@
             {
               "id": "52b907a1-ac31-47d6-8131-143d7524d204",
               "leftValue": "={{ $json.updated_column }}",
-              "rightValue": "last_edited_by",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "ebc5349e-d2ad-41c0-b4c3-c965f66da4bd",
-              "leftValue": "={{ $json.updated_column }}",
-              "rightValue": "created_by",
+              "rightValue": "updated_by",
               "operator": {
                 "type": "string",
                 "operation": "notEquals"
@@ -438,76 +397,11 @@
     },
     {
       "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $json.body.type }}",
-                    "rightValue": "INSERT",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "INSERT"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "d4c08d3b-7807-48c8-b2f6-d04ecb02b0f7",
-                    "leftValue": "={{ $json.body.type }}",
-                    "rightValue": "UPDATE",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "UPDATE"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.2,
-      "position": [
-        -620,
-        1360
-      ],
-      "id": "784f10f6-d4d5-45b6-a026-2d18bd370956",
-      "name": "Request Type"
-    },
-    {
-      "parameters": {
         "dataToSave": {
           "values": [
             {
               "key": "workflow",
-              "value": "task_update"
+              "value": "change_history"
             }
           ]
         }
@@ -523,7 +417,7 @@
     },
     {
       "parameters": {
-        "tableId": "tasks_changelog",
+        "tableId": "changelog",
         "fieldsUi": {
           "fieldValues": [
             {
@@ -535,18 +429,22 @@
               "fieldValue": "={{ $json.updated_column }}"
             },
             {
-              "fieldId": "value_new",
+              "fieldId": "updated_value",
               "fieldValue": "={{ $json.newValue }}"
             },
             {
               "fieldId": "updated_by",
               "fieldValue": "={{ $('Updated Task Record').item.json.body.record.updated_by }}"
+            },
+            {
+              "fieldId": "updated_table",
+              "fieldValue": "={{ $('task_update').item.json.body.table }}"
             }
           ]
         }
       },
       "id": "20d479f5-9da3-428f-b406-43174c997b98",
-      "name": "task_changelog_2",
+      "name": "changelog",
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
@@ -559,82 +457,6 @@
           "name": "Rent Ready Supabase"
         }
       }
-    },
-    {
-      "parameters": {
-        "tableId": "tasks_changelog",
-        "fieldsUi": {
-          "fieldValues": [
-            {
-              "fieldId": "task_id",
-              "fieldValue": "={{ $('Updated Task Record').item.json.body.record.id }}"
-            },
-            {
-              "fieldId": "updated_column",
-              "fieldValue": "={{ $json.updated_column }}"
-            },
-            {
-              "fieldId": "value_old",
-              "fieldValue": "={{ $json.oldValue }}"
-            },
-            {
-              "fieldId": "value_new",
-              "fieldValue": "={{ $json.newValue }}"
-            },
-            {
-              "fieldId": "updated_by",
-              "fieldValue": "={{ $('Updated Task Record').item.json.body.record.updated_by }}"
-            }
-          ]
-        }
-      },
-      "id": "87d8732f-7a22-474b-a91a-d31b053d64cc",
-      "name": "task_changelog_1",
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -180,
-        1360
-      ],
-      "credentials": {
-        "supabaseApi": {
-          "id": "tB73GetIJaJt8VPH",
-          "name": "Rent Ready Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "workflow",
-              "value": "task_insert"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
-      "position": [
-        -400,
-        1360
-      ],
-      "id": "23c41535-c1f9-42ba-a5a0-54f5535dece4",
-      "name": "task_insert"
-    },
-    {
-      "parameters": {
-        "jsCode": "function findDifferences(obj1, obj2) {\n  let differences = [];\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        oldValue: obj2[key],\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  // Check for keys in obj2 that are not in obj1\n  for (let key in obj2) {\n    if (!(key in obj1)) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        oldValue: obj2[key],\n        newValue: undefined\n      });\n    }\n  }\n  \n  return differences;\n}\n\n// Assuming the JSON objects are in $('Updated Task Record').all()[0].json.body\nconst newObject = $('Updated Task Record').all()[0].json.body.record;\nconst oldObject = $('Updated Task Record').all()[0].json.body.old_record;\n\nconst differences = findDifferences(newObject, oldObject);\n\n// Set the output to be an array of difference objects\nitems = differences.map(diff => ({ json: diff }));\n\nreturn items;"
-      },
-      "id": "70447aa3-54c7-4b20-ab3b-99e5c5eeaae7",
-      "name": "backup",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -860,
-        1360
-      ]
     }
   ],
   "pinData": {
@@ -764,16 +586,16 @@
           "headers": {
             "host": "imposbl.up.railway.app",
             "user-agent": "pg_net/0.7.1",
-            "content-length": "496",
+            "content-length": "426",
             "accept": "*/*",
             "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
             "content-type": "application/json",
             "x-forwarded-for": "3.210.235.210",
             "x-forwarded-host": "imposbl.up.railway.app",
             "x-forwarded-proto": "https",
-            "x-railway-request-id": "wV0Cvm2CSf2xqYoDrqPg-A_1002618245",
+            "x-railway-request-id": "G1ttKjCxTU6qEfMJwNH2cg_2074704348",
             "x-real-ip": "3.210.235.210",
-            "x-request-start": "1737904786584",
+            "x-request-start": "1737907306142",
             "accept-encoding": "gzip"
           },
           "params": {},
@@ -782,18 +604,16 @@
             "type": "INSERT",
             "table": "tasks",
             "record": {
-              "id": 53,
-              "title": "test",
+              "id": 54,
+              "title": "testing updating a task here",
               "status": "Not Started",
               "date_due": "2025-01-31T05:00:00+00:00",
-              "created_by": "alex+dev@imposbl.com",
               "date_defer": "2025-01-31T05:00:00+00:00",
               "updated_by": "alex+dev@imposbl.com",
-              "assigned_to": "alex+dev@imposbl.com",
-              "description": "tewt",
-              "property_id": 617,
-              "timestamp_created": "2025-01-26T15:19:46.396158+00:00",
-              "timestamp_updated": "2025-01-26T15:19:46.396158+00:00"
+              "assigned_to": "irfanmasood@gmail.com",
+              "description": "desc",
+              "property_id": 616,
+              "timestamp_updated": "2025-01-26T16:01:45.404206+00:00"
             },
             "schema": "public",
             "old_record": null
@@ -817,6 +637,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-01-26T15:51:44.976Z",
-  "versionId": "3d8f0f07-21aa-459f-88ec-ba56e66b3aba"
+  "updatedAt": "2025-01-26T17:44:25.396Z",
+  "versionId": "a7374654-08a6-4a3a-9c5e-743c20c90968"
 }
