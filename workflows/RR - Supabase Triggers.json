@@ -578,7 +578,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+        "path": "tasks-table-updated",
         "authentication": "headerAuth",
         "options": {}
       },
@@ -1004,6 +1004,6 @@
     }
   ],
   "triggerCount": 3,
-  "updatedAt": "2025-01-24T00:49:58.502Z",
-  "versionId": "d6f7a9a8-c5ed-4765-9702-0464d6e92c28"
+  "updatedAt": "2025-01-26T01:09:24.246Z",
+  "versionId": "8a47fe12-fcae-474a-9423-0030a63d1b48"
 }
