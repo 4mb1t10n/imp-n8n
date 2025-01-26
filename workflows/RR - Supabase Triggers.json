@@ -38,7 +38,7 @@
       "main": [
         [
           {
-            "node": "create task change log",
+            "node": "task_changelog_2",
             "type": "main",
             "index": 0
           }
@@ -49,7 +49,7 @@
       "main": [
         [
           {
-            "node": "tag: task_changelog",
+            "node": "task_update",
             "type": "main",
             "index": 0
           }
@@ -67,7 +67,30 @@
         ]
       ]
     },
-    "tag: task_changelog": {
+    "tag: task_changelog1": {
+      "main": [
+        [
+          {
+            "node": "compare data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Request Type": {
+      "main": [
+        [
+          {
+            "node": "task_insert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "task_update": {
       "main": [
         [
           {
@@ -78,11 +101,11 @@
         ]
       ]
     },
-    "tag: task_changelog1": {
+    "task_insert": {
       "main": [
         [
           {
-            "node": "compare data",
+            "node": "task_changelog_1",
             "type": "main",
             "index": 0
           }
@@ -242,7 +265,7 @@
     },
     {
       "parameters": {
-        "jsCode": "function findDifferences(obj1, obj2) {\n  let differences = [];\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        oldValue: obj2[key],\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  // Check for keys in obj2 that are not in obj1\n  for (let key in obj2) {\n    if (!(key in obj1)) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        oldValue: obj2[key],\n        newValue: undefined\n      });\n    }\n  }\n  \n  return differences;\n}\n\n// Assuming the JSON objects are in $('Updated Task Record').all()[0].json.body\nconst newObject = $('Updated Task Record').all()[0].json.body.record;\nconst oldObject = $('Updated Task Record').all()[0].json.body.old_record;\n\nconst differences = findDifferences(newObject, oldObject);\n\n// Set the output to be an array of difference objects\nitems = differences.map(diff => ({ json: diff }));\n\nreturn items;"
+        "jsCode": "function findDifferences(obj1, obj2 = {}) {\n  let differences = [];\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2?.[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        oldValue: obj2?.[key] ?? null,\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  if (obj2) {\n    for (let key in obj2) {\n      if (!(key in obj1)) {\n        differences.push({\n          isDifferent: true,\n          updated_column: key,\n          oldValue: obj2[key],\n          newValue: undefined\n        });\n      }\n    }\n  }\n  \n  return differences;\n}\n\nconst newObject = $('Updated Task Record').all()[0].json.body.record;\nconst oldObject = $('Updated Task Record').all()[0].json.body.old_record || {};\nconst differences = findDifferences(newObject, oldObject);\nitems = differences.map(diff => ({ json: diff }));\nreturn items;"
       },
       "id": "16fd9d2b-ccd0-4c83-a880-b8ec2ed0b491",
       "name": "compare data1",
@@ -250,7 +273,7 @@
       "typeVersion": 2,
       "position": [
         -400,
-        800
+        920
       ]
     },
     {
@@ -271,6 +294,15 @@
                 "type": "boolean",
                 "operation": "true",
                 "singleValue": true
+              }
+            },
+            {
+              "id": "431e8ff6-e819-400f-8b58-a4da97828e95",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "id",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
               }
             },
             {
@@ -299,6 +331,15 @@
                 "type": "string",
                 "operation": "notEquals"
               }
+            },
+            {
+              "id": "ebc5349e-d2ad-41c0-b4c3-c965f66da4bd",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "created_by",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
             }
           ],
           "combinator": "and"
@@ -311,7 +352,7 @@
       "typeVersion": 2.1,
       "position": [
         -180,
-        800
+        920
       ]
     },
     {
@@ -325,7 +366,7 @@
       "typeVersion": 1,
       "position": [
         -1160,
-        780
+        900
       ],
       "disabled": true
     },
@@ -342,7 +383,7 @@
       "typeVersion": 2,
       "position": [
         -840,
-        800
+        920
       ],
       "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
       "credentials": {
@@ -381,26 +422,6 @@
           "values": [
             {
               "key": "workflow",
-              "value": "task_changelog"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
-      "position": [
-        -620,
-        800
-      ],
-      "id": "c09602b6-ef7c-41d0-9bd2-98cc17348cbd",
-      "name": "tag: task_changelog"
-    },
-    {
-      "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "workflow",
               "value": "task_c"
             }
           ]
@@ -414,6 +435,130 @@
       ],
       "id": "c194264e-d0af-4af4-9fc4-78c18bc71537",
       "name": "tag: task_changelog1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.type }}",
+                    "rightValue": "INSERT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "INSERT"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d4c08d3b-7807-48c8-b2f6-d04ecb02b0f7",
+                    "leftValue": "={{ $json.body.type }}",
+                    "rightValue": "UPDATE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "UPDATE"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -620,
+        1360
+      ],
+      "id": "784f10f6-d4d5-45b6-a026-2d18bd370956",
+      "name": "Request Type"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "task_update"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        920
+      ],
+      "id": "c09602b6-ef7c-41d0-9bd2-98cc17348cbd",
+      "name": "task_update"
+    },
+    {
+      "parameters": {
+        "tableId": "tasks_changelog",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "task_id",
+              "fieldValue": "={{ $('Updated Task Record').item.json.body.record.id }}"
+            },
+            {
+              "fieldId": "updated_column",
+              "fieldValue": "={{ $json.updated_column }}"
+            },
+            {
+              "fieldId": "value_new",
+              "fieldValue": "={{ $json.newValue }}"
+            },
+            {
+              "fieldId": "updated_by",
+              "fieldValue": "={{ $('Updated Task Record').item.json.body.record.updated_by }}"
+            }
+          ]
+        }
+      },
+      "id": "20d479f5-9da3-428f-b406-43174c997b98",
+      "name": "task_changelog_2",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        40,
+        920
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "tB73GetIJaJt8VPH",
+          "name": "Rent Ready Supabase"
+        }
+      }
     },
     {
       "parameters": {
@@ -443,13 +588,13 @@
           ]
         }
       },
-      "id": "20d479f5-9da3-428f-b406-43174c997b98",
-      "name": "create task change log",
+      "id": "87d8732f-7a22-474b-a91a-d31b053d64cc",
+      "name": "task_changelog_1",
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        40,
-        800
+        -180,
+        1360
       ],
       "credentials": {
         "supabaseApi": {
@@ -457,6 +602,39 @@
           "name": "Rent Ready Supabase"
         }
       }
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "workflow",
+              "value": "task_insert"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        1360
+      ],
+      "id": "23c41535-c1f9-42ba-a5a0-54f5535dece4",
+      "name": "task_insert"
+    },
+    {
+      "parameters": {
+        "jsCode": "function findDifferences(obj1, obj2) {\n  let differences = [];\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        oldValue: obj2[key],\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  // Check for keys in obj2 that are not in obj1\n  for (let key in obj2) {\n    if (!(key in obj1)) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        oldValue: obj2[key],\n        newValue: undefined\n      });\n    }\n  }\n  \n  return differences;\n}\n\n// Assuming the JSON objects are in $('Updated Task Record').all()[0].json.body\nconst newObject = $('Updated Task Record').all()[0].json.body.record;\nconst oldObject = $('Updated Task Record').all()[0].json.body.old_record;\n\nconst differences = findDifferences(newObject, oldObject);\n\n// Set the output to be an array of difference objects\nitems = differences.map(diff => ({ json: diff }));\n\nreturn items;"
+      },
+      "id": "70447aa3-54c7-4b20-ab3b-99e5c5eeaae7",
+      "name": "backup",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -860,
+        1360
+      ]
     }
   ],
   "pinData": {
@@ -586,52 +764,39 @@
           "headers": {
             "host": "imposbl.up.railway.app",
             "user-agent": "pg_net/0.7.1",
-            "content-length": "838",
+            "content-length": "496",
             "accept": "*/*",
             "authorization": "Bearer jpsK8t@SefRvRdt*yS3qG@nubYkmNFdyFlnO4I8VR3w32uBgasY^36xVuJ7LJfBG970A9lvGCMk#&i1x3HEFCBI7gAvaCkj9$0X",
             "content-type": "application/json",
             "x-forwarded-for": "3.210.235.210",
             "x-forwarded-host": "imposbl.up.railway.app",
             "x-forwarded-proto": "https",
-            "x-railway-request-id": "unk5drZVSWONtEzPnoTGDA_3118653284",
+            "x-railway-request-id": "wV0Cvm2CSf2xqYoDrqPg-A_1002618245",
             "x-real-ip": "3.210.235.210",
-            "x-request-start": "1737861473817",
+            "x-request-start": "1737904786584",
             "accept-encoding": "gzip"
           },
           "params": {},
           "query": {},
           "body": {
-            "type": "UPDATE",
+            "type": "INSERT",
             "table": "tasks",
             "record": {
-              "id": 52,
-              "title": "test webhook",
+              "id": 53,
+              "title": "test",
               "status": "Not Started",
-              "date_due": null,
+              "date_due": "2025-01-31T05:00:00+00:00",
               "created_by": "alex+dev@imposbl.com",
-              "date_defer": null,
+              "date_defer": "2025-01-31T05:00:00+00:00",
               "updated_by": "alex+dev@imposbl.com",
               "assigned_to": "alex+dev@imposbl.com",
-              "description": "",
+              "description": "tewt",
               "property_id": 617,
-              "timestamp_created": "2025-01-26T03:09:17.761697+00:00",
-              "timestamp_updated": "2025-01-26T03:17:53.167468+00:00"
+              "timestamp_created": "2025-01-26T15:19:46.396158+00:00",
+              "timestamp_updated": "2025-01-26T15:19:46.396158+00:00"
             },
             "schema": "public",
-            "old_record": {
-              "id": 52,
-              "title": "test webhook",
-              "status": "Not Started",
-              "date_due": null,
-              "created_by": "alex+dev@imposbl.com",
-              "date_defer": null,
-              "updated_by": "alex+dev@imposbl.com",
-              "assigned_to": "alex+dev@imposbl.com",
-              "description": "testing webhook update",
-              "property_id": 617,
-              "timestamp_created": "2025-01-26T03:09:17.761697+00:00",
-              "timestamp_updated": "2025-01-26T03:17:40.116495+00:00"
-            }
+            "old_record": null
           },
           "webhookUrl": "https://imposbl.up.railway.app/webhook/tasks-table-updated",
           "executionMode": "production"
@@ -652,6 +817,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-01-26T04:14:15.855Z",
-  "versionId": "4ccdc75a-508c-45a6-a007-f7e395ae0a44"
+  "updatedAt": "2025-01-26T15:51:44.976Z",
+  "versionId": "3d8f0f07-21aa-459f-88ec-ba56e66b3aba"
 }
