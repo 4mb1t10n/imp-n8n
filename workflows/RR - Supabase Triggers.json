@@ -417,15 +417,15 @@
     },
     {
       "parameters": {
-        "tableId": "properties_changelog",
+        "tableId": "tasks_changelog",
         "fieldsUi": {
           "fieldValues": [
             {
-              "fieldId": "property_id",
-              "fieldValue": "={{ $('Updated Task Record').first().json.body.record.id }}"
+              "fieldId": "task_id",
+              "fieldValue": "={{ $('Updated Task Record').item.json.body.record.id }}"
             },
             {
-              "fieldId": "updated_field",
+              "fieldId": "updated_column",
               "fieldValue": "={{ $json.updated_column }}"
             },
             {
@@ -439,10 +439,6 @@
             {
               "fieldId": "updated_by",
               "fieldValue": "={{ $('Updated Task Record').item.json.body.record.updated_by }}"
-            },
-            {
-              "fieldId": "timestamp_updated",
-              "fieldValue": "={{ $('Updated Task Record').item.json.body.record.timestamp_updated }}"
             }
           ]
         }
@@ -656,6 +652,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-01-26T03:47:08.109Z",
-  "versionId": "b454569d-2e12-4c73-9629-2eb641fb8478"
+  "updatedAt": "2025-01-26T04:14:15.855Z",
+  "versionId": "4ccdc75a-508c-45a6-a007-f7e395ae0a44"
 }
