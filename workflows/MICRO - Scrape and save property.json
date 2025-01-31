@@ -386,11 +386,7 @@
               "fieldValue": "={{ $now }}"
             },
             {
-              "fieldId": "timestamp_created",
-              "fieldValue": "={{ $now }}"
-            },
-            {
-              "fieldId": "last_edited_by",
+              "fieldId": "updated_by",
               "fieldValue": "={{ $('Scrape Microservice').item.json.user }}"
             },
             {
@@ -689,11 +685,7 @@
               "fieldValue": "={{ $now }}"
             },
             {
-              "fieldId": "timestamp_created",
-              "fieldValue": "={{ $now }}"
-            },
-            {
-              "fieldId": "last_edited_by",
+              "fieldId": "updated_by",
               "fieldValue": "={{ $('Scrape Microservice').item.json.user }}"
             },
             {
@@ -851,9 +843,9 @@
     "Scrape Microservice": [
       {
         "json": {
-          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/M3865669630",
+          "scrape_url": "https://www.realtor.com/realestateandhomes-detail/706-Berry-St_Toledo_OH_43605_M36365-21350",
           "user": "alex+dev@imposbl.com",
-          "scrape_log_id": "200"
+          "scrape_log_id": "212"
         }
       }
     ]
@@ -871,6 +863,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-24T03:50:53.759Z",
-  "versionId": "a6eb97c6-f6c5-4044-b199-dd67bef962d6"
+  "updatedAt": "2025-01-31T18:08:12.612Z",
+  "versionId": "f8b9d7b7-a8e5-47af-9c2b-0c99a3c0929e"
 }
