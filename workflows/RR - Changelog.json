@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Updated Property Record": {
       "main": [
@@ -605,6 +605,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-01-26T19:25:05.638Z",
+  "updatedAt": "2025-02-05T14:05:31.456Z",
   "versionId": "f0a31bf5-f6c8-45e0-b805-8cb2904cb27c"
 }
