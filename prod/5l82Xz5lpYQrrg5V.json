@@ -3445,7 +3445,7 @@
     },
     "node:chron": {
       "recurrenceRules": [
-        0
+        12
       ]
     }
   },
