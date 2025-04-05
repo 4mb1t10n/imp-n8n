@@ -210,7 +210,6 @@
     }
   },
   "createdAt": "2025-02-20T01:50:18.875Z",
-  "execution_id": "19831",
   "id": "pxOwya2rKhKkX7x6",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -4104,7 +4103,7 @@
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": [
-        16
+        18
       ]
     }
   },
