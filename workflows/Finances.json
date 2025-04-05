@@ -1,0 +1,3248 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook from Airtable": {
+      "main": [
+        [
+          {
+            "node": "All Autocat Records",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Tx Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "match found",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "no match",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "match found": {
+      "main": [
+        [
+          {
+            "node": "Get Autocat Rule",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tx Record": {
+      "main": [
+        [
+          {
+            "node": "TX Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "All Autocat Records": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Autocat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "no match": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Autocat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Autocat Rule": {
+      "main": [
+        [
+          {
+            "node": "Fields to Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "TX Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TX Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fields to Update": {
+      "main": [
+        [
+          {
+            "node": "Update Tx",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook New Autocat Rule Created": {
+      "main": [
+        [
+          {
+            "node": "Airtable Get Autocat Rule",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Airtable Get Transactions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable Get Autocat Rule": {
+      "main": [
+        [
+          {
+            "node": "AC Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable Get Transactions": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Tx",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC Fields1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TX Fields1": {
+      "main": [
+        [
+          {
+            "node": "AC Fields1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Loop Over Autocat": {
+      "main": [
+        [],
+        [
+          {
+            "node": "AC Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Tx": {
+      "main": [
+        [],
+        [
+          {
+            "node": "TX Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "match found1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "no match1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "no match1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Tx",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "match found1": {
+      "main": [
+        [
+          {
+            "node": "Airtable Update TX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable Update TX": {
+      "main": [
+        [
+          {
+            "node": "Airtable History",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable History": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Tx",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Tx": {
+      "main": [
+        [
+          {
+            "node": "Airtable History1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Personal Plaid": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Notify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify": {
+      "main": [
+        [
+          {
+            "node": "insert telegram info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Row": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/getbalances": {
+      "main": [
+        [
+          {
+            "node": "/updateBalances",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/updateBalances": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Format",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MV Finances Bot": {
+      "main": [
+        [
+          {
+            "node": "/getbalances",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "/fetchTransactions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format": {
+      "main": [
+        [
+          {
+            "node": "Send Balances",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/fetchTransactions": {
+      "main": [
+        [
+          {
+            "node": "/updateTransactions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-11-09T14:57:03.032Z",
+  "id": "0jh9kpsrP1m0UxJI",
+  "meta": null,
+  "name": "Finances",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "e08667ee-32aa-43df-a69a-8dfccd367f1c",
+        "options": {}
+      },
+      "id": "df9f094d-ffbe-4aff-83f1-e9bb5187d208",
+      "name": "Webhook from Airtable",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        680
+      ],
+      "webhookId": "e08667ee-32aa-43df-a69a-8dfccd367f1c",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "function checkTransaction() {\n    const txDirection = $json[\"tx_direction\"];\n    const acFlowDirection = $json[\"ac_flow_direction\"];\n    const txTextToAnalyze = $json[\"tx_text_to_analyze\"];\n    const acExpression = $json[\"ac_expression\"];\n    const acRecId = $json[\"ac_rec_id\"];\n\n    // Check if any inputs are missing\n    if (!txDirection || !acFlowDirection || !txTextToAnalyze || !acExpression || !acRecId) {\n        console.error(\"Missing Inputs\");\n        return { result: \"Missing Inputs\" };\n    }\n\n    // Check flow direction\n    if ((acFlowDirection === \"Income Only\" && txDirection !== \"Income\") ||\n        (acFlowDirection === \"Expense Only\" && txDirection !== \"Expense\")) {\n        return { result: \"No Match\" };\n    }\n\n    // Check regex match\n    try {\n        const regex = new RegExp(acExpression);\n        if (regex.test(txTextToAnalyze)) {\n            return { result: \"Match\", ac_rec_id: acRecId };\n        } else {\n            return { result: \"No Match\" };\n        }\n    } catch (error) {\n        console.error(\"Invalid regex:\", acExpression);\n        return { result: \"Error in regex\" };\n    }\n}\n\nreturn checkTransaction();\n"
+      },
+      "id": "ceb01527-b5c4-492f-a85f-421d84c39507",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2520,
+        760
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.result }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "Match"
+            },
+            {
+              "value2": "No Match",
+              "output": 1
+            }
+          ]
+        },
+        "fallbackOutput": 1
+      },
+      "id": "5162e980-def1-49ee-9f6b-5bf34450f7b9",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        2720,
+        760
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "0138b9e0-797a-48cf-b200-72a090858967",
+      "name": "match found",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2940,
+        660
+      ],
+      "typeVersion": 1,
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "b1fd618b-4b21-496b-a78e-0c43c1133c56",
+      "name": "no match",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        2940,
+        860
+      ],
+      "typeVersion": 1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblDg7JXvWW4mst1j",
+          "mode": "list",
+          "cachedResultName": "Transactions",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblDg7JXvWW4mst1j"
+        },
+        "id": "={{ $('Webhook from Airtable').first().json.query.rec_id }}",
+        "options": {}
+      },
+      "id": "0b6644fe-3c19-4d98-81b9-c0b5c608173e",
+      "name": "Tx Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        560
+      ],
+      "executeOnce": false,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblprQT6hfXUR56Xm",
+          "mode": "list",
+          "cachedResultName": "Autocat",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblprQT6hfXUR56Xm"
+        },
+        "filterByFormula": "=",
+        "options": {}
+      },
+      "id": "d22b887e-c3e4-4fe8-9e14-8fdb3ba8f08a",
+      "name": "All Autocat Records",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        780
+      ],
+      "executeOnce": false,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "9520657b-c1de-4ff6-8cad-a0acf78e0d24",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        2320,
+        760
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblprQT6hfXUR56Xm",
+          "mode": "list",
+          "cachedResultName": "Autocat",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblprQT6hfXUR56Xm"
+        },
+        "id": "={{ $json.ac_rec_id }}",
+        "options": {}
+      },
+      "id": "cc6cf135-cc6e-42ed-aabd-27ecb3dba54d",
+      "name": "Get Autocat Rule",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        3160,
+        660
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "ac_flow_direction",
+              "stringValue": "={{ $json.direction }}"
+            },
+            {
+              "name": "ac_expression",
+              "stringValue": "={{ $json.expression }}"
+            },
+            {
+              "name": "ac_rec_id",
+              "stringValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "c1f30df6-ac03-459d-8e20-cd6213ae992e",
+      "name": "AC Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2000,
+        780
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "tx_text_to_analyze",
+              "stringValue": "={{ $node[\"Tx Record\"].json[\"p_name_guess\"] }}\n{{ $node[\"Tx Record\"].json[\"p_name_og\"] }}\n{{ $node[\"Tx Record\"].json[\"cp_entity_id\"] }}"
+            },
+            {
+              "name": "tx_direction",
+              "stringValue": "={{ $node[\"Tx Record\"].json[\"IncomeOrExpense_display\"] }}"
+            },
+            {
+              "name": "tx_rec_id",
+              "stringValue": "={{ $node[\"Tx Record\"].json[\"at_record_id\"] }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "59f4378c-4f13-4301-b08f-111cda573387",
+      "name": "TX Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2160,
+        560
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "link_autocat_input",
+              "stringValue": "={{ $json.id }}"
+            },
+            {
+              "name": "id",
+              "stringValue": "={{ $('Tx Record').first().json.id }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "a9c298fd-ada5-4ee7-be4f-7632e11f2260",
+      "name": "Fields to Update",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        3400,
+        660
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Autocat - new record created in Airtable",
+        "height": 205.35731131193012,
+        "width": 496.129838782354
+      },
+      "id": "5bc41111-4ae0-4e85-8c17-ded2b428da95",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        620
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "path": "876d9543-74bc-4e44-abdd-d68e102336d1",
+        "options": {}
+      },
+      "id": "bca7c065-bad4-4f8e-9f1a-3b6c6100938f",
+      "name": "Webhook New Autocat Rule Created",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        1400
+      ],
+      "webhookId": "876d9543-74bc-4e44-abdd-d68e102336d1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblprQT6hfXUR56Xm",
+          "mode": "list",
+          "cachedResultName": "Autocat",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblprQT6hfXUR56Xm"
+        },
+        "id": "={{ $json.query.rec_id }}",
+        "options": {}
+      },
+      "id": "1f69e97a-1ba4-4ab8-bd35-f5c23619dad5",
+      "name": "Airtable Get Autocat Rule",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1660,
+        1300
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblDg7JXvWW4mst1j",
+          "mode": "list",
+          "cachedResultName": "Transactions",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblDg7JXvWW4mst1j"
+        },
+        "filterByFormula": "{link_autocat} = ''",
+        "options": {
+          "fields": [
+            "cp_entity_id",
+            "p_name_og",
+            "p_name_guess",
+            "amount_output",
+            "IncomeOrExpense_display"
+          ]
+        }
+      },
+      "id": "0b49182c-c2b7-4f2c-b8f9-a3a7530f566c",
+      "name": "Airtable Get Transactions",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        1660,
+        1500
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "5ab0635d-7bb2-4758-97ec-13c7a840f11f",
+      "name": "Merge1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        2460,
+        1500
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "function checkTransaction() {\n    const txDirection = $json[\"tx_direction\"];\n    const acFlowDirection = $json[\"ac_flow_direction\"];\n    const txTextToAnalyze = $json[\"tx_text_to_analyze\"];\n    const acExpression = $json[\"ac_expression\"];\n    const acRecId = $json[\"tx_rec_id\"];\n\n    // Check if any inputs are missing\n    if (!txDirection || !acFlowDirection || !txTextToAnalyze || !acExpression || !acRecId) {\n        console.error(\"Missing Inputs\");\n        return { result: \"Missing Inputs\" };\n    }\n\n    // Check flow direction\n    if ((acFlowDirection === \"Income Only\" && txDirection !== \"Income\") ||\n        (acFlowDirection === \"Expense Only\" && txDirection !== \"Expense\")) {\n        return { result: \"No Match\" };\n    }\n\n    // Check regex match\n    try {\n        const regex = new RegExp(acExpression);\n        if (regex.test(txTextToAnalyze)) {\n            return { result: \"Match\", ac_rec_id: acRecId };\n        } else {\n            return { result: \"No Match\" };\n        }\n    } catch (error) {\n        console.error(\"Invalid regex:\", acExpression);\n        return { result: \"Error in regex\" };\n    }\n}\n\nreturn checkTransaction();\n"
+      },
+      "id": "141cb1b4-dc13-4b8d-bbe0-f701bd45a1af",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2660,
+        1500
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "tx_text_to_analyze",
+              "stringValue": "={{ $node[\"Loop Over Tx\"].json[\"p_name_guess\"] }}\n{{ $node[\"Loop Over Tx\"].json[\"p_name_og\"] }}\n{{ $node[\"Loop Over Tx\"].json[\"cp_entity_id\"] }}"
+            },
+            {
+              "name": "tx_direction",
+              "stringValue": "={{ $node[\"Loop Over Tx\"].json[\"IncomeOrExpense_display\"] }}"
+            },
+            {
+              "name": "tx_rec_id",
+              "stringValue": "={{ $node[\"Loop Over Tx\"].json[\"id\"] }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "826a4a26-b0d5-4f52-a04b-3072671958e7",
+      "name": "TX Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2100,
+        1500
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "ac_flow_direction",
+              "stringValue": "={{ $node[\"Airtable Get Autocat Rule\"].json.direction }}"
+            },
+            {
+              "name": "ac_expression",
+              "stringValue": "={{ $node[\"Airtable Get Autocat Rule\"].json.expression }}"
+            },
+            {
+              "name": "ac_rec_id",
+              "stringValue": "={{ $node[\"Airtable Get Autocat Rule\"].json.id }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "8f846e26-ec5d-4082-b4f8-3d018a3c10ab",
+      "name": "AC Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2280,
+        1300
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "3a83085b-004f-404c-9eeb-fa02976443a7",
+      "name": "Loop Over Autocat",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1800,
+        780
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "9e5c9ed7-9e77-4026-8085-ceb3a07428d4",
+      "name": "Loop Over Tx",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1880,
+        1500
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.result }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "Match"
+            },
+            {
+              "value2": "No Match",
+              "output": 1
+            }
+          ]
+        },
+        "fallbackOutput": 1
+      },
+      "id": "06552558-87a1-43bc-a074-83edcf36c371",
+      "name": "Switch1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        1500
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "22cb4b10-9f21-440e-9552-b9d6cba9e9ea",
+      "name": "match found1",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        3100,
+        1340
+      ],
+      "typeVersion": 1,
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "434e62d7-52f9-4ffe-b113-f11fe23ec254",
+      "name": "no match1",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        3100,
+        1540
+      ],
+      "typeVersion": 1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblDg7JXvWW4mst1j",
+          "mode": "list",
+          "cachedResultName": "Transactions",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblDg7JXvWW4mst1j"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.ac_rec_id }}",
+            "link_autocat_input": "={{ $node[\"Airtable Get Autocat Rule\"].json.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "at_transaction_id",
+              "displayName": "at_transaction_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "at_record_id",
+              "displayName": "at_record_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "flag",
+              "displayName": "flag",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "run_autocat",
+              "displayName": "run_autocat",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "missing_info_output",
+              "displayName": "missing_info_output",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "ac_expression",
+              "displayName": "ac_expression",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ac_check_result",
+              "displayName": "ac_check_result",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "rule_summary",
+              "displayName": "rule_summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "payee_type",
+              "displayName": "payee_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "rule_payee (from link_autocat)",
+              "displayName": "rule_payee (from link_autocat)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "link_payees",
+              "displayName": "link_payees",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "rule_property (from link_autocat)",
+              "displayName": "rule_property (from link_autocat)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "link_property",
+              "displayName": "link_property",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "rule_category (from link_autocat)",
+              "displayName": "rule_category (from link_autocat)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "link_category",
+              "displayName": "link_category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "link_autocat_input",
+              "displayName": "link_autocat_input",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "link_autocat",
+              "displayName": "link_autocat",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Invoice",
+              "displayName": "Invoice",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "payment_confirmations",
+              "displayName": "payment_confirmations",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "logo",
+              "displayName": "logo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "name_display",
+              "displayName": "name_display",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "payee_id_short",
+              "displayName": "payee_id_short",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "p_name_guess",
+              "displayName": "p_name_guess",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "p_name_og",
+              "displayName": "p_name_og",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "IncomeOrExpense_display",
+              "displayName": "IncomeOrExpense_display",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "amount",
+              "displayName": "amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "amount_output",
+              "displayName": "amount_output",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "iso_currency_code",
+              "displayName": "iso_currency_code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "date_output",
+              "displayName": "date_output",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "transaction_notes",
+              "displayName": "transaction_notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "p_category",
+              "displayName": "p_category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "pf_primary",
+              "displayName": "pf_primary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "pf_detailed",
+              "displayName": "pf_detailed",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "cp_confidence_level",
+              "displayName": "cp_confidence_level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "pf_confidence_level",
+              "displayName": "pf_confidence_level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "category_id",
+              "displayName": "category_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "pending",
+              "displayName": "pending",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "false",
+                  "value": "false"
+                },
+                {
+                  "name": "true",
+                  "value": "true"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "added_modified_removed",
+              "displayName": "added_modified_removed",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "added",
+                  "value": "added"
+                },
+                {
+                  "name": "modified",
+                  "value": "modified"
+                },
+                {
+                  "name": "removed",
+                  "value": "removed"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "payment_channel",
+              "displayName": "payment_channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "transaction_type",
+              "displayName": "transaction_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "cp_entity_id",
+              "displayName": "cp_entity_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "transaction_id",
+              "displayName": "transaction_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Plaid",
+                  "value": "Plaid"
+                },
+                {
+                  "name": "Manual",
+                  "value": "Manual"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "p_updated",
+              "displayName": "p_updated",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "record_created_timestamp",
+              "displayName": "record_created_timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Nested",
+              "displayName": "Nested",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "missing_payee",
+              "displayName": "missing_payee",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "missing_cat",
+              "displayName": "missing_cat",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "missing_prop",
+              "displayName": "missing_prop",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "missing_invoice",
+              "displayName": "missing_invoice",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "ac_analyze_this_text",
+              "displayName": "ac_analyze_this_text",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "ac_strict_direction",
+              "displayName": "ac_strict_direction",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Expense Only",
+                  "value": "Expense Only"
+                },
+                {
+                  "name": "Income Only",
+                  "value": "Income Only"
+                },
+                {
+                  "name": "Either",
+                  "value": "Either"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "cp_logo_url",
+              "displayName": "cp_logo_url",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "cp_website",
+              "displayName": "cp_website",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "account_id",
+              "displayName": "account_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "user_id",
+              "displayName": "user_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "record_edited",
+              "displayName": "record_edited",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "record_edit_by",
+              "displayName": "record_edit_by",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9fd9a538-75f7-4404-a10d-1d91596777b9",
+      "name": "Airtable Update TX",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        3300,
+        1440
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4ihVkSALnPlCTA",
+          "mode": "list",
+          "cachedResultName": "History",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tbl4ihVkSALnPlCTA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "transaction_updated": "={{ $json.id }}",
+            "autocat_rule": "={{ $node[\"AC Fields1\"].json.ac_rec_id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "history_id",
+              "displayName": "history_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "transaction_updated",
+              "displayName": "transaction_updated",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "autocat_rule",
+              "displayName": "autocat_rule",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "created_time",
+              "displayName": "created_time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7e1dbc95-171c-4892-b488-bf3296c76bfc",
+      "name": "Airtable History",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        3480,
+        1540
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblDg7JXvWW4mst1j",
+          "mode": "list",
+          "cachedResultName": "Transactions",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tblDg7JXvWW4mst1j"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "id": "={{ $json.tx_rec_id }}",
+            "display_category": "="
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "at_transaction_id",
+              "displayName": "at_transaction_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "at_record_id",
+              "displayName": "at_record_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "run_autocat",
+              "displayName": "run_autocat",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "missing_info?",
+              "displayName": "missing_info?",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "✅ Good",
+                  "value": "✅ Good"
+                },
+                {
+                  "name": "⚠️ Missing",
+                  "value": "⚠️ Missing"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "missing_info_output",
+              "displayName": "missing_info_output",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "missing_list",
+              "displayName": "missing_list",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "ac_analyze_this_text",
+              "displayName": "ac_analyze_this_text",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "ac_expression",
+              "displayName": "ac_expression",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ac_set_property",
+              "displayName": "ac_set_property",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ac_set_category",
+              "displayName": "ac_set_category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ac_strict_direction",
+              "displayName": "ac_strict_direction",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Expense Only",
+                  "value": "Expense Only"
+                },
+                {
+                  "name": "Income Only",
+                  "value": "Income Only"
+                },
+                {
+                  "name": "Either",
+                  "value": "Either"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "ac_check_result",
+              "displayName": "ac_check_result",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "link_autocat",
+              "displayName": "link_autocat",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Invoice",
+              "displayName": "Invoice",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "payee_type",
+              "displayName": "payee_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "link_property",
+              "displayName": "link_property",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "logo",
+              "displayName": "logo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "name_display",
+              "displayName": "name_display",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "link_payees",
+              "displayName": "link_payees",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "payee_id_short",
+              "displayName": "payee_id_short",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "merchant_name",
+              "displayName": "merchant_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "IncomeOrExpense_display",
+              "displayName": "IncomeOrExpense_display",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "IncomeOrExpense_Internal",
+              "displayName": "IncomeOrExpense_Internal",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Expense ",
+                  "value": "Expense "
+                },
+                {
+                  "name": "Income",
+                  "value": "Income"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "amount_output",
+              "displayName": "amount_output",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "iso_currency_code",
+              "displayName": "iso_currency_code",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "display_category",
+              "displayName": "display_category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Software",
+                  "value": "Software"
+                },
+                {
+                  "name": "Utilities",
+                  "value": "Utilities"
+                },
+                {
+                  "name": "Insurance",
+                  "value": "Insurance"
+                },
+                {
+                  "name": "Security Deposit",
+                  "value": "Security Deposit"
+                },
+                {
+                  "name": "Construction",
+                  "value": "Construction"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "transaction_notes",
+              "displayName": "transaction_notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "pf_primary",
+              "displayName": "pf_primary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "pf_detailed",
+              "displayName": "pf_detailed",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "cp_confidence_level",
+              "displayName": "cp_confidence_level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "pf_confidence_level",
+              "displayName": "pf_confidence_level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "category_id",
+              "displayName": "category_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "pending",
+              "displayName": "pending",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "added_modified_removed",
+              "displayName": "added_modified_removed",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "added",
+                  "value": "added"
+                },
+                {
+                  "name": "modified",
+                  "value": "modified"
+                },
+                {
+                  "name": "removed",
+                  "value": "removed"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "payment_channel",
+              "displayName": "payment_channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "transaction_type",
+              "displayName": "transaction_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "coordinates_lat",
+              "displayName": "coordinates_lat",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "coordinates_lon",
+              "displayName": "coordinates_lon",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "cp_entity_id",
+              "displayName": "cp_entity_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "cp_logo_url",
+              "displayName": "cp_logo_url",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "cp_website",
+              "displayName": "cp_website",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "transaction_id",
+              "displayName": "transaction_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "account_id",
+              "displayName": "account_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "user_id",
+              "displayName": "user_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "record_created_timestamp",
+              "displayName": "record_created_timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "missing_payee",
+              "displayName": "missing_payee",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "missing_cat",
+              "displayName": "missing_cat",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "missing_prop",
+              "displayName": "missing_prop",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "missing_invoice",
+              "displayName": "missing_invoice",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "amount",
+              "displayName": "amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Transactions (Nested)",
+              "displayName": "Transactions (Nested)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {
+          "ignoreFields": "id"
+        }
+      },
+      "id": "b382e8bf-6af7-4c2e-bd85-95ff1565b3a3",
+      "name": "Update Tx",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        3640,
+        660
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appjjY9qVQZlWUkkj",
+          "mode": "list",
+          "cachedResultName": "Finances",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4ihVkSALnPlCTA",
+          "mode": "list",
+          "cachedResultName": "History",
+          "cachedResultUrl": "https://airtable.com/appjjY9qVQZlWUkkj/tbl4ihVkSALnPlCTA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "transaction_updated": "={{ $json.id }}",
+            "autocat_rule": "={{ $json.fields.link_autocat_input }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "history_id",
+              "displayName": "history_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "base",
+              "displayName": "base",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "transaction_updated",
+              "displayName": "transaction_updated",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "link_transaction",
+              "displayName": "link_transaction",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "autocat_rule",
+              "displayName": "autocat_rule",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "link_autocat",
+              "displayName": "link_autocat",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "payee_id_short",
+              "displayName": "payee_id_short",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "created_time",
+              "displayName": "created_time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "27eff30d-ce65-4dd4-acdb-ea15fcac5c8a",
+      "name": "Airtable History1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        3860,
+        660
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ba9BL3rXOUDjb7P2",
+          "name": "alex@section.homes"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Autocat - New rule created",
+        "height": 257.2752043596731,
+        "width": 445.9945504087194
+      },
+      "id": "56ce768c-ce7c-4fd7-a569-c73722830b4f",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        1300
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## \"Added\" transactions from plaid [PERSONAL]",
+        "height": 80,
+        "width": 434.1260766582634
+      },
+      "id": "d5ec67ad-2dea-47a0-afb1-2a46d9b3b1c6",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        840,
+        -220
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "-1002118068539",
+        "text": "={{ $json.p_amount*-1 }} {{ $json.p_iso_currency_code }}\n{{ $json.p_date }}\n{{ $json.p_name_og }}\n------\n{{ $json[\"p_transaction_id\"] }}\n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>\n\n\n",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "aa0f71be-2f4c-40f3-a5ca-18baf8efe2ff",
+      "name": "Notify",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        2260,
+        -240
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "0fQ1WNqKtNnjGFpt",
+          "name": "MV Finances Bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "personal_plaid_updates",
+        "options": {}
+      },
+      "id": "d1643e0d-8f8d-404e-853c-ca042fbf0546",
+      "name": "Personal Plaid",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        1380,
+        -240
+      ],
+      "webhookId": "68592fe3-4e28-4ed9-ae6d-fe636493ca66",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "858c83d3-be70-4e07-9e40-2217a0da678d",
+              "leftValue": "={{ $json.body.status }}",
+              "rightValue": "added",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d37ed6ee-0a7a-4b6f-ae7c-5fa03193d913",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        -240
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.telegram_message_id }}",
+              "operation": "isEmpty"
+            },
+            {
+              "value1": "={{ $json.telegram_chat_id }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "f2a707a7-42be-42d6-8ce6-717390173b82",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        2040,
+        -240
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "transactions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Filter').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "telegram_message_id",
+              "fieldValue": "={{ $json.result.message_id }}"
+            },
+            {
+              "fieldId": "telegram_chat_id",
+              "fieldValue": "={{ $json.result.chat.id }}"
+            }
+          ]
+        }
+      },
+      "id": "99da632b-e8e4-4629-a0f2-d7ee89ad38f9",
+      "name": "insert telegram info",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2480,
+        -240
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "L3YlYYsR7qok4PBY",
+          "name": "MV FInancial"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "transactions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "p_transaction_id",
+              "keyValue": "={{ $json.body.record_id }}"
+            }
+          ]
+        }
+      },
+      "id": "7a337490-30d7-46a7-971b-f18a5d1e3382",
+      "name": "Get Row",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        -240
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "supabaseApi": {
+          "id": "L3YlYYsR7qok4PBY",
+          "name": "MV FInancial"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.message.text }}",
+              "value2": "/getbalances@mv_finances_bot"
+            }
+          ]
+        }
+      },
+      "id": "61b5dbb9-48b8-4db8-a6ec-9bb770c07723",
+      "name": "/getbalances",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        40
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "plaid_accounts"
+      },
+      "id": "4c5475ca-c8db-4776-9541-bbd52f71ab3a",
+      "name": "Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2040,
+        40
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "L3YlYYsR7qok4PBY",
+          "name": "MV FInancial"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://plaid-production.up.railway.app/updateBalances",
+        "options": {}
+      },
+      "id": "bd196ce4-6294-4682-8b09-07ed29eb40fa",
+      "name": "/updateBalances",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1820,
+        40
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mv_financial_bot",
+        "options": {}
+      },
+      "id": "4d120a02-2b26-48ca-9485-3b50be89af39",
+      "name": "MV Finances Bot",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        1380,
+        140
+      ],
+      "webhookId": "84c50769-b5ac-4747-bded-805f4a2cf08e",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "function generateAccountsHTML(items) {\n  let totalCredit = 0;\n  let totalDebit = 0;\n\n  // Sort items alphabetically by nickname\n  const sortedItems = items.sort((a, b) => {\n    const nicknameA = a.json.nickname || 'Unnamed Account';\n    const nicknameB = b.json.nickname || 'Unnamed Account';\n    return nicknameA.localeCompare(nicknameB);\n  });\n\n  const accountsHTML = sortedItems.map(item => {\n    const account = item.json;\n    const currentAmount = Number(account.p_current_amount) || 0;\n\n    if (account.type === 'depository') {\n      totalDebit += currentAmount;\n    } else if (account.type === 'credit') {\n      totalCredit += currentAmount;\n    }\n\n    return `<b>${account.nickname || 'Unnamed Account'}</b>\nCurrent: $${account.p_current_amount != null ? account.p_current_amount.toFixed(2) : 'N/A'}\nAvailable: $${account.p_available_amount != null ? account.p_available_amount.toFixed(2) : 'N/A'}\n\n`;\n  }).join('');\n\n  const totalCurrent = totalDebit - totalCredit;\n\n  const totalsHTML = `\n<b>Totals</b>\nTotal Credit: $${totalCredit.toFixed(2)}\nTotal Debit: $${totalDebit.toFixed(2)}\nCurrent: $${totalCurrent.toFixed(2)}`;\n\n  const htmlString = accountsHTML + totalsHTML;\n  return { html: htmlString };\n}\n\nreturn generateAccountsHTML($input.all());"
+      },
+      "id": "4d72fdd3-ac7d-4f0b-9f37-65ee8c463c89",
+      "name": "Format",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2260,
+        40
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.message.text }}",
+              "value2": "/updatetransactions@mv_finances_bot"
+            }
+          ]
+        }
+      },
+      "id": "064afd4c-cbca-4d76-8df6-00eee7d42e8c",
+      "name": "/fetchTransactions",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        240
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "-1002118068539",
+        "text": "={{ $json.html}}\n------\n<a href=\"https://imposbl.up.railway.app/workflow/0jh9kpsrP1m0UxJI/executions/{{ $execution.id }}\">Execution {{ $execution.id }}</a>",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "1991726d-7a87-4d59-bec4-50e7da98b1dc",
+      "name": "Send Balances",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        2480,
+        40
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "0fQ1WNqKtNnjGFpt",
+          "name": "MV Finances Bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://plaid-production.up.railway.app/updateTransactions",
+        "options": {}
+      },
+      "id": "fce90505-93fe-4bc7-b723-0cfe05c2772a",
+      "name": "/updateTransactions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1820,
+        240
+      ],
+      "disabled": true
+    }
+  ],
+  "pinData": {
+    "Webhook New Autocat Rule Created": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "x-airtable-source": "appjjY9qVQZlWUkkj/wflvDbFabhFT6u4zO",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-forwarded-for": "34.239.160.216",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "34.239.160.216",
+            "x-request-id": "682275d5-2597-4f99-9b70-716c0a6f1c88"
+          },
+          "params": {},
+          "query": {
+            "rec_id": "rec4eau6QOJUgKIoH"
+          }
+        }
+      }
+    ],
+    "Webhook from Airtable": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "user-agent": "Mozilla/5.0 (compatible; AirtableScripting; +https://airtable.com/developers/scripting;)",
+            "x-airtable-source": "appjjY9qVQZlWUkkj/wflKUbNbPPAcBgYqG",
+            "accept": "*/*",
+            "accept-encoding": "gzip,deflate",
+            "x-forwarded-for": "34.202.162.161",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "34.202.162.161",
+            "x-request-id": "996dc143-e52a-4935-b2d9-e02ea53d7b85"
+          },
+          "params": {},
+          "query": {
+            "rec_id": "reca1ENpvPCH7lCBO",
+            "db_id": "appjjY9qVQZlWUkkj"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Personal Plaid": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "user-agent": "axios/1.7.2",
+            "content-length": "100",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "x-forwarded-for": "174.48.138.15",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "174.48.138.15",
+            "x-request-id": "7fa8fb04-e34d-4b94-860d-d21d06266f33"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "transaction_updated",
+            "record_id": "EqJJ3gYgwXTdPv10nNV1i69jR1b3BNUdPRY0z",
+            "status": "added"
+          }
+        }
+      }
+    ],
+    "MV Finances Bot": [
+      {
+        "json": {
+          "headers": {
+            "host": "imposbl.up.railway.app",
+            "content-type": "application/json",
+            "content-length": "363",
+            "accept-encoding": "gzip, deflate",
+            "x-forwarded-for": "91.108.6.5",
+            "x-forwarded-proto": "https",
+            "x-envoy-external-address": "91.108.6.5",
+            "x-request-id": "32716995-30d2-4cee-bcbe-453add0d74f6"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "update_id": 335753419,
+            "message": {
+              "message_id": 397,
+              "from": {
+                "id": 384291172,
+                "is_bot": false,
+                "first_name": "Alex",
+                "last_name": "Miles",
+                "username": "AMOnition",
+                "language_code": "en"
+              },
+              "chat": {
+                "id": -1002118068539,
+                "title": "MV Financial",
+                "type": "supergroup"
+              },
+              "date": 1720621272,
+              "text": "/getbalances@mv_finances_bot",
+              "entities": [
+                {
+                  "offset": 0,
+                  "length": 28,
+                  "type": "bot_command"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Gmail Trigger": {
+      "lastTimeChecked": 1704678186
+    }
+  },
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-01-22T17:11:08.018Z",
+  "versionId": "b66df94a-b056-4db8-a896-aea84dea9cd0"
+}
