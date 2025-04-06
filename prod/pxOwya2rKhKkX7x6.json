@@ -325,7 +325,7 @@
     }
   },
   "createdAt": "2025-02-20T01:50:18.875Z",
-  "execution_id": "20069",
+  "execution_id": "20289",
   "id": "pxOwya2rKhKkX7x6",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -659,7 +659,8 @@
           "id": "bqnRc8rGYs6JvqnN",
           "name": "4mb1t10n"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -673,7 +674,8 @@
         -1100,
         1740
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {
@@ -706,7 +708,8 @@
           "id": "bqnRc8rGYs6JvqnN",
           "name": "4mb1t10n"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -720,7 +723,8 @@
         -660,
         1740
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {
@@ -741,7 +745,8 @@
           "id": "qY8OP9lpzoxVpSpc",
           "name": "n8n-production"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -776,7 +781,8 @@
         -1540,
         1740
       ],
-      "typeVersion": 3.4
+      "typeVersion": 3.4,
+      "disabled": true
     },
     {
       "parameters": {
@@ -791,7 +797,8 @@
         -1940,
         1980
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {
@@ -808,7 +815,8 @@
         -220,
         2000
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {
@@ -851,7 +859,8 @@
         -440,
         2000
       ],
-      "typeVersion": 2.2
+      "typeVersion": 2.2,
+      "disabled": true
     },
     {
       "parameters": {
@@ -886,7 +895,8 @@
         -1540,
         2000
       ],
-      "typeVersion": 3.4
+      "typeVersion": 3.4,
+      "disabled": true
     },
     {
       "parameters": {
@@ -898,9 +908,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -500,
-        2220
+        2200
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {
@@ -916,7 +927,8 @@
         -1320,
         2000
       ],
-      "typeVersion": 4.2
+      "typeVersion": 4.2,
+      "disabled": true
     },
     {
       "parameters": {
@@ -930,7 +942,8 @@
         -1100,
         2000
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {
@@ -957,7 +970,8 @@
         2000
       ],
       "typeVersion": 1,
-      "alwaysOutputData": true
+      "alwaysOutputData": true,
+      "disabled": true
     },
     {
       "parameters": {
@@ -971,7 +985,8 @@
         -660,
         2000
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {},
@@ -1089,18 +1104,13 @@
       ]
     },
     "node:Chron": {
-      "recurrenceRules": []
+      "recurrenceRules": [
+        14
+      ]
     }
   },
-  "tags": [
-    {
-      "createdAt": "2025-02-05T04:49:31.622Z",
-      "updatedAt": "2025-02-05T04:49:31.622Z",
-      "id": "6VUohJWuwhRuCCOI",
-      "name": "cron"
-    }
-  ],
+  "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-06T01:50:54.149Z",
-  "versionId": "277749ff-4230-4f1c-a663-33ac32c4a017"
+  "updatedAt": "2025-04-06T18:02:13.910Z",
+  "versionId": "915c31e8-1c72-4cb0-a7f7-f796751bc037"
 }
