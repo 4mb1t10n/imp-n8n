@@ -300,18 +300,7 @@
       "main": [
         [
           {
-            "node": "appendExec",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "appendExec": {
-      "main": [
-        [
-          {
-            "node": "Loop",
+            "node": "appendVars",
             "type": "main",
             "index": 0
           }
@@ -322,10 +311,21 @@
       "main": [
         []
       ]
+    },
+    "appendVars": {
+      "main": [
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-02-20T01:50:18.875Z",
-  "execution_id": "20289",
+  "execution_id": "20300",
   "id": "pxOwya2rKhKkX7x6",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -1041,30 +1041,6 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "fbf8509c-35ab-4137-8470-4a04c6135c93",
-              "name": "execution_id",
-              "value": "={{ $execution.id }}",
-              "type": "string"
-            }
-          ]
-        },
-        "includeOtherFields": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -1100,
-        720
-      ],
-      "id": "b8804037-a998-4101-b8c1-31183a5c54f7",
-      "name": "appendExec"
-    },
-    {
-      "parameters": {
         "workflowId": {
           "__rl": true,
           "mode": "id",
@@ -1091,8 +1067,39 @@
         720
       ],
       "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fbf8509c-35ab-4137-8470-4a04c6135c93",
+              "name": "execution_id",
+              "value": "={{ $execution.id }}",
+              "type": "string"
+            },
+            {
+              "id": "ab4c0e24-cfd2-4a2c-a632-81c3d11629ef",
+              "name": "notes",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1100,
+        720
+      ],
+      "id": "b8804037-a998-4101-b8c1-31183a5c54f7",
+      "name": "appendVars"
     }
   ],
+  "notes": "",
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -1105,12 +1112,12 @@
     },
     "node:Chron": {
       "recurrenceRules": [
-        14
+        16
       ]
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-06T18:02:13.910Z",
-  "versionId": "915c31e8-1c72-4cb0-a7f7-f796751bc037"
+  "updatedAt": "2025-04-06T18:06:58.830Z",
+  "versionId": "d038375e-4811-4774-a603-e787457927d9"
 }
