@@ -154,7 +154,7 @@
     }
   },
   "createdAt": "2025-03-30T16:18:22.495Z",
-  "execution_id": "20986",
+  "execution_id": "21037",
   "id": "K30PWfMkvHZTKYC3",
   "meta": null,
   "name": "Tasks",
@@ -188,7 +188,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\n// Start with the select parameter\nlet queryString = \"select=*\";\n// Function to handle array, string, or single value inputs\nfunction processArrayInput(input) {\n  // If null, undefined, or string \"null\", return empty array\n  if (input === null || input === undefined || input === \"null\") {\n    return [];\n  }\n  \n  // If it's already an array, filter out null values\n  if (Array.isArray(input)) {\n    return input.filter(item => item !== null && item !== \"null\");\n  }\n  \n  // If it's a string that looks like JSON, try to parse it\n  if (typeof input === 'string') {\n    try {\n      const parsed = JSON.parse(input);\n      // If parsing succeeded and result is an array, filter out null values\n      if (Array.isArray(parsed)) {\n        return parsed.filter(item => item !== null && item !== \"null\");\n      }\n      // If parsing succeeded but result is not an array, check if it's null\n      return parsed === null || parsed === \"null\" ? [] : [parsed];\n    } catch (e) {\n      // If parsing failed, treat it as a single value unless it's \"null\"\n      return input === \"null\" ? [] : [input];\n    }\n  }\n  \n  // For any other type (number, boolean, etc.), wrap in array\n  return [input];\n}\n// Process assigned users - URL encode each email address\nif (inputData.assigned && inputData.assigned !== \"null\") {\n  const assigned = processArrayInput(inputData.assigned);\n  if (assigned.length > 0) {\n    const assignedList = \"(\" + assigned.map(user => `\"${encodeURIComponent(user)}\"`).join(\",\") + \")\";\n    queryString += \"&assigned_to=in.\" + assignedList;\n  }\n}\n// Process snooze status\nif (inputData.snooze && inputData.snooze !== \"null\") {\n  const snoozeStatus = processArrayInput(inputData.snooze);\n  if (snoozeStatus.length > 0) {\n    if (snoozeStatus.includes(\"Active\") && !snoozeStatus.includes(\"Snoozed\")) {\n      // Active: timestamp_snooze is null or in the past\n      queryString += \"&or=(timestamp_snooze.is.null,timestamp_snooze.lt.now)\";\n    } else if (!snoozeStatus.includes(\"Active\") && snoozeStatus.includes(\"Snoozed\")) {\n      // Snoozed: timestamp_snooze is in the future\n      queryString += \"&timestamp_snooze=gt.now\";\n    }\n  }\n}\n// Process priorities\nif (inputData.priorities && inputData.priorities !== \"null\") {\n  const priorities = processArrayInput(inputData.priorities);\n  if (priorities.length > 0) {\n    const prioritiesList = \"(\" + priorities.join(\",\") + \")\";\n    queryString += \"&priority=in.\" + prioritiesList;\n  }\n}\n// Process properties\nif (inputData.properties && inputData.properties !== \"null\") {\n  const properties = processArrayInput(inputData.properties);\n  if (properties.length > 0) {\n    const propertiesList = \"(\" + properties.join(\",\") + \")\";\n    queryString += \"&property_id=in.\" + propertiesList;\n  }\n}\n// Process completed status\nif (inputData.completed && inputData.completed !== \"null\") {\n  const completed = processArrayInput(inputData.completed);\n  if (completed.length > 0) {\n    const completedList = \"(\" + completed.map(status => `${status}`).join(\",\") + \")\";\n    queryString += \"&completed=in.\" + completedList;\n  }\n}\n\n// Get primary sort column and direction, or use defaults\nconst sortColumn = inputData.sort_column || \"address_simple\";\nconst sortDirection = inputData.sort_direction || \"asc\";\n\n// Add sorting to the query string with two layers of ordering\n// First by the primary sort column, then by assigned_to\nqueryString += `&order=${sortColumn}.${sortDirection},assigned_to.asc`;\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
+        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\n// Start with the select parameter\nlet queryString = \"select=*\";\n// Function to handle array, string, or single value inputs\nfunction processArrayInput(input) {\n  // If null, undefined, or string \"null\", return empty array\n  if (input === null || input === undefined || input === \"null\") {\n    return [];\n  }\n  \n  // If it's already an array, filter out null values\n  if (Array.isArray(input)) {\n    return input.filter(item => item !== null && item !== \"null\");\n  }\n  \n  // If it's a string that looks like JSON, try to parse it\n  if (typeof input === 'string') {\n    try {\n      const parsed = JSON.parse(input);\n      // If parsing succeeded and result is an array, filter out null values\n      if (Array.isArray(parsed)) {\n        return parsed.filter(item => item !== null && item !== \"null\");\n      }\n      // If parsing succeeded but result is not an array, check if it's null\n      return parsed === null || parsed === \"null\" ? [] : [parsed];\n    } catch (e) {\n      // If parsing failed, treat it as a single value unless it's \"null\"\n      return input === \"null\" ? [] : [input];\n    }\n  }\n  \n  // For any other type (number, boolean, etc.), wrap in array\n  return [input];\n}\n// Process assigned users - URL encode each email address\nif (inputData.assigned && inputData.assigned !== \"null\") {\n  const assigned = processArrayInput(inputData.assigned);\n  if (assigned.length > 0) {\n    const assignedList = \"(\" + assigned.map(user => `\"${encodeURIComponent(user)}\"`).join(\",\") + \")\";\n    queryString += \"&assigned_to=in.\" + assignedList;\n  }\n}\n// Process snooze status\nif (inputData.snooze && inputData.snooze !== \"null\") {\n  const snoozeStatus = processArrayInput(inputData.snooze);\n  if (snoozeStatus.length > 0) {\n    if (snoozeStatus.includes(\"Active\") && !snoozeStatus.includes(\"Snoozed\")) {\n      // Active: timestamp_snooze is null or in the past\n      queryString += \"&or=(timestamp_snooze.is.null,timestamp_snooze.lt.now)\";\n    } else if (!snoozeStatus.includes(\"Active\") && snoozeStatus.includes(\"Snoozed\")) {\n      // Snoozed: timestamp_snooze is in the future\n      queryString += \"&timestamp_snooze=gt.now\";\n    }\n  }\n}\n// Process priorities\nif (inputData.priorities && inputData.priorities !== \"null\") {\n  const priorities = processArrayInput(inputData.priorities);\n  if (priorities.length > 0) {\n    const prioritiesList = \"(\" + priorities.join(\",\") + \")\";\n    queryString += \"&priority=in.\" + prioritiesList;\n  }\n}\n// Process properties\nif (inputData.properties && inputData.properties !== \"null\") {\n  const properties = processArrayInput(inputData.properties);\n  if (properties.length > 0) {\n    const propertiesList = \"(\" + properties.join(\",\") + \")\";\n    queryString += \"&property_id=in.\" + propertiesList;\n  }\n}\n// Process completed status\nif (inputData.completed && inputData.completed !== \"null\") {\n  const completed = processArrayInput(inputData.completed);\n  if (completed.length > 0) {\n    const completedList = \"(\" + completed.map(status => `${status}`).join(\",\") + \")\";\n    queryString += \"&completed=in.\" + completedList;\n  }\n}\n\n// Process flagged status\nif (inputData.flagged !== undefined && inputData.flagged !== null && inputData.flagged !== \"\") {\n  // Convert string \"true\"/\"false\" to boolean if needed\n  const flaggedValue = inputData.flagged === \"true\" ? true : \n                      inputData.flagged === \"false\" ? false : \n                      inputData.flagged;\n  \n  // Only add to query if it's a boolean value\n  if (typeof flaggedValue === 'boolean') {\n    queryString += flaggedValue ? \"&flagged=is.true\" : \"&flagged=is.false\";\n  }\n}\n\n// Get primary sort column and direction, or use defaults\nconst sortColumn = inputData.sort_column || \"address_simple\";\nconst sortDirection = inputData.sort_direction || \"asc\";\n\n// Add sorting to the query string with two layers of ordering\n// First by the primary sort column, then by assigned_to\nqueryString += `&order=${sortColumn}.${sortDirection},assigned_to.asc`;\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -356,6 +356,10 @@
             {
               "fieldId": "timestamp_updated",
               "fieldValue": "={{ new Date().toDateTime() }}"
+            },
+            {
+              "fieldId": "flagged",
+              "fieldValue": "={{ $json.flagged || $json.flagged == \"true\"? true : false }}"
             }
           ]
         }
@@ -478,6 +482,12 @@
               "type": "string"
             },
             {
+              "id": "1264258f-5f77-4246-9f55-af6fc47543b8",
+              "name": "flagged",
+              "value": "={{ $json.query.flagged }}",
+              "type": "string"
+            },
+            {
               "id": "fc6be482-1f8f-42d1-bde9-3599c6deb9c7",
               "name": "sort_column",
               "value": "={{ $json.query.sort_column }}",
@@ -568,6 +578,12 @@
               "id": "6fea0b5a-f2cf-4b57-a767-739231ef711b",
               "name": "user",
               "value": "={{ $json.query.user }}",
+              "type": "string"
+            },
+            {
+              "id": "aad5799f-e0c0-45e2-99a8-884398911694",
+              "name": "flagged",
+              "value": "={{ $json.query.flagged }}",
               "type": "string"
             }
           ]
@@ -689,15 +705,16 @@
           "query": {
             "user": "alex+dev@imposbl.com",
             "assigned": "",
-            "deadlines": "",
-            "snooze": "",
-            "priorities": "",
+            "deadlines": "null",
+            "snooze": "Active",
+            "priorities": "null",
             "properties": "",
-            "completed": "",
-            "sort_column": "",
-            "sort_direction": "",
+            "completed": "false",
+            "sort_column": "address_simple",
+            "sort_direction": "asc",
             "search_query": "",
-            "search_columns": ""
+            "search_columns": "[\"title\",\"description\"]",
+            "flagged": "true"
           },
           "body": {},
           "webhookUrl": "https://s8s.up.railway.app/webhook/get-tasks",
@@ -712,6 +729,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-04-04T16:46:09.678Z",
-  "versionId": "35582488-c9ca-4439-8f76-fdd05d7d193a"
+  "updatedAt": "2025-04-07T18:58:25.268Z",
+  "versionId": "5650d29f-fde3-4cc4-921b-0603025ce8e3"
 }
