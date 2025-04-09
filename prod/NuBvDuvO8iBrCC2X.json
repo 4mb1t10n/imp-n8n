@@ -1,0 +1,214 @@
+{
+  "active": true,
+  "connections": {
+    "Get properties": {
+      "main": [
+        [
+          {
+            "node": "respond with properties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "propertiesQuery": {
+      "main": [
+        [
+          {
+            "node": "Get properties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs-properties-get": {
+      "main": [
+        [
+          {
+            "node": "properties-get",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "properties-get": {
+      "main": [
+        [
+          {
+            "node": "propertiesQuery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/get-properties": {
+      "main": [
+        [
+          {
+            "node": "inputs-properties-get",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-09T17:35:25.999Z",
+  "execution_id": "22094",
+  "id": "NuBvDuvO8iBrCC2X",
+  "meta": null,
+  "name": "/properties GET",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/view_properties?{{ $json.queryString }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        820,
+        80
+      ],
+      "id": "78049c28-4888-4609-98e5-d7544693b554",
+      "name": "Get properties",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "KwKIAL5ixwLlPeZY",
+          "name": "Supabase Imposbl Header Auth"
+        },
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\n// Start with the select parameter\nlet queryString = \"select=id, address_street, address_zip, beds, property_status, realtor_status, realtor_dwelling_type, realtor_list_price, offer_price, followup_notes, timestamp_scraped, zillow_url, color, tags, safmr, cover_photo_url, address_city, address_state\";\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(input) {\n  // Add explicit check for null/undefined\n  if (input === null || input === undefined) {\n    return [];\n  }\n  \n  if (typeof input === 'string') {\n    try {\n      // Try to parse it as JSON\n      return JSON.parse(input);\n    } catch (e) {\n      // If parsing fails, return empty array\n      return [];\n    }\n  } else if (Array.isArray(input)) {\n    return input;\n  }\n  return [];\n}\n\n// Process internal_statuses\nif (inputData.internal_statuses) {\n  const statuses = processArrayInput(inputData.internal_statuses);\n  if (statuses && statuses.length > 0) {  // Add check for null before accessing length\n    const statusList = \"(\" + statuses.map(status => `\"${status}\"`).join(\",\") + \")\";\n    queryString += \"&property_status=in.\" + statusList;\n  }\n}\n\n// Process market_statuses\nif (inputData.market_statuses) {\n  const marketStatuses = processArrayInput(inputData.market_statuses);\n  if (marketStatuses && marketStatuses.length > 0) {  // Add check for null before accessing length\n    const marketStatusList = \"(\" + marketStatuses.map(status => `\"${status}\"`).join(\",\") + \")\";\n    queryString += \"&realtor_status=in.\" + marketStatusList;\n  }\n}\n\n// Process dwellings\nif (inputData.dwellings) {\n  const dwellings = processArrayInput(inputData.dwellings);\n  if (dwellings && dwellings.length > 0) {  // Add check for null before accessing length\n    const dwellingsList = \"(\" + dwellings.map(dwelling => `\"${dwelling}\"`).join(\",\") + \")\";\n    queryString += \"&realtor_dwelling_type=in.\" + dwellingsList;\n  }\n}\n\n// Process tags\nif (inputData.tags) {\n  const tags = processArrayInput(inputData.tags);\n  if (tags && tags.length > 0) {  // Add check for null before accessing length\n    const tagsList = \"{\" + tags.map(tag => `${tag}`).join(\",\") + \"}\";\n    queryString += \"&tags=ov.\" + tagsList;\n  }\n}\n\n// Process search query and search columns\nif (inputData.search_query && inputData.search_query.trim() !== '') {\n  const searchColumns = processArrayInput(inputData.search_columns);\n  if (searchColumns && searchColumns.length > 0) {  // Add check for null before accessing length\n    // Create search conditions for each column\n    const conditions = searchColumns.map(column => \n      `${column}.ilike.*${inputData.search_query}*`\n    );\n    \n    // Join conditions with commas and wrap in parentheses\n    const orCondition = \"(\" + conditions.join(\",\") + \")\";\n    \n    // Add to query string\n    queryString += \"&or=\" + orCondition;\n  }\n}\n\n// Handle sorting with default and secondary sorting\nlet sortDirection = 'asc'; // Default sort direction\nif (inputData.sort_direction && \n    (inputData.sort_direction.toLowerCase() === 'desc' || \n     inputData.sort_direction.toLowerCase() === 'asc')) {\n  sortDirection = inputData.sort_direction.toLowerCase();\n}\nif (inputData.sort_column) {\n  // Primary sort by provided column, secondary sort by id in same direction\n  queryString += `&order=${inputData.sort_column}.${sortDirection},id.${sortDirection}`;\n} else {\n  // Default sort by property_status and then id\n  queryString += \"&order=property_status.asc,id.asc\";\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        80
+      ],
+      "id": "9a7c3320-0425-4030-9cba-9cc7f6407c66",
+      "name": "propertiesQuery"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1040,
+        80
+      ],
+      "id": "af68a0fb-a4c0-4543-9b6e-00379cf6238b",
+      "name": "respond with properties"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n  {\n    \"internal_statuses\": $json.query.internal_statuses,\n    \"market_statuses\": $json.query.market_statuses,\n    \"tags\": $json.query.tags,\n    \"dwellings\": $json.query.dwellings, \n    \"sort_column\": $json.query.sort_column,\n    \"sort_direction\": $json.query.sort_direction,\n    \"search_query\": $json.query.search_query,\n    \"search_columns\": $json.query.search_columns,\n    \"user\": $json.query.user\n  }\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        80
+      ],
+      "id": "739c9169-cbca-41a5-87eb-53e652b37b37",
+      "name": "inputs-properties-get",
+      "notesInFlow": false,
+      "notes": "All of the \"filter_\" inputs are optional"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "w",
+              "value": "properties-get"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        380,
+        80
+      ],
+      "id": "23f8788c-d3c0-4328-a582-dcd2b3bf46ab",
+      "name": "properties-get",
+      "notesInFlow": true,
+      "notes": "w: properties-get"
+    },
+    {
+      "parameters": {
+        "path": "get-properties",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        80
+      ],
+      "id": "534e4af8-b3a4-4296-ac22-31824b267fe0",
+      "name": "/get-properties",
+      "webhookId": "07639ed8-3eb6-45c4-808a-4f563e7dd0ff"
+    }
+  ],
+  "notes": "",
+  "pinData": {
+    "/get-properties": [
+      {
+        "json": {
+          "headers": {
+            "accept-encoding": "gzip",
+            "user-agent": "ReactorNetty/1.1.22",
+            "host": "n8n.railway.internal:5678",
+            "accept": "*/*"
+          },
+          "params": {},
+          "query": {
+            "internal_statuses": "",
+            "market_statuses": "",
+            "dwellings": "",
+            "tags": "",
+            "user": "alex+dev@imposbl.com",
+            "sort_column": "",
+            "sort_direction": "",
+            "search_query": "",
+            "search_columns": ""
+          },
+          "body": {},
+          "webhookUrl": "https://s8s.up.railway.app/webhook/properties",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-09T17:42:07.324Z",
+  "versionId": "1d93b340-a21e-477d-a1a4-44ed5cd30862"
+}
