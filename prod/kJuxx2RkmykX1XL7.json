@@ -189,7 +189,7 @@
     }
   },
   "createdAt": "2025-04-07T23:41:11.388Z",
-  "execution_id": "21788",
+  "execution_id": "21898",
   "id": "kJuxx2RkmykX1XL7",
   "meta": null,
   "name": "/telegram-topic",
@@ -787,107 +787,6 @@
   ],
   "notes": "",
   "pinData": {
-    "Inputs": [
-      {
-        "json": {
-          "property_id": "800"
-        }
-      }
-    ],
-    "view_properties": [
-      {
-        "json": {
-          "id": 800,
-          "address_street": "2125 Valentine St",
-          "address_city": "Toledo",
-          "address_state": "OH",
-          "address_zip": "43605",
-          "prop_size_inside": 1265,
-          "prop_year": 1896,
-          "county_parcel": "abc1234",
-          "county_tract": null,
-          "property_status": "Make Offer",
-          "zillow_id": 34623735,
-          "zillow_url": "https://www.zillow.com/homedetails/2125-Valentine-St-Toledo-OH-43605/34623735_zpid/",
-          "realtor_status": "FOR_SALE",
-          "beds": 3,
-          "baths": 1,
-          "stories": null,
-          "realtor_desc": "Welcome to 2125 Valentine, a delightful & well-maintained home offering 3 spacious bedrooms, including 1 conveniently located on\r\nthe main floor. Step inside & enjoy the inviting atmosphere, featuring comfortable LR, a dedicated DR & spacious\r\nkitchen with newer flooring. The updated bath makes this home move-in ready. Recent updates include a furnace replaced in '09, central air installed in '21, and a new HWT in '21, ensuring peace of mind for years to come. A central location provides easy access to Birmingham Elem, local gas stations, e-ways & the iconic Tony Packo's!",
-          "realtor_dwelling_type": "SINGLE_FAMILY",
-          "realtor_list_price": 80000,
-          "address_neighborhood": null,
-          "coord_lat": 41.6612373,
-          "coord_lng": -83.4964608,
-          "prop_size_outside": 3598,
-          "timestamp_updated": "2025-04-04T16:01:41.825+00:00",
-          "starred": false,
-          "updated_by": "Bot@RentReadyS8.com",
-          "followup_notes": "The asking price is too high. We can offer 65k. Lets text the agent and just float this number out there",
-          "offer_price": 70000,
-          "timestamp_scraped": "2025-04-04T16:01:41.826+00:00",
-          "timestamp_created": "2025-02-27T20:27:52.702+00:00",
-          "address_county": "LUCAS",
-          "google_place_id": "ChIJJS9G_vmDO4gR4tZiNRCzdSA",
-          "has_garage": false,
-          "is_forauction": false,
-          "is_newhome": false,
-          "is_fsbo": false,
-          "is_fsba": true,
-          "is_foreclosure": false,
-          "is_bankowned": false,
-          "is_comingsoon": false,
-          "is_pending": false,
-          "date_listed": "2025-02-05T16:01:41.827+00:00",
-          "offer_type": null,
-          "lender": null,
-          "purchase_strategy": null,
-          "inspector": null,
-          "date_inspection": null,
-          "date_closing": null,
-          "date_walkthrough": null,
-          "is_water_on": false,
-          "is_electric_on": false,
-          "is_gas_on": false,
-          "is_tenant_occupied": false,
-          "current_rent": null,
-          "lease_type": null,
-          "lease_expires": null,
-          "county_zoning": null,
-          "tract_income": null,
-          "taxes_owed": null,
-          "is_distressed": false,
-          "is_opportunity_zone": true,
-          "is_registered_rental": false,
-          "has_lead_certificate": false,
-          "investor": null,
-          "scrape_photos": false,
-          "telegram_realtor_topic_id": 6514,
-          "telegram_internal_forum": null,
-          "realtor_assigned": "whitneynbarlow@gmail.com",
-          "telegram_realtor_pinned_message_id": "null",
-          "tax_rate": 1.63,
-          "keystone_home_status": "ForSale",
-          "contingent_listing_type": null,
-          "virtual_tour": "https://www.propertypanorama.com/instaview/toledo/6125595",
-          "last_sold_price": 59900,
-          "cover_photo_url": "https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/properties/800/photos/61ad1853-3ab9-45fc-be9f-c81369a1d79d.jpeg",
-          "telegram_realtor_forum": 2214771933,
-          "status": "Make Offer",
-          "order": 2,
-          "color": "#7E57C2",
-          "scrape": true,
-          "pre_or_post": "Pre-purchase",
-          "telegram_emoji_id": 5373251851074416000,
-          "tags": [
-            "Bundle 1",
-            "Bundle 2"
-          ],
-          "safmr": 1360,
-          "address_simple": "2125 Valentine St | 43605"
-        }
-      }
-    ],
     "/telegram-topic": [
       {
         "json": {
@@ -901,31 +800,11 @@
           },
           "params": {},
           "query": {
-            "property_id": "800"
+            "property_id": "613"
           },
           "body": {},
           "webhookUrl": "https://s8s.up.railway.app/webhook/telegram-topic",
           "executionMode": "production"
-        }
-      }
-    ],
-    "property_id": [
-      {
-        "json": {
-          "property_id": "800"
-        }
-      }
-    ],
-    "get status": [
-      {
-        "json": {
-          "status": "Make Offer",
-          "order": 2,
-          "color": "#7E57C2",
-          "scrape": true,
-          "pre_or_post": "Pre-purchase",
-          "telegram_emoji_id": 5373251851074416000,
-          "update_realtor_topic": true
         }
       }
     ]
@@ -936,6 +815,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-07T23:41:26.947Z",
-  "versionId": "1388f52e-1f5b-47bc-b5c8-9c8204d11e21"
+  "updatedAt": "2025-04-09T10:32:23.909Z",
+  "versionId": "de683c4a-112f-4df1-8727-76fdbc0e7a70"
 }
