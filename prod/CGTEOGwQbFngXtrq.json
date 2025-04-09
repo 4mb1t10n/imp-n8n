@@ -1,99 +1,11 @@
 {
   "active": true,
   "connections": {
-    "record-get": {
-      "main": [
-        [
-          {
-            "node": "check_inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/options": {
-      "main": [
-        [
-          {
-            "node": "input2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "options": {
-      "main": [
-        [
-          {
-            "node": "optionsQuery",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "optionsQuery": {
-      "main": [
-        [
-          {
-            "node": "Get options",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get options": {
-      "main": [
-        [
-          {
-            "node": "format labels",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "format labels": {
-      "main": [
-        [
-          {
-            "node": "Respond w options",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "record-post": {
       "main": [
         [
           {
             "node": "check_inputs2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "recordGetQuery": {
-      "main": [
-        [
-          {
-            "node": "Get record",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get record": {
-      "main": [
-        [
-          {
-            "node": "Respond w Data",
             "type": "main",
             "index": 0
           }
@@ -123,47 +35,6 @@
         []
       ]
     },
-    "/record-get": {
-      "main": [
-        [
-          {
-            "node": "input1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
-      ]
-    },
-    "input1": {
-      "main": [
-        [
-          {
-            "node": "record-get",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "check_inputs": {
-      "main": [
-        [
-          {
-            "node": "recordGetQuery",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "400 respond",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "check_inputs2": {
       "main": [
         [
@@ -176,17 +47,6 @@
         [
           {
             "node": "400 respond1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "input2": {
-      "main": [
-        [
-          {
-            "node": "options",
             "type": "main",
             "index": 0
           }
@@ -206,150 +66,13 @@
     }
   },
   "createdAt": "2025-03-20T13:18:41.700Z",
-  "execution_id": "22108",
+  "execution_id": "22238",
   "id": "CGTEOGwQbFngXtrq",
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "General",
+  "name": "/record-insert",
   "nodes": [
-    {
-      "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "w",
-              "value": "record-get"
-            },
-            {
-              "key": "select_table",
-              "value": "={{ $json.select_table }}"
-            },
-            {
-              "key": "search_value",
-              "value": "={{ $json.search_value }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
-      "position": [
-        -240,
-        -620
-      ],
-      "id": "ef6c80fc-50d6-4d87-a1e8-ca6b6e16fead",
-      "name": "record-get",
-      "notesInFlow": true,
-      "notes": "w: record-get"
-    },
-    {
-      "parameters": {
-        "path": "options",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -680,
-        200
-      ],
-      "id": "cfbb6236-2e75-4650-98c4-7bfbdf94e132",
-      "name": "/options",
-      "webhookId": "610245e4-d833-432a-a23c-ce6eea9146bf"
-    },
-    {
-      "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "webhook",
-              "value": "options"
-            },
-            {
-              "key": "table",
-              "value": "={{ $json.table }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
-      "position": [
-        -240,
-        200
-      ],
-      "id": "f884c08b-162d-4515-a34c-3bae8bbf4f98",
-      "name": "options"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\nconst table = inputData.table;\nconst labelColumn = inputData.label_column;\nconst valueColumn = inputData.value_column;\nconst sortColumn = inputData.sort_column;\nconst sortDirection = inputData.sort_direction;\nconst additionalColumns = inputData.return_additional_columns;\n\n// Start with the base URL and table\nlet queryString = \"https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/\" + table;\n\n// Create the select parameter with column aliases for label and value\nlet selectColumns = [];\n\n// Add the columns with appropriate aliases\nselectColumns.push(`label:${labelColumn}`);\nselectColumns.push(`value:${valueColumn}`);\n\n// Process additional columns if they exist\nif (additionalColumns) {\n  // Handle different formats of additionalColumns\n  if (Array.isArray(additionalColumns)) {\n    // If it's already an array, add each column\n    additionalColumns.forEach(col => selectColumns.push(col));\n  } else if (typeof additionalColumns === 'string') {\n    // Check if it looks like an array represented as a string\n    if (additionalColumns.startsWith('[') && additionalColumns.endsWith(']')) {\n      try {\n        // Try to parse it as JSON\n        const parsedColumns = JSON.parse(additionalColumns);\n        if (Array.isArray(parsedColumns)) {\n          parsedColumns.forEach(col => selectColumns.push(col));\n        } else {\n          // If it parsed but isn't an array, treat it as a single column\n          selectColumns.push(additionalColumns);\n        }\n      } catch (e) {\n        // If parsing failed, treat it as a single column\n        selectColumns.push(additionalColumns);\n      }\n    } else {\n      // It's a simple string, treat as a single column\n      selectColumns.push(additionalColumns);\n    }\n  }\n}\n\n// Remove duplicates\nselectColumns = [...new Set(selectColumns)];\n\n// Build the query string\nqueryString += \"?select=\" + selectColumns.join(',');\n\n// Process sorting if sort_column exists\nif (sortColumn) {\n  // Validate sort direction, default to asc if invalid\n  // PostgREST requires lowercase asc/desc\n  const direction = (sortDirection && ['asc', 'desc'].includes(sortDirection.toLowerCase())) \n    ? sortDirection.toLowerCase() \n    : 'asc';\n  \n  // Add order parameter\n  queryString += `&order=${sortColumn}.${direction}`;\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -20,
-        200
-      ],
-      "id": "3742d04b-0497-4a7f-9032-5b1c197eed30",
-      "name": "optionsQuery"
-    },
-    {
-      "parameters": {
-        "url": "={{ $json.queryString }}",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "supabaseApi",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        200,
-        200
-      ],
-      "id": "4432429a-4ba9-4d3e-9e4b-c772b2b00905",
-      "name": "Get options",
-      "alwaysOutputData": true,
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "KwKIAL5ixwLlPeZY",
-          "name": "Supabase Imposbl Header Auth"
-        },
-        "supabaseApi": {
-          "id": "hN8Yj6BvjJqfKMnH",
-          "name": "Rent Ready Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "respondWith": "allIncomingItems",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        640,
-        200
-      ],
-      "id": "e7c01385-fa50-40f8-a78a-b360df545934",
-      "name": "Respond w options"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Function to capitalize first letter of each word\nfunction capitalizeWords(str) {\n  return str.replace(/\\b\\w/g, char => char.toUpperCase());\n}\n\n// Function to format the label: replace underscores with spaces, lowercase, then capitalize each word\nfunction formatLabel(label) {\n  if (typeof label !== 'string') return label;\n  return capitalizeWords(label.replace(/_/g, ' ').toLowerCase());\n}\n\n// Process all input items\nconst items = $input.all();\nconst outputItems = [];\n\nfor (const item of items) {\n  // Check what data structure we're dealing with\n  let data = item.json;\n  \n  // If data is an array, process each element in the array\n  if (Array.isArray(data)) {\n    // Format each item in the array\n    const formattedArray = data.map(entry => ({\n      ...entry,\n      label: formatLabel(entry.label)\n    }));\n    \n    // Add to output items\n    outputItems.push({\n      json: formattedArray\n    });\n  } else {\n    // Single object case\n    outputItems.push({\n      json: {\n        ...data,\n        label: formatLabel(data.label)\n      }\n    });\n  }\n}\n\n// Return all processed items\nreturn outputItems;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        420,
-        200
-      ],
-      "id": "376a56a8-a4a4-4776-8c4e-c4c6c6d38c21",
-      "name": "format labels"
-    },
     {
       "parameters": {
         "dataToSave": {
@@ -379,46 +102,6 @@
       "name": "record-post",
       "notesInFlow": true,
       "notes": "w: record-post"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\nconst table = inputData.select_table;\nconst columns = inputData.select_columns;\nconst searchColumn = inputData.search_column || \"id\"; // Default to \"id\" if empty\nconst recordId = inputData.search_value;\nconst sortColumn = inputData.sort_column;\nconst sortDirection = inputData.sort_direction;\n\n// Start with the base URL and table\nlet queryString = \"https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/\" + table;\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(input) {\n  if (!input) return []; // Handle null, undefined, or empty string\n  \n  if (typeof input === 'string') {\n    // If it's empty, return empty array\n    if (input.trim() === '') return [];\n    \n    try {\n      // Try to parse it as JSON\n      return JSON.parse(input);\n    } catch (e) {\n      // If parsing fails, assume it's a comma-separated string\n      return input.split(',').map(item => item.trim()).filter(item => item !== '');\n    }\n  } else if (Array.isArray(input)) {\n    return input;\n  }\n  return [];\n}\n\n// Initialize query parameters\nlet params = [];\n\n// Process columns if they exist\nconst processedColumns = processArrayInput(columns);\nif (processedColumns.length > 0) {\n  params.push(\"select=\" + processedColumns.join(','));\n} else {\n  // If no columns specified, select all columns\n  params.push(\"select=*\");\n}\n\n// Process search column and record id\nif (recordId) {\n  params.push(`${searchColumn}=eq.${recordId}`);\n}\n\n// Process sorting if sort_column exists\nif (sortColumn) {\n  // Validate sort direction, default to asc if invalid\n  // PostgREST requires lowercase asc/desc\n  const direction = (sortDirection && ['asc', 'desc'].includes(sortDirection.toLowerCase())) \n    ? sortDirection.toLowerCase() \n    : 'asc';\n  \n  // Add order parameter\n  params.push(`order=${sortColumn}.${direction}`);\n}\n\n// Add parameters to query string\nif (params.length > 0) {\n  queryString += \"?\" + params.join('&');\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        200,
-        -720
-      ],
-      "id": "ff4f1136-33e9-4c08-87e5-fa23a8f5b2d8",
-      "name": "recordGetQuery"
-    },
-    {
-      "parameters": {
-        "url": "={{ $json.queryString }}",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "supabaseApi",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        420,
-        -720
-      ],
-      "id": "be57a4d5-03e9-4a2a-b184-ee7847633cc9",
-      "name": "Get record",
-      "alwaysOutputData": true,
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "KwKIAL5ixwLlPeZY",
-          "name": "Supabase Imposbl Header Auth"
-        },
-        "supabaseApi": {
-          "id": "hN8Yj6BvjJqfKMnH",
-          "name": "Rent Ready Supabase"
-        }
-      }
     },
     {
       "parameters": {
@@ -476,109 +159,6 @@
     },
     {
       "parameters": {
-        "path": "record-get",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -680,
-        -620
-      ],
-      "id": "09ecb948-a25a-48e5-bf24-ddc729aec89f",
-      "name": "/record-get",
-      "webhookId": "f838d05f-0c99-42dd-a099-c038893f8b84"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "03333ad5-f3d0-4513-be78-79daf97f9346",
-              "name": "select_table",
-              "value": "={{ $json.query.select_table }}",
-              "type": "string"
-            },
-            {
-              "id": "43b1625d-e963-45b5-abe3-f07d086c6382",
-              "name": "search_column",
-              "value": "={{ $json.query.search_column }}",
-              "type": "string"
-            },
-            {
-              "id": "8b8ff294-77f2-4086-81a5-6d93ef36a208",
-              "name": "search_value",
-              "value": "={{ $json.query.search_value }}",
-              "type": "string"
-            },
-            {
-              "id": "03c1d52a-2479-4478-8a62-1e67da1040d9",
-              "name": "select_columns_o",
-              "value": "={{ $json.query.select_columns }}",
-              "type": "string"
-            },
-            {
-              "id": "4fc09576-ee3e-4347-b2d6-5f33021f2591",
-              "name": "sort_column_o",
-              "value": "={{ $json.query.sort_column }}",
-              "type": "string"
-            },
-            {
-              "id": "27fd7c10-729a-43ae-8a91-3ffa85a3881c",
-              "name": "sort_direction_o",
-              "value": "={{ $json.query.sort_direction }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -460,
-        -620
-      ],
-      "id": "08fecb75-6aba-4c12-9ffc-43ff3fb35252",
-      "name": "input1"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "6999df63-b018-48f9-9625-7e4c3ac88a1d",
-              "leftValue": "={{ $json.select_table && $json.search_value}}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -20,
-        -620
-      ],
-      "id": "8ab6e5a5-d2fd-4f35-bfb7-235eec7793ce",
-      "name": "check_inputs"
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -613,22 +193,6 @@
     },
     {
       "parameters": {
-        "respondWith": "allIncomingItems",
-        "options": {
-          "responseCode": 200
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        640,
-        -720
-      ],
-      "id": "13a464e8-a200-4662-acae-9e7ab43794eb",
-      "name": "Respond w Data"
-    },
-    {
-      "parameters": {
         "respondWith": "text",
         "responseBody": "updated",
         "options": {
@@ -659,75 +223,6 @@
       ],
       "id": "a84dfd3a-2724-4e82-8c5b-9b3bf5da1e97",
       "name": "400 respond1"
-    },
-    {
-      "parameters": {
-        "respondWith": "noData",
-        "options": {
-          "responseCode": 400
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        200,
-        -520
-      ],
-      "id": "6498ecf8-a1be-4996-9363-941d332d4663",
-      "name": "400 respond"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "81bf5ea2-5196-4f1b-bd24-0a904103eb96",
-              "name": "table",
-              "value": "={{ $json.query.table }}",
-              "type": "string"
-            },
-            {
-              "id": "83a8f38f-2e83-4dd9-9b90-62e88d320557",
-              "name": "label_column",
-              "value": "={{ $json.query.label_column }}",
-              "type": "string"
-            },
-            {
-              "id": "2db9938b-9f66-4b1a-ad8c-2e3f51d43441",
-              "name": "value_column",
-              "value": "={{ $json.query.value_column }}",
-              "type": "string"
-            },
-            {
-              "id": "9ac4a22e-0864-4ed2-a576-4357249d93e3",
-              "name": "sort_column",
-              "value": "={{ $json.query.sort_column }}",
-              "type": "string"
-            },
-            {
-              "id": "8dc7c136-6672-4dd9-897d-9edc00317432",
-              "name": "sort_direction",
-              "value": "={{ $json.query.sort_direction }}",
-              "type": "string"
-            },
-            {
-              "id": "66b472ff-9e8d-4b92-a2f2-3cbb79a760a9",
-              "name": "return_additional_columns",
-              "value": "={{ $json.query.return_additional_columns }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -460,
-        200
-      ],
-      "id": "4cd72b4c-966d-4d65-9f38-86dadd321741",
-      "name": "input2"
     },
     {
       "parameters": {
@@ -779,30 +274,6 @@
   ],
   "notes": "",
   "pinData": {
-    "/options": [
-      {
-        "json": {
-          "headers": {
-            "accept-encoding": "gzip",
-            "user-agent": "ReactorNetty/1.1.22",
-            "host": "n8n.railway.internal:5678",
-            "accept": "*/*"
-          },
-          "params": {},
-          "query": {
-            "table": "options_property_status",
-            "label_column": "status",
-            "value_column": "status",
-            "sort_column": "order",
-            "sort_direction": "asc",
-            "return_additional_columns": "[\"status\",\"order\",\"pre_or_post\"]"
-          },
-          "body": {},
-          "webhookUrl": "https://s8s.up.railway.app/webhook/options",
-          "executionMode": "production"
-        }
-      }
-    ],
     "/record-insert": [
       {
         "json": {
@@ -841,7 +312,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2025-04-04T12:45:37.731Z",
-  "versionId": "219d27c8-7309-4603-b64d-bbbaf278cda8"
+  "triggerCount": 1,
+  "updatedAt": "2025-04-09T22:00:09.611Z",
+  "versionId": "8e8b44bb-78f5-4dfa-914b-2cb6e513ab21"
 }
