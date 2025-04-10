@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "record-get": {
       "main": [
@@ -69,7 +69,7 @@
     }
   },
   "createdAt": "2025-04-10T00:56:33.675Z",
-  "execution_id": "22992",
+  "execution_id": "23113",
   "id": "vKuRvtLXd2DYrRqE",
   "meta": null,
   "name": "/records-get",
@@ -102,7 +102,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\nconst table = inputData.select_table;\nconst columns = inputData.select_columns;\nconst searchColumn = inputData.search_column || \"id\"; // Default to \"id\" if empty\nconst recordId = inputData.search_value;\nconst sortColumn = inputData.sort_column;\nconst sortDirection = inputData.sort_direction;\n\n// Start with the base URL and table\nlet queryString = \"https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/\" + table;\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(input) {\n  if (!input) return []; // Handle null, undefined, or empty string\n  \n  if (typeof input === 'string') {\n    // If it's empty, return empty array\n    if (input.trim() === '') return [];\n    \n    try {\n      // Try to parse it as JSON\n      return JSON.parse(input);\n    } catch (e) {\n      // If parsing fails, assume it's a comma-separated string\n      return input.split(',').map(item => item.trim()).filter(item => item !== '');\n    }\n  } else if (Array.isArray(input)) {\n    return input;\n  }\n  return [];\n}\n\n// Initialize query parameters\nlet params = [];\n\n// Process columns if they exist\nconst processedColumns = processArrayInput(columns);\nif (processedColumns.length > 0) {\n  params.push(\"select=\" + processedColumns.join(','));\n} else {\n  // If no columns specified, select all columns\n  params.push(\"select=*\");\n}\n\n// Process search column and record id\nif (recordId) {\n  params.push(`${searchColumn}=eq.${recordId}`);\n}\n\n// Process sorting if sort_column exists\nif (sortColumn) {\n  // Validate sort direction, default to asc if invalid\n  // PostgREST requires lowercase asc/desc\n  const direction = (sortDirection && ['asc', 'desc'].includes(sortDirection.toLowerCase())) \n    ? sortDirection.toLowerCase() \n    : 'asc';\n  \n  // Add order parameter\n  params.push(`order=${sortColumn}.${direction}`);\n}\n\n// Add parameters to query string\nif (params.length > 0) {\n  queryString += \"?\" + params.join('&');\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
+        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\nconst table = inputData.select_table;\nconst columns = inputData.select_columns;\nconst searchColumns = inputData.search_columns;  // Changed to plural\nconst searchValues = inputData.search_values;    // Changed to plural\nconst sortColumn = inputData.sort_column;\nconst sortDirection = inputData.sort_direction;\n\n// Start with the base URL and table\nlet queryString = \"https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/\" + table;\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(input) {\n  if (!input) return []; // Handle null, undefined, or empty string\n  \n  if (typeof input === 'string') {\n    // If it's empty, return empty array\n    if (input.trim() === '') return [];\n    \n    try {\n      // Try to parse it as JSON\n      return JSON.parse(input);\n    } catch (e) {\n      // If parsing fails, assume it's a comma-separated string\n      return input.split(',').map(item => item.trim()).filter(item => item !== '');\n    }\n  } else if (Array.isArray(input)) {\n    return input;\n  }\n  return [];\n}\n\n// Initialize query parameters\nlet params = [];\n\n// Process columns if they exist\nconst processedColumns = processArrayInput(columns);\nif (processedColumns.length > 0) {\n  params.push(\"select=\" + processedColumns.join(','));\n} else {\n  // If no columns specified, select all columns\n  params.push(\"select=*\");\n}\n\n// Process search columns and values\nconst processedSearchColumns = processArrayInput(searchColumns);\nconst processedSearchValues = processArrayInput(searchValues);\n\n// Only proceed if we have both columns and values\nif (processedSearchColumns.length > 0 && processedSearchValues.length > 0) {\n  // Handle case where we have equal number of columns and values\n  if (processedSearchColumns.length === processedSearchValues.length) {\n    // Create individual filters for each column-value pair\n    for (let i = 0; i < processedSearchColumns.length; i++) {\n      params.push(`${processedSearchColumns[i]}=eq.${processedSearchValues[i]}`);\n    }\n  } else {\n    // If unequal lengths, just use as many pairs as we can\n    const pairCount = Math.min(processedSearchColumns.length, processedSearchValues.length);\n    for (let i = 0; i < pairCount; i++) {\n      params.push(`${processedSearchColumns[i]}=eq.${processedSearchValues[i]}`);\n    }\n  }\n}\n\n// Process sorting if sort_column exists\nif (sortColumn) {\n  // Validate sort direction, default to asc if invalid\n  const direction = (sortDirection && ['asc', 'desc'].includes(sortDirection.toLowerCase())) \n    ? sortDirection.toLowerCase() \n    : 'asc';\n  \n  // Add order parameter\n  params.push(`order=${sortColumn}.${direction}`);\n}\n\n// Add parameters to query string\nif (params.length > 0) {\n  queryString += \"?\" + params.join('&');\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -175,13 +175,13 @@
             {
               "id": "43b1625d-e963-45b5-abe3-f07d086c6382",
               "name": "search_columns",
-              "value": "={{ $json.query.search_column }}",
+              "value": "={{ $json.query.search_columns }}",
               "type": "string"
             },
             {
               "id": "8b8ff294-77f2-4086-81a5-6d93ef36a208",
               "name": "search_values",
-              "value": "={{ $json.query.search_value }}",
+              "value": "={{ $json.query.search_values }}",
               "type": "string"
             },
             {
@@ -261,13 +261,38 @@
     }
   ],
   "notes": "",
-  "pinData": {},
+  "pinData": {
+    "/records-get": [
+      {
+        "json": {
+          "headers": {
+            "accept-encoding": "gzip",
+            "user-agent": "ReactorNetty/1.1.22",
+            "host": "n8n.railway.internal:5678",
+            "accept": "*/*"
+          },
+          "params": {},
+          "query": {
+            "select_table": "changelog",
+            "select_columns": "",
+            "search_columns": "[\"property_id\",\"updated_column\"]",
+            "search_values": "[\"800\",\"followup_notes\"]",
+            "sort_column": "id",
+            "sort_direction": "asc"
+          },
+          "body": {},
+          "webhookUrl": "https://s8s.up.railway.app/webhook/records-get",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-04-10T00:59:39.650Z",
-  "versionId": "1e87876f-0cad-41d0-b491-32efc9f7ec92"
+  "triggerCount": 1,
+  "updatedAt": "2025-04-10T17:59:25.505Z",
+  "versionId": "e98d53c3-5f95-4b7b-9fc6-29df7598a0ec"
 }
