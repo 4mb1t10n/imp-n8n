@@ -1,41 +1,18 @@
 {
   "active": true,
   "connections": {
-    "record-post": {
-      "main": [
-        [
-          {
-            "node": "check_inputs2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Supabase": {
       "main": [
         [
           {
-            "node": "Respond w Data1",
+            "node": "Data",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "/record-insert": {
-      "main": [
-        [
-          {
-            "node": "input3",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
-      ]
-    },
-    "check_inputs2": {
+    "check_inputs": {
       "main": [
         [
           {
@@ -46,18 +23,52 @@
         ],
         [
           {
-            "node": "400 respond1",
+            "node": "400",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "input3": {
+    "inputs": {
       "main": [
         [
           {
-            "node": "record-post",
+            "node": "save exec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "save exec": {
+      "main": [
+        [
+          {
+            "node": "check_inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/record-update": {
+      "main": [
+        [
+          {
+            "node": "host",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "host": {
+      "main": [
+        [
+          {
+            "node": "inputs",
             "type": "main",
             "index": 0
           }
@@ -66,42 +77,28 @@
     }
   },
   "createdAt": "2025-03-20T13:18:41.700Z",
-  "execution_id": "22238",
+  "execution_id": "22334",
   "id": "CGTEOGwQbFngXtrq",
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "/record-insert",
+  "name": "/record-update",
   "nodes": [
     {
       "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "w",
-              "value": "record-post"
-            },
-            {
-              "key": "record_id",
-              "value": "={{ $json.record_id }}"
-            },
-            {
-              "key": "table",
-              "value": "={{ $json.table }}"
-            }
-          ]
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 400
         }
       },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
       "position": [
-        -240,
-        -160
+        420,
+        -60
       ],
-      "id": "b20187a2-849a-4b46-8680-7a3e56857f81",
-      "name": "record-post",
-      "notesInFlow": true,
-      "notes": "w: record-post"
+      "id": "a84dfd3a-2724-4e82-8c5b-9b3bf5da1e97",
+      "name": "400"
     },
     {
       "parameters": {
@@ -128,7 +125,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        200,
+        420,
         -260
       ],
       "id": "b6f6287f-d43c-4904-98a2-31ec5d9141b0",
@@ -139,23 +136,6 @@
           "name": "Rent Ready Supabase"
         }
       }
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "record-insert",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -680,
-        -160
-      ],
-      "id": "8daf9af9-7e6f-4ce6-a811-d708c5423b8f",
-      "name": "/record-insert",
-      "webhookId": "f838d05f-0c99-42dd-a099-c038893f8b84"
     },
     {
       "parameters": {
@@ -185,11 +165,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -20,
+        200,
         -160
       ],
       "id": "5546fe14-1e9c-481d-9720-cdb9c4697f25",
-      "name": "check_inputs2"
+      "name": "check_inputs"
     },
     {
       "parameters": {
@@ -202,27 +182,11 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        420,
+        640,
         -260
       ],
       "id": "b05785c9-3090-4f40-b6ee-73baeb0e14ea",
-      "name": "Respond w Data1"
-    },
-    {
-      "parameters": {
-        "respondWith": "noData",
-        "options": {
-          "responseCode": 400
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        200,
-        -60
-      ],
-      "id": "a84dfd3a-2724-4e82-8c5b-9b3bf5da1e97",
-      "name": "400 respond1"
+      "name": "Data"
     },
     {
       "parameters": {
@@ -265,16 +229,93 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -460,
+        -240,
         -160
       ],
       "id": "74a9126a-7f3e-4176-8116-dff01d5b41c6",
-      "name": "input3"
+      "name": "inputs"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "record_id",
+              "value": "={{ $json.record_id }}"
+            },
+            {
+              "key": "table",
+              "value": "={{ $json.table }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        -160
+      ],
+      "id": "b20187a2-849a-4b46-8680-7a3e56857f81",
+      "name": "save exec",
+      "notesInFlow": true,
+      "notes": "w: record-post"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "record-update",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -680,
+        -160
+      ],
+      "id": "8daf9af9-7e6f-4ce6-a811-d708c5423b8f",
+      "name": "/record-update",
+      "webhookId": "f838d05f-0c99-42dd-a099-c038893f8b84"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e4cd625e-f8b6-497b-ba11-1981e4d53c2a",
+              "leftValue": "={{ $json.headers.host }}",
+              "rightValue": "=n8n.railway.internal:5678",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -460,
+        -160
+      ],
+      "id": "143e96e3-5492-4d26-9477-36100242d8c8",
+      "name": "host"
     }
   ],
   "notes": "",
   "pinData": {
-    "/record-insert": [
+    "/record-update": [
       {
         "json": {
           "headers": {
@@ -313,6 +354,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-09T22:00:09.611Z",
-  "versionId": "8e8b44bb-78f5-4dfa-914b-2cb6e513ab21"
+  "updatedAt": "2025-04-09T22:22:25.595Z",
+  "versionId": "3ac8239e-859e-4ace-a02a-1d76c800ee72"
 }
