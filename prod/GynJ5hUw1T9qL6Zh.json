@@ -1,0 +1,291 @@
+{
+  "active": true,
+  "connections": {
+    "task insert": {
+      "main": [
+        [
+          {
+            "node": "/telegram-task-topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/new-task": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/telegram-task-topic": {
+      "main": [
+        [
+          {
+            "node": "Respond task created",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "task insert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-10T07:18:34.067Z",
+  "execution_id": "22555",
+  "id": "GynJ5hUw1T9qL6Zh",
+  "meta": null,
+  "name": "/new-task",
+  "nodes": [
+    {
+      "parameters": {
+        "tableId": "tasks",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldId": "description",
+              "fieldValue": "={{ $json.description || null }}"
+            },
+            {
+              "fieldId": "priority",
+              "fieldValue": "={{ $json.priority }}"
+            },
+            {
+              "fieldId": "assigned_to",
+              "fieldValue": "={{ $json.assigned }}"
+            },
+            {
+              "fieldId": "property_id",
+              "fieldValue": "={{ $json.property || null }}"
+            },
+            {
+              "fieldId": "timestamp_deadline",
+              "fieldValue": "={{ $json.deadline || null }}"
+            },
+            {
+              "fieldId": "timestamp_snooze",
+              "fieldValue": "={{ $json.snoozed || null}}"
+            },
+            {
+              "fieldId": "timestamp_created",
+              "fieldValue": "={{ new Date().toDateTime() }}"
+            },
+            {
+              "fieldId": "updated_by",
+              "fieldValue": "={{ $json.user }}"
+            },
+            {
+              "fieldId": "timestamp_updated",
+              "fieldValue": "={{ new Date().toDateTime() }}"
+            },
+            {
+              "fieldId": "flagged",
+              "fieldValue": "={{ $json.flagged || $json.flagged == \"true\"? true : false }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        440,
+        -80
+      ],
+      "id": "8b7bea9a-df64-47c1-b5b5-5a60a226b4d5",
+      "name": "task insert",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "task created",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        -80
+      ],
+      "id": "8713c118-5645-45c2-9217-5a69863aeb49",
+      "name": "Respond task created"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "new-task",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        -80
+      ],
+      "id": "92615c23-fec3-4396-802e-551d6f4ab6de",
+      "name": "/new-task",
+      "webhookId": "07639ed8-3eb6-45c4-808a-4f563e7dd0ff"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://n8n.railway.internal:5678/webhook/telegram-task-topic",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "task_id",
+              "value": "={{ $json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        -80
+      ],
+      "id": "e326c987-08ff-459e-84a6-cd13e973c334",
+      "name": "/telegram-task-topic"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "96e95774-5bad-48ef-a46a-0d11154151df",
+              "name": "title",
+              "value": "={{ $json.query.title }}",
+              "type": "string"
+            },
+            {
+              "id": "a25dff31-be4f-401c-9b61-0291c042fa49",
+              "name": "description",
+              "value": "={{ $json.query.description }}",
+              "type": "string"
+            },
+            {
+              "id": "adbe8b3a-79af-4167-ac99-ea6e73c84ff5",
+              "name": "priority",
+              "value": "={{ $json.query.priority }}",
+              "type": "string"
+            },
+            {
+              "id": "d522ca34-2a52-43ca-867a-25ce2a863bf2",
+              "name": "assigned",
+              "value": "={{ $json.query.assigned }}",
+              "type": "string"
+            },
+            {
+              "id": "6f8c2a53-6d82-4e87-8540-0133539fe62c",
+              "name": "property",
+              "value": "={{ $json.query.property }}",
+              "type": "string"
+            },
+            {
+              "id": "b314aac5-3c67-4717-bf5a-b78420b19567",
+              "name": "deadline",
+              "value": "={{ $json.query.deadline }}",
+              "type": "string"
+            },
+            {
+              "id": "cc394181-1c72-4ed2-8aa4-33a0f15297af",
+              "name": "snoozed",
+              "value": "={{ $json.query.snoozed }}",
+              "type": "string"
+            },
+            {
+              "id": "6fea0b5a-f2cf-4b57-a767-739231ef711b",
+              "name": "user",
+              "value": "={{ $json.query.user }}",
+              "type": "string"
+            },
+            {
+              "id": "aad5799f-e0c0-45e2-99a8-884398911694",
+              "name": "flagged",
+              "value": "={{ $json.query.flagged }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        -80
+      ],
+      "id": "b266409b-fd09-4d5a-b33f-ad4953302cf3",
+      "name": "inputs"
+    }
+  ],
+  "notes": "",
+  "pinData": {
+    "/new-task": [
+      {
+        "json": {
+          "headers": {
+            "accept-encoding": "gzip",
+            "user-agent": "ReactorNetty/1.1.22",
+            "host": "n8n.railway.internal:5678",
+            "accept": "*/*",
+            "content-type": "application/json",
+            "content-length": "0"
+          },
+          "params": {},
+          "query": {
+            "title": "testing a new task",
+            "description": "hello",
+            "priority": "1",
+            "assigned": "anthony@imposbl.com",
+            "property": "726",
+            "deadline": "",
+            "snoozed": "",
+            "user": "alex+dev@imposbl.com"
+          },
+          "body": {},
+          "webhookUrl": "https://s8s.up.railway.app/webhook/new-task",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-10T07:18:55.257Z",
+  "versionId": "647745e8-68ad-4fd7-b0c3-78145135bc26"
+}
