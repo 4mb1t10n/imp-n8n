@@ -38,7 +38,7 @@
       "main": [
         [
           {
-            "node": "input",
+            "node": "inputs",
             "type": "main",
             "index": 0
           }
@@ -63,7 +63,7 @@
         ]
       ]
     },
-    "input": {
+    "inputs": {
       "main": [
         [
           {
@@ -76,7 +76,7 @@
     }
   },
   "createdAt": "2025-04-09T21:59:06.282Z",
-  "execution_id": "22238",
+  "execution_id": "22334",
   "id": "BOdlc9zPIeoJV7GX",
   "meta": null,
   "name": "/record-get",
@@ -280,7 +280,7 @@
         60
       ],
       "id": "11772090-a105-4f45-b462-29fad0abc411",
-      "name": "input"
+      "name": "inputs"
     }
   ],
   "notes": "",
@@ -291,6 +291,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-09T21:59:31.584Z",
-  "versionId": "9128fb14-32d1-4a68-a526-a4e050029413"
+  "updatedAt": "2025-04-09T22:03:37.195Z",
+  "versionId": "006e2742-9898-4ffa-8f3b-cc90ab89d642"
 }
