@@ -1,0 +1,472 @@
+{
+  "active": true,
+  "connections": {
+    "property photo": {
+      "main": [
+        [
+          {
+            "node": "get property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get property": {
+      "main": [
+        [
+          {
+            "node": "empty cover photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "compare data2": {
+      "main": [
+        [
+          {
+            "node": "Filter2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "empty cover photo": {
+      "main": [
+        [
+          {
+            "node": "set cover photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/updated-media": {
+      "main": [
+        [
+          {
+            "node": "update or new task1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tasks2": {
+      "main": [
+        [
+          {
+            "node": "compare data2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update or new task1": {
+      "main": [
+        [
+          {
+            "node": "tasks2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "tasks3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tasks3": {
+      "main": [
+        [
+          {
+            "node": "property photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-10T18:26:15.140Z",
+  "execution_id": "23192",
+  "id": "RZlZ6qypldoEYRn6",
+  "meta": null,
+  "name": "/updated-media",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5702f6b6-4819-46d3-8586-c4e54e0de1a9",
+              "leftValue": "={{ $json.body.record.tag }}",
+              "rightValue": "Property Photo",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "c46ddeec-b02f-48ad-ab91-36b2ac20a9c3",
+              "leftValue": "={{ $json.body.record.property_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        140,
+        220
+      ],
+      "id": "2a8d9d39-275e-420c-b332-e2b2c79af95e",
+      "name": "property photo"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "properties",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.body.record.property_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        360,
+        220
+      ],
+      "id": "94d7f3e4-97af-4076-88e3-48c0dab338b5",
+      "name": "get property",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "cover_photo",
+              "fieldValue": "={{ $('update or new media').item.json.body.record.id }}"
+            },
+            {
+              "fieldId": "updated_by",
+              "fieldValue": "Bot@RentReadyS8.com"
+            },
+            {
+              "fieldId": "timestamp_updated",
+              "fieldValue": "={{ new Date().toISOString() }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        800,
+        220
+      ],
+      "id": "a20173bf-4074-4da5-a285-abfd33e720a2",
+      "name": "set cover photo",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function findDifferences(obj1, obj2 = {}) {\n  let differences = [];\n  \n  function getValueType(value) {\n    if (typeof value === 'string') {\n      const date = new Date(value);\n      if (date instanceof Date && !isNaN(date)) return 'timestamp';\n      return 'text';\n    }\n    if (typeof value === 'boolean') return 'boolean';\n    if (typeof value === 'number') return 'number';\n    if (Array.isArray(value)) return 'array';\n    if (value === null) return 'null';\n    if (typeof value === 'object') return 'object';\n    return 'undefined';\n  }\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2?.[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        column_type: getValueType(obj1[key]),\n        oldValue: obj2?.[key] ?? null,\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  if (obj2) {\n    for (let key in obj2) {\n      if (!(key in obj1)) {\n        differences.push({\n          isDifferent: true,\n          updated_column: key,\n          column_type: getValueType(obj2[key]),\n          oldValue: obj2[key],\n          newValue: undefined\n        });\n      }\n    }\n  }\n  \n  // If no differences found, return array with \"no changes\" message\n  if (differences.length === 0) {\n    return [{\n      isDifferent: false,\n      message: \"no changes\"\n    }];\n  }\n  \n  return differences;\n}\n\nconst newObject = $('/updated-properties').all()[0].json.body.record;\nconst oldObject = $('/updated-properties').all()[0].json.body.old_record || {};\nconst differences = findDifferences(newObject, oldObject);\nitems = differences.map(diff => ({ json: diff }));\nreturn items;"
+      },
+      "id": "50caf585-1031-4a97-8b83-4309418e3ad9",
+      "name": "compare data2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        140,
+        20
+      ],
+      "notes": "The id of each table is supabase needs to be called exactly \"id\""
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "00f990c9-9187-4105-ad41-69a174a6145a",
+              "leftValue": "={{ $json.isDifferent }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "f87b8385-75c8-420b-9c11-35b5c8b2a9be",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "timestamp_updated",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "52b907a1-ac31-47d6-8131-143d7524d204",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "updated_by",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "451ead62-3dee-4199-9e1f-5d7b3e5bc0d7",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "id",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "af90eaa1-8b6b-4edf-af9c-6367df0048a9",
+      "name": "Filter2",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.1,
+      "position": [
+        360,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "93e240bd-8e1e-484a-96e9-3c7cee1f1bfd",
+              "leftValue": "={{ $json.cover_photo }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        580,
+        220
+      ],
+      "id": "955fdc7b-7e0b-4fd7-96d8-3774b27cf65b",
+      "name": "empty cover photo"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "updated-media",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "2cf989c0-5643-4cca-af58-ebd07bff75b2",
+      "name": "/updated-media",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        120
+      ],
+      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "KwKIAL5ixwLlPeZY",
+          "name": "Supabase Imposbl Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "table",
+              "value": "tasks"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        20
+      ],
+      "id": "fd0fc272-e151-4fc2-90e8-649630126b33",
+      "name": "tasks2",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.type }}",
+                    "rightValue": "UPDATE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "UPDATE"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e5542755-9a16-4ccb-bb8d-0603567d3480",
+                    "leftValue": "={{ $json.body.type }}",
+                    "rightValue": "UPDATE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "NEW"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -300,
+        120
+      ],
+      "id": "eeba86ac-0058-42d3-8cb5-ec7e78e95bb3",
+      "name": "update or new task1"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "table",
+              "value": "tasks"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        220
+      ],
+      "id": "64c39ac1-a6e2-499e-b270-03d9bce693b6",
+      "name": "tasks3",
+      "alwaysOutputData": true
+    }
+  ],
+  "notes": "",
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-10T18:27:48.683Z",
+  "versionId": "f0dbead3-a899-45d4-9bc0-4748fb2597f5"
+}
