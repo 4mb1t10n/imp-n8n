@@ -1,0 +1,269 @@
+{
+  "active": true,
+  "connections": {
+    "/options": {
+      "main": [
+        [
+          {
+            "node": "input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "options": {
+      "main": [
+        [
+          {
+            "node": "optionsQuery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "optionsQuery": {
+      "main": [
+        [
+          {
+            "node": "Get options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get options": {
+      "main": [
+        [
+          {
+            "node": "format labels",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "format labels": {
+      "main": [
+        [
+          {
+            "node": "Respond w options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "input": {
+      "main": [
+        [
+          {
+            "node": "options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-09T21:56:53.280Z",
+  "execution_id": "22440",
+  "id": "fTKAncOcIe9g4i0P",
+  "meta": null,
+  "name": "/options",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "options",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7fe85d15-711a-46f7-85e2-34b692f402ed",
+      "name": "/options",
+      "webhookId": "610245e4-d833-432a-a23c-ce6eea9146bf"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "table",
+              "value": "={{ $json.table }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "96024d3c-4ac4-44a2-9ba8-a73d82ba3fa0",
+      "name": "options"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\nconst table = inputData.table;\nconst labelColumn = inputData.label_column;\nconst valueColumn = inputData.value_column;\nconst sortColumn = inputData.sort_column;\nconst sortDirection = inputData.sort_direction;\nconst additionalColumns = inputData.return_additional_columns;\n\n// Start with the base URL and table\nlet queryString = \"https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/\" + table;\n\n// Create the select parameter with column aliases for label and value\nlet selectColumns = [];\n\n// Add the columns with appropriate aliases\nselectColumns.push(`label:${labelColumn}`);\nselectColumns.push(`value:${valueColumn}`);\n\n// Process additional columns if they exist\nif (additionalColumns) {\n  // Handle different formats of additionalColumns\n  if (Array.isArray(additionalColumns)) {\n    // If it's already an array, add each column\n    additionalColumns.forEach(col => selectColumns.push(col));\n  } else if (typeof additionalColumns === 'string') {\n    // Check if it looks like an array represented as a string\n    if (additionalColumns.startsWith('[') && additionalColumns.endsWith(']')) {\n      try {\n        // Try to parse it as JSON\n        const parsedColumns = JSON.parse(additionalColumns);\n        if (Array.isArray(parsedColumns)) {\n          parsedColumns.forEach(col => selectColumns.push(col));\n        } else {\n          // If it parsed but isn't an array, treat it as a single column\n          selectColumns.push(additionalColumns);\n        }\n      } catch (e) {\n        // If parsing failed, treat it as a single column\n        selectColumns.push(additionalColumns);\n      }\n    } else {\n      // It's a simple string, treat as a single column\n      selectColumns.push(additionalColumns);\n    }\n  }\n}\n\n// Remove duplicates\nselectColumns = [...new Set(selectColumns)];\n\n// Build the query string\nqueryString += \"?select=\" + selectColumns.join(',');\n\n// Process sorting if sort_column exists\nif (sortColumn) {\n  // Validate sort direction, default to asc if invalid\n  // PostgREST requires lowercase asc/desc\n  const direction = (sortDirection && ['asc', 'desc'].includes(sortDirection.toLowerCase())) \n    ? sortDirection.toLowerCase() \n    : 'asc';\n  \n  // Add order parameter\n  queryString += `&order=${sortColumn}.${direction}`;\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ],
+      "id": "a5c666e0-292b-469d-ab48-2681e395d6ec",
+      "name": "optionsQuery"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.queryString }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        0
+      ],
+      "id": "07ef8ed4-77ad-4539-bdc0-ac618eeb0be7",
+      "name": "Get options",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "KwKIAL5ixwLlPeZY",
+          "name": "Supabase Imposbl Header Auth"
+        },
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1320,
+        0
+      ],
+      "id": "51d25404-db60-43ad-8f71-8721030459ad",
+      "name": "Respond w options"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Function to capitalize first letter of each word\nfunction capitalizeWords(str) {\n  return str.replace(/\\b\\w/g, char => char.toUpperCase());\n}\n\n// Function to format the label: replace underscores with spaces, lowercase, then capitalize each word\nfunction formatLabel(label) {\n  if (typeof label !== 'string') return label;\n  return capitalizeWords(label.replace(/_/g, ' ').toLowerCase());\n}\n\n// Process all input items\nconst items = $input.all();\nconst outputItems = [];\n\nfor (const item of items) {\n  // Check what data structure we're dealing with\n  let data = item.json;\n  \n  // If data is an array, process each element in the array\n  if (Array.isArray(data)) {\n    // Format each item in the array\n    const formattedArray = data.map(entry => ({\n      ...entry,\n      label: formatLabel(entry.label)\n    }));\n    \n    // Add to output items\n    outputItems.push({\n      json: formattedArray\n    });\n  } else {\n    // Single object case\n    outputItems.push({\n      json: {\n        ...data,\n        label: formatLabel(data.label)\n      }\n    });\n  }\n}\n\n// Return all processed items\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        0
+      ],
+      "id": "bb2a0c25-9f3d-45f1-9e81-0f83d46ad193",
+      "name": "format labels"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "81bf5ea2-5196-4f1b-bd24-0a904103eb96",
+              "name": "table",
+              "value": "={{ $json.query.table }}",
+              "type": "string"
+            },
+            {
+              "id": "83a8f38f-2e83-4dd9-9b90-62e88d320557",
+              "name": "label_column",
+              "value": "={{ $json.query.label_column }}",
+              "type": "string"
+            },
+            {
+              "id": "2db9938b-9f66-4b1a-ad8c-2e3f51d43441",
+              "name": "value_column",
+              "value": "={{ $json.query.value_column }}",
+              "type": "string"
+            },
+            {
+              "id": "9ac4a22e-0864-4ed2-a576-4357249d93e3",
+              "name": "sort_column",
+              "value": "={{ $json.query.sort_column }}",
+              "type": "string"
+            },
+            {
+              "id": "8dc7c136-6672-4dd9-897d-9edc00317432",
+              "name": "sort_direction",
+              "value": "={{ $json.query.sort_direction }}",
+              "type": "string"
+            },
+            {
+              "id": "66b472ff-9e8d-4b92-a2f2-3cbb79a760a9",
+              "name": "return_additional_columns",
+              "value": "={{ $json.query.return_additional_columns }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "7bcc1035-2b40-44ed-85d7-d2228a0ed85c",
+      "name": "input"
+    }
+  ],
+  "notes": "",
+  "pinData": {
+    "/options": [
+      {
+        "json": {
+          "headers": {
+            "accept-encoding": "gzip",
+            "user-agent": "ReactorNetty/1.1.22",
+            "host": "n8n.railway.internal:5678",
+            "accept": "*/*"
+          },
+          "params": {},
+          "query": {
+            "table": "options_property_status",
+            "label_column": "status",
+            "value_column": "status",
+            "sort_column": "order",
+            "sort_direction": "asc",
+            "return_additional_columns": "[\"status\",\"order\",\"pre_or_post\"]"
+          },
+          "body": {},
+          "webhookUrl": "https://s8s.up.railway.app/webhook/options",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-09T21:57:06.621Z",
+  "versionId": "accc9428-46e7-4237-9a2e-346cdcbcb0bf"
+}
