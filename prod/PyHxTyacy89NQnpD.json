@@ -1,0 +1,440 @@
+{
+  "active": true,
+  "connections": {
+    "changelog": {
+      "main": [
+        [
+          {
+            "node": "Filter statuses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "compare data": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "changelog",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter statuses": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update or new property": {
+      "main": [
+        [
+          {
+            "node": "properties-updated",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "properties-new",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/updated-properties": {
+      "main": [
+        [
+          {
+            "node": "update or new property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "properties-updated": {
+      "main": [
+        [
+          {
+            "node": "compare data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-10T18:24:00.033Z",
+  "execution_id": "23192",
+  "id": "PyHxTyacy89NQnpD",
+  "meta": null,
+  "name": "/updated-properties",
+  "nodes": [
+    {
+      "parameters": {
+        "tableId": "changelog",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "task_id",
+              "fieldValue": "={{ $('/updated-properties').first().json.body.table === \"tasks\" ? \n$('/updated-properties').item.json.body.record.id : \nnull }}"
+            },
+            {
+              "fieldId": "updated_column",
+              "fieldValue": "={{ $json.updated_column }}"
+            },
+            {
+              "fieldId": "updated_value",
+              "fieldValue": "={{ $json.newValue }}"
+            },
+            {
+              "fieldId": "updated_by",
+              "fieldValue": "={{ $('/updated-properties').item.json.body.record.updated_by }}"
+            },
+            {
+              "fieldId": "updated_table",
+              "fieldValue": "={{ $('/updated-properties').item.json.body.table }}"
+            },
+            {
+              "fieldId": "updated_column_type",
+              "fieldValue": "={{ $json.column_type }}"
+            },
+            {
+              "fieldId": "property_id",
+              "fieldValue": "={{ $('/updated-properties').first().json.body.table === \"properties\" ?  $('/updated-properties').item.json.body.record.id :  null }}"
+            }
+          ]
+        }
+      },
+      "id": "13137daf-d55d-4877-8c0e-e55ed4da9156",
+      "name": "changelog",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        -60
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function findDifferences(obj1, obj2 = {}) {\n  let differences = [];\n  \n  function getValueType(value) {\n    if (typeof value === 'string') {\n      const date = new Date(value);\n      if (date instanceof Date && !isNaN(date)) return 'timestamp';\n      return 'text';\n    }\n    if (typeof value === 'boolean') return 'boolean';\n    if (typeof value === 'number') return 'number';\n    if (Array.isArray(value)) return 'array';\n    if (value === null) return 'null';\n    if (typeof value === 'object') return 'object';\n    return 'undefined';\n  }\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2?.[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        column_type: getValueType(obj1[key]),\n        oldValue: obj2?.[key] ?? null,\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  if (obj2) {\n    for (let key in obj2) {\n      if (!(key in obj1)) {\n        differences.push({\n          isDifferent: true,\n          updated_column: key,\n          column_type: getValueType(obj2[key]),\n          oldValue: obj2[key],\n          newValue: undefined\n        });\n      }\n    }\n  }\n  \n  // If no differences found, return array with \"no changes\" message\n  if (differences.length === 0) {\n    return [{\n      isDifferent: false,\n      message: \"no changes\"\n    }];\n  }\n  \n  return differences;\n}\n\nconst newObject = $('/updated-properties').all()[0].json.body.record;\nconst oldObject = $('/updated-properties').all()[0].json.body.old_record || {};\nconst differences = findDifferences(newObject, oldObject);\nitems = differences.map(diff => ({ json: diff }));\nreturn items;"
+      },
+      "id": "af7ab7d3-45a3-41db-8f02-57e24292d539",
+      "name": "compare data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -860,
+        -60
+      ],
+      "notes": "The id of each table is supabase needs to be called exactly \"id\""
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "00f990c9-9187-4105-ad41-69a174a6145a",
+              "leftValue": "={{ $json.isDifferent }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "f87b8385-75c8-420b-9c11-35b5c8b2a9be",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "timestamp_updated",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "52b907a1-ac31-47d6-8131-143d7524d204",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "updated_by",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "451ead62-3dee-4199-9e1f-5d7b3e5bc0d7",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "id",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7c0b5373-4521-4039-bfcd-18c37dc06572",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.1,
+      "position": [
+        -640,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "content": "The id of each table is supabase needs to be called exactly \"id\"",
+        "height": 80,
+        "width": 180
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -180,
+        -180
+      ],
+      "typeVersion": 1,
+      "id": "e3b5750c-b79b-49ee-be5a-a857c134e24e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8a83b269-b28c-430a-8ccf-ae0e6245902d",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "realtor_status",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -200,
+        -60
+      ],
+      "id": "751b839f-aafb-46c6-9120-b0c666729bd9",
+      "name": "Filter statuses"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "properties",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.property_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        20,
+        -60
+      ],
+      "id": "569e56f0-d0b2-4669-bbbe-7b9f0d2352da",
+      "name": "Supabase",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.type }}",
+                    "rightValue": "UPDATE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "UPDATE"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e5542755-9a16-4ccb-bb8d-0603567d3480",
+                    "leftValue": "={{ $json.body.type }}",
+                    "rightValue": "UPDATE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "NEW"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -1300,
+        40
+      ],
+      "id": "90c58edc-d8bb-4076-925f-f508ae18c18e",
+      "name": "update or new property"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "updated-properties",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "7e5b8f5a-dbf3-47f8-9da3-aedcecbd1ca8",
+      "name": "/updated-properties",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1520,
+        40
+      ],
+      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "KwKIAL5ixwLlPeZY",
+          "name": "Supabase Imposbl Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "w",
+              "value": "properties-new"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -1080,
+        140
+      ],
+      "id": "b83a2a2e-742b-4e1f-a86d-cadaa37c78ca",
+      "name": "properties-new",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "w",
+              "value": "properties-updated"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -1080,
+        -60
+      ],
+      "id": "fa75a637-5a37-47e3-a94a-19cdadade2f3",
+      "name": "properties-updated",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    }
+  ],
+  "notes": "",
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-10T18:24:17.655Z",
+  "versionId": "0dea27ca-b4e2-40ce-8e08-b2a56c008aa1"
+}
