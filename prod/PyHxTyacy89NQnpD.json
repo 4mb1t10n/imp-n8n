@@ -5,7 +5,12 @@
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "otherColumns",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "scrape_photos",
             "type": "main",
             "index": 0
           }
@@ -67,22 +72,12 @@
         ]
       ]
     },
-    "Switch": {
+    "/scrape-property": {
       "main": [
-        [],
-        [],
-        [],
-        [],
-        [
-          {
-            "node": "/scrape-property",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
-    "/scrape-property": {
+    "scrape_photos": {
       "main": [
         [
           {
@@ -92,10 +87,59 @@
           }
         ]
       ]
+    },
+    "otherColumns": {
+      "main": [
+        [
+          {
+            "node": "updated_columm",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "telegramMessage": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "scrape-photos": {
+      "main": [
+        [
+          {
+            "node": "/scrape-property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "updated_columm": {
+      "main": [
+        [
+          {
+            "node": "telegramMessage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "23448",
+  "execution_id": "23479",
   "id": "PyHxTyacy89NQnpD",
   "meta": null,
   "name": "/updated-properties",
@@ -138,7 +182,7 @@
       "typeVersion": 1,
       "position": [
         -300,
-        -298
+        -420
       ],
       "credentials": {
         "supabaseApi": {
@@ -205,7 +249,7 @@
       "typeVersion": 2.1,
       "position": [
         -520,
-        -298
+        -420
       ]
     },
     {
@@ -221,7 +265,7 @@
       "typeVersion": 2,
       "position": [
         -1400,
-        -298
+        -420
       ],
       "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
       "credentials": {
@@ -267,7 +311,7 @@
       "typeVersion": 3.4,
       "position": [
         -1180,
-        -298
+        -420
       ],
       "id": "a618013c-a60f-412e-90b8-2e600670886d",
       "name": "inputs"
@@ -287,7 +331,7 @@
       "typeVersion": 1,
       "position": [
         -960,
-        -298
+        -420
       ],
       "id": "fa75a637-5a37-47e3-a94a-19cdadade2f3",
       "name": "record_id",
@@ -304,152 +348,9 @@
       "typeVersion": 2,
       "position": [
         -740,
-        -298
+        -420
       ],
       "notes": "The id of each table is supabase needs to be called exactly \"id\""
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $json.updated_column }}",
-                    "rightValue": "=realtor_status",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    },
-                    "id": "ae1011a5-3906-4768-9d19-0f291f573695"
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "realtor_status"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "e3f7b01c-3f98-481a-87bd-481cd555c6d4",
-                    "leftValue": "={{ $json.updated_column }}",
-                    "rightValue": "realtor_list_price",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "realtor_list_price"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "2d55cd62-3214-4f42-8b26-5ce8abe33a9b",
-                    "leftValue": "={{ $json.updated_column }}",
-                    "rightValue": "offer_price",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "offer_price"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "cca7c4d9-9ccf-4a39-ac19-2a8cce2cdb8a",
-                    "leftValue": "={{ $json.updated_column }}",
-                    "rightValue": "is_pending",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "is_pending"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "6682c805-98b7-41cb-a1fe-06d80864eaf8",
-                    "leftValue": "={{ $json.updated_column }}",
-                    "rightValue": "=scrape_photos {{ $json.property_id }}",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "scrape_photos"
-            }
-          ]
-        },
-        "options": {
-          "allMatchingOutputs": true
-        }
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.2,
-      "position": [
-        -80,
-        -340
-      ],
-      "id": "60262583-3993-4f35-8e43-daf724d2f5f9",
-      "name": "Switch"
     },
     {
       "parameters": {
@@ -469,8 +370,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        140,
-        -100
+        360,
+        -320
       ],
       "id": "fec0e4f8-b405-4857-8fbb-17ef77c1df09",
       "name": "/scrape-property"
@@ -489,11 +390,183 @@
       "type": "n8n-nodes-base.executionData",
       "typeVersion": 1,
       "position": [
-        360,
-        -100
+        140,
+        -320
       ],
       "id": "95cb91d9-2044-4a76-b1f0-e381dc6a1df4",
       "name": "scrape-photos"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "20fa661f-6e51-46b0-989e-0e34b7fba83e",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "scrape_photos",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        -320
+      ],
+      "id": "4d1c62e4-3015-4233-8253-a9e236481f54",
+      "name": "scrape_photos"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "20fa661f-6e51-46b0-989e-0e34b7fba83e",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "realtor_status",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "e0adb3d2-8272-414f-9200-7b19f7fcf430",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "realtor_list_price",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "a1667dd0-d48e-4616-80ca-7bdf6dae48ee",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "offer_price",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "8c3a239b-8860-4931-ab0b-98575ce3f413",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "is_pending",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "de87c68d-2e3f-4b0a-9225-f3aaf99eb57c",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "followup_notes",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        -520
+      ],
+      "id": "f737dbc9-c7c8-4643-ad21-efc2d904089c",
+      "name": "otherColumns"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b13da02e-8e97-4f2d-b8ed-361af9c61c05",
+              "name": "message",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "d092e6d2-1c78-425c-9809-cd1152b83623",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        360,
+        -520
+      ],
+      "id": "872896ab-d4d6-4c1e-b1c7-715007908ef1",
+      "name": "telegramMessage"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://n8n.railway.internal:5678/webhook/telegram-property-notification",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        580,
+        -520
+      ],
+      "id": "54ad451e-289b-4a8f-ab13-5247a15e8a5d",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "=updated_columm",
+              "value": "={{ $json.updated_column }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -520
+      ],
+      "id": "32fc4870-f896-4782-a26e-ae557abeb226",
+      "name": "updated_columm"
     }
   ],
   "notes": "",
@@ -682,6 +755,21 @@
           "executionMode": "production"
         }
       }
+    ],
+    "changelog": [
+      {
+        "json": {
+          "id": 9893,
+          "task_id": null,
+          "updated_column": "followup_notes",
+          "updated_value": "updated notes",
+          "timestamp": "2025-04-10T22:36:43.892436+00:00",
+          "updated_by": "alex+dev@imposbl.com",
+          "updated_table": "properties",
+          "updated_column_type": "text",
+          "property_id": 800
+        }
+      }
     ]
   },
   "settings": {
@@ -690,6 +778,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-10T23:15:25.156Z",
-  "versionId": "6552766a-82ad-4464-9c4d-b14c714025e7"
+  "updatedAt": "2025-04-11T06:33:44.703Z",
+  "versionId": "ca1ff696-4666-497e-a6ea-137d0dae97e0"
 }
