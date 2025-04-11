@@ -1,44 +1,84 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "/telegram-property-notification": {
       "main": [
         [
           {
-            "node": "Filter",
+            "node": "host",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Filter": {
+    "host": {
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "inputs",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Edit Fields": {
+    "inputs": {
       "main": [
         [
           {
-            "node": "Execution Data",
+            "node": "property_id",
             "type": "main",
             "index": 0
+          }
+        ]
+      ]
+    },
+    "property_id": {
+      "main": [
+        [
+          {
+            "node": "view_properties",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "view_users",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "view_properties": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "view_users": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
           }
         ]
       ]
     }
   },
   "createdAt": "2025-04-10T23:17:08.415Z",
-  "execution_id": "23479",
+  "execution_id": "23511",
   "id": "IYI2oAiiYaDMBc5r",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "/telegram-property-notification",
   "nodes": [
     {
@@ -51,7 +91,7 @@
       "typeVersion": 2,
       "position": [
         0,
-        0
+        60
       ],
       "id": "1cecc921-1d4b-423e-bbe7-a401b4e0e425",
       "name": "/telegram-property-notification",
@@ -69,8 +109,8 @@
           "conditions": [
             {
               "id": "e3b102a1-31d0-4c5c-8ce4-fbdce65237fb",
-              "leftValue": "",
-              "rightValue": "",
+              "leftValue": "={{ $json.headers.host }}",
+              "rightValue": "n8n.railway.internal:5678",
               "operator": {
                 "type": "string",
                 "operation": "equals",
@@ -86,44 +126,184 @@
       "typeVersion": 2.2,
       "position": [
         220,
-        0
+        60
       ],
       "id": "8be6a8c3-5849-439c-9cae-f41005dccce4",
-      "name": "Filter"
+      "name": "host"
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "496e815b-0525-4699-b29c-5103a448fb52",
+              "name": "property_id",
+              "value": "={{ $json.query.property_id }}",
+              "type": "string"
+            },
+            {
+              "id": "5a509075-fc21-4e01-b73a-5ca050eca640",
+              "name": "updated_column",
+              "value": "={{ $json.query.updated_column }}",
+              "type": "string"
+            },
+            {
+              "id": "ce8f7f8c-de36-4ac6-acc1-1a0b77f97fd7",
+              "name": "updated_value",
+              "value": "={{ $json.query.updated_value }}",
+              "type": "string"
+            },
+            {
+              "id": "34a42f6a-63c2-4475-9c87-b22610996925",
+              "name": "updated_column_type",
+              "value": "={{ $json.query.updated_column_type }}",
+              "type": "string"
+            },
+            {
+              "id": "9aaf6714-1f20-4c6a-b716-9bad66c39c82",
+              "name": "updated_by",
+              "value": "={{ $json.query.updated_by }}",
+              "type": "string"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
         440,
-        0
+        60
       ],
       "id": "adc3e8a2-717a-45a4-8c18-ff12da15a189",
-      "name": "Edit Fields"
+      "name": "inputs"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "property_id",
+              "value": "={{ $json.property_id }}"
+            }
+          ]
+        }
+      },
       "type": "n8n-nodes-base.executionData",
       "typeVersion": 1,
       "position": [
         660,
-        0
+        60
       ],
       "id": "5e3a2831-656e-4ef8-8ab0-1c64f4bf23a4",
-      "name": "Execution Data"
+      "name": "property_id"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "view_properties",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.property_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        880,
+        -40
+      ],
+      "id": "af88bce2-541f-4227-9fef-7cd185dd03d6",
+      "name": "view_properties",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "view_users",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "email",
+              "keyValue": "={{ $('inputs').item.json.updated_by }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        880,
+        160
+      ],
+      "id": "56b19509-f708-4e39-8303-d9fdab71cd3e",
+      "name": "view_users",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "joinMode": "keepEverything",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        1100,
+        60
+      ],
+      "id": "cfec21bd-90e7-45df-a329-4ee0f9230db1",
+      "name": "Merge"
     }
   ],
   "notes": "",
-  "pinData": {},
+  "pinData": {
+    "/telegram-property-notification": [
+      {
+        "json": {
+          "headers": {
+            "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
+            "user-agent": "axios/1.8.2",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "host": "n8n.railway.internal:5678",
+            "connection": "keep-alive",
+            "content-length": "0"
+          },
+          "params": {},
+          "query": {
+            "property_id": "800",
+            "updated_column": "followup_notes",
+            "updated_value": "updated notes",
+            "updated_column_type": "text",
+            "updated_by": "alex+dev@imposbl.com"
+          },
+          "body": {},
+          "webhookUrl": "https://s8s.up.railway.app/webhook/telegram-property-notification",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-04-10T23:21:39.996Z",
-  "versionId": "20a8b1c5-88f7-449b-ac10-7025eb8fddc7"
+  "triggerCount": 1,
+  "updatedAt": "2025-04-11T08:48:58.011Z",
+  "versionId": "2edef02a-5465-4199-ad5e-1256e1d5ebf0"
 }
