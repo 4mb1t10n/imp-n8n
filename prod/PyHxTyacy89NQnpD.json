@@ -99,22 +99,6 @@
         ]
       ]
     },
-    "telegramMessage": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request": {
-      "main": [
-        []
-      ]
-    },
     "scrape-photos": {
       "main": [
         [
@@ -130,16 +114,21 @@
       "main": [
         [
           {
-            "node": "telegramMessage",
+            "node": "/telegram-property-notification",
             "type": "main",
             "index": 0
           }
         ]
       ]
+    },
+    "/telegram-property-notification": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "23479",
+  "execution_id": "23511",
   "id": "PyHxTyacy89NQnpD",
   "meta": null,
   "name": "/updated-properties",
@@ -506,50 +495,6 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "b13da02e-8e97-4f2d-b8ed-361af9c61c05",
-              "name": "message",
-              "value": "",
-              "type": "string"
-            },
-            {
-              "id": "d092e6d2-1c78-425c-9809-cd1152b83623",
-              "name": "",
-              "value": "",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        360,
-        -520
-      ],
-      "id": "872896ab-d4d6-4c1e-b1c7-715007908ef1",
-      "name": "telegramMessage"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://n8n.railway.internal:5678/webhook/telegram-property-notification",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        580,
-        -520
-      ],
-      "id": "54ad451e-289b-4a8f-ab13-5247a15e8a5d",
-      "name": "HTTP Request"
-    },
-    {
-      "parameters": {
         "dataToSave": {
           "values": [
             {
@@ -567,6 +512,46 @@
       ],
       "id": "32fc4870-f896-4782-a26e-ae557abeb226",
       "name": "updated_columm"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://n8n.railway.internal:5678/webhook/telegram-property-notification",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "property_id",
+              "value": "={{ $json.property_id }}"
+            },
+            {
+              "name": "updated_column",
+              "value": "={{ $json.updated_column }}"
+            },
+            {
+              "name": "updated_value",
+              "value": "={{ $json.updated_value }}"
+            },
+            {
+              "name": "updated_column_type",
+              "value": "={{ $json.updated_column_type }}"
+            },
+            {
+              "name": "updated_by",
+              "value": "={{ $json.updated_by }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        360,
+        -520
+      ],
+      "id": "54ad451e-289b-4a8f-ab13-5247a15e8a5d",
+      "name": "/telegram-property-notification"
     }
   ],
   "notes": "",
@@ -778,6 +763,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-11T06:33:44.703Z",
-  "versionId": "ca1ff696-4666-497e-a6ea-137d0dae97e0"
+  "updatedAt": "2025-04-11T08:33:47.254Z",
+  "versionId": "10085fef-9aa3-403f-90c9-49dbc196e709"
 }
