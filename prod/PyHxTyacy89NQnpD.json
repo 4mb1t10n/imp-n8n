@@ -5,18 +5,7 @@
       "main": [
         [
           {
-            "node": "Filter statuses",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "compare data": {
-      "main": [
-        [
-          {
-            "node": "Filter",
+            "node": "Switch",
             "type": "main",
             "index": 0
           }
@@ -34,51 +23,70 @@
         ]
       ]
     },
-    "Filter statuses": {
-      "main": [
-        [
-          {
-            "node": "Supabase",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "update or new property": {
-      "main": [
-        [
-          {
-            "node": "properties-updated",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "properties-new",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "/updated-properties": {
       "main": [
         [
           {
-            "node": "update or new property",
+            "node": "inputs",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "properties-updated": {
+    "inputs": {
       "main": [
         [
           {
-            "node": "compare data",
+            "node": "record_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "record_id": {
+      "main": [
+        [
+          {
+            "node": "compareData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "compareData": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [],
+        [],
+        [],
+        [],
+        [
+          {
+            "node": "/scrape-property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/scrape-property": {
+      "main": [
+        [
+          {
+            "node": "scrape-photos",
             "type": "main",
             "index": 0
           }
@@ -87,7 +95,7 @@
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "23192",
+  "execution_id": "23294",
   "id": "PyHxTyacy89NQnpD",
   "meta": null,
   "name": "/updated-properties",
@@ -97,10 +105,6 @@
         "tableId": "changelog",
         "fieldsUi": {
           "fieldValues": [
-            {
-              "fieldId": "task_id",
-              "fieldValue": "={{ $('/updated-properties').first().json.body.table === \"tasks\" ? \n$('/updated-properties').item.json.body.record.id : \nnull }}"
-            },
             {
               "fieldId": "updated_column",
               "fieldValue": "={{ $json.updated_column }}"
@@ -133,8 +137,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -420,
-        -60
+        -300,
+        -298
       ],
       "credentials": {
         "supabaseApi": {
@@ -142,20 +146,6 @@
           "name": "Rent Ready Supabase"
         }
       }
-    },
-    {
-      "parameters": {
-        "jsCode": "function findDifferences(obj1, obj2 = {}) {\n  let differences = [];\n  \n  function getValueType(value) {\n    if (typeof value === 'string') {\n      const date = new Date(value);\n      if (date instanceof Date && !isNaN(date)) return 'timestamp';\n      return 'text';\n    }\n    if (typeof value === 'boolean') return 'boolean';\n    if (typeof value === 'number') return 'number';\n    if (Array.isArray(value)) return 'array';\n    if (value === null) return 'null';\n    if (typeof value === 'object') return 'object';\n    return 'undefined';\n  }\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2?.[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        column_type: getValueType(obj1[key]),\n        oldValue: obj2?.[key] ?? null,\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  if (obj2) {\n    for (let key in obj2) {\n      if (!(key in obj1)) {\n        differences.push({\n          isDifferent: true,\n          updated_column: key,\n          column_type: getValueType(obj2[key]),\n          oldValue: obj2[key],\n          newValue: undefined\n        });\n      }\n    }\n  }\n  \n  // If no differences found, return array with \"no changes\" message\n  if (differences.length === 0) {\n    return [{\n      isDifferent: false,\n      message: \"no changes\"\n    }];\n  }\n  \n  return differences;\n}\n\nconst newObject = $('/updated-properties').all()[0].json.body.record;\nconst oldObject = $('/updated-properties').all()[0].json.body.old_record || {};\nconst differences = findDifferences(newObject, oldObject);\nitems = differences.map(diff => ({ json: diff }));\nreturn items;"
-      },
-      "id": "af7ab7d3-45a3-41db-8f02-57e24292d539",
-      "name": "compare data",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -860,
-        -60
-      ],
-      "notes": "The id of each table is supabase needs to be called exactly \"id\""
     },
     {
       "parameters": {
@@ -214,86 +204,109 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.1,
       "position": [
-        -640,
-        -60
+        -520,
+        -298
       ]
     },
     {
       "parameters": {
-        "content": "The id of each table is supabase needs to be called exactly \"id\"",
-        "height": 80,
-        "width": 180
+        "httpMethod": "POST",
+        "path": "updated-properties",
+        "authentication": "headerAuth",
+        "options": {}
       },
-      "type": "n8n-nodes-base.stickyNote",
+      "id": "7e5b8f5a-dbf3-47f8-9da3-aedcecbd1ca8",
+      "name": "/updated-properties",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
       "position": [
-        -180,
-        -180
+        -1400,
+        -298
       ],
-      "typeVersion": 1,
-      "id": "e3b5750c-b79b-49ee-be5a-a857c134e24e",
-      "name": "Sticky Note"
+      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "KwKIAL5ixwLlPeZY",
+          "name": "Supabase Imposbl Header Auth"
+        }
+      }
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
+        "assignments": {
+          "assignments": [
             {
-              "id": "8a83b269-b28c-430a-8ccf-ae0e6245902d",
-              "leftValue": "={{ $json.updated_column }}",
-              "rightValue": "realtor_status",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
+              "id": "f743914b-f427-48fb-901e-10ee1b71c7f1",
+              "name": "table",
+              "value": "={{ $json.body.table }}",
+              "type": "string"
+            },
+            {
+              "id": "90237df7-4b1c-4463-a076-8f16ed878e74",
+              "name": "type",
+              "value": "={{ $json.body.type }}",
+              "type": "string"
+            },
+            {
+              "id": "5f3ad40b-5195-4845-80b7-dd337c872813",
+              "name": "new_record",
+              "value": "={{ $json.body.record }}",
+              "type": "object"
+            },
+            {
+              "id": "97538103-c349-4463-8ebd-dd9bbbf66c13",
+              "name": "old_record",
+              "value": "={{ $json.body.old_record }}",
+              "type": "object"
             }
-          ],
-          "combinator": "or"
+          ]
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.filter",
-      "typeVersion": 2.2,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        -200,
-        -60
+        -1180,
+        -298
       ],
-      "id": "751b839f-aafb-46c6-9120-b0c666729bd9",
-      "name": "Filter statuses"
+      "id": "a618013c-a60f-412e-90b8-2e600670886d",
+      "name": "inputs"
     },
     {
       "parameters": {
-        "operation": "get",
-        "tableId": "properties",
-        "filters": {
-          "conditions": [
+        "dataToSave": {
+          "values": [
             {
-              "keyName": "id",
-              "keyValue": "={{ $json.property_id }}"
+              "key": "record_id",
+              "value": "={{ $json.new_record.id }}"
             }
           ]
         }
       },
-      "type": "n8n-nodes-base.supabase",
+      "type": "n8n-nodes-base.executionData",
       "typeVersion": 1,
       "position": [
-        20,
-        -60
+        -960,
+        -298
       ],
-      "id": "569e56f0-d0b2-4669-bbbe-7b9f0d2352da",
-      "name": "Supabase",
-      "credentials": {
-        "supabaseApi": {
-          "id": "hN8Yj6BvjJqfKMnH",
-          "name": "Rent Ready Supabase"
-        }
-      }
+      "id": "fa75a637-5a37-47e3-a94a-19cdadade2f3",
+      "name": "record_id",
+      "alwaysOutputData": true,
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "function findDifferences(obj1, obj2 = {}) {\n  let differences = [];\n  \n  function getValueType(value) {\n    if (typeof value === 'string') {\n      const date = new Date(value);\n      if (date instanceof Date && !isNaN(date)) return 'timestamp';\n      return 'text';\n    }\n    if (typeof value === 'boolean') return 'boolean';\n    if (typeof value === 'number') return 'number';\n    if (Array.isArray(value)) return 'array';\n    if (value === null) return 'null';\n    if (typeof value === 'object') return 'object';\n    return 'undefined';\n  }\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2?.[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        column_type: getValueType(obj1[key]),\n        oldValue: obj2?.[key] ?? null,\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  if (obj2) {\n    for (let key in obj2) {\n      if (!(key in obj1)) {\n        differences.push({\n          isDifferent: true,\n          updated_column: key,\n          column_type: getValueType(obj2[key]),\n          oldValue: obj2[key],\n          newValue: undefined\n        });\n      }\n    }\n  }\n  \n  // If no differences found, return array with \"no changes\" message\n  if (differences.length === 0) {\n    return [{\n      isDifferent: false,\n      message: \"no changes\"\n    }];\n  }\n  \n  return differences;\n}\n\nconst newObject = $('/updated-properties').all()[0].json.body.record;\nconst oldObject = $('/updated-properties').all()[0].json.body.old_record || {};\nconst differences = findDifferences(newObject, oldObject);\nitems = differences.map(diff => ({ json: diff }));\nreturn items;"
+      },
+      "id": "af7ab7d3-45a3-41db-8f02-57e24292d539",
+      "name": "compareData",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -740,
+        -298
+      ],
+      "notes": "The id of each table is supabase needs to be called exactly \"id\""
     },
     {
       "parameters": {
@@ -309,18 +322,19 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $json.body.type }}",
-                    "rightValue": "UPDATE",
+                    "leftValue": "={{ $json.updated_column }}",
+                    "rightValue": "=realtor_status",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
-                    }
+                    },
+                    "id": "ae1011a5-3906-4768-9d19-0f291f573695"
                   }
                 ],
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "UPDATE"
+              "outputKey": "realtor_status"
             },
             {
               "conditions": {
@@ -332,63 +346,142 @@
                 },
                 "conditions": [
                   {
-                    "id": "e5542755-9a16-4ccb-bb8d-0603567d3480",
-                    "leftValue": "={{ $json.body.type }}",
-                    "rightValue": "UPDATE",
+                    "id": "e3f7b01c-3f98-481a-87bd-481cd555c6d4",
+                    "leftValue": "={{ $json.updated_column }}",
+                    "rightValue": "realtor_list_price",
                     "operator": {
                       "type": "string",
-                      "operation": "notEquals"
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
                     }
                   }
                 ],
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "NEW"
+              "outputKey": "realtor_list_price"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "2d55cd62-3214-4f42-8b26-5ce8abe33a9b",
+                    "leftValue": "={{ $json.updated_column }}",
+                    "rightValue": "offer_price",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "offer_price"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "cca7c4d9-9ccf-4a39-ac19-2a8cce2cdb8a",
+                    "leftValue": "={{ $json.updated_column }}",
+                    "rightValue": "is_pending",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "is_pending"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6682c805-98b7-41cb-a1fe-06d80864eaf8",
+                    "leftValue": "={{ $json.updated_column }}",
+                    "rightValue": "=scrape_photos {{ $json.property_id }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "scrape_photos"
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -80,
+        -340
+      ],
+      "id": "60262583-3993-4f35-8e43-daf724d2f5f9",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://n8n.railway.internal:5678/webhook/scrape-property",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "property_id",
+              "value": "={{ $json.property_id }}"
             }
           ]
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.2,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
-        -1300,
-        40
+        140,
+        -100
       ],
-      "id": "90c58edc-d8bb-4076-925f-f508ae18c18e",
-      "name": "update or new property"
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "updated-properties",
-        "authentication": "headerAuth",
-        "options": {}
-      },
-      "id": "7e5b8f5a-dbf3-47f8-9da3-aedcecbd1ca8",
-      "name": "/updated-properties",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -1520,
-        40
-      ],
-      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "KwKIAL5ixwLlPeZY",
-          "name": "Supabase Imposbl Header Auth"
-        }
-      }
+      "id": "fec0e4f8-b405-4857-8fbb-17ef77c1df09",
+      "name": "/scrape-property"
     },
     {
       "parameters": {
         "dataToSave": {
           "values": [
             {
-              "key": "w",
-              "value": "properties-new"
+              "key": "scrape-photos",
+              "value": "true"
             }
           ]
         }
@@ -396,45 +489,207 @@
       "type": "n8n-nodes-base.executionData",
       "typeVersion": 1,
       "position": [
-        -1080,
-        140
+        360,
+        -100
       ],
-      "id": "b83a2a2e-742b-4e1f-a86d-cadaa37c78ca",
-      "name": "properties-new",
-      "alwaysOutputData": true,
-      "notesInFlow": true
-    },
-    {
-      "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "w",
-              "value": "properties-updated"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
-      "position": [
-        -1080,
-        -60
-      ],
-      "id": "fa75a637-5a37-47e3-a94a-19cdadade2f3",
-      "name": "properties-updated",
-      "alwaysOutputData": true,
-      "notesInFlow": true
+      "id": "95cb91d9-2044-4a76-b1f0-e381dc6a1df4",
+      "name": "scrape-photos"
     }
   ],
   "notes": "",
-  "pinData": {},
+  "pinData": {
+    "/updated-properties": [
+      {
+        "json": {
+          "headers": {
+            "host": "s8s.up.railway.app",
+            "user-agent": "pg_net/0.7.1",
+            "content-length": "5819",
+            "accept": "*/*",
+            "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5eXlhY21oY3dxZHhxbmhncW1yIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzI1NjA3MSwiZXhwIjoyMDE4ODMyMDcxfQ.SaB9Ht-q_YXbVraQSSXBONJrRq7gR7TGQ5rickZehVs",
+            "content-type": "application/json",
+            "x-forwarded-for": "3.210.235.210",
+            "x-forwarded-host": "s8s.up.railway.app",
+            "x-forwarded-proto": "https",
+            "x-railway-edge": "railway/us-east4",
+            "x-railway-request-id": "I1dphsi1SyeewKpJ9i0GHA_3118653284",
+            "x-real-ip": "3.210.235.210",
+            "x-request-start": "1744324148486",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "type": "UPDATE",
+            "table": "properties",
+            "record": {
+              "id": 800,
+              "beds": 3,
+              "baths": 1,
+              "lender": null,
+              "is_fsba": true,
+              "is_fsbo": false,
+              "starred": false,
+              "stories": null,
+              "investor": null,
+              "tax_rate": 1.63,
+              "coord_lat": 41.6612373,
+              "coord_lng": -83.4964608,
+              "inspector": null,
+              "is_gas_on": false,
+              "prop_year": 1896,
+              "zillow_id": 34623735,
+              "has_garage": false,
+              "is_newhome": false,
+              "is_pending": false,
+              "lease_type": null,
+              "offer_type": null,
+              "taxes_owed": null,
+              "updated_by": "alex+dev@imposbl.com",
+              "zillow_url": "https://www.zillow.com/homedetails/2125-Valentine-St-Toledo-OH-43605/34623735_zpid/",
+              "address_zip": "43605",
+              "date_listed": "2025-02-05T16:02:05.974+00:00",
+              "is_water_on": false,
+              "offer_price": 65000,
+              "address_city": "Toledo",
+              "county_tract": null,
+              "current_rent": null,
+              "date_closing": null,
+              "is_bankowned": false,
+              "realtor_desc": "Welcome to 2125 Valentine, a delightful & well-maintained home offering 3 spacious bedrooms, including 1 conveniently located on\r\nthe main floor. Step inside & enjoy the inviting atmosphere, featuring comfortable LR, a dedicated DR & spacious\r\nkitchen with newer flooring. The updated bath makes this home move-in ready. Recent updates include a furnace replaced in '09, central air installed in '21, and a new HWT in '21, ensuring peace of mind for years to come. A central location provides easy access to Birmingham Elem, local gas stations, e-ways & the iconic Tony Packo's!",
+              "tract_income": "medium",
+              "virtual_tour": "https://www.propertypanorama.com/instaview/toledo/6125595",
+              "address_state": "OH",
+              "county_parcel": "abc1234",
+              "county_zoning": null,
+              "is_comingsoon": false,
+              "is_distressed": false,
+              "is_forauction": false,
+              "lease_expires": null,
+              "scrape_photos": false,
+              "address_county": "LUCAS",
+              "address_street": "2125 Valentine St",
+              "followup_notes": "updated notes",
+              "is_electric_on": false,
+              "is_foreclosure": false,
+              "realtor_status": "FOR_SALE",
+              "cover_photo_url": "https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/properties/800/photos/61ad1853-3ab9-45fc-be9f-c81369a1d79d.jpeg",
+              "date_inspection": null,
+              "google_place_id": "ChIJJS9G_vmDO4gR4tZiNRCzdSA",
+              "last_sold_price": 59900,
+              "property_status": "Make Offer",
+              "date_walkthrough": null,
+              "prop_size_inside": 1265,
+              "realtor_assigned": "whitneynbarlow@gmail.com",
+              "prop_size_outside": 3598,
+              "purchase_strategy": null,
+              "timestamp_created": "2025-02-27T20:27:52.702+00:00",
+              "timestamp_scraped": "2025-04-07T16:02:05.971+00:00",
+              "timestamp_updated": "2025-04-07T16:02:05.971+00:00",
+              "is_tenant_occupied": false,
+              "realtor_list_price": 80000,
+              "is_opportunity_zone": true,
+              "address_neighborhood": null,
+              "has_lead_certificate": false,
+              "is_registered_rental": false,
+              "keystone_home_status": "ForSale",
+              "realtor_dwelling_type": "SINGLE_FAMILY",
+              "contingent_listing_type": null,
+              "telegram_internal_forum": null,
+              "telegram_realtor_topic_id": 6514,
+              "telegram_realtor_pinned_message_id": "6895"
+            },
+            "schema": "public",
+            "old_record": {
+              "id": 800,
+              "beds": 3,
+              "baths": 1,
+              "lender": null,
+              "is_fsba": true,
+              "is_fsbo": false,
+              "starred": false,
+              "stories": null,
+              "investor": null,
+              "tax_rate": 1.63,
+              "coord_lat": 41.6612373,
+              "coord_lng": -83.4964608,
+              "inspector": null,
+              "is_gas_on": false,
+              "prop_year": 1896,
+              "zillow_id": 34623735,
+              "has_garage": false,
+              "is_newhome": false,
+              "is_pending": false,
+              "lease_type": null,
+              "offer_type": null,
+              "taxes_owed": null,
+              "updated_by": "alex+dev@imposbl.com",
+              "zillow_url": "https://www.zillow.com/homedetails/2125-Valentine-St-Toledo-OH-43605/34623735_zpid/",
+              "address_zip": "43605",
+              "date_listed": "2025-02-05T16:02:05.974+00:00",
+              "is_water_on": false,
+              "offer_price": 65000,
+              "address_city": "Toledo",
+              "county_tract": null,
+              "current_rent": null,
+              "date_closing": null,
+              "is_bankowned": false,
+              "realtor_desc": "Welcome to 2125 Valentine, a delightful & well-maintained home offering 3 spacious bedrooms, including 1 conveniently located on\r\nthe main floor. Step inside & enjoy the inviting atmosphere, featuring comfortable LR, a dedicated DR & spacious\r\nkitchen with newer flooring. The updated bath makes this home move-in ready. Recent updates include a furnace replaced in '09, central air installed in '21, and a new HWT in '21, ensuring peace of mind for years to come. A central location provides easy access to Birmingham Elem, local gas stations, e-ways & the iconic Tony Packo's!",
+              "tract_income": "medium",
+              "virtual_tour": "https://www.propertypanorama.com/instaview/toledo/6125595",
+              "address_state": "OH",
+              "county_parcel": "abc1234",
+              "county_zoning": null,
+              "is_comingsoon": false,
+              "is_distressed": false,
+              "is_forauction": false,
+              "lease_expires": null,
+              "scrape_photos": false,
+              "address_county": "LUCAS",
+              "address_street": "2125 Valentine St",
+              "followup_notes": "testing notes",
+              "is_electric_on": false,
+              "is_foreclosure": false,
+              "realtor_status": "FOR_SALE",
+              "cover_photo_url": "https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/properties/800/photos/61ad1853-3ab9-45fc-be9f-c81369a1d79d.jpeg",
+              "date_inspection": null,
+              "google_place_id": "ChIJJS9G_vmDO4gR4tZiNRCzdSA",
+              "last_sold_price": 59900,
+              "property_status": "Make Offer",
+              "date_walkthrough": null,
+              "prop_size_inside": 1265,
+              "realtor_assigned": "whitneynbarlow@gmail.com",
+              "prop_size_outside": 3598,
+              "purchase_strategy": null,
+              "timestamp_created": "2025-02-27T20:27:52.702+00:00",
+              "timestamp_scraped": "2025-04-07T16:02:05.971+00:00",
+              "timestamp_updated": "2025-04-07T16:02:05.971+00:00",
+              "is_tenant_occupied": false,
+              "realtor_list_price": 80000,
+              "is_opportunity_zone": true,
+              "address_neighborhood": null,
+              "has_lead_certificate": false,
+              "is_registered_rental": false,
+              "keystone_home_status": "ForSale",
+              "realtor_dwelling_type": "SINGLE_FAMILY",
+              "contingent_listing_type": null,
+              "telegram_internal_forum": null,
+              "telegram_realtor_topic_id": 6514,
+              "telegram_realtor_pinned_message_id": "6895"
+            }
+          },
+          "webhookUrl": "https://s8s.up.railway.app/webhook/updated-properties",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-10T18:24:17.655Z",
-  "versionId": "0dea27ca-b4e2-40ce-8e08-b2a56c008aa1"
+  "updatedAt": "2025-04-10T23:15:25.156Z",
+  "versionId": "6552766a-82ad-4464-9c4d-b14c714025e7"
 }
