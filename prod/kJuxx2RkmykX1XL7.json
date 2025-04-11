@@ -189,10 +189,10 @@
     }
   },
   "createdAt": "2025-04-07T23:41:11.388Z",
-  "execution_id": "23228",
+  "execution_id": "23294",
   "id": "kJuxx2RkmykX1XL7",
   "meta": null,
-  "name": "/telegram-topic",
+  "name": "/telegram-property-topic",
   "nodes": [
     {
       "parameters": {
@@ -815,6 +815,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-09T10:32:23.909Z",
-  "versionId": "de683c4a-112f-4df1-8727-76fdbc0e7a70"
+  "updatedAt": "2025-04-10T22:51:04.059Z",
+  "versionId": "a8d788b5-aea4-4ebe-a55b-7b29a7166b70"
 }
