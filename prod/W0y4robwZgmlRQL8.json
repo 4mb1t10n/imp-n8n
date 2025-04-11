@@ -277,7 +277,7 @@
     }
   },
   "createdAt": "2025-04-07T23:39:17.248Z",
-  "execution_id": "23228",
+  "execution_id": "23294",
   "id": "W0y4robwZgmlRQL8",
   "meta": null,
   "name": "/apify",
@@ -916,7 +916,7 @@
     {
       "parameters": {
         "chatId": "-1002250368392",
-        "text": "=<b>Server Error</b>\nUnable to upsert new record for property: <a href=\"https://www.zillow.com{{ $('loopProperties').item.json.hdpUrl }}\">{{ $('loopProperties').item.json.streetAddress }} | {{ $('loopProperties').item.json.zipcode }}</a>\n\nWorkflow: {{ $workflow.name }}\nExecution ID: <a href=\"https://s8s.up.railway.app/workflow/5l82Xz5lpYQrrg5V/executions/{{ $execution.id }}\">{{ $execution.id }}</a>",
+        "text": "=<b>Server Error</b>\nWorkflow: {{ $workflow.name }}\nExecution ID: <a href=\"https://s8s.up.railway.app/workflow/5l82Xz5lpYQrrg5V/executions/{{ $execution.id }}\">{{ $execution.id }}</a>",
         "additionalFields": {
           "appendAttribution": false,
           "parse_mode": "HTML",
@@ -937,8 +937,7 @@
           "id": "5EhmVCbyRMyj9grg",
           "name": "P0m0shnik11_Bot"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -1277,7 +1276,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://n8n.railway.internal:5678/webhook/telegram-topic",
+        "url": "http://n8n.railway.internal:5678/webhook/telegram-property-topic",
         "sendQuery": true,
         "queryParameters": {
           "parameters": [
@@ -2093,6 +2092,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-04-07T23:40:12.801Z",
-  "versionId": "38389c3f-8f40-4ac9-aaf1-ff5a47f79208"
+  "updatedAt": "2025-04-10T22:54:26.528Z",
+  "versionId": "9337bb3f-e178-4aec-b585-a020bc619dac"
 }
