@@ -34,7 +34,7 @@
       "main": [
         [
           {
-            "node": "callApify",
+            "node": "/callApify",
             "type": "main",
             "index": 0
           }
@@ -51,17 +51,6 @@
         [
           {
             "node": "apifyQuery",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/telegram-topic": {
-      "main": [
-        [
-          {
-            "node": "update tags?",
             "type": "main",
             "index": 0
           }
@@ -181,17 +170,6 @@
         []
       ]
     },
-    "callApify": {
-      "main": [
-        [
-          {
-            "node": "/telegram-topic",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "/process-validated-property": {
       "main": [
         [
@@ -247,10 +225,32 @@
         ],
         []
       ]
+    },
+    "/telegram-property-topic": {
+      "main": [
+        [
+          {
+            "node": "update tags?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/callApify": {
+      "main": [
+        [
+          {
+            "node": "/telegram-property-topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-03-28T08:58:34.161Z",
-  "execution_id": "23192",
+  "execution_id": "23318",
   "id": "5l82Xz5lpYQrrg5V",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -426,31 +426,6 @@
       ],
       "id": "40967ab6-225e-45f1-9089-4c4d86bff3ef",
       "name": "updated property"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://n8n.railway.internal:5678/webhook/telegram-topic",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "property_id",
-              "value": "={{ $('updated property').item.json.id }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -1660,
-        -1360
-      ],
-      "id": "206a7259-a9bb-45cc-96de-809e2a6ad2bd",
-      "name": "/telegram-topic",
-      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -773,40 +748,6 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "https://api.apify.com/v2/acts/maxcopell~zillow-detail-scraper/runs",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "token",
-              "value": "apify_api_eBcJIT4Z3eJhNHRL1UFtko2cVhff8i4fqE6a"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ $json }}",
-        "options": {
-          "timeout": 300000
-        }
-      },
-      "id": "1a029e2d-5513-467c-9c5e-71469e47feb5",
-      "name": "callApify",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -1880,
-        -1360
-      ],
-      "retryOnFail": true,
-      "waitBetweenTries": 3000,
-      "alwaysOutputData": true,
-      "maxTries": 2,
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
         "httpMethod": "POST",
         "path": "process-validated-property",
         "options": {}
@@ -905,6 +846,65 @@
       "id": "35aaaffc-4ead-4489-98f9-47bb45778c2a",
       "name": "/new-property",
       "webhookId": "07639ed8-3eb6-45c4-808a-4f563e7dd0ff"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://n8n.railway.internal:5678/webhook/telegram-property-topic",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "property_id",
+              "value": "={{ $('updated property').item.json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1660,
+        -1360
+      ],
+      "id": "206a7259-a9bb-45cc-96de-809e2a6ad2bd",
+      "name": "/telegram-property-topic",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/maxcopell~zillow-detail-scraper/runs",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "apify_api_eBcJIT4Z3eJhNHRL1UFtko2cVhff8i4fqE6a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "1a029e2d-5513-467c-9c5e-71469e47feb5",
+      "name": "/callApify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1880,
+        -1360
+      ],
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "alwaysOutputData": true,
+      "maxTries": 2,
+      "onError": "continueRegularOutput"
     }
   ],
   "notes": "",
@@ -1001,6 +1001,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-04-09T17:44:42.891Z",
-  "versionId": "5c110cea-b397-4ea5-97a3-c8e78601e4c4"
+  "updatedAt": "2025-04-10T22:53:00.645Z",
+  "versionId": "b441aa26-178c-4b11-9c72-1aa7425da8ec"
 }
