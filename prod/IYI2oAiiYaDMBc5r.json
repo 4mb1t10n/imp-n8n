@@ -41,11 +41,6 @@
             "node": "view_properties",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "view_users",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -54,7 +49,7 @@
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "hasTopic?",
             "type": "main",
             "index": 0
           }
@@ -63,18 +58,12 @@
     },
     "view_users": {
       "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
+        []
       ]
     }
   },
   "createdAt": "2025-04-10T23:17:08.415Z",
-  "execution_id": "23584",
+  "execution_id": "23672",
   "id": "IYI2oAiiYaDMBc5r",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -91,7 +80,7 @@
       "typeVersion": 2,
       "position": [
         0,
-        60
+        -40
       ],
       "id": "1cecc921-1d4b-423e-bbe7-a401b4e0e425",
       "name": "/telegram-property-notification",
@@ -126,7 +115,7 @@
       "typeVersion": 2.2,
       "position": [
         220,
-        60
+        -40
       ],
       "id": "8be6a8c3-5849-439c-9cae-f41005dccce4",
       "name": "host"
@@ -173,7 +162,7 @@
       "typeVersion": 3.4,
       "position": [
         440,
-        60
+        -40
       ],
       "id": "adc3e8a2-717a-45a4-8c18-ff12da15a189",
       "name": "inputs"
@@ -193,7 +182,7 @@
       "typeVersion": 1,
       "position": [
         660,
-        60
+        -40
       ],
       "id": "5e3a2831-656e-4ef8-8ab0-1c64f4bf23a4",
       "name": "property_id"
@@ -242,8 +231,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        880,
-        160
+        0,
+        220
       ],
       "id": "56b19509-f708-4e39-8303-d9fdab71cd3e",
       "name": "view_users",
@@ -256,18 +245,37 @@
     },
     {
       "parameters": {
-        "mode": "combine",
-        "joinMode": "keepEverything",
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f96e1776-fd7c-4311-877c-72c5765169e6",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
         "options": {}
       },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.1,
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
       "position": [
         1100,
-        60
+        -40
       ],
-      "id": "cfec21bd-90e7-45df-a329-4ee0f9230db1",
-      "name": "Merge"
+      "id": "29b6e289-f8c3-448f-bb0f-d8f7f71e070f",
+      "name": "hasTopic?"
     }
   ],
   "notes": "",
@@ -304,6 +312,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-11T08:48:58.011Z",
-  "versionId": "2edef02a-5465-4199-ad5e-1256e1d5ebf0"
+  "updatedAt": "2025-04-11T17:17:03.451Z",
+  "versionId": "d3657c13-683a-4b75-bdce-5105ecf94eda"
 }
