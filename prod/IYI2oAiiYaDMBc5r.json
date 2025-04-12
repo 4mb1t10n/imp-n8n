@@ -63,7 +63,7 @@
     }
   },
   "createdAt": "2025-04-10T23:17:08.415Z",
-  "execution_id": "24163",
+  "execution_id": "24188",
   "id": "IYI2oAiiYaDMBc5r",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -255,12 +255,22 @@
           "conditions": [
             {
               "id": "f96e1776-fd7c-4311-877c-72c5765169e6",
-              "leftValue": "",
+              "leftValue": "={{ $json.telegram_realtor_forum }}",
               "rightValue": "",
               "operator": {
                 "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "717d2c12-491b-4f56-b855-f96b02723eff",
+              "leftValue": "={{ $json.telegram_realtor_topic_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
               }
             }
           ],
@@ -285,7 +295,7 @@
         "json": {
           "headers": {
             "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
-            "user-agent": "axios/1.8.2",
+            "user-agent": "axios/1.7.4",
             "accept-encoding": "gzip, compress, deflate, br",
             "host": "n8n.railway.internal:5678",
             "connection": "keep-alive",
@@ -293,11 +303,11 @@
           },
           "params": {},
           "query": {
-            "property_id": "800",
-            "updated_column": "followup_notes",
-            "updated_value": "updated notes",
+            "property_id": "824",
+            "updated_column": "realtor_status",
+            "updated_value": "RECENTLY_SOLD",
             "updated_column_type": "text",
-            "updated_by": "alex+dev@imposbl.com"
+            "updated_by": "Bot@RentReadyS8.com"
           },
           "body": {},
           "webhookUrl": "https://s8s.up.railway.app/webhook/telegram-property-notification",
@@ -312,6 +322,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-11T17:17:03.451Z",
-  "versionId": "d3657c13-683a-4b75-bdce-5105ecf94eda"
+  "updatedAt": "2025-04-12T21:41:41.769Z",
+  "versionId": "e32dc241-d161-411f-b4e3-070a2f114d06"
 }
