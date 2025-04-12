@@ -128,7 +128,7 @@
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "24163",
+  "execution_id": "24188",
   "id": "PyHxTyacy89NQnpD",
   "meta": null,
   "name": "/updated-properties",
@@ -552,6 +552,19 @@
       ],
       "id": "54ad451e-289b-4a8f-ab13-5247a15e8a5d",
       "name": "/telegram-property-notification"
+    },
+    {
+      "parameters": {
+        "content": "Triggered by Supabase when record in properties table is updated"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1720,
+        -440
+      ],
+      "typeVersion": 1,
+      "id": "5f47ce68-be3d-484d-a183-7f4075d7a822",
+      "name": "Sticky Note"
     }
   ],
   "notes": "",
@@ -763,6 +776,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-11T08:33:47.254Z",
-  "versionId": "10085fef-9aa3-403f-90c9-49dbc196e709"
+  "updatedAt": "2025-04-12T21:45:59.206Z",
+  "versionId": "91da9aaa-38f4-4a63-9541-daddcaa57b88"
 }
