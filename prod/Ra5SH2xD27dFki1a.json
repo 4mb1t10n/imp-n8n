@@ -58,12 +58,12 @@
     }
   },
   "createdAt": "2025-03-27T17:13:45.285Z",
-  "execution_id": "24163",
+  "execution_id": "24188",
   "id": "Ra5SH2xD27dFki1a",
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Telegram",
+  "name": "/telegram-task-topic",
   "nodes": [
     {
       "parameters": {
@@ -235,6 +235,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-07T23:41:35.374Z",
-  "versionId": "4bdb3074-b640-44e7-8d53-78b7c24a4425"
+  "updatedAt": "2025-04-12T21:48:23.353Z",
+  "versionId": "ce667b5a-f600-4903-a7ae-d4464ea2ccd1"
 }
