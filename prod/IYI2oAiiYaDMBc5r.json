@@ -63,7 +63,7 @@
     }
   },
   "createdAt": "2025-04-10T23:17:08.415Z",
-  "execution_id": "24227",
+  "execution_id": "24298",
   "id": "IYI2oAiiYaDMBc5r",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -249,7 +249,7 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict",
+            "typeValidation": "loose",
             "version": 2
           },
           "conditions": [
@@ -276,6 +276,7 @@
           ],
           "combinator": "and"
         },
+        "looseTypeValidation": true,
         "options": {}
       },
       "type": "n8n-nodes-base.if",
@@ -322,6 +323,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-12T21:41:41.769Z",
-  "versionId": "e32dc241-d161-411f-b4e3-070a2f114d06"
+  "updatedAt": "2025-04-13T00:01:34.876Z",
+  "versionId": "68eb66d9-3de4-4e00-bcc4-651f6b2bb384"
 }
