@@ -250,7 +250,7 @@
     }
   },
   "createdAt": "2025-03-28T08:58:34.161Z",
-  "execution_id": "24608",
+  "execution_id": "24926",
   "id": "5l82Xz5lpYQrrg5V",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -980,7 +980,8 @@
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": false,
-    "callerPolicy": "workflowsFromSameOwner"
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
   },
   "staticData": {
     "node:Schedule Trigger": {
@@ -1001,6 +1002,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-04-13T12:25:32.442Z",
-  "versionId": "af615bbc-c62e-482e-9d32-7ff18f52ec8f"
+  "updatedAt": "2025-04-13T17:11:35.025Z",
+  "versionId": "308ff6df-6c06-4ed3-b949-e04c7506e95e"
 }
