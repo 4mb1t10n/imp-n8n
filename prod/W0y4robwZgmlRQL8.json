@@ -277,10 +277,10 @@
     }
   },
   "createdAt": "2025-04-07T23:39:17.248Z",
-  "execution_id": "24527",
+  "execution_id": "24577",
   "id": "W0y4robwZgmlRQL8",
   "meta": null,
-  "name": "/apify",
+  "name": "/apify-completed",
   "nodes": [
     {
       "parameters": {
@@ -679,10 +679,6 @@
               "fieldValue": "={{ $json.listing_sub_type.is_forAuction }}"
             },
             {
-              "fieldId": "is_newhome",
-              "fieldValue": "={{ $json.listing_sub_type.is_newHome }}"
-            },
-            {
               "fieldId": "is_fsbo",
               "fieldValue": "={{ $json.listing_sub_type.is_FSBO }}"
             },
@@ -703,10 +699,6 @@
               "fieldValue": "={{ $json.listing_sub_type.is_comingSoon }}"
             },
             {
-              "fieldId": "is_pending",
-              "fieldValue": "={{ $json.listing_sub_type.is_pending }}"
-            },
-            {
               "fieldId": "date_listed",
               "fieldValue": "={{ new Date(Date.now() - ($json.daysOnZillow * 24 * 60 * 60 * 1000)).toISOString() }}"
             },
@@ -721,10 +713,6 @@
             {
               "fieldId": "tax_rate",
               "fieldValue": "={{ $json.propertyTaxRate }}"
-            },
-            {
-              "fieldId": "keystone_home_status",
-              "fieldValue": "={{ $json.keystoneHomeStatus }}"
             },
             {
               "fieldId": "contingent_listing_type",
@@ -838,10 +826,6 @@
               "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_foreclosure }}"
             },
             {
-              "fieldId": "is_newhome",
-              "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_newHome }}"
-            },
-            {
               "fieldId": "is_fsbo",
               "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_FSBO }}"
             },
@@ -862,10 +846,6 @@
               "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_comingSoon }}"
             },
             {
-              "fieldId": "is_pending",
-              "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_pending }}"
-            },
-            {
               "fieldId": "date_listed",
               "fieldValue": "={{ new Date(Date.now() - ($('inputs').item.json.daysOnZillow * 24 * 60 * 60 * 1000)).toISOString() }}"
             },
@@ -876,10 +856,6 @@
             {
               "fieldId": "tax_rate",
               "fieldValue": "={{ $('inputs').item.json.propertyTaxRate }}"
-            },
-            {
-              "fieldId": "keystone_home_status",
-              "fieldValue": "={{ $('inputs').item.json.keystoneHomeStatus }}"
             },
             {
               "fieldId": "contingent_listing_type",
@@ -2092,6 +2068,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-04-10T22:54:26.528Z",
-  "versionId": "9337bb3f-e178-4aec-b585-a020bc619dac"
+  "updatedAt": "2025-04-13T13:32:49.126Z",
+  "versionId": "740e5a9c-6c22-4a01-ad80-62cd69a173ee"
 }
