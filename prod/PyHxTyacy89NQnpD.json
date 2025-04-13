@@ -28,17 +28,6 @@
         ]
       ]
     },
-    "/updated-properties": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "inputs": {
       "main": [
         [
@@ -125,13 +114,24 @@
       "main": [
         []
       ]
+    },
+    "/supabase-updated-properties": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "24527",
+  "execution_id": "24577",
   "id": "PyHxTyacy89NQnpD",
   "meta": null,
-  "name": "/updated-properties",
+  "name": "/supabase-updated-properties",
   "nodes": [
     {
       "parameters": {
@@ -148,11 +148,11 @@
             },
             {
               "fieldId": "updated_by",
-              "fieldValue": "={{ $('/updated-properties').item.json.body.record.updated_by }}"
+              "fieldValue": "={{ $('/supabase-updated-properties').item.json.body.record.updated_by }}"
             },
             {
               "fieldId": "updated_table",
-              "fieldValue": "={{ $('/updated-properties').item.json.body.table }}"
+              "fieldValue": "={{ $('/supabase-updated-properties').item.json.body.table }}"
             },
             {
               "fieldId": "updated_column_type",
@@ -160,7 +160,7 @@
             },
             {
               "fieldId": "property_id",
-              "fieldValue": "={{ $('/updated-properties').first().json.body.table === \"properties\" ?  $('/updated-properties').item.json.body.record.id :  null }}"
+              "fieldValue": "={{ $('/supabase-updated-properties').first().json.body.table === \"properties\" ?  $('/supabase-updated-properties').item.json.body.record.id :  null }}"
             }
           ]
         }
@@ -243,29 +243,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "updated-properties",
-        "authentication": "headerAuth",
-        "options": {}
-      },
-      "id": "7e5b8f5a-dbf3-47f8-9da3-aedcecbd1ca8",
-      "name": "/updated-properties",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -1400,
-        -420
-      ],
-      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "KwKIAL5ixwLlPeZY",
-          "name": "Supabase Imposbl Header Auth"
-        }
-      }
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -329,7 +306,7 @@
     },
     {
       "parameters": {
-        "jsCode": "function findDifferences(obj1, obj2 = {}) {\n  let differences = [];\n  \n  function getValueType(value) {\n    if (typeof value === 'string') {\n      const date = new Date(value);\n      if (date instanceof Date && !isNaN(date)) return 'timestamp';\n      return 'text';\n    }\n    if (typeof value === 'boolean') return 'boolean';\n    if (typeof value === 'number') return 'number';\n    if (Array.isArray(value)) return 'array';\n    if (value === null) return 'null';\n    if (typeof value === 'object') return 'object';\n    return 'undefined';\n  }\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2?.[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        column_type: getValueType(obj1[key]),\n        oldValue: obj2?.[key] ?? null,\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  if (obj2) {\n    for (let key in obj2) {\n      if (!(key in obj1)) {\n        differences.push({\n          isDifferent: true,\n          updated_column: key,\n          column_type: getValueType(obj2[key]),\n          oldValue: obj2[key],\n          newValue: undefined\n        });\n      }\n    }\n  }\n  \n  // If no differences found, return array with \"no changes\" message\n  if (differences.length === 0) {\n    return [{\n      isDifferent: false,\n      message: \"no changes\"\n    }];\n  }\n  \n  return differences;\n}\n\nconst newObject = $('/updated-properties').all()[0].json.body.record;\nconst oldObject = $('/updated-properties').all()[0].json.body.old_record || {};\nconst differences = findDifferences(newObject, oldObject);\nitems = differences.map(diff => ({ json: diff }));\nreturn items;"
+        "jsCode": "function findDifferences(obj1, obj2 = {}) {\n  let differences = [];\n  \n  function getValueType(value) {\n    if (typeof value === 'string') {\n      const date = new Date(value);\n      if (date instanceof Date && !isNaN(date)) return 'timestamp';\n      return 'text';\n    }\n    if (typeof value === 'boolean') return 'boolean';\n    if (typeof value === 'number') return 'number';\n    if (Array.isArray(value)) return 'array';\n    if (value === null) return 'null';\n    if (typeof value === 'object') return 'object';\n    return 'undefined';\n  }\n  \n  for (let key in obj1) {\n    if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2?.[key])) {\n      differences.push({\n        isDifferent: true,\n        updated_column: key,\n        column_type: getValueType(obj1[key]),\n        oldValue: obj2?.[key] ?? null,\n        newValue: obj1[key]\n      });\n    }\n  }\n  \n  if (obj2) {\n    for (let key in obj2) {\n      if (!(key in obj1)) {\n        differences.push({\n          isDifferent: true,\n          updated_column: key,\n          column_type: getValueType(obj2[key]),\n          oldValue: obj2[key],\n          newValue: undefined\n        });\n      }\n    }\n  }\n  \n  // If no differences found, return array with \"no changes\" message\n  if (differences.length === 0) {\n    return [{\n      isDifferent: false,\n      message: \"no changes\"\n    }];\n  }\n  \n  return differences;\n}\n\nconst newObject = $('/supabase-updated-properties').all()[0].json.body.record;\nconst oldObject = $('/supabase-updated-properties').all()[0].json.body.old_record || {};\nconst differences = findDifferences(newObject, oldObject);\nitems = differences.map(diff => ({ json: diff }));\nreturn items;"
       },
       "id": "af7ab7d3-45a3-41db-8f02-57e24292d539",
       "name": "compareData",
@@ -555,21 +532,46 @@
     },
     {
       "parameters": {
-        "content": "Triggered by Supabase when record in properties table is updated"
+        "httpMethod": "POST",
+        "path": "supabase-updated-properties",
+        "authentication": "headerAuth",
+        "options": {}
       },
-      "type": "n8n-nodes-base.stickyNote",
+      "id": "7e5b8f5a-dbf3-47f8-9da3-aedcecbd1ca8",
+      "name": "/supabase-updated-properties",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
       "position": [
-        -1720,
-        -440
+        -1400,
+        -420
       ],
-      "typeVersion": 1,
-      "id": "5f47ce68-be3d-484d-a183-7f4075d7a822",
-      "name": "Sticky Note"
+      "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "KwKIAL5ixwLlPeZY",
+          "name": "Supabase Imposbl Header Auth"
+        }
+      }
     }
   ],
   "notes": "",
   "pinData": {
-    "/updated-properties": [
+    "changelog": [
+      {
+        "json": {
+          "id": 9893,
+          "task_id": null,
+          "updated_column": "followup_notes",
+          "updated_value": "updated notes",
+          "timestamp": "2025-04-10T22:36:43.892436+00:00",
+          "updated_by": "alex+dev@imposbl.com",
+          "updated_table": "properties",
+          "updated_column_type": "text",
+          "property_id": 800
+        }
+      }
+    ],
+    "/supabase-updated-properties": [
       {
         "json": {
           "headers": {
@@ -753,21 +755,6 @@
           "executionMode": "production"
         }
       }
-    ],
-    "changelog": [
-      {
-        "json": {
-          "id": 9893,
-          "task_id": null,
-          "updated_column": "followup_notes",
-          "updated_value": "updated notes",
-          "timestamp": "2025-04-10T22:36:43.892436+00:00",
-          "updated_by": "alex+dev@imposbl.com",
-          "updated_table": "properties",
-          "updated_column_type": "text",
-          "property_id": 800
-        }
-      }
     ]
   },
   "settings": {
@@ -776,6 +763,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-12T21:45:59.206Z",
-  "versionId": "91da9aaa-38f4-4a63-9541-daddcaa57b88"
+  "updatedAt": "2025-04-13T12:20:08.777Z",
+  "versionId": "eccaa683-60fd-47ea-a46b-dac62a2bdd06"
 }
