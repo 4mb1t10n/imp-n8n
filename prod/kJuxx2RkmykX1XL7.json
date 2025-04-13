@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "get status",
+            "node": "pinned message",
             "type": "main",
             "index": 0
           }
@@ -45,33 +45,11 @@
         ]
       ]
     },
-    "/telegram-topic": {
-      "main": [
-        [
-          {
-            "node": "Inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "property_id": {
       "main": [
         [
           {
             "node": "view_properties",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "get status": {
-      "main": [
-        [
-          {
-            "node": "pinned message",
             "type": "main",
             "index": 0
           }
@@ -209,10 +187,21 @@
           }
         ]
       ]
+    },
+    "/telegram-property-topic": {
+      "main": [
+        [
+          {
+            "node": "Inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-07T23:41:11.388Z",
-  "execution_id": "24527",
+  "execution_id": "24577",
   "id": "kJuxx2RkmykX1XL7",
   "meta": null,
   "name": "/telegram-property-topic",
@@ -283,7 +272,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -80,
+        -300,
         425
       ],
       "id": "311d3daa-1f45-4f69-b7e2-cd446089654a",
@@ -313,27 +302,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1180,
+        -1400,
         375
       ],
       "id": "c687ada1-0e04-4ddb-b115-ec2880951a42",
       "name": "pinned message"
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "telegram-topic",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -2280,
-        375
-      ],
-      "id": "2545193b-2bbb-4df0-8715-f03c2dba39bb",
-      "name": "/telegram-topic",
-      "webhookId": "3f9043e8-ad23-43ab-8af2-949b6d21a108"
     },
     {
       "parameters": {
@@ -358,34 +331,6 @@
     },
     {
       "parameters": {
-        "operation": "get",
-        "tableId": "options_property_status",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "status",
-              "keyValue": "={{ $json.property_status }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -1400,
-        375
-      ],
-      "id": "666a5f02-d469-4ad5-895e-39d53a6b1449",
-      "name": "get status",
-      "credentials": {
-        "supabaseApi": {
-          "id": "hN8Yj6BvjJqfKMnH",
-          "name": "Rent Ready Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -396,7 +341,7 @@
           "conditions": [
             {
               "id": "02fb6b80-7dd1-495b-ac89-ab95909e4751",
-              "leftValue": "={{ $('get status').item.json.update_realtor_topic }}",
+              "leftValue": "={{ $('view_properties').item.json.update_realtor_topic }}",
               "rightValue": "Purchased",
               "operator": {
                 "type": "boolean",
@@ -412,7 +357,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -740,
+        -960,
         375
       ],
       "id": "055ce2b6-e590-4b0f-a190-a57335cfdfe3",
@@ -440,7 +385,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -520,
+        -740,
         475
       ],
       "id": "d366693a-1b0e-426f-bfea-7d3f92f1b254",
@@ -510,7 +455,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        -960,
+        -1180,
         375
       ],
       "id": "bee378d7-b6b5-401e-aae6-5c917040cd74",
@@ -544,7 +489,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -520,
+        -740,
         275
       ],
       "id": "041dc680-7008-4df3-9214-6ddd876b5fa8",
@@ -587,7 +532,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -80,
+        -300,
         175
       ],
       "id": "a73eed27-9c81-427c-9212-268064191112",
@@ -606,7 +551,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        580,
+        360,
         175
       ],
       "id": "5e577a8d-59a7-40fa-b93f-8a1ba440225e",
@@ -641,7 +586,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        360,
+        140,
         175
       ],
       "id": "62190780-b777-4b88-94a2-09bfddd05e3a",
@@ -668,7 +613,7 @@
             },
             {
               "name": "text",
-              "value": "={{ $json.pinnedMessage }}"
+              "value": "={{ $('pinned message').item.json.pinnedMessage }}"
             },
             {
               "name": "parse_mode",
@@ -681,7 +626,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        140,
+        -80,
         100
       ],
       "id": "8b57966e-6eb4-4de0-8b2c-686a03560236",
@@ -698,7 +643,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        800,
+        580,
         175
       ],
       "id": "4526ac9a-f037-4f88-bb49-d4caa3bcb9e8",
@@ -740,7 +685,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1020,
+        800,
         175
       ],
       "id": "858902ea-9df3-4e21-ac39-d243978083ae",
@@ -781,7 +726,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        140,
+        -80,
         425
       ],
       "id": "fbc4ca2f-e097-4d45-a24a-208a9b54cce4",
@@ -806,7 +751,7 @@
             },
             {
               "name": "name",
-              "value": "={{ $('view_properties').item.json.address_simple }}"
+              "value": "={{ $('view_properties').item.json.status_emoji }} {{ $('view_properties').item.json.address_simple }}"
             },
             {
               "name": "icon_color",
@@ -819,7 +764,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -300,
+        -520,
         425
       ],
       "id": "05c127cb-36ad-40b8-bd0a-dd06cc182c39",
@@ -842,7 +787,7 @@
             },
             {
               "name": "name",
-              "value": "=🔎 {{ $('view_properties').item.json.address_simple }}"
+              "value": "={{ $('view_properties').item.json.status_emoji }} {{ $('view_properties').item.json.address_simple }}"
             }
           ]
         },
@@ -851,17 +796,35 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -300,
+        -520,
         175
       ],
       "id": "d5653533-25cd-4697-9659-897833dc19ac",
       "name": "/editForumTopic",
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "telegram-property-topic",
+        "responseMode": "lastNode",
+        "responseData": "noData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2280,
+        375
+      ],
+      "id": "2545193b-2bbb-4df0-8715-f03c2dba39bb",
+      "name": "/telegram-property-topic",
+      "webhookId": "3f9043e8-ad23-43ab-8af2-949b6d21a108"
     }
   ],
   "notes": "",
   "pinData": {
-    "/telegram-topic": [
+    "/telegram-property-topic": [
       {
         "json": {
           "headers": {
@@ -889,6 +852,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T11:56:57.732Z",
-  "versionId": "783c4fbe-f8f0-4c6d-8be3-368c9b41687c"
+  "updatedAt": "2025-04-13T13:27:17.272Z",
+  "versionId": "abc6aa4c-a214-4a79-a7b6-b3a271dae917"
 }
