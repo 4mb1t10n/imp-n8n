@@ -212,7 +212,7 @@
     }
   },
   "createdAt": "2025-04-07T23:41:11.388Z",
-  "execution_id": "24457",
+  "execution_id": "24527",
   "id": "kJuxx2RkmykX1XL7",
   "meta": null,
   "name": "/telegram-property-topic",
@@ -809,7 +809,8 @@
               "value": "={{ $('view_properties').item.json.address_simple }}"
             },
             {
-              "name": "icon_emoji_id"
+              "name": "icon_color",
+              "value": "0x6FB9F0"
             }
           ]
         },
@@ -841,11 +842,7 @@
             },
             {
               "name": "name",
-              "value": "={{ $('view_properties').item.json.address_simple }}"
-            },
-            {
-              "name": "icon_emoji_id",
-              "value": "0"
+              "value": "=🔎 {{ $('view_properties').item.json.address_simple }}"
             }
           ]
         },
@@ -892,6 +889,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T00:00:11.292Z",
-  "versionId": "0c97fece-88ce-4619-bf85-a2fb99859d9d"
+  "updatedAt": "2025-04-13T11:56:57.732Z",
+  "versionId": "783c4fbe-f8f0-4c6d-8be3-368c9b41687c"
 }
