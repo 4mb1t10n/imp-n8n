@@ -49,21 +49,58 @@
       "main": [
         [
           {
-            "node": "hasTopic?",
+            "node": "Switch",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "view_users": {
+    "updateRealtorTopic?": {
       "main": [
+        [
+          {
+            "node": "topicExists?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "/closeForumTopic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "topicExists?": {
+      "main": [
+        [],
         []
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "updateRealtorTopic?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "logic here",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
   "createdAt": "2025-04-10T23:17:08.415Z",
-  "execution_id": "24527",
+  "execution_id": "24577",
   "id": "IYI2oAiiYaDMBc5r",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -80,7 +117,7 @@
       "typeVersion": 2,
       "position": [
         0,
-        -40
+        -5
       ],
       "id": "1cecc921-1d4b-423e-bbe7-a401b4e0e425",
       "name": "/telegram-property-notification",
@@ -115,7 +152,7 @@
       "typeVersion": 2.2,
       "position": [
         220,
-        -40
+        -5
       ],
       "id": "8be6a8c3-5849-439c-9cae-f41005dccce4",
       "name": "host"
@@ -127,7 +164,7 @@
             {
               "id": "496e815b-0525-4699-b29c-5103a448fb52",
               "name": "property_id",
-              "value": "={{ $json.query.property_id }}",
+              "value": "=800",
               "type": "string"
             },
             {
@@ -162,7 +199,7 @@
       "typeVersion": 3.4,
       "position": [
         440,
-        -40
+        -5
       ],
       "id": "adc3e8a2-717a-45a4-8c18-ff12da15a189",
       "name": "inputs"
@@ -182,7 +219,7 @@
       "typeVersion": 1,
       "position": [
         660,
-        -40
+        -5
       ],
       "id": "5e3a2831-656e-4ef8-8ab0-1c64f4bf23a4",
       "name": "property_id"
@@ -204,38 +241,10 @@
       "typeVersion": 1,
       "position": [
         880,
-        -40
+        -5
       ],
       "id": "af88bce2-541f-4227-9fef-7cd185dd03d6",
       "name": "view_properties",
-      "credentials": {
-        "supabaseApi": {
-          "id": "hN8Yj6BvjJqfKMnH",
-          "name": "Rent Ready Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "tableId": "view_users",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "email",
-              "keyValue": "={{ $('inputs').item.json.updated_by }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        0,
-        220
-      ],
-      "id": "56b19509-f708-4e39-8303-d9fdab71cd3e",
-      "name": "view_users",
       "credentials": {
         "supabaseApi": {
           "id": "hN8Yj6BvjJqfKMnH",
@@ -249,44 +258,176 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "loose",
+            "typeValidation": "strict",
             "version": 2
           },
           "conditions": [
             {
-              "id": "f96e1776-fd7c-4311-877c-72c5765169e6",
-              "leftValue": "={{ $json.telegram_realtor_forum }}",
-              "rightValue": "",
+              "id": "02fb6b80-7dd1-495b-ac89-ab95909e4751",
+              "leftValue": "={{ $('get status').item.json.update_realtor_topic }}",
+              "rightValue": "Purchased",
               "operator": {
-                "type": "string",
-                "operation": "notEmpty",
+                "type": "boolean",
+                "operation": "true",
                 "singleValue": true
               }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        -105
+      ],
+      "id": "07ac4f9f-8ceb-45df-8076-a715bb37934f",
+      "name": "updateRealtorTopic?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/closeForumTopic",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "=-100{{ $('view_properties').item.json.telegram_realtor_forum }}"
             },
             {
-              "id": "717d2c12-491b-4f56-b855-f96b02723eff",
-              "leftValue": "={{ $json.telegram_realtor_topic_id }}",
+              "name": "message_thread_id",
+              "value": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        -5
+      ],
+      "id": "45b8654c-fa39-4f14-a61e-490b17fb92df",
+      "name": "/closeForumTopic"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "bbcc66a2-94c1-4ac3-a4af-cc0d6c2f3613",
+              "leftValue": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}",
               "rightValue": "",
               "operator": {
-                "type": "string",
-                "operation": "notEmpty",
+                "type": "number",
+                "operation": "exists",
                 "singleValue": true
               }
             }
           ],
           "combinator": "and"
         },
-        "looseTypeValidation": true,
         "options": {}
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1100,
-        -40
+        1540,
+        -205
       ],
-      "id": "29b6e289-f8c3-448f-bb0f-d8f7f71e070f",
-      "name": "hasTopic?"
+      "id": "19d80b81-8983-4959-a764-c521cb652424",
+      "name": "topicExists?"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('view_properties').item.json.realtor_assigned != null && $('view_properties').item.json.telegram_realtor_forum != null}}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "6262d907-2b9c-4440-856b-6b17547aa272"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "realtor"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f72e8246-1f49-41a1-9626-27e8a77b9e83",
+                    "leftValue": "={{ $('view_properties').item.json.telegram_internal_forum }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "number",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "internal"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1100,
+        -5
+      ],
+      "id": "08c5f122-86f3-45e4-b72b-1dbc410fa96a",
+      "name": "Switch"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        95
+      ],
+      "id": "55c618c3-ccc9-4e65-a138-353145397a72",
+      "name": "logic here"
     }
   ],
   "notes": "",
@@ -323,6 +464,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T00:01:34.876Z",
-  "versionId": "68eb66d9-3de4-4e00-bcc4-651f6b2bb384"
+  "updatedAt": "2025-04-13T13:47:02.977Z",
+  "versionId": "25de6158-81eb-4610-b72b-77052dc246ab"
 }
