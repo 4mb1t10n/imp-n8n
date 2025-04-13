@@ -128,7 +128,7 @@
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "24608",
+  "execution_id": "24926",
   "id": "PyHxTyacy89NQnpD",
   "meta": null,
   "name": "/supabase-updated-properties",
@@ -439,7 +439,7 @@
             {
               "id": "8c3a239b-8860-4931-ab0b-98575ce3f413",
               "leftValue": "={{ $json.updated_column }}",
-              "rightValue": "is_pending",
+              "rightValue": "contingent_listing_type",
               "operator": {
                 "type": "string",
                 "operation": "equals",
@@ -450,6 +450,16 @@
               "id": "de87c68d-2e3f-4b0a-9225-f3aaf99eb57c",
               "leftValue": "={{ $json.updated_column }}",
               "rightValue": "followup_notes",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "497626f9-60a2-4bf7-a123-14e69a501bd5",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "property_status",
               "operator": {
                 "type": "string",
                 "operation": "equals",
@@ -758,11 +768,13 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T12:20:08.777Z",
-  "versionId": "eccaa683-60fd-47ea-a46b-dac62a2bdd06"
+  "updatedAt": "2025-04-13T17:29:29.780Z",
+  "versionId": "40dc686f-e257-4209-84de-5b2752e7f50f"
 }
