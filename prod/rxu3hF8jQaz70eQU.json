@@ -135,7 +135,7 @@
     }
   },
   "createdAt": "2025-04-10T23:03:39.829Z",
-  "execution_id": "24608",
+  "execution_id": "24926",
   "id": "rxu3hF8jQaz70eQU",
   "meta": null,
   "name": "/scrape-all & /scrape-property",
@@ -478,7 +478,9 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
   },
   "staticData": {
     "node:chron": {
@@ -489,6 +491,6 @@
   },
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-04-10T23:08:36.233Z",
-  "versionId": "1a167542-61e5-406a-b445-527f142e128c"
+  "updatedAt": "2025-04-13T17:11:12.485Z",
+  "versionId": "770247ac-7e94-46ae-909e-e2b98a08bd61"
 }
