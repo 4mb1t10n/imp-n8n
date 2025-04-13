@@ -78,7 +78,7 @@
       "main": [
         [
           {
-            "node": "updateRealtor?",
+            "node": "updateRealtor",
             "type": "main",
             "index": 0
           }
@@ -90,18 +90,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "updateRealtor?": {
-      "main": [
-        [
-          {
-            "node": "topicExists?",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
       ]
     },
     "notificationMessage": {
@@ -136,10 +124,21 @@
           }
         ]
       ]
+    },
+    "updateRealtor": {
+      "main": [
+        [
+          {
+            "node": "topicExists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-10T23:17:08.415Z",
-  "execution_id": "24608",
+  "execution_id": "24926",
   "id": "IYI2oAiiYaDMBc5r",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -408,46 +407,12 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "02fb6b80-7dd1-495b-ac89-ab95909e4751",
-              "leftValue": "={{ $('view_properties').item.json.update_realtor_topic }}",
-              "rightValue": "Purchased",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        1540,
-        -320
-      ],
-      "id": "07ac4f9f-8ceb-45df-8076-a715bb37934f",
-      "name": "updateRealtor?"
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
               "id": "c1db4e89-a671-404d-8faa-0e7093adba27",
               "name": "notificationMessage",
-              "value": "={{ $('inputs').item.json.updated_column\n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ')\n}} ➡️ {{ $('inputs').item.json.updated_value  \n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ') }}",
+              "value": "={{ $('inputs').item.json.updated_column\n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ')\n}} ➡️ {{ $('inputs').item.json.updated_value  \n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ') }}\nby: {{ $('inputs').item.json.updated_by }}",
               "type": "string"
             }
           ]
@@ -566,6 +531,40 @@
           "name": "Rent Ready Supabase"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "57088120-5090-460c-86eb-40f9c19f5880",
+              "leftValue": "={{ $('view_properties').item.json.update_realtor_topic }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1540,
+        -320
+      ],
+      "id": "92de3122-0de6-4e59-a65c-d8e87a35b560",
+      "name": "updateRealtor"
     }
   ],
   "notes": "",
@@ -597,11 +596,13 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T16:00:25.579Z",
-  "versionId": "2cca21a6-95db-4517-9595-bbf37d104cb1"
+  "updatedAt": "2025-04-13T17:21:33.618Z",
+  "versionId": "61aafd5b-79b4-4fa0-8085-a34eb3aa01e9"
 }
