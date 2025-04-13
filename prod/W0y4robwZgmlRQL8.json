@@ -191,7 +191,7 @@
       "main": [
         [
           {
-            "node": "inputs",
+            "node": "hasUrl?",
             "type": "main",
             "index": 0
           }
@@ -202,7 +202,7 @@
       "main": [
         [
           {
-            "node": "hasUrl?",
+            "node": "process-property",
             "type": "main",
             "index": 0
           }
@@ -257,7 +257,7 @@
       "main": [
         [
           {
-            "node": "process-property",
+            "node": "inputs",
             "type": "main",
             "index": 0
           }
@@ -277,7 +277,7 @@
     }
   },
   "createdAt": "2025-04-07T23:39:17.248Z",
-  "execution_id": "25221",
+  "execution_id": "25347",
   "id": "W0y4robwZgmlRQL8",
   "meta": null,
   "name": "/apify-completed",
@@ -344,7 +344,7 @@
       "typeVersion": 2,
       "position": [
         740,
-        760
+        745
       ],
       "id": "779e3a3a-14e6-4572-8b9a-c004d3909ee0",
       "name": "UUID"
@@ -387,7 +387,7 @@
       "typeVersion": 1,
       "position": [
         1400,
-        760
+        745
       ],
       "id": "c7e4261f-9d94-4ae3-855a-3a8ca6e5a0d2",
       "name": "Insert media",
@@ -423,7 +423,7 @@
       "typeVersion": 1,
       "position": [
         300,
-        760
+        745
       ],
       "id": "7f0fafad-9fe7-4605-88cd-9913bedba819",
       "name": "Check if URL exists",
@@ -560,7 +560,7 @@
       "typeVersion": 1.1,
       "position": [
         -140,
-        760
+        745
       ],
       "id": "87650190-244d-46c7-ad30-d1ab889097ca",
       "name": "/save-photos"
@@ -873,7 +873,7 @@
       "typeVersion": 1,
       "position": [
         1180,
-        440
+        435
       ],
       "id": "350733d1-b54a-4d5e-90db-dfcafcd351d0",
       "name": "Update by Address",
@@ -900,7 +900,7 @@
       "typeVersion": 1.2,
       "position": [
         1620,
-        500
+        485
       ],
       "id": "14cc168c-d191-4235-9106-4f02a8de581a",
       "name": "S8 Notifications1",
@@ -1020,7 +1020,7 @@
       "typeVersion": 2.2,
       "position": [
         1400,
-        440
+        435
       ],
       "id": "f4bad5e6-3225-42dc-a219-3a6d81f48643",
       "name": "hasData?"
@@ -1067,6 +1067,9 @@
             {
               "key": "w",
               "value": "process-property"
+            },
+            {
+              "key": "address"
             }
           ]
         }
@@ -1074,7 +1077,7 @@
       "type": "n8n-nodes-base.executionData",
       "typeVersion": 1,
       "position": [
-        80,
+        300,
         360
       ],
       "id": "ad22656a-1881-4dc5-aa90-5ac20a071a4d",
@@ -1089,7 +1092,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        300,
+        80,
         360
       ],
       "id": "86dbde64-1df3-4702-ab85-d8125ee98c6e",
@@ -1125,7 +1128,7 @@
       "typeVersion": 2.2,
       "position": [
         520,
-        760
+        745
       ],
       "id": "793b5311-7632-4086-b70b-e26ebcd293d5",
       "name": "addedRecord"
@@ -1139,7 +1142,7 @@
       "typeVersion": 4.2,
       "position": [
         960,
-        760
+        745
       ],
       "id": "ae98b557-0a43-4901-94cf-7ba1907ea5e2",
       "name": "GetImage",
@@ -1170,7 +1173,7 @@
       "typeVersion": 4.2,
       "position": [
         1180,
-        760
+        745
       ],
       "id": "082b0398-d582-471c-b992-de5c0ca9c041",
       "name": "bucketUpload",
@@ -1196,7 +1199,7 @@
       "typeVersion": 1,
       "position": [
         80,
-        760
+        745
       ],
       "id": "ad36f690-2122-4ab9-b8c4-621d4236dcae",
       "name": "save-photos"
@@ -1550,6 +1553,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-04-13T18:18:42.918Z",
-  "versionId": "2b869696-842d-44f1-a1ae-4a919ee68856"
+  "updatedAt": "2025-04-13T21:04:22.741Z",
+  "versionId": "051516e0-dc62-4c52-9191-31e4bff9ba24"
 }
