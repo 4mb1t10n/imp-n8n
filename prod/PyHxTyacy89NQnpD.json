@@ -54,7 +54,7 @@
       "main": [
         [
           {
-            "node": "Filter",
+            "node": "updated_column",
             "type": "main",
             "index": 0
           }
@@ -70,7 +70,7 @@
       "main": [
         [
           {
-            "node": "scrape-photos",
+            "node": "flow: scrape-photos",
             "type": "main",
             "index": 0
           }
@@ -81,29 +81,7 @@
       "main": [
         [
           {
-            "node": "updated_columm",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "scrape-photos": {
-      "main": [
-        [
-          {
-            "node": "/scrape-property",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "updated_columm": {
-      "main": [
-        [
-          {
-            "node": "/telegram-property-notification",
+            "node": "flow: notification",
             "type": "main",
             "index": 0
           }
@@ -125,10 +103,43 @@
           }
         ]
       ]
+    },
+    "updated_column": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "flow: notification": {
+      "main": [
+        [
+          {
+            "node": "/telegram-property-notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "flow: scrape-photos": {
+      "main": [
+        [
+          {
+            "node": "/scrape-property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "25221",
+  "execution_id": "25347",
   "id": "PyHxTyacy89NQnpD",
   "meta": null,
   "name": "/supabase-updated-properties",
@@ -170,7 +181,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -300,
+        -80,
         -420
       ],
       "credentials": {
@@ -237,7 +248,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.1,
       "position": [
-        -520,
+        -300,
         -420
       ]
     },
@@ -336,31 +347,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        360,
+        580,
         -320
       ],
       "id": "fec0e4f8-b405-4857-8fbb-17ef77c1df09",
       "name": "/scrape-property"
-    },
-    {
-      "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "scrape-photos",
-              "value": "true"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
-      "position": [
-        140,
-        -320
-      ],
-      "id": "95cb91d9-2044-4a76-b1f0-e381dc6a1df4",
-      "name": "scrape-photos"
     },
     {
       "parameters": {
@@ -390,7 +381,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        -80,
+        140,
         -320
       ],
       "id": "4d1c62e4-3015-4233-8253-a9e236481f54",
@@ -474,31 +465,11 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        -80,
+        140,
         -520
       ],
       "id": "f737dbc9-c7c8-4643-ad21-efc2d904089c",
       "name": "otherColumns"
-    },
-    {
-      "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "=updated_columm",
-              "value": "={{ $json.updated_column }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
-      "position": [
-        140,
-        -520
-      ],
-      "id": "32fc4870-f896-4782-a26e-ae557abeb226",
-      "name": "updated_columm"
     },
     {
       "parameters": {
@@ -534,7 +505,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        360,
+        580,
         -520
       ],
       "id": "54ad451e-289b-4a8f-ab13-5247a15e8a5d",
@@ -562,6 +533,68 @@
           "name": "Supabase Imposbl Header Auth"
         }
       }
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "updated_column",
+              "value": "={{ $json.updated_column }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        -420
+      ],
+      "id": "a6785fea-5487-4abd-89c3-68fcf81accc6",
+      "name": "updated_column"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "=flow",
+              "value": "=notification"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        360,
+        -520
+      ],
+      "id": "32fc4870-f896-4782-a26e-ae557abeb226",
+      "name": "flow: notification",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "flow",
+              "value": "scrape-photos"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        360,
+        -320
+      ],
+      "id": "95cb91d9-2044-4a76-b1f0-e381dc6a1df4",
+      "name": "flow: scrape-photos",
+      "notesInFlow": true
     }
   ],
   "notes": "",
@@ -775,6 +808,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T17:29:29.780Z",
-  "versionId": "40dc686f-e257-4209-84de-5b2752e7f50f"
+  "updatedAt": "2025-04-13T21:18:24.167Z",
+  "versionId": "c5996f47-db6b-44d6-baf7-c073c5f5a33e"
 }
