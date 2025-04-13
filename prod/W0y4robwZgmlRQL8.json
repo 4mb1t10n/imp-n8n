@@ -277,7 +277,7 @@
     }
   },
   "createdAt": "2025-04-07T23:39:17.248Z",
-  "execution_id": "24608",
+  "execution_id": "24926",
   "id": "W0y4robwZgmlRQL8",
   "meta": null,
   "name": "/apify-completed",
@@ -569,15 +569,14 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "5l82Xz5lpYQrrg5V",
-          "mode": "list",
-          "cachedResultName": "Properties"
+          "value": "W0y4robwZgmlRQL8",
+          "mode": "id"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
           "value": {
-            "photo_url": "={{ $json.photo_url }}",
-            "property_id": "={{ $json.property_id }}"
+            "property_id": "={{ $json.property_id }}",
+            "photo_url": "={{ $json.photo_url }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -588,8 +587,7 @@
               "defaultMatch": false,
               "display": true,
               "canBeUsedToMatch": true,
-              "type": "number",
-              "removed": false
+              "type": "number"
             },
             {
               "id": "photo_url",
@@ -598,8 +596,7 @@
               "defaultMatch": false,
               "display": true,
               "canBeUsedToMatch": true,
-              "type": "string",
-              "removed": false
+              "type": "string"
             }
           ],
           "attemptToConvertTypes": false,
@@ -607,7 +604,7 @@
         },
         "mode": "each",
         "options": {
-          "waitForSubWorkflow": false
+          "waitForSubWorkflow": true
         }
       },
       "type": "n8n-nodes-base.executeWorkflow",
@@ -1277,523 +1274,6 @@
   ],
   "notes": "",
   "pinData": {
-    "process-property": [
-      {
-        "json": {
-          "headers": {
-            "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
-            "content-type": "application/json",
-            "user-agent": "axios/1.7.4",
-            "content-length": "6128",
-            "accept-encoding": "gzip, compress, deflate, br",
-            "host": "n8n.railway.internal:5678",
-            "connection": "keep-alive"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "propery": {
-              "streetAddress": "1402 Western Ave",
-              "city": "Toledo",
-              "state": "OH",
-              "zipcode": "43609",
-              "bedrooms": 3,
-              "bathrooms": 1,
-              "yearBuilt": 1902,
-              "livingArea": 1217,
-              "lotSize": 3598,
-              "price": 74500,
-              "lastSoldPrice": 27000,
-              "priceChange": null,
-              "priceChangeDateString": null,
-              "propertyTaxRate": 1.63,
-              "homeType": "SINGLE_FAMILY",
-              "homeStatus": "FOR_SALE",
-              "keystoneHomeStatus": "ForSale",
-              "listing_sub_type": {
-                "is_forAuction": false,
-                "is_newHome": false,
-                "is_FSBO": false,
-                "is_FSBA": true,
-                "is_foreclosure": false,
-                "is_bankOwned": false,
-                "is_comingSoon": false,
-                "is_pending": false,
-                "is_openHouse": false
-              },
-              "contingentListingType": null,
-              "description": "Charming home with 12ft ceilings, original woodwork, and hardwood floors ready for refinishing. Updated kitchen with tile and cork laminate counters. New sewer & gas lines. Detached 1-car garage with workbench. Small back deck, brick front porch, vinyl siding. Unfinished basement with shower, sink, laundry hookups. Newer furnace motherboard & hot water tank. Attic access. Electrical system coded. Shingle roof (approx. 10 yrs).",
-              "virtualTourUrl": "https://www.propertypanorama.com/instaview/toledo/6127720",
-              "mlsid": "6127720",
-              "parcelId": "1420291",
-              "zpid": 34678319,
-              "hdpUrl": "/homedetails/1402-Western-Ave-Toledo-OH-43609/34678319_zpid/",
-              "daysOnZillow": 4,
-              "datePostedString": "2025-03-28",
-              "originalPhotos": [
-                {
-                  "caption": "",
-                  "mixedSources": {
-                    "jpeg": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-d_d.jpg",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-o_a.jpg",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1344_1008.jpg",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1536_1152.jpg",
-                        "width": 1536
-                      }
-                    ],
-                    "webp": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-d_d.webp",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-o_a.webp",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1344_1008.webp",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1536_1152.webp",
-                        "width": 1536
-                      }
-                    ]
-                  }
-                },
-                {
-                  "caption": "",
-                  "mixedSources": {
-                    "jpeg": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-d_d.jpg",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-o_a.jpg",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1344_1008.jpg",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1536_1152.jpg",
-                        "width": 1536
-                      }
-                    ],
-                    "webp": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-d_d.webp",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-o_a.webp",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1344_1008.webp",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1536_1152.webp",
-                        "width": 1536
-                      }
-                    ]
-                  }
-                },
-                {
-                  "caption": "",
-                  "mixedSources": {
-                    "jpeg": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-d_d.jpg",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-o_a.jpg",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1344_1008.jpg",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1536_1152.jpg",
-                        "width": 1536
-                      }
-                    ],
-                    "webp": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-d_d.webp",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-o_a.webp",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1344_1008.webp",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1536_1152.webp",
-                        "width": 1536
-                      }
-                    ]
-                  }
-                },
-                {
-                  "caption": "",
-                  "mixedSources": {
-                    "jpeg": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-d_d.jpg",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-o_a.jpg",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1344_1008.jpg",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1536_1152.jpg",
-                        "width": 1536
-                      }
-                    ],
-                    "webp": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-d_d.webp",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-o_a.webp",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1344_1008.webp",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1536_1152.webp",
-                        "width": 1536
-                      }
-                    ]
-                  }
-                },
-                {
-                  "caption": "",
-                  "mixedSources": {
-                    "jpeg": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-d_d.jpg",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-o_a.jpg",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1344_1008.jpg",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1536_1152.jpg",
-                        "width": 1536
-                      }
-                    ],
-                    "webp": [
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-d_d.webp",
-                        "width": 800
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-o_a.webp",
-                        "width": 1024
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1344_1008.webp",
-                        "width": 1344
-                      },
-                      {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1536_1152.webp",
-                        "width": 1536
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          "webhookUrl": "https://s8s.up.railway.app/webhook/process-apify-property",
-          "executionMode": "production"
-        }
-      }
-    ],
-    "inputs": [
-      {
-        "json": {
-          "streetAddress": "1402 Western Ave",
-          "city": "Toledo",
-          "state": "OH",
-          "zipcode": "43609",
-          "bedrooms": 3,
-          "bathrooms": 1,
-          "yearBuilt": 1902,
-          "livingArea": 1217,
-          "lotSize": 3598,
-          "price": 74500,
-          "lastSoldPrice": 27000,
-          "priceChange": null,
-          "priceChangeDateString": null,
-          "propertyTaxRate": 1.63,
-          "homeType": "SINGLE_FAMILY",
-          "homeStatus": "FOR_SALE",
-          "keystoneHomeStatus": "ForSale",
-          "listing_sub_type": {
-            "is_forAuction": false,
-            "is_newHome": false,
-            "is_FSBO": false,
-            "is_FSBA": true,
-            "is_foreclosure": false,
-            "is_bankOwned": false,
-            "is_comingSoon": false,
-            "is_pending": false,
-            "is_openHouse": false
-          },
-          "contingentListingType": null,
-          "description": "Charming home with 12ft ceilings, original woodwork, and hardwood floors ready for refinishing. Updated kitchen with tile and cork laminate counters. New sewer & gas lines. Detached 1-car garage with workbench. Small back deck, brick front porch, vinyl siding. Unfinished basement with shower, sink, laundry hookups. Newer furnace motherboard & hot water tank. Attic access. Electrical system coded. Shingle roof (approx. 10 yrs).",
-          "virtualTourUrl": "https://www.propertypanorama.com/instaview/toledo/6127720",
-          "mlsid": "6127720",
-          "parcelId": "1420291",
-          "zpid": 34678319,
-          "hdpUrl": "/homedetails/1402-Western-Ave-Toledo-OH-43609/34678319_zpid/",
-          "daysOnZillow": 4,
-          "datePostedString": "2025-03-28",
-          "originalPhotos": [
-            {
-              "caption": "",
-              "mixedSources": {
-                "jpeg": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-d_d.jpg",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-o_a.jpg",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1344_1008.jpg",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1536_1152.jpg",
-                    "width": 1536
-                  }
-                ],
-                "webp": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-d_d.webp",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-o_a.webp",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1344_1008.webp",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1536_1152.webp",
-                    "width": 1536
-                  }
-                ]
-              }
-            },
-            {
-              "caption": "",
-              "mixedSources": {
-                "jpeg": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-d_d.jpg",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-o_a.jpg",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1344_1008.jpg",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1536_1152.jpg",
-                    "width": 1536
-                  }
-                ],
-                "webp": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-d_d.webp",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-o_a.webp",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1344_1008.webp",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1536_1152.webp",
-                    "width": 1536
-                  }
-                ]
-              }
-            },
-            {
-              "caption": "",
-              "mixedSources": {
-                "jpeg": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-d_d.jpg",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-o_a.jpg",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1344_1008.jpg",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1536_1152.jpg",
-                    "width": 1536
-                  }
-                ],
-                "webp": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-d_d.webp",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-o_a.webp",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1344_1008.webp",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1536_1152.webp",
-                    "width": 1536
-                  }
-                ]
-              }
-            },
-            {
-              "caption": "",
-              "mixedSources": {
-                "jpeg": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-d_d.jpg",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-o_a.jpg",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1344_1008.jpg",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1536_1152.jpg",
-                    "width": 1536
-                  }
-                ],
-                "webp": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-d_d.webp",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-o_a.webp",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1344_1008.webp",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1536_1152.webp",
-                    "width": 1536
-                  }
-                ]
-              }
-            },
-            {
-              "caption": "",
-              "mixedSources": {
-                "jpeg": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-d_d.jpg",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-o_a.jpg",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1344_1008.jpg",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1536_1152.jpg",
-                    "width": 1536
-                  }
-                ],
-                "webp": [
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-d_d.webp",
-                    "width": 800
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-o_a.webp",
-                    "width": 1024
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1344_1008.webp",
-                    "width": 1344
-                  },
-                  {
-                    "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1536_1152.webp",
-                    "width": 1536
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      }
-    ],
     "/process-apify-property": [
       {
         "json": {
@@ -1801,7 +1281,7 @@
             "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
             "content-type": "application/json",
             "user-agent": "axios/1.7.4",
-            "content-length": "6128",
+            "content-length": "5982",
             "accept-encoding": "gzip, compress, deflate, br",
             "host": "n8n.railway.internal:5678",
             "connection": "keep-alive"
@@ -1810,23 +1290,23 @@
           "query": {},
           "body": {
             "propery": {
-              "streetAddress": "1402 Western Ave",
+              "streetAddress": "3603 Anderson Pkwy",
               "city": "Toledo",
               "state": "OH",
-              "zipcode": "43609",
+              "zipcode": "43613",
               "bedrooms": 3,
               "bathrooms": 1,
-              "yearBuilt": 1902,
-              "livingArea": 1217,
-              "lotSize": 3598,
-              "price": 74500,
-              "lastSoldPrice": 27000,
+              "yearBuilt": 1950,
+              "livingArea": 1391,
+              "lotSize": 5000,
+              "price": 25000,
+              "lastSoldPrice": 34000,
               "priceChange": null,
               "priceChangeDateString": null,
               "propertyTaxRate": 1.63,
               "homeType": "SINGLE_FAMILY",
-              "homeStatus": "FOR_SALE",
-              "keystoneHomeStatus": "ForSale",
+              "homeStatus": "PENDING",
+              "keystoneHomeStatus": "Pending",
               "listing_sub_type": {
                 "is_forAuction": false,
                 "is_newHome": false,
@@ -1835,55 +1315,55 @@
                 "is_foreclosure": false,
                 "is_bankOwned": false,
                 "is_comingSoon": false,
-                "is_pending": false,
+                "is_pending": true,
                 "is_openHouse": false
               },
               "contingentListingType": null,
-              "description": "Charming home with 12ft ceilings, original woodwork, and hardwood floors ready for refinishing. Updated kitchen with tile and cork laminate counters. New sewer & gas lines. Detached 1-car garage with workbench. Small back deck, brick front porch, vinyl siding. Unfinished basement with shower, sink, laundry hookups. Newer furnace motherboard & hot water tank. Attic access. Electrical system coded. Shingle roof (approx. 10 yrs).",
-              "virtualTourUrl": "https://www.propertypanorama.com/instaview/toledo/6127720",
-              "mlsid": "6127720",
-              "parcelId": "1420291",
-              "zpid": 34678319,
-              "hdpUrl": "/homedetails/1402-Western-Ave-Toledo-OH-43609/34678319_zpid/",
-              "daysOnZillow": 4,
-              "datePostedString": "2025-03-28",
+              "description": "Investor Special! Severely fire damaged house in need of complete renovation top to bottom. All brick home with 2-car detached garage. Garage was not affected by the fire. HOLD HARMLESS AGREEMENT REQUIRED...MULTIPLE OFFERS RECEIVED...HIGHES & BEST DUE BY MON. APRIL 7TH, 2025 @ 5 PM",
+              "virtualTourUrl": "https://www.propertypanorama.com/instaview/toledo/6127977",
+              "mlsid": "6127977",
+              "parcelId": "1655517",
+              "zpid": 34687528,
+              "hdpUrl": "/homedetails/3603-Anderson-Pkwy-Toledo-OH-43613/34687528_zpid/",
+              "daysOnZillow": 9,
+              "datePostedString": "2025-04-03",
               "originalPhotos": [
                 {
                   "caption": "",
                   "mixedSources": {
                     "jpeg": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-d_d.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-d_d.jpg",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-o_a.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-o_a.jpg",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1344_1008.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-uncropped_scaled_within_1344_1008.jpg",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1536_1152.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-uncropped_scaled_within_1536_1152.jpg",
                         "width": 1536
                       }
                     ],
                     "webp": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-d_d.webp",
+                        "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-d_d.webp",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-o_a.webp",
+                        "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-o_a.webp",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1344_1008.webp",
+                        "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-uncropped_scaled_within_1344_1008.webp",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/0d9c33a31560d55b143a758cd754be17-uncropped_scaled_within_1536_1152.webp",
+                        "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-uncropped_scaled_within_1536_1152.webp",
                         "width": 1536
                       }
                     ]
@@ -1894,37 +1374,37 @@
                   "mixedSources": {
                     "jpeg": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-d_d.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-d_d.jpg",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-o_a.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-o_a.jpg",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1344_1008.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-uncropped_scaled_within_1344_1008.jpg",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1536_1152.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-uncropped_scaled_within_1536_1152.jpg",
                         "width": 1536
                       }
                     ],
                     "webp": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-d_d.webp",
+                        "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-d_d.webp",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-o_a.webp",
+                        "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-o_a.webp",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1344_1008.webp",
+                        "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-uncropped_scaled_within_1344_1008.webp",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/c57417f1557e0ac4fa4c92a289b446cd-uncropped_scaled_within_1536_1152.webp",
+                        "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-uncropped_scaled_within_1536_1152.webp",
                         "width": 1536
                       }
                     ]
@@ -1935,37 +1415,37 @@
                   "mixedSources": {
                     "jpeg": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-d_d.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-d_d.jpg",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-o_a.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-o_a.jpg",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1344_1008.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-uncropped_scaled_within_1344_1008.jpg",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1536_1152.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-uncropped_scaled_within_1536_1152.jpg",
                         "width": 1536
                       }
                     ],
                     "webp": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-d_d.webp",
+                        "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-d_d.webp",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-o_a.webp",
+                        "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-o_a.webp",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1344_1008.webp",
+                        "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-uncropped_scaled_within_1344_1008.webp",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8087a406dc1d2c5efd9b17a43f9678e0-uncropped_scaled_within_1536_1152.webp",
+                        "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-uncropped_scaled_within_1536_1152.webp",
                         "width": 1536
                       }
                     ]
@@ -1976,37 +1456,37 @@
                   "mixedSources": {
                     "jpeg": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-d_d.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-d_d.jpg",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-o_a.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-o_a.jpg",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1344_1008.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-uncropped_scaled_within_1344_1008.jpg",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1536_1152.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-uncropped_scaled_within_1536_1152.jpg",
                         "width": 1536
                       }
                     ],
                     "webp": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-d_d.webp",
+                        "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-d_d.webp",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-o_a.webp",
+                        "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-o_a.webp",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1344_1008.webp",
+                        "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-uncropped_scaled_within_1344_1008.webp",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/8dbe8123af291fa5ff78f582137b7667-uncropped_scaled_within_1536_1152.webp",
+                        "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-uncropped_scaled_within_1536_1152.webp",
                         "width": 1536
                       }
                     ]
@@ -2017,37 +1497,37 @@
                   "mixedSources": {
                     "jpeg": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-d_d.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-d_d.jpg",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-o_a.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-o_a.jpg",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1344_1008.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-uncropped_scaled_within_1344_1008.jpg",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1536_1152.jpg",
+                        "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-uncropped_scaled_within_1536_1152.jpg",
                         "width": 1536
                       }
                     ],
                     "webp": [
                       {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-d_d.webp",
+                        "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-d_d.webp",
                         "width": 800
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-o_a.webp",
+                        "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-o_a.webp",
                         "width": 1024
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1344_1008.webp",
+                        "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-uncropped_scaled_within_1344_1008.webp",
                         "width": 1344
                       },
                       {
-                        "url": "https://photos.zillowstatic.com/fp/94a659603e5fdab1519d37b1f50e48b3-uncropped_scaled_within_1536_1152.webp",
+                        "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-uncropped_scaled_within_1536_1152.webp",
                         "width": 1536
                       }
                     ]
@@ -2063,11 +1543,13 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-04-13T13:32:49.126Z",
-  "versionId": "740e5a9c-6c22-4a01-ad80-62cd69a173ee"
+  "updatedAt": "2025-04-13T16:42:45.481Z",
+  "versionId": "53c797cd-de3e-4cae-9129-d205713870f4"
 }
