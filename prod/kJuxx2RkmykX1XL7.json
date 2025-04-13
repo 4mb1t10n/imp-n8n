@@ -192,7 +192,7 @@
       "main": [
         [
           {
-            "node": "Inputs",
+            "node": "Wait",
             "type": "main",
             "index": 0
           }
@@ -213,10 +213,21 @@
       "main": [
         []
       ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-07T23:41:11.388Z",
-  "execution_id": "24608",
+  "execution_id": "24926",
   "id": "kJuxx2RkmykX1XL7",
   "meta": null,
   "name": "/telegram-property-topic",
@@ -238,8 +249,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2060,
-        285
+        -1840,
+        295
       ],
       "id": "8323e042-99d0-4c2a-8c66-0861b75c1163",
       "name": "Inputs",
@@ -262,8 +273,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -1620,
-        285
+        -1400,
+        295
       ],
       "id": "a1edb09b-292c-4d38-951b-4e14f9a66284",
       "name": "view_properties",
@@ -287,8 +298,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -300,
-        335
+        -80,
+        345
       ],
       "id": "311d3daa-1f45-4f69-b7e2-cd446089654a",
       "name": "sendMessage",
@@ -317,8 +328,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1400,
-        285
+        -1180,
+        295
       ],
       "id": "c687ada1-0e04-4ddb-b115-ec2880951a42",
       "name": "pinned message"
@@ -337,8 +348,8 @@
       "type": "n8n-nodes-base.executionData",
       "typeVersion": 1,
       "position": [
-        -1840,
-        285
+        -1620,
+        295
       ],
       "id": "74fff488-e29c-495c-b0f0-449ffe5da7f0",
       "name": "property_id",
@@ -372,8 +383,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -960,
-        285
+        -740,
+        295
       ],
       "id": "055ce2b6-e590-4b0f-a190-a57335cfdfe3",
       "name": "updateRealtorTopic?"
@@ -400,8 +411,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -740,
-        385
+        -520,
+        395
       ],
       "id": "d366693a-1b0e-426f-bfea-7d3f92f1b254",
       "name": "/closeForumTopic"
@@ -470,8 +481,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        -1180,
-        285
+        -960,
+        295
       ],
       "id": "bee378d7-b6b5-401e-aae6-5c917040cd74",
       "name": "Switch"
@@ -504,8 +515,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -740,
-        185
+        -520,
+        195
       ],
       "id": "041dc680-7008-4df3-9214-6ddd876b5fa8",
       "name": "topicExists?"
@@ -547,8 +558,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -300,
-        85
+        -80,
+        95
       ],
       "id": "a73eed27-9c81-427c-9212-268064191112",
       "name": "pinnedExists?"
@@ -566,8 +577,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        360,
-        85
+        580,
+        95
       ],
       "id": "5e577a8d-59a7-40fa-b93f-8a1ba440225e",
       "name": "sendMessage1",
@@ -601,8 +612,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        140,
-        85
+        360,
+        95
       ],
       "id": "62190780-b777-4b88-94a2-09bfddd05e3a",
       "name": "/unpinAll"
@@ -641,8 +652,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -80,
-        10
+        140,
+        20
       ],
       "id": "8b57966e-6eb4-4de0-8b2c-686a03560236",
       "name": "/editPinnedMessage",
@@ -658,8 +669,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        580,
-        85
+        800,
+        95
       ],
       "id": "4526ac9a-f037-4f88-bb49-d4caa3bcb9e8",
       "name": "pinMessage",
@@ -697,8 +708,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -520,
-        335
+        -300,
+        345
       ],
       "id": "05c127cb-36ad-40b8-bd0a-dd06cc182c39",
       "name": "/createForumTopic"
@@ -729,8 +740,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -520,
-        85
+        -300,
+        95
       ],
       "id": "d5653533-25cd-4697-9659-897833dc19ac",
       "name": "/editForumTopic",
@@ -748,7 +759,7 @@
       "typeVersion": 2,
       "position": [
         -2280,
-        285
+        295
       ],
       "id": "2545193b-2bbb-4df0-8715-f03c2dba39bb",
       "name": "/telegram-property-topic",
@@ -783,8 +794,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        800,
-        85
+        1020,
+        95
       ],
       "id": "858902ea-9df3-4e21-ac39-d243978083ae",
       "name": "update_properties2",
@@ -824,8 +835,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -80,
-        335
+        140,
+        345
       ],
       "id": "fbc4ca2f-e097-4d45-a24a-208a9b54cce4",
       "name": "update_properties3",
@@ -835,6 +846,20 @@
           "name": "Rent Ready Supabase"
         }
       }
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -2060,
+        295
+      ],
+      "id": "61f09ab8-129b-4ac1-8866-ed6d4adfc04b",
+      "name": "Wait",
+      "webhookId": "6d62707a-f297-481e-9c5a-055a8148d93e"
     }
   ],
   "notes": "",
@@ -862,11 +887,13 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T15:58:42.811Z",
-  "versionId": "6ffb6f3d-8f5d-4f3d-80af-8f38d6b8c6b7"
+  "updatedAt": "2025-04-13T17:19:59.865Z",
+  "versionId": "ef49f67d-a4bb-4197-9769-d3b2e49393ae"
 }
