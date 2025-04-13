@@ -27,7 +27,7 @@
       "main": [
         [
           {
-            "node": "updatePropertyTable2",
+            "node": "update_properties3",
             "type": "main",
             "index": 0
           }
@@ -147,7 +147,7 @@
       "main": [
         [
           {
-            "node": "updatePropertyTable1",
+            "node": "update_properties2",
             "type": "main",
             "index": 0
           }
@@ -198,10 +198,25 @@
           }
         ]
       ]
+    },
+    "/closeForumTopic": {
+      "main": [
+        []
+      ]
+    },
+    "update_properties2": {
+      "main": [
+        []
+      ]
+    },
+    "update_properties3": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2025-04-07T23:41:11.388Z",
-  "execution_id": "24577",
+  "execution_id": "24608",
   "id": "kJuxx2RkmykX1XL7",
   "meta": null,
   "name": "/telegram-property-topic",
@@ -224,7 +239,7 @@
       "typeVersion": 3.4,
       "position": [
         -2060,
-        375
+        285
       ],
       "id": "8323e042-99d0-4c2a-8c66-0861b75c1163",
       "name": "Inputs",
@@ -248,7 +263,7 @@
       "typeVersion": 1,
       "position": [
         -1620,
-        375
+        285
       ],
       "id": "a1edb09b-292c-4d38-951b-4e14f9a66284",
       "name": "view_properties",
@@ -273,7 +288,7 @@
       "typeVersion": 1.2,
       "position": [
         -300,
-        425
+        335
       ],
       "id": "311d3daa-1f45-4f69-b7e2-cd446089654a",
       "name": "sendMessage",
@@ -303,7 +318,7 @@
       "typeVersion": 3.4,
       "position": [
         -1400,
-        375
+        285
       ],
       "id": "c687ada1-0e04-4ddb-b115-ec2880951a42",
       "name": "pinned message"
@@ -323,7 +338,7 @@
       "typeVersion": 1,
       "position": [
         -1840,
-        375
+        285
       ],
       "id": "74fff488-e29c-495c-b0f0-449ffe5da7f0",
       "name": "property_id",
@@ -358,7 +373,7 @@
       "typeVersion": 2.2,
       "position": [
         -960,
-        375
+        285
       ],
       "id": "055ce2b6-e590-4b0f-a190-a57335cfdfe3",
       "name": "updateRealtorTopic?"
@@ -386,7 +401,7 @@
       "typeVersion": 4.2,
       "position": [
         -740,
-        475
+        385
       ],
       "id": "d366693a-1b0e-426f-bfea-7d3f92f1b254",
       "name": "/closeForumTopic"
@@ -456,7 +471,7 @@
       "typeVersion": 3.2,
       "position": [
         -1180,
-        375
+        285
       ],
       "id": "bee378d7-b6b5-401e-aae6-5c917040cd74",
       "name": "Switch"
@@ -490,7 +505,7 @@
       "typeVersion": 2.2,
       "position": [
         -740,
-        275
+        185
       ],
       "id": "041dc680-7008-4df3-9214-6ddd876b5fa8",
       "name": "topicExists?"
@@ -533,7 +548,7 @@
       "typeVersion": 2.2,
       "position": [
         -300,
-        175
+        85
       ],
       "id": "a73eed27-9c81-427c-9212-268064191112",
       "name": "pinnedExists?"
@@ -552,7 +567,7 @@
       "typeVersion": 1.2,
       "position": [
         360,
-        175
+        85
       ],
       "id": "5e577a8d-59a7-40fa-b93f-8a1ba440225e",
       "name": "sendMessage1",
@@ -587,7 +602,7 @@
       "typeVersion": 4.2,
       "position": [
         140,
-        175
+        85
       ],
       "id": "62190780-b777-4b88-94a2-09bfddd05e3a",
       "name": "/unpinAll"
@@ -627,7 +642,7 @@
       "typeVersion": 4.2,
       "position": [
         -80,
-        100
+        10
       ],
       "id": "8b57966e-6eb4-4de0-8b2c-686a03560236",
       "name": "/editPinnedMessage",
@@ -644,7 +659,7 @@
       "typeVersion": 1.2,
       "position": [
         580,
-        175
+        85
       ],
       "id": "4526ac9a-f037-4f88-bb49-d4caa3bcb9e8",
       "name": "pinMessage",
@@ -655,6 +670,89 @@
           "name": "P0m0shnik11_Bot"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/createForumTopic",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "=-100{{ $('view_properties').item.json.telegram_realtor_forum }}"
+            },
+            {
+              "name": "name",
+              "value": "={{ $('view_properties').item.json.status_emoji }} {{ $('view_properties').item.json.address_simple }}"
+            },
+            {
+              "name": "icon_color",
+              "value": "0x6FB9F0"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -520,
+        335
+      ],
+      "id": "05c127cb-36ad-40b8-bd0a-dd06cc182c39",
+      "name": "/createForumTopic"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/editForumTopic",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "=-100{{ $('view_properties').item.json.telegram_realtor_forum }}"
+            },
+            {
+              "name": "message_thread_id",
+              "value": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}"
+            },
+            {
+              "name": "name",
+              "value": "={{ $('view_properties').item.json.status_emoji }} {{ $('view_properties').item.json.address_simple }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -520,
+        85
+      ],
+      "id": "d5653533-25cd-4697-9659-897833dc19ac",
+      "name": "/editForumTopic",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "telegram-property-topic",
+        "responseMode": "lastNode",
+        "responseData": "noData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2280,
+        285
+      ],
+      "id": "2545193b-2bbb-4df0-8715-f03c2dba39bb",
+      "name": "/telegram-property-topic",
+      "webhookId": "3f9043e8-ad23-43ab-8af2-949b6d21a108"
     },
     {
       "parameters": {
@@ -686,10 +784,10 @@
       "typeVersion": 1,
       "position": [
         800,
-        175
+        85
       ],
       "id": "858902ea-9df3-4e21-ac39-d243978083ae",
-      "name": "updatePropertyTable1",
+      "name": "update_properties2",
       "credentials": {
         "supabaseApi": {
           "id": "hN8Yj6BvjJqfKMnH",
@@ -727,99 +825,16 @@
       "typeVersion": 1,
       "position": [
         -80,
-        425
+        335
       ],
       "id": "fbc4ca2f-e097-4d45-a24a-208a9b54cce4",
-      "name": "updatePropertyTable2",
+      "name": "update_properties3",
       "credentials": {
         "supabaseApi": {
           "id": "hN8Yj6BvjJqfKMnH",
           "name": "Rent Ready Supabase"
         }
       }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/createForumTopic",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "chat_id",
-              "value": "=-100{{ $('view_properties').item.json.telegram_realtor_forum }}"
-            },
-            {
-              "name": "name",
-              "value": "={{ $('view_properties').item.json.status_emoji }} {{ $('view_properties').item.json.address_simple }}"
-            },
-            {
-              "name": "icon_color",
-              "value": "0x6FB9F0"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -520,
-        425
-      ],
-      "id": "05c127cb-36ad-40b8-bd0a-dd06cc182c39",
-      "name": "/createForumTopic"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/editForumTopic",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "chat_id",
-              "value": "=-100{{ $('view_properties').item.json.telegram_realtor_forum }}"
-            },
-            {
-              "name": "message_thread_id",
-              "value": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}"
-            },
-            {
-              "name": "name",
-              "value": "={{ $('view_properties').item.json.status_emoji }} {{ $('view_properties').item.json.address_simple }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -520,
-        175
-      ],
-      "id": "d5653533-25cd-4697-9659-897833dc19ac",
-      "name": "/editForumTopic",
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "telegram-property-topic",
-        "responseMode": "lastNode",
-        "responseData": "noData",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -2280,
-        375
-      ],
-      "id": "2545193b-2bbb-4df0-8715-f03c2dba39bb",
-      "name": "/telegram-property-topic",
-      "webhookId": "3f9043e8-ad23-43ab-8af2-949b6d21a108"
     }
   ],
   "notes": "",
@@ -852,6 +867,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T13:27:17.272Z",
-  "versionId": "abc6aa4c-a214-4a79-a7b6-b3a271dae917"
+  "updatedAt": "2025-04-13T15:58:42.811Z",
+  "versionId": "6ffb6f3d-8f5d-4f3d-80af-8f38d6b8c6b7"
 }
