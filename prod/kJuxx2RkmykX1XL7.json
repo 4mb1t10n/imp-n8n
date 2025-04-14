@@ -156,7 +156,13 @@
     },
     "/editPinnedMessage": {
       "main": [
-        [],
+        [
+          {
+            "node": "200",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "/unpinAll",
@@ -201,17 +207,35 @@
     },
     "/closeForumTopic": {
       "main": [
-        []
+        [
+          {
+            "node": "200-3",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "update_properties2": {
       "main": [
-        []
+        [
+          {
+            "node": "200-1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "update_properties3": {
       "main": [
-        []
+        [
+          {
+            "node": "200-2",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Wait": {
@@ -227,11 +251,27 @@
     }
   },
   "createdAt": "2025-04-07T23:41:11.388Z",
-  "execution_id": "26244",
+  "execution_id": "26361",
   "id": "kJuxx2RkmykX1XL7",
   "meta": null,
   "name": "/telegram-property-topic",
   "nodes": [
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        360,
+        180
+      ],
+      "id": "99d28319-3c7d-4477-a7ef-21ee6ad4e050",
+      "name": "200"
+    },
     {
       "parameters": {
         "assignments": {
@@ -250,7 +290,7 @@
       "typeVersion": 3.4,
       "position": [
         -1840,
-        295
+        505
       ],
       "id": "8323e042-99d0-4c2a-8c66-0861b75c1163",
       "name": "Inputs",
@@ -274,7 +314,7 @@
       "typeVersion": 1,
       "position": [
         -1400,
-        295
+        505
       ],
       "id": "a1edb09b-292c-4d38-951b-4e14f9a66284",
       "name": "view_properties",
@@ -299,7 +339,7 @@
       "typeVersion": 1.2,
       "position": [
         -80,
-        345
+        630
       ],
       "id": "311d3daa-1f45-4f69-b7e2-cd446089654a",
       "name": "sendMessage",
@@ -329,7 +369,7 @@
       "typeVersion": 3.4,
       "position": [
         -1180,
-        295
+        505
       ],
       "id": "c687ada1-0e04-4ddb-b115-ec2880951a42",
       "name": "pinned message"
@@ -349,7 +389,7 @@
       "typeVersion": 1,
       "position": [
         -1620,
-        295
+        505
       ],
       "id": "74fff488-e29c-495c-b0f0-449ffe5da7f0",
       "name": "property_id",
@@ -384,7 +424,7 @@
       "typeVersion": 2.2,
       "position": [
         -740,
-        295
+        505
       ],
       "id": "055ce2b6-e590-4b0f-a190-a57335cfdfe3",
       "name": "updateRealtorTopic?"
@@ -412,7 +452,7 @@
       "typeVersion": 4.2,
       "position": [
         -520,
-        395
+        830
       ],
       "id": "d366693a-1b0e-426f-bfea-7d3f92f1b254",
       "name": "/closeForumTopic"
@@ -482,7 +522,7 @@
       "typeVersion": 3.2,
       "position": [
         -960,
-        295
+        505
       ],
       "id": "bee378d7-b6b5-401e-aae6-5c917040cd74",
       "name": "Switch"
@@ -516,7 +556,7 @@
       "typeVersion": 2.2,
       "position": [
         -520,
-        195
+        405
       ],
       "id": "041dc680-7008-4df3-9214-6ddd876b5fa8",
       "name": "topicExists?"
@@ -559,7 +599,7 @@
       "typeVersion": 2.2,
       "position": [
         -80,
-        95
+        305
       ],
       "id": "a73eed27-9c81-427c-9212-268064191112",
       "name": "pinnedExists?"
@@ -578,7 +618,7 @@
       "typeVersion": 1.2,
       "position": [
         580,
-        95
+        405
       ],
       "id": "5e577a8d-59a7-40fa-b93f-8a1ba440225e",
       "name": "sendMessage1",
@@ -613,7 +653,7 @@
       "typeVersion": 4.2,
       "position": [
         360,
-        95
+        405
       ],
       "id": "62190780-b777-4b88-94a2-09bfddd05e3a",
       "name": "/unpinAll"
@@ -653,7 +693,7 @@
       "typeVersion": 4.2,
       "position": [
         140,
-        20
+        230
       ],
       "id": "8b57966e-6eb4-4de0-8b2c-686a03560236",
       "name": "/editPinnedMessage",
@@ -670,7 +710,7 @@
       "typeVersion": 1.2,
       "position": [
         800,
-        95
+        405
       ],
       "id": "4526ac9a-f037-4f88-bb49-d4caa3bcb9e8",
       "name": "pinMessage",
@@ -709,7 +749,7 @@
       "typeVersion": 4.2,
       "position": [
         -300,
-        345
+        630
       ],
       "id": "05c127cb-36ad-40b8-bd0a-dd06cc182c39",
       "name": "/createForumTopic"
@@ -741,7 +781,7 @@
       "typeVersion": 4.2,
       "position": [
         -300,
-        95
+        305
       ],
       "id": "d5653533-25cd-4697-9659-897833dc19ac",
       "name": "/editForumTopic",
@@ -751,15 +791,14 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "telegram-property-topic",
-        "responseMode": "lastNode",
-        "responseData": "noData",
+        "responseMode": "responseNode",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
         -2280,
-        295
+        505
       ],
       "id": "2545193b-2bbb-4df0-8715-f03c2dba39bb",
       "name": "/telegram-property-topic",
@@ -795,7 +834,7 @@
       "typeVersion": 1,
       "position": [
         1020,
-        95
+        405
       ],
       "id": "858902ea-9df3-4e21-ac39-d243978083ae",
       "name": "update_properties2",
@@ -836,7 +875,7 @@
       "typeVersion": 1,
       "position": [
         140,
-        345
+        630
       ],
       "id": "fbc4ca2f-e097-4d45-a24a-208a9b54cce4",
       "name": "update_properties3",
@@ -855,11 +894,59 @@
       "typeVersion": 1.1,
       "position": [
         -2060,
-        295
+        505
       ],
       "id": "61f09ab8-129b-4ac1-8866-ed6d4adfc04b",
       "name": "Wait",
       "webhookId": "6d62707a-f297-481e-9c5a-055a8148d93e"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1240,
+        405
+      ],
+      "id": "b888d150-2627-4bdb-b908-d55d13909dc7",
+      "name": "200-1"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        360,
+        630
+      ],
+      "id": "65d68f61-63ba-4922-95e0-4b84428fdc1e",
+      "name": "200-2"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -300,
+        830
+      ],
+      "id": "e9770d9b-73bf-422f-bd30-a38e732ddf04",
+      "name": "200-3"
     }
   ],
   "notes": "",
@@ -868,19 +955,19 @@
       {
         "json": {
           "headers": {
-            "accept-encoding": "gzip",
-            "user-agent": "ReactorNetty/1.1.22",
+            "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
+            "user-agent": "axios/1.8.2",
+            "accept-encoding": "gzip, compress, deflate, br",
             "host": "n8n.railway.internal:5678",
-            "accept": "*/*",
-            "content-type": "application/json",
+            "connection": "keep-alive",
             "content-length": "0"
           },
           "params": {},
           "query": {
-            "property_id": "613"
+            "property_id": "940"
           },
           "body": {},
-          "webhookUrl": "https://s8s.up.railway.app/webhook/telegram-topic",
+          "webhookUrl": "https://s8s.up.railway.app/webhook/telegram-property-topic",
           "executionMode": "production"
         }
       }
@@ -894,6 +981,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T17:19:59.865Z",
-  "versionId": "ef49f67d-a4bb-4197-9769-d3b2e49393ae"
+  "updatedAt": "2025-04-14T11:56:58.169Z",
+  "versionId": "86a01aee-0231-4600-a9d1-7458bc96012b"
 }
