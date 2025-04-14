@@ -142,10 +142,15 @@
           }
         ]
       ]
+    },
+    "/telegram-property-topic": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "27594",
+  "execution_id": "27657",
   "id": "PyHxTyacy89NQnpD",
   "meta": null,
   "name": "/supabase-updated-properties",
@@ -239,6 +244,15 @@
               "id": "451ead62-3dee-4199-9e1f-5d7b3e5bc0d7",
               "leftValue": "={{ $json.updated_column }}",
               "rightValue": "id",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "180ff959-883c-4ee9-863b-75bc5e8fdf81",
+              "leftValue": "={{ $json.updated_column }}",
+              "rightValue": "starred",
               "operator": {
                 "type": "string",
                 "operation": "notEquals"
@@ -822,6 +836,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-14T14:36:48.576Z",
-  "versionId": "3efffa38-1975-4efc-a264-86794ba56756"
+  "updatedAt": "2025-04-14T21:37:36.830Z",
+  "versionId": "a5e20a3d-8a67-40aa-adb0-1811d97fe940"
 }
