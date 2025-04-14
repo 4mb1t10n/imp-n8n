@@ -67,7 +67,7 @@
         ],
         [
           {
-            "node": "/closeForumTopic",
+            "node": "/archiveForumTopic",
             "type": "main",
             "index": 0
           }
@@ -248,10 +248,32 @@
           }
         ]
       ]
+    },
+    "/archiveForumTopic": {
+      "main": [
+        [
+          {
+            "node": "nofifyArchived",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "nofifyArchived": {
+      "main": [
+        [
+          {
+            "node": "/closeForumTopic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-07T23:41:11.388Z",
-  "execution_id": "26361",
+  "execution_id": "26821",
   "id": "kJuxx2RkmykX1XL7",
   "meta": null,
   "name": "/telegram-property-topic",
@@ -331,6 +353,7 @@
         "text": "={{ $('pinned message').item.json.pinnedMessage }}",
         "additionalFields": {
           "appendAttribution": false,
+          "disable_web_page_preview": true,
           "parse_mode": "HTML",
           "message_thread_id": "={{ $json.result.message_thread_id }}"
         }
@@ -358,7 +381,7 @@
             {
               "id": "1b82316e-f3ca-4318-a449-050e00e0e2d5",
               "name": "pinnedMessage",
-              "value": "={{ $('view_properties').item.json.address_street }}, {{ $('view_properties').item.json.address_city }}, {{ $('view_properties').item.json.address_state }} {{ $('view_properties').item.json.address_zip }}\n\nInternal status: {{ $('view_properties').item.json.status }}\nMarket Status: {{ $('view_properties').item.json.realtor_status.replace(/_/g, ' ').toLowerCase().replace(/\\b\\w/g, char => char.toUpperCase())}}\n{{$('view_properties').item.contingent_listing_type != null ? `Contingent: `+ $json.contingent_listing_type + \"\\n\" : null}}Asking Price: ${{ $('view_properties').item.json.realtor_list_price.toLocaleString() }}\n{{$('view_properties').item.offer_price != null ? \"Offer: $\" + $('view_properties').item.offer_price.toLocaleString() + \"\\n\" : null}}{{$('view_properties').item.json.safmr != null ? \"SAFMR: $\"+ $('view_properties').item.json.safmr.toLocaleString() + \"\\n\" : null}}Beds Baths: {{ $('view_properties').item.json.beds }} | {{ $('view_properties').item.json.baths }}\n{{ $('view_properties').item.json.tags[0] != null ? \"Tags: \" + $json.tags + \"\\n\" : null }}{{ $('view_properties').item.followup_notes != null ? \"Note: \" + $json.followup_notes + \"\\n\" : null }}\n<a href=\"https://section8success.com/app/rent-ready-crm/properties-67986c14378e245fb0c54f49?branch=master&environment=production?property_id={{ $('view_properties').item.json.id }}\">View in CRM</a> \n<a href=\"{{ $('view_properties').item.json.zillow_url }}\">View on Zillow</a> \n<a href=\"https://www.google.com/maps/place/?q=place_id:{{ $('view_properties').item.json.google_place_id }}\">Open Google Maps</a>",
+              "value": "={{ $('view_properties').item.json.address_street }}, {{ $('view_properties').item.json.address_city }}, {{ $('view_properties').item.json.address_state }} {{ $('view_properties').item.json.address_zip }}\n<b>{{ $('view_properties').item.json.status_emoji }} {{ $('view_properties').item.json.status }}</b>\n\nSale Status: {{ $('view_properties').item.json.realtor_status.replace(/_/g, ' ').toLowerCase().replace(/\\b\\w/g, char => char.toUpperCase())}}{{$('view_properties').item.json.contingent_listing_type != null ? \" - \" + $('view_properties').item.json.contingent_listing_type.replace(/_/g, ' ').toLowerCase().replace(/\\b\\w/g, char => char.toUpperCase()) : null}} \nAsking: ${{ $('view_properties').item.json.realtor_list_price.toLocaleString() }}\n{{$('view_properties').item.offer_price != null ? \"Offer: $\" + $('view_properties').item.offer_price.toLocaleString() + \"\\n\" : null}}{{$('view_properties').item.json.safmr != null ? \"SAFMR: $\"+ $('view_properties').item.json.safmr.toLocaleString() + \"\\n\" : null}}Beds Baths: {{ $('view_properties').item.json.beds }} | {{ $('view_properties').item.json.baths }}\n{{ $('view_properties').item.json.tags[0] != null ? \"Tags: \" + $json.tags + \"\\n\" : null }}{{ $('view_properties').item.followup_notes != null ? \"Note: \" + $json.followup_notes + \"\\n\" : null }}ID: {{ $('view_properties').item.json.id }}\n\n➡️ <a href=\"https://section8success.com/app/rent-ready-crm/properties-67986c14378e245fb0c54f49?branch=master&environment=production&property_id={{ $('view_properties').item.json.id }}\">Open in CRM</a> \n➡️ <a href=\"{{ $('view_properties').item.json.zillow_url }}\">Open Zillow</a> \n➡️ <a href=\"https://www.google.com/maps/place/?q=place_id:{{ $('view_properties').item.json.google_place_id }}\">Open Google Maps</a>",
               "type": "string"
             }
           ]
@@ -451,11 +474,12 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -520,
+        -80,
         830
       ],
       "id": "d366693a-1b0e-426f-bfea-7d3f92f1b254",
-      "name": "/closeForumTopic"
+      "name": "/closeForumTopic",
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -610,6 +634,7 @@
         "text": "={{ $('pinned message').item.json.pinnedMessage }}",
         "additionalFields": {
           "appendAttribution": false,
+          "disable_web_page_preview": true,
           "parse_mode": "HTML",
           "message_thread_id": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}"
         }
@@ -942,11 +967,71 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        -300,
+        140,
         830
       ],
       "id": "e9770d9b-73bf-422f-bd30-a38e732ddf04",
       "name": "200-3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot5915934616:AAGESDx8tDTznWASDbefd4UtufS5qodJLUc/editForumTopic",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "=-100{{ $('view_properties').item.json.telegram_realtor_forum }}"
+            },
+            {
+              "name": "message_thread_id",
+              "value": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}"
+            },
+            {
+              "name": "name",
+              "value": "={{ $('view_properties').item.json.status_emoji }} {{ $('view_properties').item.json.address_simple }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -520,
+        830
+      ],
+      "id": "a596ced7-2caa-481f-98dd-8a1feeee2feb",
+      "name": "/archiveForumTopic",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "=-100{{ $('view_properties').item.json.telegram_realtor_forum }}",
+        "text": "=Property is Archived 🗃️",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML",
+          "message_thread_id": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -300,
+        830
+      ],
+      "id": "9f454805-bfda-4cc4-8b48-abf488056cca",
+      "name": "nofifyArchived",
+      "webhookId": "6ff697f7-e07c-4868-90e3-f105faae5c97",
+      "credentials": {
+        "telegramApi": {
+          "id": "5EhmVCbyRMyj9grg",
+          "name": "P0m0shnik11_Bot"
+        }
+      }
     }
   ],
   "notes": "",
@@ -956,7 +1041,7 @@
         "json": {
           "headers": {
             "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
-            "user-agent": "axios/1.8.2",
+            "user-agent": "axios/1.7.4",
             "accept-encoding": "gzip, compress, deflate, br",
             "host": "n8n.railway.internal:5678",
             "connection": "keep-alive",
@@ -964,7 +1049,7 @@
           },
           "params": {},
           "query": {
-            "property_id": "940"
+            "property_id": "894"
           },
           "body": {},
           "webhookUrl": "https://s8s.up.railway.app/webhook/telegram-property-topic",
@@ -981,6 +1066,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-14T11:56:58.169Z",
-  "versionId": "86a01aee-0231-4600-a9d1-7458bc96012b"
+  "updatedAt": "2025-04-14T14:42:38.162Z",
+  "versionId": "2068f119-e5c0-4559-bcba-ab20d30213c7"
 }
