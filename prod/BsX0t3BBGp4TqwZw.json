@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Error Trigger": {
       "main": [
@@ -14,7 +14,7 @@
     }
   },
   "createdAt": "2025-03-27T22:13:03.714Z",
-  "execution_id": "24577",
+  "execution_id": "25431",
   "id": "BsX0t3BBGp4TqwZw",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -35,7 +35,7 @@
     {
       "parameters": {
         "chatId": "-1001439671341",
-        "text": "=<a href=\"{{ $json.execution.url }}\">Server Error {{ $json.execution.id }}</a>\nNode: {{ $json.execution.lastNodeExecuted }}\nMode: {{ $json.execution.mode }}\n{{ $json.execution.error.message }}",
+        "text": "=<b>Rent Ready Server Error</b>\n\nWorkflow: {{ $json.workflow.name }}\nNode with error: {{ $json.execution.lastNodeExecuted }}\nExecution ID: {{ $json.execution.id }}\nError Message: {{ $json.execution.error.message }}\n\n<a href=\"{{ $json.execution.url }}\">Open Error Execution</a>",
         "replyMarkup": "=none",
         "forceReply": {},
         "replyKeyboardOptions": {},
@@ -70,6 +70,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-09T21:02:18.011Z",
-  "versionId": "e674ca54-3f40-4b05-bcbe-d7a6627a4d93"
+  "updatedAt": "2025-04-13T16:56:09.242Z",
+  "versionId": "8ac3f493-c1f1-4764-b3f1-56f3477f27cd"
 }
