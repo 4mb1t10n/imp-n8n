@@ -44,10 +44,15 @@
           }
         ]
       ]
+    },
+    "respond with properties": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2025-04-09T17:35:25.999Z",
-  "execution_id": "27657",
+  "execution_id": "27736",
   "id": "NuBvDuvO8iBrCC2X",
   "meta": null,
   "name": "/properties GET",
@@ -179,6 +184,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-14T17:35:35.957Z",
-  "versionId": "476e2d87-4af6-450f-b29b-93d613c305a2"
+  "updatedAt": "2025-04-14T22:50:58.302Z",
+  "versionId": "0d30fb47-53b1-43b4-8ab2-63f310ac841e"
 }
