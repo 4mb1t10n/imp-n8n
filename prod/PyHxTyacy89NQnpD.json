@@ -150,7 +150,7 @@
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "28598",
+  "execution_id": "29245",
   "id": "PyHxTyacy89NQnpD",
   "meta": null,
   "name": "/supabase-updated-properties",
@@ -639,6 +639,7 @@
       ],
       "id": "e89e7ecd-4806-4deb-988d-dd5e0c445edc",
       "name": "/telegram-property-topic",
+      "disabled": true,
       "onError": "continueRegularOutput"
     }
   ],
@@ -836,6 +837,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-14T21:37:36.830Z",
-  "versionId": "a5e20a3d-8a67-40aa-adb0-1811d97fe940"
+  "updatedAt": "2025-04-15T16:24:14.368Z",
+  "versionId": "a1f00d23-c690-4b9e-a350-1db0fb6901a9"
 }
