@@ -137,7 +137,7 @@
       "main": [
         [
           {
-            "node": "/telegram-topic1",
+            "node": "/telegram-property-topic",
             "type": "main",
             "index": 0
           }
@@ -155,7 +155,7 @@
       "main": [
         [
           {
-            "node": "/telegram-topic1",
+            "node": "/telegram-property-topic",
             "type": "main",
             "index": 0
           }
@@ -264,7 +264,7 @@
         ]
       ]
     },
-    "/telegram-topic1": {
+    "/telegram-property-topic": {
       "main": [
         [
           {
@@ -277,7 +277,7 @@
     }
   },
   "createdAt": "2025-04-07T23:39:17.248Z",
-  "execution_id": "28112",
+  "execution_id": "28161",
   "id": "W0y4robwZgmlRQL8",
   "meta": null,
   "name": "/apify-completed",
@@ -1271,7 +1271,7 @@
         260
       ],
       "id": "1db61e50-7234-4f4a-a93c-aea84ed28c8d",
-      "name": "/telegram-topic1",
+      "name": "/telegram-property-topic",
       "onError": "continueRegularOutput"
     }
   ],
@@ -1553,6 +1553,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-04-13T21:04:22.741Z",
-  "versionId": "051516e0-dc62-4c52-9191-31e4bff9ba24"
+  "updatedAt": "2025-04-15T08:30:48.482Z",
+  "versionId": "67b66fb7-5317-4160-aeec-622b8fdd6854"
 }
