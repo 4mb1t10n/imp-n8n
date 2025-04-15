@@ -104,7 +104,7 @@
       "main": [
         [
           {
-            "node": "Scrape Zillow",
+            "node": "/apify",
             "type": "main",
             "index": 0
           }
@@ -135,45 +135,11 @@
     }
   },
   "createdAt": "2025-04-10T23:03:39.829Z",
-  "execution_id": "28112",
+  "execution_id": "28161",
   "id": "rxu3hF8jQaz70eQU",
   "meta": null,
   "name": "/scrape-all & /scrape-property",
   "nodes": [
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.apify.com/v2/acts/maxcopell~zillow-detail-scraper/runs",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "token",
-              "value": "apify_api_eBcJIT4Z3eJhNHRL1UFtko2cVhff8i4fqE6a"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ $json.toJsonString() }}",
-        "options": {
-          "timeout": 300000
-        }
-      },
-      "id": "6ea61b01-670f-4aa5-952b-a9cb8fe6503f",
-      "name": "Scrape Zillow",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        1180,
-        140
-      ],
-      "retryOnFail": true,
-      "waitBetweenTries": 3000,
-      "alwaysOutputData": false,
-      "maxTries": 2,
-      "onError": "continueRegularOutput"
-    },
     {
       "parameters": {
         "operation": "getAll",
@@ -451,6 +417,40 @@
       ],
       "id": "03e0e3c9-422d-440a-87f9-b387f2df1cf1",
       "name": "chron1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/maxcopell~zillow-detail-scraper/runs",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "apify_api_eBcJIT4Z3eJhNHRL1UFtko2cVhff8i4fqE6a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.toJsonString() }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "6ea61b01-670f-4aa5-952b-a9cb8fe6503f",
+      "name": "/apify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        140
+      ],
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "alwaysOutputData": false,
+      "maxTries": 2,
+      "onError": "continueRegularOutput"
     }
   ],
   "notes": "",
@@ -491,6 +491,6 @@
   },
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-04-13T17:11:12.485Z",
-  "versionId": "770247ac-7e94-46ae-909e-e2b98a08bd61"
+  "updatedAt": "2025-04-15T08:28:19.874Z",
+  "versionId": "33dc941b-d7cf-47ed-9d3c-b6f22d9d2be2"
 }
