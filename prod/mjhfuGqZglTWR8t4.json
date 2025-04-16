@@ -1,0 +1,20 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-04-16T17:14:25.413Z",
+  "execution_id": "30449",
+  "id": "mjhfuGqZglTWR8t4",
+  "meta": null,
+  "name": "test postgres",
+  "nodes": [],
+  "notes": "",
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-16T17:14:25.413Z",
+  "versionId": "54216c9a-c7c6-4629-b102-4ab406ece802"
+}
