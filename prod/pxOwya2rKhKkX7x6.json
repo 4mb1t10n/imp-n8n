@@ -325,7 +325,7 @@
     }
   },
   "createdAt": "2025-02-20T01:50:18.875Z",
-  "execution_id": "30929",
+  "execution_id": "31002",
   "id": "pxOwya2rKhKkX7x6",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -1112,7 +1112,7 @@
     },
     "node:Chron": {
       "recurrenceRules": [
-        10
+        12
       ]
     }
   },
