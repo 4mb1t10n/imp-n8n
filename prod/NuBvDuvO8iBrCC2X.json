@@ -52,9 +52,11 @@
     }
   },
   "createdAt": "2025-04-09T17:35:25.999Z",
-  "execution_id": "32103",
+  "execution_id": "32464",
   "id": "NuBvDuvO8iBrCC2X",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "/properties GET",
   "nodes": [
     {
@@ -68,7 +70,7 @@
       "typeVersion": 4.2,
       "position": [
         580,
-        80
+        -60
       ],
       "id": "78049c28-4888-4609-98e5-d7544693b554",
       "name": "Get properties",
@@ -92,7 +94,7 @@
       "typeVersion": 2,
       "position": [
         360,
-        80
+        -60
       ],
       "id": "9a7c3320-0425-4030-9cba-9cc7f6407c66",
       "name": "propertiesQuery"
@@ -106,7 +108,7 @@
       "typeVersion": 1.1,
       "position": [
         800,
-        80
+        -60
       ],
       "id": "af68a0fb-a4c0-4543-9b6e-00379cf6238b",
       "name": "respond with properties"
@@ -121,7 +123,7 @@
       "typeVersion": 2,
       "position": [
         -80,
-        80
+        -60
       ],
       "id": "534e4af8-b3a4-4296-ac22-31824b267fe0",
       "name": "/get-properties",
@@ -137,7 +139,7 @@
       "typeVersion": 3.4,
       "position": [
         140,
-        80
+        -60
       ],
       "id": "739c9169-cbca-41a5-87eb-53e652b37b37",
       "name": "inputs",
@@ -146,36 +148,7 @@
     }
   ],
   "notes": "",
-  "pinData": {
-    "/get-properties": [
-      {
-        "json": {
-          "headers": {
-            "accept-encoding": "gzip",
-            "user-agent": "ReactorNetty/1.1.22",
-            "host": "n8n.railway.internal:5678",
-            "accept": "*/*"
-          },
-          "params": {},
-          "query": {
-            "internal_statuses": "null",
-            "market_statuses": "null",
-            "dwellings": "null",
-            "tags": "null",
-            "user": "alex+dev@imposbl.com",
-            "sort_column": "property_status",
-            "sort_direction": "asc",
-            "search_query": "",
-            "search_columns": "[\"property_status\",\"address_street\",\"followup_notes\"]",
-            "starred": "null"
-          },
-          "body": {},
-          "webhookUrl": "https://s8s.up.railway.app/webhook/get-properties",
-          "executionMode": "production"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "callerPolicy": "workflowsFromSameOwner",
@@ -184,6 +157,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-14T22:50:58.302Z",
-  "versionId": "0d30fb47-53b1-43b4-8ab2-63f310ac841e"
+  "updatedAt": "2025-04-18T17:56:14.289Z",
+  "versionId": "dbd64bce-95a6-4d2b-871a-c110431da11d"
 }
