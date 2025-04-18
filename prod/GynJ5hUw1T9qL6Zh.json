@@ -47,7 +47,7 @@
     }
   },
   "createdAt": "2025-04-10T07:18:34.067Z",
-  "execution_id": "31398",
+  "execution_id": "31543",
   "id": "GynJ5hUw1T9qL6Zh",
   "meta": null,
   "name": "/new-task",
@@ -228,12 +228,6 @@
               "name": "user",
               "value": "={{ $json.query.user }}",
               "type": "string"
-            },
-            {
-              "id": "aad5799f-e0c0-45e2-99a8-884398911694",
-              "name": "flagged",
-              "value": "={{ $json.query.flagged }}",
-              "type": "string"
             }
           ]
         },
@@ -286,6 +280,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-10T07:18:55.257Z",
-  "versionId": "647745e8-68ad-4fd7-b0c3-78145135bc26"
+  "updatedAt": "2025-04-17T23:07:09.108Z",
+  "versionId": "ede42148-a9d1-45b4-b8d4-182311c9bb09"
 }
