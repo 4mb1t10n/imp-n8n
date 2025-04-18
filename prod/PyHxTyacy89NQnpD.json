@@ -101,13 +101,7 @@
     },
     "/supabase-updated-properties": {
       "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "updated_column": {
@@ -147,13 +141,26 @@
       "main": [
         []
       ]
+    },
+    "Postgres Trigger": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "32073",
+  "execution_id": "32103",
   "id": "PyHxTyacy89NQnpD",
-  "meta": null,
-  "name": "/supabase-updated-properties",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "/postgres-properties-trigger",
   "nodes": [
     {
       "parameters": {
@@ -193,7 +200,7 @@
       "typeVersion": 1,
       "position": [
         -80,
-        -420
+        -160
       ],
       "credentials": {
         "supabaseApi": {
@@ -269,7 +276,7 @@
       "typeVersion": 2.1,
       "position": [
         -300,
-        -420
+        -160
       ]
     },
     {
@@ -308,7 +315,7 @@
       "typeVersion": 3.4,
       "position": [
         -1180,
-        -420
+        -160
       ],
       "id": "a618013c-a60f-412e-90b8-2e600670886d",
       "name": "inputs"
@@ -328,7 +335,7 @@
       "typeVersion": 1,
       "position": [
         -960,
-        -420
+        -160
       ],
       "id": "fa75a637-5a37-47e3-a94a-19cdadade2f3",
       "name": "record_id",
@@ -345,7 +352,7 @@
       "typeVersion": 2,
       "position": [
         -740,
-        -420
+        -160
       ],
       "notes": "The id of each table is supabase needs to be called exactly \"id\""
     },
@@ -368,7 +375,7 @@
       "typeVersion": 4.2,
       "position": [
         580,
-        -320
+        -60
       ],
       "id": "fec0e4f8-b405-4857-8fbb-17ef77c1df09",
       "name": "/scrape-property"
@@ -402,7 +409,7 @@
       "typeVersion": 2.2,
       "position": [
         140,
-        -320
+        -60
       ],
       "id": "4d1c62e4-3015-4233-8253-a9e236481f54",
       "name": "scrape_photos"
@@ -486,7 +493,7 @@
       "typeVersion": 2.2,
       "position": [
         140,
-        -520
+        -260
       ],
       "id": "f737dbc9-c7c8-4643-ad21-efc2d904089c",
       "name": "otherColumns"
@@ -526,7 +533,7 @@
       "typeVersion": 4.2,
       "position": [
         580,
-        -520
+        -260
       ],
       "id": "54ad451e-289b-4a8f-ab13-5247a15e8a5d",
       "name": "/telegram-property-notification"
@@ -544,7 +551,7 @@
       "typeVersion": 2,
       "position": [
         -1400,
-        -420
+        -520
       ],
       "webhookId": "2ac3d1a9-7334-451c-aa4c-947182f598d5",
       "credentials": {
@@ -569,7 +576,7 @@
       "typeVersion": 1,
       "position": [
         -520,
-        -420
+        -160
       ],
       "id": "a6785fea-5487-4abd-89c3-68fcf81accc6",
       "name": "updated_column"
@@ -589,7 +596,7 @@
       "typeVersion": 1,
       "position": [
         360,
-        -520
+        -260
       ],
       "id": "32fc4870-f896-4782-a26e-ae557abeb226",
       "name": "flow: notification",
@@ -610,7 +617,7 @@
       "typeVersion": 1,
       "position": [
         360,
-        -320
+        -60
       ],
       "id": "95cb91d9-2044-4a76-b1f0-e381dc6a1df4",
       "name": "flow: scrape-photos",
@@ -635,12 +642,44 @@
       "typeVersion": 4.2,
       "position": [
         800,
-        -520
+        -260
       ],
       "id": "e89e7ecd-4806-4deb-988d-dd5e0c445edc",
       "name": "/telegram-property-topic",
       "disabled": true,
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "tableName": {
+          "__rl": true,
+          "value": "properties",
+          "mode": "list",
+          "cachedResultName": "properties"
+        },
+        "firesOn": "UPDATE",
+        "additionalFields": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1400,
+        -160
+      ],
+      "id": "daf26d6b-e5c9-4e42-903b-9cffb8c2f7be",
+      "name": "Postgres Trigger",
+      "credentials": {
+        "postgres": {
+          "id": "NNsR1zePyz4wtNPy",
+          "name": "PostgreS8S"
+        }
+      }
     }
   ],
   "notes": "",
@@ -836,7 +875,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2025-04-15T16:24:14.368Z",
-  "versionId": "a1f00d23-c690-4b9e-a350-1db0fb6901a9"
+  "triggerCount": 2,
+  "updatedAt": "2025-04-18T15:15:07.914Z",
+  "versionId": "1869aac2-35f8-41ca-9cb9-daa8b4483a91"
 }
