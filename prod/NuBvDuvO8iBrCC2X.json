@@ -52,7 +52,7 @@
     }
   },
   "createdAt": "2025-04-09T17:35:25.999Z",
-  "execution_id": "32790",
+  "execution_id": "32859",
   "id": "NuBvDuvO8iBrCC2X",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -61,9 +61,7 @@
   "nodes": [
     {
       "parameters": {
-        "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/view_properties?{{ $json.queryString }}",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "supabaseApi",
+        "url": "=http://postgrest.railway.internal:3000/view_properties?{{ $json.queryString }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -74,17 +72,7 @@
       ],
       "id": "78049c28-4888-4609-98e5-d7544693b554",
       "name": "Get properties",
-      "alwaysOutputData": true,
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "KwKIAL5ixwLlPeZY",
-          "name": "Supabase Imposbl Header Auth"
-        },
-        "supabaseApi": {
-          "id": "hN8Yj6BvjJqfKMnH",
-          "name": "Rent Ready Supabase"
-        }
-      }
+      "alwaysOutputData": true
     },
     {
       "parameters": {
@@ -148,7 +136,36 @@
     }
   ],
   "notes": "",
-  "pinData": {},
+  "pinData": {
+    "/get-properties": [
+      {
+        "json": {
+          "headers": {
+            "accept-encoding": "gzip",
+            "user-agent": "ReactorNetty/1.1.22",
+            "host": "n8n.railway.internal:5678",
+            "accept": "*/*"
+          },
+          "params": {},
+          "query": {
+            "internal_statuses": "[\"Off Market Deal\",\"Monitor\",\"Decide\",\"Walkthrough\",\"Offer\",\"Inspection\",\"Closing\",\"Construction\",\"Advertising\",\"Rented\",\"Maintenance \",\"Vacating\",\"Evicting\",\"Selling\",\"Sold\",\"Auction\",\"Archive\"]",
+            "market_statuses": "[]",
+            "dwellings": "null",
+            "tags": "null",
+            "user": "alex+dev@imposbl.com",
+            "sort_column": "property_status",
+            "sort_direction": "asc",
+            "search_query": "",
+            "search_columns": "[\"property_status\",\"address_street\",\"followup_notes\"]",
+            "starred": "null"
+          },
+          "body": {},
+          "webhookUrl": "https://s8s.up.railway.app/webhook/get-properties",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "callerPolicy": "workflowsFromSameOwner",
@@ -157,6 +174,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-18T17:56:14.289Z",
-  "versionId": "dbd64bce-95a6-4d2b-871a-c110431da11d"
+  "updatedAt": "2025-04-19T11:41:27.641Z",
+  "versionId": "6fa6257a-f77c-4233-9417-f85cd5554089"
 }
