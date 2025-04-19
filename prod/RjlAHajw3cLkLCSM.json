@@ -1,0 +1,183 @@
+{
+  "active": true,
+  "connections": {
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "propertiesQuery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "propertiesQuery": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/properties-list": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-18T17:09:42.066Z",
+  "execution_id": "32574",
+  "id": "RjlAHajw3cLkLCSM",
+  "meta": null,
+  "name": "testing properties workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n  {\n    \"internal_statuses\": $json.query.internal_statuses,\n    \"market_statuses\": $json.query.market_statuses,\n    \"tags\": $json.query.tags,\n    \"dwellings\": $json.query.dwellings, \n\t\"starred\": $json.query.starred,\n    \"sort_column\": $json.query.sort_column,\n    \"sort_direction\": $json.query.sort_direction,\n    \"search_query\": $json.query.search_query,\n    \"search_columns\": $json.query.search_columns,\n    \"user\": $json.query.user\n  }\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "1ccc02a5-77c9-4fa6-aaae-5d4c072e92db",
+      "name": "inputs",
+      "notesInFlow": false,
+      "disabled": true,
+      "notes": "All of the \"filter_\" inputs are optional"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "hey",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        0
+      ],
+      "id": "b5421b35-fa13-4505-bfe1-652bd56a9be5",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ $json.sqlQuery }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        660,
+        0
+      ],
+      "id": "d3b361d8-dc8e-495c-b6e5-0f244b5880ed",
+      "name": "Postgres",
+      "credentials": {
+        "postgres": {
+          "id": "NNsR1zePyz4wtNPy",
+          "name": "PostgreS8S"
+        }
+      },
+      "disabled": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(input) {\n  // Add explicit check for null/undefined\n  if (input === null || input === undefined) {\n    return [];\n  }\n  \n  if (typeof input === 'string') {\n    try {\n      // Try to parse it as JSON\n      return JSON.parse(input);\n    } catch (e) {\n      // If parsing fails, return empty array\n      return [];\n    }\n  } else if (Array.isArray(input)) {\n    return input;\n  }\n  return [];\n}\n\n// Start with the basic SELECT statement\nlet sqlQuery = `SELECT id, address_street, address_zip, beds, property_status, realtor_status, \n  realtor_dwelling_type, realtor_list_price, offer_price, followup_notes, timestamp_scraped, \n  zillow_url, color, tags, safmr, cover_photo_url, address_city, address_state, starred, \n  telegram_internal_forum, telegram_realtor_forum, telegram_realtor_topic_id, contingent_listing_type\nFROM view_properties`;\n\n// Initialize an array to hold all WHERE conditions\nlet whereConditions = [];\n\n// Process internal_statuses\nif (inputData.internal_statuses) {\n  const statuses = processArrayInput(inputData.internal_statuses);\n  if (statuses && statuses.length > 0) {\n    const statusList = statuses.map(status => `'${status}'`).join(\", \");\n    whereConditions.push(`property_status IN (${statusList})`);\n  }\n}\n\n// Process market_statuses - MODIFIED to handle the special case for PENDING\nif (inputData.market_statuses) {\n  const marketStatuses = processArrayInput(inputData.market_statuses);\n  if (marketStatuses && marketStatuses.length > 0) {\n    // Check if \"PENDING\" is in the market_statuses\n    const hasPending = marketStatuses.includes(\"PENDING\");\n    \n    // Build the query to match any of the market statuses\n    const marketStatusList = marketStatuses.map(status => `'${status}'`).join(\", \");\n    \n    if (hasPending) {\n      // If PENDING is included, match either realtor_status in market_statuses OR contingent_listing_type is UNDER_CONTRACT\n      whereConditions.push(`(realtor_status IN (${marketStatusList}) OR contingent_listing_type = 'UNDER_CONTRACT')`);\n    } else {\n      // Otherwise, just match realtor_status in market_statuses\n      whereConditions.push(`realtor_status IN (${marketStatusList})`);\n    }\n  }\n}\n\n// Process dwellings\nif (inputData.dwellings) {\n  const dwellings = processArrayInput(inputData.dwellings);\n  if (dwellings && dwellings.length > 0) {\n    const dwellingsList = dwellings.map(dwelling => `'${dwelling}'`).join(\", \");\n    whereConditions.push(`realtor_dwelling_type IN (${dwellingsList})`);\n  }\n}\n\n// Process tags\nif (inputData.tags) {\n  const tags = processArrayInput(inputData.tags);\n  if (tags && tags.length > 0) {\n    // Assuming tags is an array column in PostgreSQL\n    const tagsList = tags.map(tag => `'${tag}'`).join(\", \");\n    whereConditions.push(`tags && ARRAY[${tagsList}]`);\n  }\n}\n\n// Process starred parameter\nif (inputData.starred === true || inputData.starred === false) {\n  whereConditions.push(`starred = ${inputData.starred}`);\n} else if (typeof inputData.starred === 'string' && inputData.starred.trim() !== '') {\n  const normalizedValue = inputData.starred.toLowerCase().trim();\n  if (normalizedValue === 'true' || normalizedValue === 'false') {\n    whereConditions.push(`starred = ${normalizedValue === 'true'}`);\n  }\n}\n\n// Process search query and search columns\nif (inputData.search_query && inputData.search_query.trim() !== '') {\n  const searchColumns = processArrayInput(inputData.search_columns);\n  if (searchColumns && searchColumns.length > 0) {\n    // Create search conditions for each column\n    const searchConditions = searchColumns.map(column => \n      `${column} ILIKE '%${inputData.search_query}%'`\n    );\n    \n    // Join conditions with OR\n    whereConditions.push(`(${searchConditions.join(\" OR \")})`);\n  }\n}\n\n// Add WHERE clause if any conditions exist\nif (whereConditions.length > 0) {\n  sqlQuery += \"\\nWHERE \" + whereConditions.join(\" AND \");\n}\n\n// Handle sorting with default and secondary sorting\nlet sortDirection = 'ASC'; // Default sort direction\nif (inputData.sort_direction && \n    (inputData.sort_direction.toLowerCase() === 'desc' || \n     inputData.sort_direction.toLowerCase() === 'asc')) {\n  sortDirection = inputData.sort_direction.toUpperCase();\n}\n\nif (inputData.sort_column) {\n  // Primary sort by provided column, secondary sort by id in same direction\n  sqlQuery += `\\nORDER BY ${inputData.sort_column} ${sortDirection}, id ${sortDirection}`;\n} else {\n  // Default sort by property_status and then id\n  sqlQuery += \"\\nORDER BY property_status ASC, id ASC\";\n}\n\n// Add a semicolon to end the SQL statement\nsqlQuery += \";\";\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    sqlQuery: sqlQuery\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "id": "036c52b5-bee3-406b-b591-b98ca30180da",
+      "name": "propertiesQuery",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "path": "properties-list",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6aaadcd8-39d7-4725-959e-e6b1de59dcc7",
+      "name": "/properties-list",
+      "webhookId": "24c377f2-f724-4926-bdd0-e654a609d312"
+    }
+  ],
+  "notes": "",
+  "pinData": {
+    "/properties-list": [
+      {
+        "json": {
+          "headers": {
+            "accept-encoding": "gzip",
+            "user-agent": "ReactorNetty/1.1.22",
+            "host": "n8n.railway.internal:5678",
+            "accept": "*/*"
+          },
+          "params": {},
+          "query": {
+            "internal_statuses": "[\"walkthrough\"]",
+            "market_statuses": "[\"FOR_SALE\"]",
+            "dwellings": "hi",
+            "tags": "[\"investor\"]",
+            "user": "alex+dev@imposbl.com",
+            "sort_column": "hi",
+            "sort_direction": "hi",
+            "search_query": "hi",
+            "search_columns": "hi",
+            "starred": "hi"
+          },
+          "body": {},
+          "webhookUrl": "https://s8s.up.railway.app/webhook/24c377f2-f724-4926-bdd0-e654a609d312",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-18T17:48:00.153Z",
+  "versionId": "d826a33c-88fd-474e-a0c8-11937dc2d81f"
+}
