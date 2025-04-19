@@ -45,17 +45,6 @@
         ]
       ]
     },
-    "view_properties": {
-      "main": [
-        [
-          {
-            "node": "notificationMessage",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "topicExists?": {
       "main": [
         [
@@ -135,10 +124,21 @@
           }
         ]
       ]
+    },
+    "view_properties": {
+      "main": [
+        [
+          {
+            "node": "notificationMessage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-10T23:17:08.415Z",
-  "execution_id": "32790",
+  "execution_id": "32859",
   "id": "IYI2oAiiYaDMBc5r",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -261,34 +261,6 @@
       ],
       "id": "5e3a2831-656e-4ef8-8ab0-1c64f4bf23a4",
       "name": "property_id"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "tableId": "view_properties",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "keyValue": "={{ $json.property_id }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        880,
-        -220
-      ],
-      "id": "af88bce2-541f-4227-9fef-7cd185dd03d6",
-      "name": "view_properties",
-      "credentials": {
-        "supabaseApi": {
-          "id": "hN8Yj6BvjJqfKMnH",
-          "name": "Rent Ready Supabase"
-        }
-      }
     },
     {
       "parameters": {
@@ -565,6 +537,46 @@
       ],
       "id": "92de3122-0de6-4e59-a65c-d8e87a35b560",
       "name": "updateRealtor"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "view_properties",
+          "mode": "list",
+          "cachedResultName": "view_properties"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "id",
+              "value": "={{ $json.property_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        880,
+        -220
+      ],
+      "id": "6ec43cd2-62a7-4ddd-a0f3-64ea653d8cb0",
+      "name": "view_properties",
+      "credentials": {
+        "postgres": {
+          "id": "NNsR1zePyz4wtNPy",
+          "name": "PostgreS8S"
+        }
+      }
     }
   ],
   "notes": "",
@@ -603,6 +615,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T17:21:33.618Z",
-  "versionId": "61aafd5b-79b4-4fa0-8085-a34eb3aa01e9"
+  "updatedAt": "2025-04-19T11:51:01.974Z",
+  "versionId": "d0caf3fb-55ef-4a55-a43f-e74a287d11d4"
 }
