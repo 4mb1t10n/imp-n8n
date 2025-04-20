@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-02-20T01:50:18.875Z",
-  "updatedAt": "2025-04-20T13:27:21.923Z",
+  "updatedAt": "2025-04-20T13:34:34.670Z",
   "id": "pxOwya2rKhKkX7x6",
   "name": "Github New",
   "active": true,
@@ -206,7 +206,7 @@
         },
         "mode": "each",
         "options": {
-          "waitForSubWorkflow": false
+          "waitForSubWorkflow": true
         }
       },
       "id": "547503bd-0c53-4fce-9d32-7ec6b747d7e4",
@@ -582,7 +582,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "40ec7504-e388-46b2-92e8-f58e085baa9c",
+  "versionId": "7c2efa62-7435-4666-bd15-81245639cde1",
   "triggerCount": 1,
   "tags": []
 }
