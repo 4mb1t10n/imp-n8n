@@ -1,88 +1,9 @@
 {
-  "active": false,
-  "connections": {
-    "Supabase": {
-      "main": [
-        [
-          {
-            "node": "Data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "check_inputs": {
-      "main": [
-        [
-          {
-            "node": "Supabase",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "400",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "save exec",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "save exec": {
-      "main": [
-        [
-          {
-            "node": "check_inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/record-update": {
-      "main": [
-        [
-          {
-            "node": "host",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
-      ]
-    },
-    "host": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-03-20T13:18:41.700Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-18T00:33:24.944Z",
   "id": "CGTEOGwQbFngXtrq",
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
   "name": "/record-update",
+  "active": false,
   "nodes": [
     {
       "parameters": {
@@ -313,7 +234,96 @@
       "name": "host"
     }
   ],
-  "notes": "",
+  "connections": {
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_inputs": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "400",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "save exec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "save exec": {
+      "main": [
+        [
+          {
+            "node": "check_inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/record-update": {
+      "main": [
+        [
+          {
+            "node": "host",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "host": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": [
+        12
+      ]
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "pinData": {
     "/record-update": [
       {
@@ -341,19 +351,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1",
-    "callerPolicy": "workflowsFromSameOwner"
-  },
-  "staticData": {
-    "node:Schedule Trigger": {
-      "recurrenceRules": [
-        12
-      ]
-    }
-  },
-  "tags": [],
+  "versionId": "3ac8239e-859e-4ace-a02a-1d76c800ee72",
   "triggerCount": 1,
-  "updatedAt": "2025-04-18T00:33:24.944Z",
-  "versionId": "3ac8239e-859e-4ace-a02a-1d76c800ee72"
+  "tags": []
 }
