@@ -2,82 +2,169 @@
   "exec_id": "33494",
   "notes": "testing notes",
   "workflow": {
-    "createdAt": "2025-04-09T21:56:53.280Z",
-    "updatedAt": "2025-04-09T21:57:06.621Z",
-    "id": "fTKAncOcIe9g4i0P",
-    "name": "/options",
+    "createdAt": "2025-03-30T08:52:17.379Z",
+    "updatedAt": "2025-04-09T21:01:24.323Z",
+    "id": "NZQafbnhJUyyBFF3",
+    "name": "Tags",
     "active": true,
     "nodes": [
       {
         "parameters": {
-          "path": "options",
-          "responseMode": "responseNode",
+          "multipleMethods": true,
+          "httpMethod": [
+            "POST"
+          ],
+          "path": "tags",
           "options": {}
         },
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2,
         "position": [
-          0,
-          0
+          -1400,
+          -140
         ],
-        "id": "7fe85d15-711a-46f7-85e2-34b692f402ed",
-        "name": "/options",
-        "webhookId": "610245e4-d833-432a-a23c-ce6eea9146bf"
+        "id": "2ba4c7a3-2391-4513-adc4-ca221bd75df0",
+        "name": "/tags",
+        "webhookId": "07639ed8-3eb6-45c4-808a-4f563e7dd0ff"
       },
       {
         "parameters": {
-          "dataToSave": {
+          "rules": {
             "values": [
               {
-                "key": "table",
-                "value": "={{ $json.table }}"
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.add_or_replace }}",
+                      "rightValue": "add",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "8da7ee68-dc0e-4a14-856e-f8cdba11d1d4"
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "add"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "04738375-1055-4a70-8746-8f2c8fb57582",
+                      "leftValue": "={{ $json.add_or_replace }}",
+                      "rightValue": "replace",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "replace"
               }
             ]
+          },
+          "looseTypeValidation": true,
+          "options": {
+            "ignoreCase": true
           }
         },
-        "type": "n8n-nodes-base.executionData",
-        "typeVersion": 1,
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
         "position": [
-          440,
-          0
+          -520,
+          -140
         ],
-        "id": "96024d3c-4ac4-44a2-9ba8-a73d82ba3fa0",
-        "name": "options"
+        "id": "d75dd1ee-e25e-4e00-bd0b-31ba6c5a0fbd",
+        "name": "Switch"
       },
       {
         "parameters": {
-          "jsCode": "// Get the input data\nconst inputData = $input.first().json;\nconst table = inputData.table;\nconst labelColumn = inputData.label_column;\nconst valueColumn = inputData.value_column;\nconst sortColumn = inputData.sort_column;\nconst sortDirection = inputData.sort_direction;\nconst additionalColumns = inputData.return_additional_columns;\n\n// Start with the base URL and table\nlet queryString = \"https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/\" + table;\n\n// Create the select parameter with column aliases for label and value\nlet selectColumns = [];\n\n// Add the columns with appropriate aliases\nselectColumns.push(`label:${labelColumn}`);\nselectColumns.push(`value:${valueColumn}`);\n\n// Process additional columns if they exist\nif (additionalColumns) {\n  // Handle different formats of additionalColumns\n  if (Array.isArray(additionalColumns)) {\n    // If it's already an array, add each column\n    additionalColumns.forEach(col => selectColumns.push(col));\n  } else if (typeof additionalColumns === 'string') {\n    // Check if it looks like an array represented as a string\n    if (additionalColumns.startsWith('[') && additionalColumns.endsWith(']')) {\n      try {\n        // Try to parse it as JSON\n        const parsedColumns = JSON.parse(additionalColumns);\n        if (Array.isArray(parsedColumns)) {\n          parsedColumns.forEach(col => selectColumns.push(col));\n        } else {\n          // If it parsed but isn't an array, treat it as a single column\n          selectColumns.push(additionalColumns);\n        }\n      } catch (e) {\n        // If parsing failed, treat it as a single column\n        selectColumns.push(additionalColumns);\n      }\n    } else {\n      // It's a simple string, treat as a single column\n      selectColumns.push(additionalColumns);\n    }\n  }\n}\n\n// Remove duplicates\nselectColumns = [...new Set(selectColumns)];\n\n// Build the query string\nqueryString += \"?select=\" + selectColumns.join(',');\n\n// Process sorting if sort_column exists\nif (sortColumn) {\n  // Validate sort direction, default to asc if invalid\n  // PostgREST requires lowercase asc/desc\n  const direction = (sortDirection && ['asc', 'desc'].includes(sortDirection.toLowerCase())) \n    ? sortDirection.toLowerCase() \n    : 'asc';\n  \n  // Add order parameter\n  queryString += `&order=${sortColumn}.${direction}`;\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
+          "jsCode": "// Get the input data\nconst tags = $input.first().json.tags;\nconst property_id = $input.first().json.property_id;\nconst addOrReplace = $input.first().json.add_or_replace;\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(tags) {\n  if (!tags) return []; // Handle null, undefined, or empty string\n\n  if (typeof tags === \"string\") {\n    // If it's empty, return empty array\n    if (tags.trim() === \"\") return [];\n\n    try {\n      // Try to parse it as JSON\n      return JSON.parse(tags);\n    } catch (e) {\n      // If parsing fails, assume it's a comma-separated string\n      return tags\n        .split(\",\")\n        .map((item) => item.trim())\n        .filter((item) => item !== \"\");\n    }\n  } else if (Array.isArray(tags)) {\n    return tags;\n  }\n  return [];\n}\n\n// Process the tags\nconst processedTags = processArrayInput(tags);\n\n// If no tags, return empty array to prevent N8N errors\nif (processedTags.length === 0) {\n  return [];\n}\n\n// Return one item per tag\nreturn processedTags.map((tag) => ({\n  json: {\n    tag: tag,\n    property_id: property_id,\n    add_or_replace: addOrReplace,\n  },\n}));\n"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          660,
-          0
+          -740,
+          -140
         ],
-        "id": "a5c666e0-292b-469d-ab48-2681e395d6ec",
-        "name": "optionsQuery"
+        "id": "d0671295-fc98-4df1-9523-3fd95cfaab36",
+        "name": "split by tag"
       },
       {
         "parameters": {
-          "url": "={{ $json.queryString }}",
-          "authentication": "predefinedCredentialType",
-          "nodeCredentialType": "supabaseApi",
-          "options": {}
+          "tableId": "properties_tags",
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "property_id",
+                "fieldValue": "={{ $json.property_id }}"
+              },
+              {
+                "fieldId": "tag_id",
+                "fieldValue": "={{ $json.tag }}"
+              }
+            ]
+          }
         },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.2,
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
         "position": [
-          880,
-          0
+          -300,
+          -240
         ],
-        "id": "07ef8ed4-77ad-4539-bdc0-ac618eeb0be7",
-        "name": "Get options",
-        "alwaysOutputData": true,
+        "id": "d53f4074-e92a-4644-8aea-09c48ba1020b",
+        "name": "insert tag",
         "credentials": {
-          "httpHeaderAuth": {
-            "id": "KwKIAL5ixwLlPeZY",
-            "name": "Supabase Imposbl Header Auth"
-          },
+          "supabaseApi": {
+            "id": "hN8Yj6BvjJqfKMnH",
+            "name": "Rent Ready Supabase"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "operation": "delete",
+          "tableId": "properties_tags",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "property_id",
+                "condition": "eq",
+                "keyValue": "={{ $json.property_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          -300,
+          -40
+        ],
+        "id": "c0d33ad0-f596-4cf3-8fa0-ba37d9175464",
+        "name": "delete all",
+        "executeOnce": true,
+        "credentials": {
           "supabaseApi": {
             "id": "hN8Yj6BvjJqfKMnH",
             "name": "Rent Ready Supabase"
@@ -86,69 +173,55 @@
       },
       {
         "parameters": {
-          "respondWith": "allIncomingItems",
-          "options": {}
+          "tableId": "properties_tags",
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "property_id",
+                "fieldValue": "={{ $json.property_id }}"
+              },
+              {
+                "fieldId": "tag_id",
+                "fieldValue": "={{ $json.tag_id }}"
+              }
+            ]
+          }
         },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.1,
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
         "position": [
-          1320,
-          0
+          140,
+          -40
         ],
-        "id": "51d25404-db60-43ad-8f71-8721030459ad",
-        "name": "Respond w options"
-      },
-      {
-        "parameters": {
-          "jsCode": "// Function to capitalize first letter of each word\nfunction capitalizeWords(str) {\n  return str.replace(/\\b\\w/g, char => char.toUpperCase());\n}\n\n// Function to format the label: replace underscores with spaces, lowercase, then capitalize each word\nfunction formatLabel(label) {\n  if (typeof label !== 'string') return label;\n  return capitalizeWords(label.replace(/_/g, ' ').toLowerCase());\n}\n\n// Process all input items\nconst items = $input.all();\nconst outputItems = [];\n\nfor (const item of items) {\n  // Check what data structure we're dealing with\n  let data = item.json;\n  \n  // If data is an array, process each element in the array\n  if (Array.isArray(data)) {\n    // Format each item in the array\n    const formattedArray = data.map(entry => ({\n      ...entry,\n      label: formatLabel(entry.label)\n    }));\n    \n    // Add to output items\n    outputItems.push({\n      json: formattedArray\n    });\n  } else {\n    // Single object case\n    outputItems.push({\n      json: {\n        ...data,\n        label: formatLabel(data.label)\n      }\n    });\n  }\n}\n\n// Return all processed items\nreturn outputItems;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          1100,
-          0
-        ],
-        "id": "bb2a0c25-9f3d-45f1-9e81-0f83d46ad193",
-        "name": "format labels"
+        "id": "f131095c-0cdc-4fb5-9eba-bbfe4eb9b735",
+        "name": "insert tag1",
+        "credentials": {
+          "supabaseApi": {
+            "id": "hN8Yj6BvjJqfKMnH",
+            "name": "Rent Ready Supabase"
+          }
+        }
       },
       {
         "parameters": {
           "assignments": {
             "assignments": [
               {
-                "id": "81bf5ea2-5196-4f1b-bd24-0a904103eb96",
-                "name": "table",
-                "value": "={{ $json.query.table }}",
+                "id": "85a62f46-e1fa-4b5b-a6c1-b3084dc8280f",
+                "name": "property_id",
+                "value": "={{ $json.query.property_id }}",
                 "type": "string"
               },
               {
-                "id": "83a8f38f-2e83-4dd9-9b90-62e88d320557",
-                "name": "label_column",
-                "value": "={{ $json.query.label_column }}",
-                "type": "string"
+                "id": "1a5f9e0f-686a-4485-a372-052c8ef3d6f8",
+                "name": "tags",
+                "value": "={{ $json.query.tags }}",
+                "type": "array"
               },
               {
-                "id": "2db9938b-9f66-4b1a-ad8c-2e3f51d43441",
-                "name": "value_column",
-                "value": "={{ $json.query.value_column }}",
-                "type": "string"
-              },
-              {
-                "id": "9ac4a22e-0864-4ed2-a576-4357249d93e3",
-                "name": "sort_column",
-                "value": "={{ $json.query.sort_column }}",
-                "type": "string"
-              },
-              {
-                "id": "8dc7c136-6672-4dd9-897d-9edc00317432",
-                "name": "sort_direction",
-                "value": "={{ $json.query.sort_direction }}",
-                "type": "string"
-              },
-              {
-                "id": "66b472ff-9e8d-4b92-a2f2-3cbb79a760a9",
-                "name": "return_additional_columns",
-                "value": "={{ $json.query.return_additional_columns }}",
+                "id": "e179d4f3-8584-4324-a1f9-a6a9bc82effc",
+                "name": "add_or_replace",
+                "value": "={{ $json.query.add_or_replace }}",
                 "type": "string"
               }
             ]
@@ -158,74 +231,149 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          220,
-          0
+          -1180,
+          -140
         ],
-        "id": "7bcc1035-2b40-44ed-85d7-d2228a0ed85c",
-        "name": "input"
+        "id": "87b4edaa-631f-4cfe-9051-659d7a933f89",
+        "name": "inputs",
+        "notesInFlow": false,
+        "notes": "All of the \"filter_\" inputs are optional"
+      },
+      {
+        "parameters": {
+          "dataToSave": {
+            "values": [
+              {
+                "key": "property_id",
+                "value": "={{ $json.property_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executionData",
+        "typeVersion": 1,
+        "position": [
+          -960,
+          -140
+        ],
+        "id": "39cb516b-d093-44e9-8d27-fb0c6430b21f",
+        "name": "property_id"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "loose",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "5a49b258-c265-4c08-b35b-7253e0d5c5ab",
+                "leftValue": "={{ $json.tag_id }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.filter",
+        "typeVersion": 2.2,
+        "position": [
+          -80,
+          -40
+        ],
+        "id": "8c1eab9f-6a56-482a-906d-b2dec9c5e8fe",
+        "name": "hasData?"
       }
     ],
     "connections": {
-      "/options": {
+      "/tags": {
         "main": [
           [
             {
-              "node": "input",
+              "node": "inputs",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "options": {
+      "Switch": {
         "main": [
           [
             {
-              "node": "optionsQuery",
+              "node": "insert tag",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "delete all",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "optionsQuery": {
+      "split by tag": {
         "main": [
           [
             {
-              "node": "Get options",
+              "node": "Switch",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Get options": {
+      "delete all": {
         "main": [
           [
             {
-              "node": "format labels",
+              "node": "hasData?",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "format labels": {
+      "inputs": {
         "main": [
           [
             {
-              "node": "Respond w options",
+              "node": "property_id",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "input": {
+      "property_id": {
         "main": [
           [
             {
-              "node": "options",
+              "node": "split by tag",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "hasData?": {
+        "main": [
+          [
+            {
+              "node": "insert tag1",
               "type": "main",
               "index": 0
             }
@@ -238,33 +386,8 @@
     },
     "staticData": null,
     "meta": null,
-    "pinData": {
-      "/options": [
-        {
-          "json": {
-            "headers": {
-              "accept-encoding": "gzip",
-              "user-agent": "ReactorNetty/1.1.22",
-              "host": "n8n.railway.internal:5678",
-              "accept": "*/*"
-            },
-            "params": {},
-            "query": {
-              "table": "options_property_status",
-              "label_column": "status",
-              "value_column": "status",
-              "sort_column": "order",
-              "sort_direction": "asc",
-              "return_additional_columns": "[\"status\",\"order\",\"pre_or_post\"]"
-            },
-            "body": {},
-            "webhookUrl": "https://s8s.up.railway.app/webhook/options",
-            "executionMode": "production"
-          }
-        }
-      ]
-    },
-    "versionId": "accc9428-46e7-4237-9a2e-346cdcbcb0bf",
+    "pinData": {},
+    "versionId": "1e963165-323a-45bd-b041-7df9fd8f1c39",
     "triggerCount": 1,
     "tags": []
   }
