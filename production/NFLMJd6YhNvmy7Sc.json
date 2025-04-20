@@ -1,11 +1,9 @@
 {
-  "active": false,
-  "connections": {},
   "createdAt": "2025-04-13T23:38:56.891Z",
-  "execution_id": "33429",
+  "updatedAt": "2025-04-14T11:50:05.470Z",
   "id": "NFLMJd6YhNvmy7Sc",
-  "meta": null,
   "name": "Twilio",
+  "active": false,
   "nodes": [
     {
       "parameters": {
@@ -24,14 +22,14 @@
       "webhookId": "bbf9f958-3d9a-4e24-828a-273cbd1a976e"
     }
   ],
-  "notes": "",
-  "pinData": {},
+  "connections": {},
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
+  "meta": null,
+  "pinData": {},
+  "versionId": "730a653a-d020-4839-95db-c279a68ad847",
   "triggerCount": 0,
-  "updatedAt": "2025-04-14T11:50:05.470Z",
-  "versionId": "730a653a-d020-4839-95db-c279a68ad847"
+  "tags": []
 }
