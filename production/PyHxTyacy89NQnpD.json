@@ -1,161 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "changelog": {
-      "main": [
-        [
-          {
-            "node": "otherColumns",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "scrape_photos",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter": {
-      "main": [
-        [
-          {
-            "node": "changelog",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "record_id",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "record_id": {
-      "main": [
-        [
-          {
-            "node": "compareData",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "compareData": {
-      "main": [
-        [
-          {
-            "node": "updated_column",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/scrape-property": {
-      "main": [
-        []
-      ]
-    },
-    "scrape_photos": {
-      "main": [
-        [
-          {
-            "node": "flow: scrape-photos",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "otherColumns": {
-      "main": [
-        [
-          {
-            "node": "flow: notification",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/telegram-property-notification": {
-      "main": [
-        [
-          {
-            "node": "/telegram-property-topic",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/supabase-updated-properties": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "updated_column": {
-      "main": [
-        [
-          {
-            "node": "Filter",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "flow: notification": {
-      "main": [
-        [
-          {
-            "node": "/telegram-property-notification",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "flow: scrape-photos": {
-      "main": [
-        [
-          {
-            "node": "/scrape-property",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/telegram-property-topic": {
-      "main": [
-        []
-      ]
-    }
-  },
   "createdAt": "2025-04-10T18:24:00.033Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-19T22:57:10.789Z",
   "id": "PyHxTyacy89NQnpD",
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
   "name": "/supabase-updated-properties",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -645,7 +493,164 @@
       "onError": "continueRegularOutput"
     }
   ],
-  "notes": "",
+  "connections": {
+    "changelog": {
+      "main": [
+        [
+          {
+            "node": "otherColumns",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "scrape_photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "changelog",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "record_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "record_id": {
+      "main": [
+        [
+          {
+            "node": "compareData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "compareData": {
+      "main": [
+        [
+          {
+            "node": "updated_column",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/scrape-property": {
+      "main": [
+        []
+      ]
+    },
+    "scrape_photos": {
+      "main": [
+        [
+          {
+            "node": "flow: scrape-photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "otherColumns": {
+      "main": [
+        [
+          {
+            "node": "flow: notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/telegram-property-notification": {
+      "main": [
+        [
+          {
+            "node": "/telegram-property-topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/supabase-updated-properties": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "updated_column": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "flow: notification": {
+      "main": [
+        [
+          {
+            "node": "/telegram-property-notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "flow: scrape-photos": {
+      "main": [
+        [
+          {
+            "node": "/scrape-property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/telegram-property-topic": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "pinData": {
     "/supabase-updated-properties": [
       {
@@ -831,14 +836,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1",
-    "callerPolicy": "workflowsFromSameOwner",
-    "errorWorkflow": "BsX0t3BBGp4TqwZw"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "3b8d94e4-1d92-4788-aadb-cb28834affb5",
   "triggerCount": 1,
-  "updatedAt": "2025-04-19T22:57:10.789Z",
-  "versionId": "3b8d94e4-1d92-4788-aadb-cb28834affb5"
+  "tags": []
 }
