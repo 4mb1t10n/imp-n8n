@@ -1,78 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "/options": {
-      "main": [
-        [
-          {
-            "node": "input",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "options": {
-      "main": [
-        [
-          {
-            "node": "optionsQuery",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "optionsQuery": {
-      "main": [
-        [
-          {
-            "node": "Get options",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get options": {
-      "main": [
-        [
-          {
-            "node": "format labels",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "format labels": {
-      "main": [
-        [
-          {
-            "node": "Respond w options",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "input": {
-      "main": [
-        [
-          {
-            "node": "options",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-09T21:56:53.280Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-09T21:57:06.621Z",
   "id": "fTKAncOcIe9g4i0P",
-  "meta": null,
   "name": "/options",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -231,7 +162,79 @@
       "name": "input"
     }
   ],
-  "notes": "",
+  "connections": {
+    "/options": {
+      "main": [
+        [
+          {
+            "node": "input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "options": {
+      "main": [
+        [
+          {
+            "node": "optionsQuery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "optionsQuery": {
+      "main": [
+        [
+          {
+            "node": "Get options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get options": {
+      "main": [
+        [
+          {
+            "node": "format labels",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "format labels": {
+      "main": [
+        [
+          {
+            "node": "Respond w options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "input": {
+      "main": [
+        [
+          {
+            "node": "options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
   "pinData": {
     "/options": [
       {
@@ -258,12 +261,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "accc9428-46e7-4237-9a2e-346cdcbcb0bf",
   "triggerCount": 1,
-  "updatedAt": "2025-04-09T21:57:06.621Z",
-  "versionId": "accc9428-46e7-4237-9a2e-346cdcbcb0bf"
+  "tags": []
 }
