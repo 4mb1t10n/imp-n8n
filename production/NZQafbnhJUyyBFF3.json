@@ -1,96 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "/tags": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch": {
-      "main": [
-        [
-          {
-            "node": "insert tag",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "delete all",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "split by tag": {
-      "main": [
-        [
-          {
-            "node": "Switch",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "delete all": {
-      "main": [
-        [
-          {
-            "node": "hasData?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "property_id",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "property_id": {
-      "main": [
-        [
-          {
-            "node": "split by tag",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "hasData?": {
-      "main": [
-        [
-          {
-            "node": "insert tag1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-03-30T08:52:17.379Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-09T21:01:24.323Z",
   "id": "NZQafbnhJUyyBFF3",
-  "meta": null,
   "name": "Tags",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -379,14 +292,99 @@
       "name": "hasData?"
     }
   ],
-  "notes": "",
-  "pinData": {},
+  "connections": {
+    "/tags": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "insert tag",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "delete all",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "split by tag": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "delete all": {
+      "main": [
+        [
+          {
+            "node": "hasData?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "property_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "property_id": {
+      "main": [
+        [
+          {
+            "node": "split by tag",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "hasData?": {
+      "main": [
+        [
+          {
+            "node": "insert tag1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
+  "meta": null,
+  "pinData": {},
+  "versionId": "1e963165-323a-45bd-b041-7df9fd8f1c39",
   "triggerCount": 1,
-  "updatedAt": "2025-04-09T21:01:24.323Z",
-  "versionId": "1e963165-323a-45bd-b041-7df9fd8f1c39"
+  "tags": []
 }
