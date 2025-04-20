@@ -1,286 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "Get Apify Data": {
-      "main": [
-        [
-          {
-            "node": "filterEmpty",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/apify-completed": {
-      "main": [
-        [
-          {
-            "node": "apify-completed",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "UUID": {
-      "main": [
-        [
-          {
-            "node": "GetImage",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Check if URL exists": {
-      "main": [
-        [
-          {
-            "node": "addedRecord",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "apify-completed": {
-      "main": [
-        [
-          {
-            "node": "Get Apify Data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Extract Photos": {
-      "main": [
-        [
-          {
-            "node": "/save-photos1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "scrape photos?": {
-      "main": [
-        [
-          {
-            "node": "Extract Photos",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/save-photos": {
-      "main": [
-        [
-          {
-            "node": "save-photos",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/save-photos1": {
-      "main": [
-        [
-          {
-            "node": "Scrape flag off3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update by URL": {
-      "main": [
-        [
-          {
-            "node": "hasData?1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update by Address": {
-      "main": [
-        [
-          {
-            "node": "hasData?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "filterEmpty": {
-      "main": [
-        [
-          {
-            "node": "process-apify-property >",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "hasData?1": {
-      "main": [
-        [
-          {
-            "node": "/telegram-property-topic",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Update by Address",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "hasData?": {
-      "main": [
-        [
-          {
-            "node": "/telegram-property-topic",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "S8 Notifications1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "hasUrl?": {
-      "main": [
-        [
-          {
-            "node": "Update by URL",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Update by Address",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "process-property": {
-      "main": [
-        [
-          {
-            "node": "hasUrl?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "process-property",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "addedRecord": {
-      "main": [
-        [
-          {
-            "node": "UUID",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "GetImage": {
-      "main": [
-        [
-          {
-            "node": "bucketUpload",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "bucketUpload": {
-      "main": [
-        [
-          {
-            "node": "Insert media",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "save-photos": {
-      "main": [
-        [
-          {
-            "node": "Check if URL exists",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/process-apify-property": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/telegram-property-topic": {
-      "main": [
-        [
-          {
-            "node": "scrape photos?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-07T23:39:17.248Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-15T08:30:48.482Z",
   "id": "W0y4robwZgmlRQL8",
-  "meta": null,
   "name": "/apify-completed",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -1275,7 +998,289 @@
       "onError": "continueRegularOutput"
     }
   ],
-  "notes": "",
+  "connections": {
+    "Get Apify Data": {
+      "main": [
+        [
+          {
+            "node": "filterEmpty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/apify-completed": {
+      "main": [
+        [
+          {
+            "node": "apify-completed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UUID": {
+      "main": [
+        [
+          {
+            "node": "GetImage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if URL exists": {
+      "main": [
+        [
+          {
+            "node": "addedRecord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "apify-completed": {
+      "main": [
+        [
+          {
+            "node": "Get Apify Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Photos": {
+      "main": [
+        [
+          {
+            "node": "/save-photos1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "scrape photos?": {
+      "main": [
+        [
+          {
+            "node": "Extract Photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/save-photos": {
+      "main": [
+        [
+          {
+            "node": "save-photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/save-photos1": {
+      "main": [
+        [
+          {
+            "node": "Scrape flag off3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update by URL": {
+      "main": [
+        [
+          {
+            "node": "hasData?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update by Address": {
+      "main": [
+        [
+          {
+            "node": "hasData?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "filterEmpty": {
+      "main": [
+        [
+          {
+            "node": "process-apify-property >",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "hasData?1": {
+      "main": [
+        [
+          {
+            "node": "/telegram-property-topic",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update by Address",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "hasData?": {
+      "main": [
+        [
+          {
+            "node": "/telegram-property-topic",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "S8 Notifications1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "hasUrl?": {
+      "main": [
+        [
+          {
+            "node": "Update by URL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update by Address",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "process-property": {
+      "main": [
+        [
+          {
+            "node": "hasUrl?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "process-property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "addedRecord": {
+      "main": [
+        [
+          {
+            "node": "UUID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetImage": {
+      "main": [
+        [
+          {
+            "node": "bucketUpload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "bucketUpload": {
+      "main": [
+        [
+          {
+            "node": "Insert media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "save-photos": {
+      "main": [
+        [
+          {
+            "node": "Check if URL exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/process-apify-property": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/telegram-property-topic": {
+      "main": [
+        [
+          {
+            "node": "scrape photos?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
+  },
+  "staticData": null,
+  "meta": null,
   "pinData": {
     "/process-apify-property": [
       {
@@ -1545,14 +1550,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1",
-    "callerPolicy": "workflowsFromSameOwner",
-    "errorWorkflow": "BsX0t3BBGp4TqwZw"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "67b66fb7-5317-4160-aeec-622b8fdd6854",
   "triggerCount": 2,
-  "updatedAt": "2025-04-15T08:30:48.482Z",
-  "versionId": "67b66fb7-5317-4160-aeec-622b8fdd6854"
+  "tags": []
 }
