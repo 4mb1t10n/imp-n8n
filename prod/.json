@@ -2,593 +2,259 @@
   "exec_id": "33494",
   "notes": "testing notes",
   "workflow": {
-    "createdAt": "2025-04-20T11:25:47.096Z",
-    "updatedAt": "2025-04-20T11:26:15.935Z",
-    "id": "KG9FOPrLb1K8f7IM",
-    "name": "Github OG",
-    "active": false,
+    "createdAt": "2025-04-10T00:56:33.675Z",
+    "updatedAt": "2025-04-10T18:18:40.262Z",
+    "id": "vKuRvtLXd2DYrRqE",
+    "name": "/records-get",
+    "active": true,
     "nodes": [
       {
         "parameters": {
-          "url": "={{ $json.download_url }}",
+          "dataToSave": {
+            "values": [
+              {
+                "key": "select_table",
+                "value": "={{ $json.select_table }}"
+              },
+              {
+                "key": "search_values",
+                "value": "={{ $json.search_values }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executionData",
+        "typeVersion": 1,
+        "position": [
+          -380,
+          -20
+        ],
+        "id": "33a305d0-84f7-4afd-98ec-f742423d3362",
+        "name": "record-get",
+        "notesInFlow": true,
+        "notes": "w: record-get"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Get the input data\nconst inputData = $input.first().json;\nconst table = inputData.select_table;\nconst columns = inputData.select_columns;\nconst searchColumns = inputData.search_columns;\nconst searchValues = inputData.search_values;\nconst sortColumn = inputData.sort_column;\nconst sortDirection = inputData.sort_direction;\n\n// Start with the base URL and table\nlet queryString = \"https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/\" + table;\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(input) {\n  try {\n    // Explicitly check for null and undefined\n    if (input === null || input === undefined) return [];\n    \n    if (typeof input === 'string') {\n      // If it's empty, return empty array\n      if (input.trim() === '') return [];\n      \n      try {\n        // Try to parse it as JSON\n        return JSON.parse(input);\n      } catch (e) {\n        // If parsing fails, assume it's a comma-separated string\n        return input.split(',').map(item => item.trim()).filter(item => item !== '');\n      }\n    } else if (Array.isArray(input)) {\n      return input;\n    }\n    return [];\n  } catch (error) {\n    // If any unexpected error occurs, return empty array as fallback\n    return [];\n  }\n}\n\n// Initialize query parameters\nlet params = [];\n\n// Process columns if they exist - add safety check\nlet processedColumns = [];\ntry {\n  processedColumns = processArrayInput(columns) || [];\n} catch (error) {\n  processedColumns = [];\n}\n\n// Now check the length with safety\nif (Array.isArray(processedColumns) && processedColumns.length > 0) {\n  params.push(\"select=\" + processedColumns.join(','));\n} else {\n  // If no columns specified, select all columns\n  params.push(\"select=*\");\n}\n\n// Process search columns and values - with similar safety checks\nlet processedSearchColumns = [];\nlet processedSearchValues = [];\ntry {\n  processedSearchColumns = processArrayInput(searchColumns) || [];\n  processedSearchValues = processArrayInput(searchValues) || [];\n} catch (error) {\n  processedSearchColumns = [];\n  processedSearchValues = [];\n}\n\n// Extra safety check before accessing length properties\nif (Array.isArray(processedSearchColumns) && Array.isArray(processedSearchValues) && \n    processedSearchColumns.length > 0 && processedSearchValues.length > 0) {\n  // Handle case where we have equal number of columns and values\n  if (processedSearchColumns.length === processedSearchValues.length) {\n    // Create individual filters for each column-value pair\n    for (let i = 0; i < processedSearchColumns.length; i++) {\n      params.push(`${processedSearchColumns[i]}=eq.${processedSearchValues[i]}`);\n    }\n  } else {\n    // If unequal lengths, just use as many pairs as we can\n    const pairCount = Math.min(processedSearchColumns.length, processedSearchValues.length);\n    for (let i = 0; i < pairCount; i++) {\n      params.push(`${processedSearchColumns[i]}=eq.${processedSearchValues[i]}`);\n    }\n  }\n}\n\n// Process sorting if sort_column exists\nif (sortColumn) {\n  // Validate sort direction, default to asc if invalid\n  const direction = (sortDirection && ['asc', 'desc'].includes(sortDirection.toLowerCase())) \n    ? sortDirection.toLowerCase() \n    : 'asc';\n  \n  // Add order parameter\n  params.push(`order=${sortColumn}.${direction}`);\n}\n\n// Add parameters to query string\nif (params.length > 0) {\n  queryString += \"?\" + params.join('&');\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -160,
+          -20
+        ],
+        "id": "1de1ab47-19df-4409-9aa8-158fb35b2982",
+        "name": "recordGetQuery"
+      },
+      {
+        "parameters": {
+          "url": "={{ $json.queryString }}",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "supabaseApi",
           "options": {}
         },
-        "id": "da9624e6-fb11-430d-8f03-7281f34b2c93",
-        "name": "Get File",
         "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
         "position": [
-          1140,
-          310
+          60,
+          -20
         ],
-        "typeVersion": 4.2
+        "id": "db074b96-d41f-4255-87ee-a226fe419c6b",
+        "name": "Get record",
+        "alwaysOutputData": true,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "KwKIAL5ixwLlPeZY",
+            "name": "Supabase Imposbl Header Auth"
+          },
+          "supabaseApi": {
+            "id": "hN8Yj6BvjJqfKMnH",
+            "name": "Rent Ready Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "allIncomingItems",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.1,
+        "position": [
+          280,
+          -20
+        ],
+        "id": "b21376a3-e683-43f4-9379-8cf3f3d82ae2",
+        "name": "Respond w Data"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "03333ad5-f3d0-4513-be78-79daf97f9346",
+                "name": "select_table",
+                "value": "={{ $json.query.select_table }}",
+                "type": "string"
+              },
+              {
+                "id": "03c1d52a-2479-4478-8a62-1e67da1040d9",
+                "name": "select_columns",
+                "value": "={{ $json.query.select_columns }}",
+                "type": "string"
+              },
+              {
+                "id": "43b1625d-e963-45b5-abe3-f07d086c6382",
+                "name": "search_columns",
+                "value": "={{ $json.query.search_columns }}",
+                "type": "string"
+              },
+              {
+                "id": "8b8ff294-77f2-4086-81a5-6d93ef36a208",
+                "name": "search_values",
+                "value": "={{ $json.query.search_values }}",
+                "type": "string"
+              },
+              {
+                "id": "4fc09576-ee3e-4347-b2d6-5f33021f2591",
+                "name": "sort_column",
+                "value": "={{ $json.query.sort_column }}",
+                "type": "string"
+              },
+              {
+                "id": "27fd7c10-729a-43ae-8a91-3ffa85a3881c",
+                "name": "sort_direction",
+                "value": "={{ $json.query.sort_direction }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -600,
+          -20
+        ],
+        "id": "3d51f716-001e-4d32-b7a2-2adae3c74a6d",
+        "name": "inputs"
+      },
+      {
+        "parameters": {
+          "path": "records-get",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -1040,
+          -20
+        ],
+        "id": "4a7e86cb-5e46-4157-a663-9ef733483172",
+        "name": "/records-get",
+        "webhookId": "f838d05f-0c99-42dd-a099-c038893f8b84"
       },
       {
         "parameters": {
           "conditions": {
             "options": {
-              "version": 1,
-              "leftValue": "",
               "caseSensitive": true,
-              "typeValidation": "strict"
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
             },
             "conditions": [
               {
-                "id": "45ce825e-9fa6-430c-8931-9aaf22c42585",
+                "id": "1e446b65-af8b-4eeb-a5c6-eeff2aed5082",
+                "leftValue": "",
+                "rightValue": "",
                 "operator": {
                   "type": "string",
-                  "operation": "empty",
-                  "singleValue": true
-                },
-                "leftValue": "={{ $json.content }}",
-                "rightValue": ""
-              },
-              {
-                "id": "9619a55f-7fb1-4f24-b1a7-7aeb82365806",
-                "operator": {
-                  "type": "string",
-                  "operation": "notExists",
-                  "singleValue": true
-                },
-                "leftValue": "={{ $json.error }}",
-                "rightValue": ""
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
               }
             ],
             "combinator": "and"
           },
           "options": {}
         },
-        "id": "00a99c34-5a34-4cc1-b9e1-d3287c8cea0e",
-        "name": "If file too large",
-        "type": "n8n-nodes-base.if",
+        "type": "n8n-nodes-base.filter",
+        "typeVersion": 2.2,
         "position": [
-          920,
-          385
+          -820,
+          -20
         ],
-        "typeVersion": 2
-      },
-      {
-        "parameters": {},
-        "id": "a1590c72-af95-4a24-98c8-33f2620519e2",
-        "name": "Merge Items",
-        "type": "n8n-nodes-base.merge",
-        "position": [
-          1360,
-          460
-        ],
-        "typeVersion": 2
-      },
-      {
-        "parameters": {
-          "dataType": "string",
-          "value1": "={{$json.github_status}}",
-          "rules": {
-            "rules": [
-              {
-                "value2": "same"
-              },
-              {
-                "value2": "different",
-                "output": 1
-              },
-              {
-                "value2": "new",
-                "output": 2
-              }
-            ]
-          }
-        },
-        "id": "5578ae5e-ad25-44d7-b905-c215a2c80720",
-        "name": "Check Status",
-        "type": "n8n-nodes-base.switch",
-        "position": [
-          1800,
-          439
-        ],
-        "typeVersion": 1
-      },
-      {
-        "parameters": {},
-        "id": "82ef6519-2028-4e6e-9891-438187f55da7",
-        "name": "Same file - Do nothing",
-        "type": "n8n-nodes-base.noOp",
-        "position": [
-          2020,
-          260
-        ],
-        "typeVersion": 1
-      },
-      {
-        "parameters": {},
-        "id": "05a227e2-e134-4135-9072-c4ac36410452",
-        "name": "File is different",
-        "type": "n8n-nodes-base.noOp",
-        "position": [
-          2020,
-          460
-        ],
-        "typeVersion": 1
-      },
-      {
-        "parameters": {},
-        "id": "f5ba9317-2227-48e9-bcaa-7d08f567ca4a",
-        "name": "File is new",
-        "type": "n8n-nodes-base.noOp",
-        "position": [
-          2020,
-          660
-        ],
-        "typeVersion": 1
-      },
-      {
-        "parameters": {
-          "resource": "file",
-          "owner": {
-            "__rl": true,
-            "mode": "name",
-            "value": "={{ $('Globals').item.json.repo.owner }}"
-          },
-          "repository": {
-            "__rl": true,
-            "mode": "name",
-            "value": "={{ $('Globals').item.json.repo.name }}"
-          },
-          "filePath": "={{ $('Globals').item.json.repo.path }}{{$('Process').first().json.id}}.json",
-          "fileContent": "={{$('isDiffOrNew').item.json[\"n8n_data_stringy\"]}}",
-          "commitMessage": "=Workflow: {{$('Process').first().json.name}} Exec_ID: {{ $('Process').first().json.execution_id }} ({{$json.github_status}})"
-        },
-        "id": "9cf19f6d-76b1-477a-9730-cb2bdc1bea11",
-        "name": "Create new file",
-        "type": "n8n-nodes-base.github",
-        "position": [
-          2240,
-          660
-        ],
-        "typeVersion": 1,
-        "webhookId": "a6f111c5-e0ee-4ea3-ae10-238b196a0a9c",
-        "credentials": {
-          "githubApi": {
-            "id": "bqnRc8rGYs6JvqnN",
-            "name": "4mb1t10n"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "resource": "file",
-          "operation": "edit",
-          "owner": {
-            "__rl": true,
-            "mode": "name",
-            "value": "={{ $('Globals').item.json.repo.owner }}"
-          },
-          "repository": {
-            "__rl": true,
-            "mode": "name",
-            "value": "={{ $('Globals').item.json.repo.name }}"
-          },
-          "filePath": "={{ $('Globals').item.json.repo.path }}{{$('Process').first().json.id}}.json",
-          "fileContent": "={{$('isDiffOrNew').item.json[\"n8n_data_stringy\"]}}",
-          "commitMessage": "=Workflow: {{$('Process').first().json.name}} Exec_ID: {{ $('Process').first().json.execution_id }} ({{$json.github_status}})"
-        },
-        "id": "647cf769-24d0-49c3-b2fe-e384c74356e7",
-        "name": "Edit existing file",
-        "type": "n8n-nodes-base.github",
-        "position": [
-          2240,
-          460
-        ],
-        "typeVersion": 1,
-        "webhookId": "9a1ab061-a633-4ebc-a606-c1535b01faf7",
-        "credentials": {
-          "githubApi": {
-            "id": "bqnRc8rGYs6JvqnN",
-            "name": "4mb1t10n"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "resource": "file",
-          "operation": "get",
-          "owner": {
-            "__rl": true,
-            "mode": "name",
-            "value": "={{ $json.repo.owner }}"
-          },
-          "repository": {
-            "__rl": true,
-            "mode": "name",
-            "value": "={{ $json.repo.name }}"
-          },
-          "filePath": "={{ $json.repo.path }}{{ $('Process').item.json.id }}.json",
-          "asBinaryProperty": false,
-          "additionalParameters": {}
-        },
-        "id": "b56da838-3428-42ed-87bd-89995c5694e6",
-        "name": "Get file data",
-        "type": "n8n-nodes-base.github",
-        "position": [
-          700,
-          385
-        ],
-        "typeVersion": 1,
-        "alwaysOutputData": true,
-        "webhookId": "9d7b3dd7-e24c-4320-bb36-ecc81680aa74",
-        "credentials": {
-          "githubApi": {
-            "id": "bqnRc8rGYs6JvqnN",
-            "name": "4mb1t10n"
-          }
-        },
-        "continueOnFail": true
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "6cf546c5-5737-4dbd-851b-17d68e0a3780",
-                "name": "repo.owner",
-                "type": "string",
-                "value": "4mb1t10n"
-              },
-              {
-                "id": "452efa28-2dc6-4ea3-a7a2-c35d100d0382",
-                "name": "repo.name",
-                "type": "string",
-                "value": "n8n-backups"
-              },
-              {
-                "id": "81c4dc54-86bf-4432-a23f-22c7ea831e74",
-                "name": "repo.path",
-                "type": "string",
-                "value": "prod/"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "id": "88eb7f2b-dff9-4377-88f5-c5cb396a4284",
-        "name": "Globals",
-        "type": "n8n-nodes-base.set",
-        "position": [
-          480,
-          385
-        ],
-        "typeVersion": 3.4
-      },
-      {
-        "parameters": {
-          "jsCode": "const orderJsonKeys = (jsonObj) => {\n  const ordered = {};\n  Object.keys(jsonObj).sort().forEach(key => {\n    ordered[key] = jsonObj[key];\n  });\n  return ordered;\n}\n\n// Check if file returned with content\nif (Object.keys($input.all()[0].json).includes(\"content\")) {\n  // Decode base64 content and parse JSON\n  const origWorkflow = JSON.parse(Buffer.from($input.all()[0].json.content, 'base64').toString());\n  const n8nWorkflow = $input.all()[1].json;\n  \n  // Order JSON objects\n  const orderedOriginal = orderJsonKeys(origWorkflow);\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n\n  // Determine difference\n  if (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) {\n    $input.all()[0].json.github_status = \"same\";\n  } else {\n    $input.all()[0].json.github_status = \"different\";\n    $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n  }\n  $input.all()[0].json.content_decoded = orderedOriginal;\n// No file returned / new workflow\n} else if (Object.keys($input.all()[0].json).includes(\"data\")) {\n  const origWorkflow = JSON.parse($input.all()[0].json.data);\n  const n8nWorkflow = $input.all()[1].json;\n  \n  // Order JSON objects\n  const orderedOriginal = orderJsonKeys(origWorkflow);\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n\n  // Determine difference\n  if (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) {\n    $input.all()[0].json.github_status = \"same\";\n  } else {\n    $input.all()[0].json.github_status = \"different\";\n    $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n  }\n  $input.all()[0].json.content_decoded = orderedOriginal;\n\n} else {\n  // Order JSON object\n  const n8nWorkflow = $input.all()[1].json;\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n  \n  // Proper formatting\n  $input.all()[0].json.github_status = \"new\";\n  $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n}\n\n// Return items\nreturn $input.all();"
-        },
-        "id": "e5b5d557-60b2-488c-90be-8f6547b73115",
-        "name": "isDiffOrNew",
-        "type": "n8n-nodes-base.code",
-        "position": [
-          1580,
-          460
-        ],
-        "typeVersion": 1
-      },
-      {
-        "parameters": {
-          "inputSource": "passthrough"
-        },
-        "id": "a6739089-ee0b-4a4e-8924-38e0ca2a8b59",
-        "name": "Process",
-        "type": "n8n-nodes-base.executeWorkflowTrigger",
-        "position": [
-          260,
-          460
-        ],
-        "typeVersion": 1.1
-      },
-      {
-        "parameters": {},
-        "type": "n8n-nodes-base.manualTrigger",
-        "typeVersion": 1,
-        "position": [
-          260,
-          -200
-        ],
-        "id": "73bdc852-ae24-4dde-91b7-85bafbe3b898",
-        "name": "Backup to Github"
-      },
-      {
-        "parameters": {
-          "rule": {
-            "interval": [
-              {
-                "field": "hours",
-                "hoursInterval": 2
-              }
-            ]
-          }
-        },
-        "id": "419d12d2-756f-4725-96df-cad9d5b9a8a4",
-        "name": "Chron",
-        "type": "n8n-nodes-base.scheduleTrigger",
-        "position": [
-          260,
-          0
-        ],
-        "typeVersion": 1.2
-      },
-      {
-        "parameters": {
-          "filters": {},
-          "requestOptions": {}
-        },
-        "id": "7f454eee-0182-48da-9c48-66a5804b11fe",
-        "name": "getWorkflows",
-        "type": "n8n-nodes-base.n8n",
-        "position": [
-          480,
-          -100
-        ],
-        "typeVersion": 1,
-        "credentials": {
-          "n8nApi": {
-            "id": "qY8OP9lpzoxVpSpc",
-            "name": "n8n-production"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "workflowId": {
-            "__rl": true,
-            "mode": "id",
-            "value": "={{ $workflow.id }}"
-          },
-          "workflowInputs": {
-            "mappingMode": "defineBelow",
-            "value": {},
-            "matchingColumns": [],
-            "schema": [],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": true
-          },
-          "mode": "each",
-          "options": {
-            "waitForSubWorkflow": false
-          }
-        },
-        "id": "b56196ac-2c31-4172-877a-1c3fe62736a3",
-        "name": "Loop",
-        "type": "n8n-nodes-base.executeWorkflow",
-        "position": [
-          920,
-          -100
-        ],
-        "typeVersion": 1.2
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "fbf8509c-35ab-4137-8470-4a04c6135c93",
-                "name": "execution_id",
-                "value": "={{ $execution.id }}",
-                "type": "string"
-              },
-              {
-                "id": "ab4c0e24-cfd2-4a2c-a632-81c3d11629ef",
-                "name": "notes",
-                "value": "",
-                "type": "string"
-              }
-            ]
-          },
-          "includeOtherFields": true,
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          700,
-          -100
-        ],
-        "id": "9eb3be0c-414f-4789-94d1-5f094069885b",
-        "name": "appendVars"
+        "id": "d221d934-afb8-47a9-866c-7ecb3802ade9",
+        "name": "Filter"
       }
     ],
     "connections": {
-      "Get File": {
+      "record-get": {
         "main": [
           [
             {
-              "node": "Merge Items",
+              "node": "recordGetQuery",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "File is new": {
+      "recordGetQuery": {
         "main": [
           [
             {
-              "node": "Create new file",
+              "node": "Get record",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Merge Items": {
+      "Get record": {
         "main": [
           [
             {
-              "node": "isDiffOrNew",
+              "node": "Respond w Data",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Check Status": {
+      "inputs": {
         "main": [
           [
             {
-              "node": "Same file - Do nothing",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "File is different",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "File is new",
+              "node": "record-get",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Get file data": {
+      "/records-get": {
         "main": [
           [
             {
-              "node": "If file too large",
+              "node": "Filter",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "File is different": {
+      "Filter": {
         "main": [
           [
             {
-              "node": "Edit existing file",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "If file too large": {
-        "main": [
-          [
-            {
-              "node": "Get File",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "Merge Items",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Globals": {
-        "main": [
-          [
-            {
-              "node": "Get file data",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "isDiffOrNew": {
-        "main": [
-          [
-            {
-              "node": "Check Status",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Process": {
-        "main": [
-          [
-            {
-              "node": "Globals",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Merge Items",
-              "type": "main",
-              "index": 1
-            }
-          ]
-        ]
-      },
-      "Backup to Github": {
-        "main": [
-          [
-            {
-              "node": "getWorkflows",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Chron": {
-        "main": [
-          [
-            {
-              "node": "getWorkflows",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "getWorkflows": {
-        "main": [
-          [
-            {
-              "node": "appendVars",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "appendVars": {
-        "main": [
-          [
-            {
-              "node": "Loop",
+              "node": "inputs",
               "type": "main",
               "index": 0
             }
@@ -600,12 +266,35 @@
       "executionOrder": "v1"
     },
     "staticData": null,
-    "meta": {
-      "templateCredsSetupCompleted": true
+    "meta": null,
+    "pinData": {
+      "/records-get": [
+        {
+          "json": {
+            "headers": {
+              "accept-encoding": "gzip",
+              "user-agent": "ReactorNetty/1.1.22",
+              "host": "n8n.railway.internal:5678",
+              "accept": "*/*"
+            },
+            "params": {},
+            "query": {
+              "select_table": "changelog",
+              "select_columns": "null",
+              "search_columns": "[\"property_id\",\"updated_column\"]",
+              "search_values": "[624,\"followup_notes\"]",
+              "sort_column": "id",
+              "sort_direction": "asc"
+            },
+            "body": {},
+            "webhookUrl": "https://s8s.up.railway.app/webhook/records-get",
+            "executionMode": "production"
+          }
+        }
+      ]
     },
-    "pinData": {},
-    "versionId": "857b918e-c751-4be1-9a74-2c9c9ae54be7",
-    "triggerCount": 0,
+    "versionId": "9bfd1b24-198a-4a4e-bea0-720f6945a281",
+    "triggerCount": 1,
     "tags": []
   }
 }
