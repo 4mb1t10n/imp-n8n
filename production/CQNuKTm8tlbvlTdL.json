@@ -1,96 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "changelog1": {
-      "main": [
-        [
-          {
-            "node": "Filter statuses1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "compare data1": {
-      "main": [
-        [
-          {
-            "node": "Filter1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter1": {
-      "main": [
-        [
-          {
-            "node": "changelog1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter statuses1": {
-      "main": [
-        [
-          {
-            "node": "Supabase1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "tasks": {
-      "main": [
-        [
-          {
-            "node": "compare data1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "update or new task": {
-      "main": [
-        [
-          {
-            "node": "tasks",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "tasks1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/updated-tasks": {
-      "main": [
-        [
-          {
-            "node": "update or new task",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-10T18:25:17.355Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-13T18:22:21.965Z",
   "id": "CQNuKTm8tlbvlTdL",
-  "meta": null,
   "name": "/updated-tasks",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -420,14 +333,99 @@
       "alwaysOutputData": true
     }
   ],
-  "notes": "",
-  "pinData": {},
+  "connections": {
+    "changelog1": {
+      "main": [
+        [
+          {
+            "node": "Filter statuses1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "compare data1": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "changelog1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter statuses1": {
+      "main": [
+        [
+          {
+            "node": "Supabase1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tasks": {
+      "main": [
+        [
+          {
+            "node": "compare data1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update or new task": {
+      "main": [
+        [
+          {
+            "node": "tasks",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "tasks1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/updated-tasks": {
+      "main": [
+        [
+          {
+            "node": "update or new task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
+  "meta": null,
+  "pinData": {},
+  "versionId": "8fe8226e-23c6-42f7-9ed0-f138b169d4ef",
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T18:22:21.965Z",
-  "versionId": "8fe8226e-23c6-42f7-9ed0-f138b169d4ef"
+  "tags": []
 }
