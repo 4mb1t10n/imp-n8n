@@ -1,97 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "Get tasks": {
-      "main": [
-        [
-          {
-            "node": "empty?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "tasksQuery": {
-      "main": [
-        [
-          {
-            "node": "Get tasks",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "add status": {
-      "main": [
-        [
-          {
-            "node": "add status color",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "empty?": {
-      "main": [
-        [
-          {
-            "node": "Respond w empty tasks",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "add status",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "add status color": {
-      "main": [
-        [
-          {
-            "node": "Respond w tasks",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/get-tasks": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "tasksQuery",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-03-30T16:18:22.495Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-10T07:25:31.846Z",
   "id": "K30PWfMkvHZTKYC3",
-  "meta": null,
   "name": "/get-tasks",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -350,7 +262,98 @@
       "notes": "inputs"
     }
   ],
-  "notes": "",
+  "connections": {
+    "Get tasks": {
+      "main": [
+        [
+          {
+            "node": "empty?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tasksQuery": {
+      "main": [
+        [
+          {
+            "node": "Get tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "add status": {
+      "main": [
+        [
+          {
+            "node": "add status color",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "empty?": {
+      "main": [
+        [
+          {
+            "node": "Respond w empty tasks",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "add status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "add status color": {
+      "main": [
+        [
+          {
+            "node": "Respond w tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/get-tasks": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "tasksQuery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
   "pinData": {
     "/get-tasks": [
       {
@@ -383,12 +386,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "61ee9b7f-ddcb-435d-9e41-8e5753281a22",
   "triggerCount": 1,
-  "updatedAt": "2025-04-10T07:25:31.846Z",
-  "versionId": "61ee9b7f-ddcb-435d-9e41-8e5753281a22"
+  "tags": []
 }
