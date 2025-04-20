@@ -1,74 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "/records-update": {
-      "main": [
-        [
-          {
-            "node": "auth",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "query",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "auth": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "query": {
-      "main": [
-        [
-          {
-            "node": "update supabase",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "update supabase": {
-      "main": [
-        [
-          {
-            "node": "200",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "400",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-09T22:09:05.191Z",
-  "execution_id": "33429",
+  "updatedAt": "2025-04-13T18:16:30.556Z",
   "id": "A6cVOcVAnKpYxIyA",
-  "meta": null,
   "name": "/records-update",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -281,7 +216,75 @@
       "onError": "continueErrorOutput"
     }
   ],
-  "notes": "",
+  "connections": {
+    "/records-update": {
+      "main": [
+        [
+          {
+            "node": "auth",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "auth": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "query": {
+      "main": [
+        [
+          {
+            "node": "update supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update supabase": {
+      "main": [
+        [
+          {
+            "node": "200",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "400",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
   "pinData": {
     "/records-update": [
       {
@@ -310,12 +313,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "fe009c9b-f053-4876-a183-efa8c82f4ad0",
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T18:16:30.556Z",
-  "versionId": "fe009c9b-f053-4876-a183-efa8c82f4ad0"
+  "tags": []
 }
