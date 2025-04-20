@@ -1,36 +1,9 @@
 {
-  "active": false,
-  "connections": {
-    "When clicking ‘Test workflow’": {
-      "main": [
-        [
-          {
-            "node": "Supabase",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Supabase": {
-      "main": [
-        [
-          {
-            "node": "Execute Workflow",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-13T18:57:12.457Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-13T19:00:14.144Z",
   "id": "TSrbuVtIiVYqHAs4",
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
   "name": "delete all where set_to_delete = true",
+  "active": false,
   "nodes": [
     {
       "parameters": {},
@@ -120,12 +93,40 @@
       "name": "Execute Workflow"
     }
   ],
-  "notes": "",
-  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "195219b4-b318-4c87-91e9-587bdd9f08a1",
+  "triggerCount": 0,
   "tags": [
     {
       "createdAt": "2025-04-13T18:59:40.219Z",
@@ -133,8 +134,5 @@
       "id": "YZXlwPv6KomPFiGE",
       "name": "manual"
     }
-  ],
-  "triggerCount": 0,
-  "updatedAt": "2025-04-13T19:00:14.144Z",
-  "versionId": "195219b4-b318-4c87-91e9-587bdd9f08a1"
+  ]
 }
