@@ -1,52 +1,9 @@
 {
-  "active": false,
-  "connections": {
-    "Delete Original": {
-      "main": [
-        [
-          {
-            "node": "delete media record",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "delete media record": {
-      "main": [
-        []
-      ]
-    },
-    "notEmpty": {
-      "main": [
-        [
-          {
-            "node": "Delete Original",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/delete-media": {
-      "main": [
-        [
-          {
-            "node": "notEmpty",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-02-20T01:47:15.690Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-13T18:56:41.050Z",
   "id": "SyURwWx9V6i1uw5s",
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
   "name": "/delete-media",
+  "active": false,
   "nodes": [
     {
       "parameters": {
@@ -156,15 +113,45 @@
       "name": "/delete-media"
     }
   ],
-  "notes": "",
-  "pinData": {
-    "/delete-media": [
-      {
-        "json": {
-          "storage_url": "https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/properties/8965/photos/bc6b9e8a-22f7-4ea4-ae03-fbfec2d76941.jpeg"
-        }
-      }
-    ]
+  "connections": {
+    "Delete Original": {
+      "main": [
+        [
+          {
+            "node": "delete media record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "delete media record": {
+      "main": [
+        []
+      ]
+    },
+    "notEmpty": {
+      "main": [
+        [
+          {
+            "node": "Delete Original",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/delete-media": {
+      "main": [
+        [
+          {
+            "node": "notEmpty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
   },
   "settings": {
     "executionOrder": "v1"
@@ -174,6 +161,20 @@
       "recurrenceRules": []
     }
   },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "/delete-media": [
+      {
+        "json": {
+          "storage_url": "https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/properties/8965/photos/bc6b9e8a-22f7-4ea4-ae03-fbfec2d76941.jpeg"
+        }
+      }
+    ]
+  },
+  "versionId": "059cb57a-2c2a-4ebd-8573-7ffb5c79ab6d",
+  "triggerCount": 1,
   "tags": [
     {
       "createdAt": "2025-02-05T04:17:48.805Z",
@@ -181,8 +182,5 @@
       "id": "A5FFOIHtLN0hZFZh",
       "name": "micro"
     }
-  ],
-  "triggerCount": 1,
-  "updatedAt": "2025-04-13T18:56:41.050Z",
-  "versionId": "059cb57a-2c2a-4ebd-8573-7ffb5c79ab6d"
+  ]
 }
