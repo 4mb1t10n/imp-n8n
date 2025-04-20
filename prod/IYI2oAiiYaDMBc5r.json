@@ -1,135 +1,135 @@
 {
   "active": true,
   "connections": {
-    "/telegram-property-notification": {
+    "/telegram-property-notification1": {
       "main": [
         [
           {
-            "node": "host",
+            "node": "host1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "host": {
+    "host1": {
       "main": [
         [
           {
-            "node": "inputs",
+            "node": "inputs1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "inputs": {
+    "inputs1": {
       "main": [
         [
           {
-            "node": "property_id",
+            "node": "property_id1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "property_id": {
+    "property_id1": {
       "main": [
         [
           {
-            "node": "view_properties",
+            "node": "view_properties2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "topicExists?": {
+    "view_properties2": {
       "main": [
         [
           {
-            "node": "sendMessage",
+            "node": "notificationMessage1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "topicExists?1": {
+      "main": [
+        [
+          {
+            "node": "sendMessage2",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "/telegram-property-topic",
+            "node": "/telegram-property-topic1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Switch": {
+    "Switch1": {
       "main": [
         [
           {
-            "node": "updateRealtor",
+            "node": "updateRealtor1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "add later",
+            "node": "add later1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "notificationMessage": {
+    "notificationMessage1": {
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "Switch1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "/telegram-property-topic": {
+    "/telegram-property-topic1": {
       "main": [
         [
           {
-            "node": "view_properties1",
+            "node": "view_properties3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "view_properties1": {
+    "view_properties3": {
       "main": [
         [
           {
-            "node": "sendMessage1",
+            "node": "sendMessage3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "updateRealtor": {
+    "updateRealtor1": {
       "main": [
         [
           {
-            "node": "topicExists?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "view_properties": {
-      "main": [
-        [
-          {
-            "node": "notificationMessage",
+            "node": "topicExists?1",
             "type": "main",
             "index": 0
           }
@@ -138,7 +138,7 @@
     }
   },
   "createdAt": "2025-04-10T23:17:08.415Z",
-  "execution_id": "33132",
+  "execution_id": "33160",
   "id": "IYI2oAiiYaDMBc5r",
   "meta": {
     "templateCredsSetupCompleted": true
@@ -154,11 +154,11 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        0,
-        -220
+        -1980,
+        880
       ],
-      "id": "1cecc921-1d4b-423e-bbe7-a401b4e0e425",
-      "name": "/telegram-property-notification",
+      "id": "e83ebad0-a41d-4c07-8d6b-938aa784a448",
+      "name": "/telegram-property-notification1",
       "webhookId": "40b3e4cc-8ea6-4aad-ad8c-5d6d8c09bc1a"
     },
     {
@@ -189,11 +189,11 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        220,
-        -220
+        -1760,
+        880
       ],
-      "id": "8be6a8c3-5849-439c-9cae-f41005dccce4",
-      "name": "host"
+      "id": "88245838-f416-4603-961f-2f43802c9ccf",
+      "name": "host1"
     },
     {
       "parameters": {
@@ -236,11 +236,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        440,
-        -220
+        -1540,
+        880
       ],
-      "id": "adc3e8a2-717a-45a4-8c18-ff12da15a189",
-      "name": "inputs"
+      "id": "4595ad1f-5082-4b9f-b7ed-3311e540e538",
+      "name": "inputs1"
     },
     {
       "parameters": {
@@ -256,11 +256,39 @@
       "type": "n8n-nodes-base.executionData",
       "typeVersion": 1,
       "position": [
-        660,
-        -220
+        -1320,
+        880
       ],
-      "id": "5e3a2831-656e-4ef8-8ab0-1c64f4bf23a4",
-      "name": "property_id"
+      "id": "7fbfee98-f543-48b7-929a-98e1e10389c2",
+      "name": "property_id1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "view_properties",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.property_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -1100,
+        880
+      ],
+      "id": "4889f6a8-81d2-47cf-aa4f-02b8106a89c0",
+      "name": "view_properties2",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
     },
     {
       "parameters": {
@@ -274,7 +302,7 @@
           "conditions": [
             {
               "id": "bbcc66a2-94c1-4ac3-a4af-cc0d6c2f3613",
-              "leftValue": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}",
+              "leftValue": "={{ $('view_properties2').item.json.telegram_realtor_topic_id }}",
               "rightValue": "",
               "operator": {
                 "type": "number",
@@ -290,11 +318,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1760,
-        -320
+        -220,
+        780
       ],
-      "id": "19d80b81-8983-4959-a764-c521cb652424",
-      "name": "topicExists?"
+      "id": "e60a6caf-aa31-4c05-b201-4af292b0a5d6",
+      "name": "topicExists?1"
     },
     {
       "parameters": {
@@ -310,7 +338,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $('view_properties').item.json.realtor_assigned != null && $('view_properties').item.json.telegram_realtor_forum != null}}",
+                    "leftValue": "={{ $('view_properties2').item.json.realtor_assigned != null && $('view_properties2').item.json.telegram_realtor_forum != null}}",
                     "rightValue": "",
                     "operator": {
                       "type": "boolean",
@@ -336,7 +364,7 @@
                 "conditions": [
                   {
                     "id": "f72e8246-1f49-41a1-9626-27e8a77b9e83",
-                    "leftValue": "={{ $('view_properties').item.json.telegram_internal_forum }}",
+                    "leftValue": "={{ $('view_properties2').item.json.telegram_internal_forum }}",
                     "rightValue": "",
                     "operator": {
                       "type": "number",
@@ -360,22 +388,22 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        1320,
-        -220
+        -660,
+        880
       ],
-      "id": "08c5f122-86f3-45e4-b72b-1dbc410fa96a",
-      "name": "Switch"
+      "id": "b681e3c1-0573-43b8-86fe-71dbcd588277",
+      "name": "Switch1"
     },
     {
       "parameters": {},
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        1540,
-        -120
+        -440,
+        980
       ],
-      "id": "2891f9b6-ef9e-4b29-b9e2-206e4d7b8089",
-      "name": "add later"
+      "id": "c0bf8d31-cef5-412f-a4e2-ff358d09d073",
+      "name": "add later1"
     },
     {
       "parameters": {
@@ -384,7 +412,7 @@
             {
               "id": "c1db4e89-a671-404d-8faa-0e7093adba27",
               "name": "notificationMessage",
-              "value": "={{ $('inputs').item.json.updated_column\n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ')\n}} ➡️ {{ $('inputs').item.json.updated_value  \n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ') }}\nby: {{ $('inputs').item.json.updated_by }}",
+              "value": "={{ $('inputs1').item.json.updated_column\n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ')\n}} ➡️ {{ $('inputs1').item.json.updated_value  \n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ') }}\nby: {{ $('inputs1').item.json.updated_by }}",
               "type": "string"
             }
           ]
@@ -394,11 +422,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1100,
-        -220
+        -880,
+        880
       ],
-      "id": "f8359fbb-8ab3-4205-8afa-f1b647173249",
-      "name": "notificationMessage"
+      "id": "98cd2c04-1755-4596-a50b-c6c96710d185",
+      "name": "notificationMessage1"
     },
     {
       "parameters": {
@@ -409,7 +437,7 @@
           "parameters": [
             {
               "name": "property_id",
-              "value": "={{ $('view_properties').item.json.id }}"
+              "value": "={{ $('view_properties2').item.json.id }}"
             }
           ]
         },
@@ -418,30 +446,30 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1980,
-        -220
+        0,
+        880
       ],
-      "id": "18651580-5b68-4aca-8afb-092ee285fd19",
-      "name": "/telegram-property-topic"
+      "id": "9d520ae8-d69a-47f2-989d-68b49d56d23d",
+      "name": "/telegram-property-topic1"
     },
     {
       "parameters": {
-        "chatId": "=-100{{ $('view_properties').item.json.telegram_realtor_forum }}",
-        "text": "={{ $('notificationMessage').item.json.notificationMessage }}",
+        "chatId": "=-100{{ $('view_properties2').item.json.telegram_realtor_forum }}",
+        "text": "={{ $('notificationMessage1').item.json.notificationMessage }}",
         "additionalFields": {
           "appendAttribution": false,
           "parse_mode": "HTML",
-          "message_thread_id": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}"
+          "message_thread_id": "={{ $('view_properties2').item.json.telegram_realtor_topic_id }}"
         }
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1980,
-        -420
+        0,
+        680
       ],
-      "id": "dae99dcf-3a24-457c-83ae-b3f068971166",
-      "name": "sendMessage",
+      "id": "2f857c51-5888-47c4-b74b-3095af323fa0",
+      "name": "sendMessage2",
       "webhookId": "265c260b-3fa1-45fb-9936-b9ad7b40310e",
       "credentials": {
         "telegramApi": {
@@ -452,22 +480,22 @@
     },
     {
       "parameters": {
-        "chatId": "=-100{{ $('view_properties').item.json.telegram_realtor_forum }}",
-        "text": "={{ $('notificationMessage').item.json.notificationMessage }}",
+        "chatId": "=-100{{ $('view_properties2').item.json.telegram_realtor_forum }}",
+        "text": "={{ $('notificationMessage1').item.json.notificationMessage }}",
         "additionalFields": {
           "appendAttribution": false,
           "parse_mode": "HTML",
-          "message_thread_id": "={{ $('view_properties').item.json.telegram_realtor_topic_id }}"
+          "message_thread_id": "={{ $('view_properties2').item.json.telegram_realtor_topic_id }}"
         }
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        2420,
-        -220
+        440,
+        880
       ],
-      "id": "749a9c06-da4a-47cb-9eb1-c95281ec0913",
-      "name": "sendMessage1",
+      "id": "e8027199-ccc8-43b4-954f-eff76dd2bb5a",
+      "name": "sendMessage3",
       "webhookId": "265c260b-3fa1-45fb-9936-b9ad7b40310e",
       "credentials": {
         "telegramApi": {
@@ -492,11 +520,11 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2200,
-        -220
+        220,
+        880
       ],
-      "id": "5623387e-083a-4c80-8cb2-ba920a8e0a7b",
-      "name": "view_properties1",
+      "id": "863b2b45-97c6-4d51-b431-c7484a15dc54",
+      "name": "view_properties3",
       "credentials": {
         "supabaseApi": {
           "id": "hN8Yj6BvjJqfKMnH",
@@ -516,7 +544,7 @@
           "conditions": [
             {
               "id": "57088120-5090-460c-86eb-40f9c19f5880",
-              "leftValue": "={{ $('view_properties').item.json.update_realtor_topic }}",
+              "leftValue": "={{ $('view_properties2').item.json.update_realtor_topic }}",
               "rightValue": "",
               "operator": {
                 "type": "boolean",
@@ -532,56 +560,16 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        1540,
-        -320
+        -440,
+        780
       ],
-      "id": "92de3122-0de6-4e59-a65c-d8e87a35b560",
-      "name": "updateRealtor"
-    },
-    {
-      "parameters": {
-        "operation": "select",
-        "schema": {
-          "__rl": true,
-          "mode": "list",
-          "value": "public"
-        },
-        "table": {
-          "__rl": true,
-          "value": "view_properties",
-          "mode": "list",
-          "cachedResultName": "view_properties"
-        },
-        "returnAll": true,
-        "where": {
-          "values": [
-            {
-              "column": "id",
-              "value": "={{ $json.property_id }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        880,
-        -220
-      ],
-      "id": "6ec43cd2-62a7-4ddd-a0f3-64ea653d8cb0",
-      "name": "view_properties",
-      "credentials": {
-        "postgres": {
-          "id": "NNsR1zePyz4wtNPy",
-          "name": "PostgreS8S"
-        }
-      }
+      "id": "36df20ee-dd83-4428-8ed2-5a4ed167633c",
+      "name": "updateRealtor1"
     }
   ],
   "notes": "",
   "pinData": {
-    "/telegram-property-notification": [
+    "/telegram-property-notification1": [
       {
         "json": {
           "headers": {
@@ -615,6 +603,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-19T11:51:01.974Z",
-  "versionId": "d0caf3fb-55ef-4a55-a43f-e74a287d11d4"
+  "updatedAt": "2025-04-19T23:09:55.735Z",
+  "versionId": "76cf41ee-e05a-4783-896e-fbdd453b2136"
 }
