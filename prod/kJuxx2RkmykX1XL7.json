@@ -273,7 +273,7 @@
     }
   },
   "createdAt": "2025-04-07T23:41:11.388Z",
-  "execution_id": "33132",
+  "execution_id": "33160",
   "id": "kJuxx2RkmykX1XL7",
   "meta": null,
   "name": "/telegram-property-topic",
@@ -311,8 +311,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2060,
-        555
+        -2120,
+        740
       ],
       "id": "8323e042-99d0-4c2a-8c66-0861b75c1163",
       "name": "Inputs",
@@ -335,8 +335,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -1620,
-        555
+        -1680,
+        740
       ],
       "id": "a1edb09b-292c-4d38-951b-4e14f9a66284",
       "name": "view_properties",
@@ -391,8 +391,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1400,
-        555
+        -1460,
+        740
       ],
       "id": "c687ada1-0e04-4ddb-b115-ec2880951a42",
       "name": "pinned message"
@@ -411,8 +411,8 @@
       "type": "n8n-nodes-base.executionData",
       "typeVersion": 1,
       "position": [
-        -1840,
-        555
+        -1900,
+        740
       ],
       "id": "74fff488-e29c-495c-b0f0-449ffe5da7f0",
       "name": "property_id",
@@ -545,8 +545,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        -1180,
-        555
+        -1240,
+        740
       ],
       "id": "bee378d7-b6b5-401e-aae6-5c917040cd74",
       "name": "Switch"
@@ -825,8 +825,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -2280,
-        555
+        -2340,
+        740
       ],
       "id": "2545193b-2bbb-4df0-8715-f03c2dba39bb",
       "name": "/telegram-property-topic",
@@ -1088,6 +1088,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-15T14:34:19.930Z",
-  "versionId": "8f18f675-2899-4850-b974-595952f2b948"
+  "updatedAt": "2025-04-19T22:57:35.768Z",
+  "versionId": "6ff363db-1a33-4db6-a6a6-a3dd2af9ca48"
 }
