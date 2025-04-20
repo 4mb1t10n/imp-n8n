@@ -1,69 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "Inputs1": {
-      "main": [
-        [
-          {
-            "node": "telegram-task-topic",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/telegram-task-topic": {
-      "main": [
-        [
-          {
-            "node": "Inputs1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "telegram-task-topic": {
-      "main": [
-        [
-          {
-            "node": "view_tasks",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "view_tasks": {
-      "main": [
-        [
-          {
-            "node": "completed?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "completed?": {
-      "main": [
-        [
-          {
-            "node": "close topic",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-03-27T17:13:45.285Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-13T18:22:44.984Z",
   "id": "Ra5SH2xD27dFki1a",
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
   "name": "/telegram-task-topic",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -205,7 +145,70 @@
       "name": "close topic"
     }
   ],
-  "notes": "",
+  "connections": {
+    "Inputs1": {
+      "main": [
+        [
+          {
+            "node": "telegram-task-topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/telegram-task-topic": {
+      "main": [
+        [
+          {
+            "node": "Inputs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "telegram-task-topic": {
+      "main": [
+        [
+          {
+            "node": "view_tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "view_tasks": {
+      "main": [
+        [
+          {
+            "node": "completed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "completed?": {
+      "main": [
+        [
+          {
+            "node": "close topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "pinData": {
     "/telegram-task-topic": [
       {
@@ -229,12 +232,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "ce667b5a-f600-4903-a7ae-d4464ea2ccd1",
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T18:22:44.984Z",
-  "versionId": "ce667b5a-f600-4903-a7ae-d4464ea2ccd1"
+  "tags": []
 }
