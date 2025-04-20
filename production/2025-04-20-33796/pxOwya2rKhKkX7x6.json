@@ -1,0 +1,422 @@
+{
+  "createdAt": "2025-02-20T01:50:18.875Z",
+  "updatedAt": "2025-04-20T14:53:02.543Z",
+  "id": "pxOwya2rKhKkX7x6",
+  "name": "Github New",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "workflow",
+              "type": "object"
+            },
+            {
+              "name": "exec_id"
+            },
+            {
+              "name": "folder"
+            },
+            {
+              "name": "env"
+            }
+          ]
+        }
+      },
+      "id": "01a1f3cc-74d0-483a-91a6-af0e32d8c325",
+      "name": "Process",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -1600,
+        1300
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        840
+      ],
+      "id": "78d0f555-119e-4827-b183-47112f46d5c2",
+      "name": "Backup to Github"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 4
+            }
+          ]
+        }
+      },
+      "id": "30dadefe-d2c9-44fc-ae25-e18e0e54d808",
+      "name": "Chron",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        -1600,
+        1040
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "filters": {},
+        "requestOptions": {}
+      },
+      "id": "60bd5bfa-dec4-415f-86c9-5f24262680ff",
+      "name": "getWorkflows",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        -940,
+        940
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "n8nApi": {
+          "id": "qY8OP9lpzoxVpSpc",
+          "name": "n8n-production"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "pxOwya2rKhKkX7x6",
+          "mode": "list",
+          "cachedResultName": "Github New"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "workflow": "={{ $('getWorkflows').item.json }}",
+            "exec_id": "={{$execution.id}}",
+            "folder": "={{ $('set').item.json.folder }}",
+            "env": "={{ $('folder').item.json.env }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "workflow",
+              "displayName": "workflow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "object",
+              "removed": false
+            },
+            {
+              "id": "exec_id",
+              "displayName": "exec_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "folder",
+              "displayName": "folder",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "env",
+              "displayName": "env",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "547503bd-0c53-4fce-9d32-7ec6b747d7e4",
+      "name": "Loop",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "position": [
+        -720,
+        940
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "=4mb1t10n",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "=n8n-backups",
+          "mode": "name"
+        },
+        "filePath": "={{ $('Process').item.json.env }}/{{ $('Process').item.json.folder }}/{{$('Process').item.json.workflow.id}}.json",
+        "fileContent": "={{ JSON.stringify($('Process').item.json.workflow, null, 2) }}",
+        "commitMessage": "={{ $('Process').item.json.workflow.name }}"
+      },
+      "id": "ab617a5c-9598-4629-bfeb-7b7a643a5175",
+      "name": "Create",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        -1160,
+        1300
+      ],
+      "typeVersion": 1,
+      "webhookId": "32148ebb-3673-4c50-9b27-c8e585bc7388",
+      "credentials": {
+        "githubApi": {
+          "id": "bqnRc8rGYs6JvqnN",
+          "name": "4mb1t10n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "flow",
+              "value": "child"
+            },
+            {
+              "key": "exec",
+              "value": "={{ $json.exec_id }}"
+            },
+            {
+              "key": "folder",
+              "value": "={{ $json.folder }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -1380,
+        1300
+      ],
+      "id": "6061ca59-3027-45fb-af3a-0efd72f8ac70",
+      "name": "flow",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "folder",
+              "value": "={{ $json.folder }}"
+            },
+            {
+              "key": "flow",
+              "value": "parent"
+            },
+            {
+              "key": "exec",
+              "value": "={{ $execution.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -1160,
+        940
+      ],
+      "id": "cb28e171-d68f-4fb8-a47b-9c5ad9c11f7a",
+      "name": "folder",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2894bada-4d24-48e8-ad24-f07afff0b33b",
+              "name": "folder",
+              "value": "={{ new Date().toISOString().split('T')[0] }}-{{ $execution.id }}",
+              "type": "string"
+            },
+            {
+              "id": "3a87f6ea-0af6-454a-8ccf-e5a7cc0013ca",
+              "name": "env",
+              "value": "={{ $env.RAILWAY_ENVIRONMENT_NAME }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1380,
+        940
+      ],
+      "id": "367339bf-190d-4ee4-b52d-8b6a90e09c13",
+      "name": "set"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "name",
+              "value": "={{ $('Process').item.json.workflow.name }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -940,
+        1300
+      ],
+      "id": "3be292e9-e1fe-4510-b4d1-77d82983ab5f",
+      "name": "name"
+    }
+  ],
+  "connections": {
+    "Process": {
+      "main": [
+        [
+          {
+            "node": "flow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Backup to Github": {
+      "main": [
+        [
+          {
+            "node": "set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chron": {
+      "main": [
+        [
+          {
+            "node": "set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getWorkflows": {
+      "main": [
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop": {
+      "main": [
+        []
+      ]
+    },
+    "Create": {
+      "main": [
+        [
+          {
+            "node": "name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "flow": {
+      "main": [
+        [
+          {
+            "node": "Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "folder": {
+      "main": [
+        [
+          {
+            "node": "getWorkflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set": {
+      "main": [
+        [
+          {
+            "node": "folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": [
+        20
+      ]
+    },
+    "node:Chron": {
+      "recurrenceRules": [
+        8
+      ]
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "13536beb-b97e-4633-8104-5b0bf6b3f967",
+  "triggerCount": 1,
+  "tags": []
+}
