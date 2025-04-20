@@ -1,0 +1,501 @@
+{
+  "createdAt": "2025-04-10T23:03:39.829Z",
+  "updatedAt": "2025-04-19T22:57:37.816Z",
+  "id": "rxu3hF8jQaz70eQU",
+  "name": "/scrape-all & /scrape-property",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "view_properties",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "scrape",
+              "condition": "is",
+              "keyValue": "={{ true }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        740,
+        240
+      ],
+      "id": "cf2282ce-e505-4521-9dc6-9912735a7167",
+      "name": "view_properties",
+      "executeOnce": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 12
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        340
+      ],
+      "id": "b80de1f9-8d23-457f-ba40-83754454ca45",
+      "name": "chron"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "scrape-all",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        80,
+        140
+      ],
+      "id": "4466534b-1987-457a-a283-aeff5f05840a",
+      "name": "/scrape-all",
+      "webhookId": "154f4509-2188-4e23-9e73-91e8fb8c4482"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "w",
+              "value": "scrape-all"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        520,
+        140
+      ],
+      "id": "4f2243d1-ad67-4209-8705-5459331a9e4c",
+      "name": "scrape-all"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "scrape-property",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -140,
+        -60
+      ],
+      "id": "d0ed3b5d-2ddd-42d1-9805-5fe4648c61c0",
+      "name": "/scrape-property",
+      "webhookId": "154f4509-2188-4e23-9e73-91e8fb8c4482"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "96c216b6-4894-441f-affc-e7af7067dc31",
+              "leftValue": "={{ $json.headers.host }}",
+              "rightValue": "n8n.railway.internal:5678",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        80,
+        -60
+      ],
+      "id": "26a188eb-1120-4740-916b-caf9d6a9f208",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "80503561-cc0d-457a-8475-76abec8de570",
+              "name": "property_id",
+              "value": "={{ $json.query.property_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        300,
+        -60
+      ],
+      "id": "c8a68cc4-10a9-4213-8810-7daee5ec5581",
+      "name": "inputs"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "property_id",
+              "value": "={{ $json.property_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        520,
+        -60
+      ],
+      "id": "42826e70-1f75-4659-aad4-7667373c0dcf",
+      "name": "property_id"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "view_properties",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('inputs').item.json.property_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        740,
+        -60
+      ],
+      "id": "58ee685d-91df-473f-b042-2c903e6121a3",
+      "name": "view_properties1",
+      "executeOnce": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nconst formattedRequest = {\n  addresses: [],\n  extractBuildingUnits: \"for_sale\",\n  propertyStatus: \"FOR_SALE\",\n  startUrls: []\n};\n\nitems.forEach(item => {\n  // Access the properties through the json property in n8n\n  const property = item.json;\n  \n  if (property.zillow_url && property.zillow_url.includes('zillow.com')) {\n    formattedRequest.startUrls.push({\n      url: property.zillow_url,\n      method: \"GET\"\n    });\n  } else {\n    const fullAddress = `${property.address_street}, ${property.address_city}, ${property.address_state} ${property.address_zip}`;\n    formattedRequest.addresses.push(fullAddress);\n  }\n});\n\nreturn formattedRequest;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        140
+      ],
+      "id": "e379c4e2-0fb5-4c05-b493-56c42df844eb",
+      "name": "apifyRequest"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "96c216b6-4894-441f-affc-e7af7067dc31",
+              "leftValue": "={{ $json.headers.host }}",
+              "rightValue": "n8n.railway.internal:5678",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        300,
+        140
+      ],
+      "id": "6edfdef3-05bc-415b-a003-6308add858e5",
+      "name": "Filter1"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "w",
+              "value": "chron"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        520,
+        340
+      ],
+      "id": "03e0e3c9-422d-440a-87f9-b387f2df1cf1",
+      "name": "chron1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/maxcopell~zillow-detail-scraper/runs",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "apify_api_eBcJIT4Z3eJhNHRL1UFtko2cVhff8i4fqE6a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.toJsonString() }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "6ea61b01-670f-4aa5-952b-a9cb8fe6503f",
+      "name": "/apify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        140
+      ],
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "alwaysOutputData": false,
+      "maxTries": 2,
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "connections": {
+    "view_properties": {
+      "main": [
+        [
+          {
+            "node": "apifyRequest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chron": {
+      "main": [
+        [
+          {
+            "node": "chron1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/scrape-all": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "scrape-all": {
+      "main": [
+        [
+          {
+            "node": "view_properties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/scrape-property": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "property_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "property_id": {
+      "main": [
+        [
+          {
+            "node": "view_properties1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "view_properties1": {
+      "main": [
+        [
+          {
+            "node": "apifyRequest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "apifyRequest": {
+      "main": [
+        [
+          {
+            "node": "/apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "scrape-all",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chron1": {
+      "main": [
+        [
+          {
+            "node": "view_properties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
+  },
+  "staticData": {
+    "node:chron": {
+      "recurrenceRules": [
+        0
+      ]
+    }
+  },
+  "meta": null,
+  "pinData": {
+    "/scrape-property": [
+      {
+        "json": {
+          "headers": {
+            "accept-encoding": "gzip",
+            "user-agent": "ReactorNetty/1.1.22",
+            "host": "n8n.railway.internal:5678",
+            "accept": "*/*",
+            "content-type": "application/json",
+            "content-length": "0"
+          },
+          "params": {},
+          "query": {
+            "property_id": "800"
+          },
+          "body": {},
+          "webhookUrl": "https://s8s.up.railway.app/webhook/scrape-property",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "versionId": "566ff90c-e791-49f5-be15-6dee39f6a133",
+  "triggerCount": 3,
+  "tags": [
+    {
+      "createdAt": "2025-04-19T11:43:08.117Z",
+      "updatedAt": "2025-04-19T11:43:08.117Z",
+      "id": "N6i2kFUE3jSwSod8",
+      "name": "NEEDS_UPDATE"
+    }
+  ]
+}
