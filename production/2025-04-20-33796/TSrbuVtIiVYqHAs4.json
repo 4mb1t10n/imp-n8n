@@ -1,0 +1,138 @@
+{
+  "createdAt": "2025-04-13T18:57:12.457Z",
+  "updatedAt": "2025-04-13T19:00:14.144Z",
+  "id": "TSrbuVtIiVYqHAs4",
+  "name": "delete all where set_to_delete = true",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e6271699-2f47-41eb-9d8f-7fb4f2bb2fd3",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "media",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "set_to_delete",
+              "condition": "is",
+              "keyValue": "TRUE"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "262c59ad-1dcf-4789-80a8-eef74d1f85dc",
+      "name": "Supabase",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "SyURwWx9V6i1uw5s",
+          "mode": "list",
+          "cachedResultName": "/delete-media"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "storage_url": "={{ $json.storage_url }}"
+          },
+          "matchingColumns": [
+            "storage_url"
+          ],
+          "schema": [
+            {
+              "id": "storage_url",
+              "displayName": "storage_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        440,
+        0
+      ],
+      "id": "89030fc2-f564-4dce-8247-764a7ae48f61",
+      "name": "Execute Workflow"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "195219b4-b318-4c87-91e9-587bdd9f08a1",
+  "triggerCount": 0,
+  "tags": [
+    {
+      "createdAt": "2025-04-13T18:59:40.219Z",
+      "updatedAt": "2025-04-13T18:59:40.219Z",
+      "id": "YZXlwPv6KomPFiGE",
+      "name": "manual"
+    }
+  ]
+}
