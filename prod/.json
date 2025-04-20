@@ -2,28 +2,99 @@
   "exec_id": "33494",
   "notes": "testing notes",
   "workflow": {
-    "createdAt": "2025-04-09T17:35:25.999Z",
-    "updatedAt": "2025-04-19T22:56:14.172Z",
-    "id": "NuBvDuvO8iBrCC2X",
-    "name": "/properties GET",
+    "createdAt": "2025-03-27T17:13:45.285Z",
+    "updatedAt": "2025-04-13T18:22:44.984Z",
+    "id": "Ra5SH2xD27dFki1a",
+    "name": "/telegram-task-topic",
     "active": true,
     "nodes": [
       {
         "parameters": {
-          "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/view_properties?{{ $json.queryString }}",
-          "authentication": "predefinedCredentialType",
-          "nodeCredentialType": "supabaseApi",
+          "assignments": {
+            "assignments": [
+              {
+                "id": "911f1f08-f39e-41f3-a162-80bdfee1e456",
+                "name": "task_id",
+                "value": "={{ $json.query.task_id }}",
+                "type": "string"
+              }
+            ]
+          },
           "options": {}
         },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.2,
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
         "position": [
-          580,
-          -60
+          -1640,
+          360
         ],
-        "id": "78049c28-4888-4609-98e5-d7544693b554",
-        "name": "Get properties",
-        "alwaysOutputData": true,
+        "id": "63958375-4ad6-4712-9af7-498619d8881e",
+        "name": "Inputs1",
+        "notesInFlow": false,
+        "notes": "supabase_telegram_column = is where the topic ID should be saved"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "telegram-task-topic",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -1860,
+          360
+        ],
+        "id": "a4354e33-031f-4e1e-a077-cbda31064423",
+        "name": "/telegram-task-topic",
+        "webhookId": "3f9043e8-ad23-43ab-8af2-949b6d21a108"
+      },
+      {
+        "parameters": {
+          "dataToSave": {
+            "values": [
+              {
+                "key": "task_id",
+                "value": "={{ $json.task_id }}"
+              },
+              {
+                "key": "w",
+                "value": "telegram-task-topic"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executionData",
+        "typeVersion": 1,
+        "position": [
+          -1420,
+          360
+        ],
+        "id": "f5a433f1-bea5-4675-a2f7-b1b74cc16c03",
+        "name": "telegram-task-topic",
+        "notesInFlow": true
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "tableId": "view_tasks",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "keyValue": "={{ $json.task_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          -1200,
+          360
+        ],
+        "id": "6cfdfa14-bafe-444b-921e-0bc7e0b86636",
+        "name": "view_tasks",
         "credentials": {
           "supabaseApi": {
             "id": "hN8Yj6BvjJqfKMnH",
@@ -33,156 +104,138 @@
       },
       {
         "parameters": {
-          "jsCode": "// Get the input data\nconst inputData = $input.first().json;\n// Start with the select parameter\nlet queryString = \"select=id, address_street, address_zip, beds, property_status, realtor_status, realtor_dwelling_type, realtor_list_price, offer_price, followup_notes, timestamp_scraped, zillow_url, color, tags, safmr, cover_photo_url, address_city, address_state, starred, telegram_internal_forum, telegram_realtor_forum, telegram_realtor_topic_id, contingent_listing_type\";\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(input) {\n  // Add explicit check for null/undefined\n  if (input === null || input === undefined) {\n    return [];\n  }\n  \n  if (typeof input === 'string') {\n    try {\n      // Try to parse it as JSON\n      return JSON.parse(input);\n    } catch (e) {\n      // If parsing fails, return empty array\n      return [];\n    }\n  } else if (Array.isArray(input)) {\n    return input;\n  }\n  return [];\n}\n\n// Process internal_statuses\nif (inputData.internal_statuses) {\n  const statuses = processArrayInput(inputData.internal_statuses);\n  if (statuses && statuses.length > 0) {  // Add check for null before accessing length\n    const statusList = \"(\" + statuses.map(status => `\"${status}\"`).join(\",\") + \")\";\n    queryString += \"&property_status=in.\" + statusList;\n  }\n}\n\n// Process market_statuses - MODIFIED to handle the special case for PENDING\nif (inputData.market_statuses) {\n  const marketStatuses = processArrayInput(inputData.market_statuses);\n  if (marketStatuses && marketStatuses.length > 0) {\n    // Check if \"PENDING\" is in the market_statuses\n    const hasPending = marketStatuses.includes(\"PENDING\");\n    \n    // Build the query to match any of the market statuses\n    const marketStatusList = \"(\" + marketStatuses.map(status => `\"${status}\"`).join(\",\") + \")\";\n    \n    if (hasPending) {\n      // If PENDING is included, match either realtor_status in market_statuses OR contingent_listing_type is UNDER_CONTRACT\n      queryString += \"&or=(realtor_status.in.\" + marketStatusList + \",contingent_listing_type.eq.UNDER_CONTRACT)\";\n    } else {\n      // Otherwise, just match realtor_status in market_statuses\n      queryString += \"&realtor_status=in.\" + marketStatusList;\n    }\n  }\n}\n\n// Process dwellings\nif (inputData.dwellings) {\n  const dwellings = processArrayInput(inputData.dwellings);\n  if (dwellings && dwellings.length > 0) {  // Add check for null before accessing length\n    const dwellingsList = \"(\" + dwellings.map(dwelling => `\"${dwelling}\"`).join(\",\") + \")\";\n    queryString += \"&realtor_dwelling_type=in.\" + dwellingsList;\n  }\n}\n\n// Process tags\nif (inputData.tags) {\n  const tags = processArrayInput(inputData.tags);\n  if (tags && tags.length > 0) {  // Add check for null before accessing length\n    const tagsList = \"{\" + tags.map(tag => `${tag}`).join(\",\") + \"}\";\n    queryString += \"&tags=ov.\" + tagsList;\n  }\n}\n\n// Process starred parameter - only add it if it's explicitly provided\nif (inputData.starred === true || inputData.starred === false) {\n  // Only add if it's an explicit boolean\n  queryString += `&starred=is.${inputData.starred}`;\n} else if (typeof inputData.starred === 'string' && inputData.starred.trim() !== '') {\n  // If it's a non-empty string, convert to boolean only if it's \"true\" or \"false\"\n  const normalizedValue = inputData.starred.toLowerCase().trim();\n  if (normalizedValue === 'true' || normalizedValue === 'false') {\n    queryString += `&starred=is.${normalizedValue === 'true'}`;\n  }\n}\n\n// Process search query and search columns\nif (inputData.search_query && inputData.search_query.trim() !== '') {\n  const searchColumns = processArrayInput(inputData.search_columns);\n  if (searchColumns && searchColumns.length > 0) {  // Add check for null before accessing length\n    // Create search conditions for each column\n    const conditions = searchColumns.map(column => \n      `${column}.ilike.*${inputData.search_query}*`\n    );\n    \n    // Join conditions with commas and wrap in parentheses\n    const orCondition = \"(\" + conditions.join(\",\") + \")\";\n    \n    // Add to query string\n    queryString += \"&or=\" + orCondition;\n  }\n}\n\n// Handle sorting with default and secondary sorting\nlet sortDirection = 'asc'; // Default sort direction\nif (inputData.sort_direction && \n    (inputData.sort_direction.toLowerCase() === 'desc' || \n     inputData.sort_direction.toLowerCase() === 'asc')) {\n  sortDirection = inputData.sort_direction.toLowerCase();\n}\nif (inputData.sort_column) {\n  // Primary sort by provided column, secondary sort by id in same direction\n  queryString += `&order=${inputData.sort_column}.${sortDirection},id.${sortDirection}`;\n} else {\n  // Default sort by property_status and then id\n  queryString += \"&order=property_status.asc,id.asc\";\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          360,
-          -60
-        ],
-        "id": "9a7c3320-0425-4030-9cba-9cc7f6407c66",
-        "name": "propertiesQuery"
-      },
-      {
-        "parameters": {
-          "respondWith": "allIncomingItems",
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "71f22a68-cddd-467c-8d83-a598894be042",
+                "leftValue": "={{ $json.completed }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
           "options": {}
         },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.1,
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
         "position": [
-          800,
-          -60
+          -980,
+          360
         ],
-        "id": "af68a0fb-a4c0-4543-9b6e-00379cf6238b",
-        "name": "respond with properties"
+        "id": "3d2391b4-d409-4bd9-8b29-68276227fea3",
+        "name": "completed?"
       },
       {
-        "parameters": {
-          "path": "get-properties",
-          "responseMode": "responseNode",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2,
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
         "position": [
-          -80,
-          -60
+          -760,
+          360
         ],
-        "id": "534e4af8-b3a4-4296-ac22-31824b267fe0",
-        "name": "/get-properties",
-        "webhookId": "07639ed8-3eb6-45c4-808a-4f563e7dd0ff"
-      },
-      {
-        "parameters": {
-          "mode": "raw",
-          "jsonOutput": "={{\n  {\n    \"internal_statuses\": $json.query.internal_statuses,\n    \"market_statuses\": $json.query.market_statuses,\n    \"tags\": $json.query.tags,\n    \"dwellings\": $json.query.dwellings, \n\t\"starred\": $json.query.starred,\n    \"sort_column\": $json.query.sort_column,\n    \"sort_direction\": $json.query.sort_direction,\n    \"search_query\": $json.query.search_query,\n    \"search_columns\": $json.query.search_columns,\n    \"user\": $json.query.user\n  }\n}}",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          140,
-          -60
-        ],
-        "id": "739c9169-cbca-41a5-87eb-53e652b37b37",
-        "name": "inputs",
-        "notesInFlow": false,
-        "notes": "All of the \"filter_\" inputs are optional"
+        "id": "477071fd-4cb7-43cb-97d6-4c8ba65892f1",
+        "name": "close topic"
       }
     ],
     "connections": {
-      "Get properties": {
+      "Inputs1": {
         "main": [
           [
             {
-              "node": "respond with properties",
+              "node": "telegram-task-topic",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "propertiesQuery": {
+      "/telegram-task-topic": {
         "main": [
           [
             {
-              "node": "Get properties",
+              "node": "Inputs1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "/get-properties": {
+      "telegram-task-topic": {
         "main": [
           [
             {
-              "node": "inputs",
+              "node": "view_tasks",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "inputs": {
+      "view_tasks": {
         "main": [
           [
             {
-              "node": "propertiesQuery",
+              "node": "completed?",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "respond with properties": {
+      "completed?": {
         "main": [
-          []
+          [
+            {
+              "node": "close topic",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       }
     },
     "settings": {
-      "executionOrder": "v1",
-      "callerPolicy": "workflowsFromSameOwner",
-      "errorWorkflow": "BsX0t3BBGp4TqwZw"
+      "executionOrder": "v1"
     },
     "staticData": null,
     "meta": {
       "templateCredsSetupCompleted": true
     },
     "pinData": {
-      "/get-properties": [
+      "/telegram-task-topic": [
         {
           "json": {
             "headers": {
-              "accept-encoding": "gzip",
-              "user-agent": "ReactorNetty/1.1.22",
+              "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
+              "user-agent": "axios/1.7.4",
+              "accept-encoding": "gzip, compress, deflate, br",
               "host": "n8n.railway.internal:5678",
-              "accept": "*/*"
+              "connection": "keep-alive",
+              "content-length": "0"
             },
             "params": {},
             "query": {
-              "internal_statuses": "[\"Off Market Deal\",\"Monitor\",\"Decide\",\"Walkthrough\",\"Offer\",\"Inspection\",\"Closing\",\"Construction\",\"Advertising\",\"Rented\",\"Maintenance \",\"Vacating\",\"Evicting\",\"Selling\",\"Sold\",\"Auction\",\"Archive\"]",
-              "market_statuses": "[]",
-              "dwellings": "null",
-              "tags": "null",
-              "user": "alex+dev@imposbl.com",
-              "sort_column": "property_status",
-              "sort_direction": "asc",
-              "search_query": "",
-              "search_columns": "[\"property_status\",\"address_street\",\"followup_notes\"]",
-              "starred": "null"
+              "task_id": "155"
             },
             "body": {},
-            "webhookUrl": "https://s8s.up.railway.app/webhook/get-properties",
+            "webhookUrl": "https://s8s.up.railway.app/webhook/telegram-task-topic",
             "executionMode": "production"
           }
         }
       ]
     },
-    "versionId": "3006cc4a-4200-449f-ad73-ea0f982ac2be",
+    "versionId": "ce667b5a-f600-4903-a7ae-d4464ea2ccd1",
     "triggerCount": 1,
     "tags": []
   }
