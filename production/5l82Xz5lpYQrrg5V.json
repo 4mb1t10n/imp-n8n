@@ -1,261 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "Validate Address": {
-      "main": [
-        [
-          {
-            "node": "Filter",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "400 - invalid address",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter": {
-      "main": [
-        [
-          {
-            "node": "loopInput",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "apifyQuery": {
-      "main": [
-        [
-          {
-            "node": "/callApify",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "400 - invalid address": {
-      "main": [
-        []
-      ]
-    },
-    "updated property": {
-      "main": [
-        [
-          {
-            "node": "apifyQuery",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs-properties-post": {
-      "main": [
-        [
-          {
-            "node": "properties-post",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "properties-post": {
-      "main": [
-        [
-          {
-            "node": "splitProperties",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "splitProperties": {
-      "main": [
-        [
-          {
-            "node": "address not empty",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "address not empty": {
-      "main": [
-        [
-          {
-            "node": "Validate Address",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "update tags?": {
-      "main": [
-        [
-          {
-            "node": "/tags",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
-      ]
-    },
-    "/tags": {
-      "main": [
-        []
-      ]
-    },
-    "loopInput": {
-      "main": [
-        [
-          {
-            "node": "process-validated-property>",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Try create new": {
-      "main": [
-        [
-          {
-            "node": "updated property",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Try to update",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Try to update": {
-      "main": [
-        [
-          {
-            "node": "updated property",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "S8 Notifications",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "S8 Notifications": {
-      "main": [
-        []
-      ]
-    },
-    "/process-validated-property": {
-      "main": [
-        [
-          {
-            "node": "inputs1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "process-validated-property>": {
-      "main": [
-        [
-          {
-            "node": "200",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "process-validated-property": {
-      "main": [
-        [
-          {
-            "node": "Try create new",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs1": {
-      "main": [
-        [
-          {
-            "node": "process-validated-property",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/new-property": {
-      "main": [
-        [
-          {
-            "node": "inputs-properties-post",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
-      ]
-    },
-    "/telegram-property-topic": {
-      "main": [
-        [
-          {
-            "node": "update tags?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/callApify": {
-      "main": [
-        [
-          {
-            "node": "/telegram-property-topic",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-03-28T08:58:34.161Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-19T11:43:16.921Z",
   "id": "5l82Xz5lpYQrrg5V",
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
   "name": "/properties POST",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -907,7 +655,281 @@
       "onError": "continueRegularOutput"
     }
   ],
-  "notes": "",
+  "connections": {
+    "Validate Address": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "400 - invalid address",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "loopInput",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "apifyQuery": {
+      "main": [
+        [
+          {
+            "node": "/callApify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "400 - invalid address": {
+      "main": [
+        []
+      ]
+    },
+    "updated property": {
+      "main": [
+        [
+          {
+            "node": "apifyQuery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs-properties-post": {
+      "main": [
+        [
+          {
+            "node": "properties-post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "properties-post": {
+      "main": [
+        [
+          {
+            "node": "splitProperties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "splitProperties": {
+      "main": [
+        [
+          {
+            "node": "address not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "address not empty": {
+      "main": [
+        [
+          {
+            "node": "Validate Address",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update tags?": {
+      "main": [
+        [
+          {
+            "node": "/tags",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "/tags": {
+      "main": [
+        []
+      ]
+    },
+    "loopInput": {
+      "main": [
+        [
+          {
+            "node": "process-validated-property>",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Try create new": {
+      "main": [
+        [
+          {
+            "node": "updated property",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Try to update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Try to update": {
+      "main": [
+        [
+          {
+            "node": "updated property",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "S8 Notifications",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "S8 Notifications": {
+      "main": [
+        []
+      ]
+    },
+    "/process-validated-property": {
+      "main": [
+        [
+          {
+            "node": "inputs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "process-validated-property>": {
+      "main": [
+        [
+          {
+            "node": "200",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "process-validated-property": {
+      "main": [
+        [
+          {
+            "node": "Try create new",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs1": {
+      "main": [
+        [
+          {
+            "node": "process-validated-property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/new-property": {
+      "main": [
+        [
+          {
+            "node": "inputs-properties-post",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "/telegram-property-topic": {
+      "main": [
+        [
+          {
+            "node": "update tags?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/callApify": {
+      "main": [
+        [
+          {
+            "node": "/telegram-property-topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": [
+        12
+      ]
+    },
+    "node:Schedule Trigger1": {
+      "recurrenceRules": [
+        0
+      ]
+    },
+    "node:chron": {
+      "recurrenceRules": [
+        12
+      ]
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "pinData": {
     "inputs-properties-post": [
       {
@@ -977,29 +999,8 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1",
-    "saveManualExecutions": false,
-    "callerPolicy": "workflowsFromSameOwner",
-    "errorWorkflow": "BsX0t3BBGp4TqwZw"
-  },
-  "staticData": {
-    "node:Schedule Trigger": {
-      "recurrenceRules": [
-        12
-      ]
-    },
-    "node:Schedule Trigger1": {
-      "recurrenceRules": [
-        0
-      ]
-    },
-    "node:chron": {
-      "recurrenceRules": [
-        12
-      ]
-    }
-  },
+  "versionId": "daab2e9a-9790-468f-96ed-fa23011eb2c0",
+  "triggerCount": 2,
   "tags": [
     {
       "createdAt": "2025-04-19T11:43:08.117Z",
@@ -1007,8 +1008,5 @@
       "id": "N6i2kFUE3jSwSod8",
       "name": "NEEDS_UPDATE"
     }
-  ],
-  "triggerCount": 2,
-  "updatedAt": "2025-04-19T11:43:16.921Z",
-  "versionId": "daab2e9a-9790-468f-96ed-fa23011eb2c0"
+  ]
 }
