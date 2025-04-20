@@ -2,641 +2,27 @@
   "exec_id": "33526",
   "notes": "testing notes",
   "workflow": {
-    "createdAt": "2025-04-07T23:39:17.248Z",
-    "updatedAt": "2025-04-15T08:30:48.482Z",
-    "id": "W0y4robwZgmlRQL8",
-    "name": "/apify-completed",
+    "createdAt": "2025-04-10T23:17:08.415Z",
+    "updatedAt": "2025-04-19T23:09:55.735Z",
+    "id": "IYI2oAiiYaDMBc5r",
+    "name": "/telegram-property-notification",
     "active": true,
     "nodes": [
       {
         "parameters": {
-          "url": "=https://api.apify.com/v2/datasets/{{ $json.body.resource.defaultDatasetId }}/items",
-          "sendQuery": true,
-          "queryParameters": {
-            "parameters": [
-              {
-                "name": "token",
-                "value": "apify_api_eBcJIT4Z3eJhNHRL1UFtko2cVhff8i4fqE6a"
-              },
-              {
-                "name": "fields",
-                "value": "streetAddress,city,state,zipcode,bedrooms,bathrooms,yearBuilt,livingArea,lotSize,price,lastSoldPrice,priceChange,priceChangeDateString,propertyTaxRate,homeType,homeStatus,keystoneHomeStatus,listing_sub_type,contingentListingType,description,virtualTourUrl,mlsid,parcelId,zpid,hdpUrl,daysOnZillow,datePostedString,originalPhotos"
-              },
-              {
-                "name": "clean",
-                "value": "0"
-              }
-            ]
-          },
-          "options": {
-            "timeout": 300000
-          }
-        },
-        "id": "3ac38a8b-3041-4286-8f9a-bfea9b5d801c",
-        "name": "Get Apify Data",
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.2,
-        "position": [
-          300,
-          0
-        ],
-        "retryOnFail": true,
-        "waitBetweenTries": 3000,
-        "alwaysOutputData": false,
-        "maxTries": 2,
-        "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
           "httpMethod": "POST",
-          "path": "apify-completed",
+          "path": "telegram-property-notification",
           "options": {}
         },
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2,
         "position": [
-          -140,
-          0
+          -1980,
+          880
         ],
-        "id": "06c6b1b5-a41f-421c-bb09-1594d602a8a7",
-        "name": "/apify-completed",
-        "webhookId": "3ac1c164-a521-4b11-97c6-7b223d38d9f0"
-      },
-      {
-        "parameters": {
-          "jsCode": "function generateUUID() {\n  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\n    var r = Math.random() * 16 | 0,\n        v = c == 'x' ? r : (r & 0x3 | 0x8);\n    return v.toString(16);\n  });\n}\n\nconst items = [];\nitems.push({\n  json: {\n    uuid: generateUUID()\n  }\n});\n\nreturn items;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          740,
-          745
-        ],
-        "id": "779e3a3a-14e6-4572-8b9a-c004d3909ee0",
-        "name": "UUID"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "tableId": "media",
-          "filters": {
-            "conditions": [
-              {
-                "keyName": "id",
-                "condition": "eq",
-                "keyValue": "={{ $('Check if URL exists').item.json.id }}"
-              }
-            ]
-          },
-          "fieldsUi": {
-            "fieldValues": [
-              {
-                "fieldId": "storage_url",
-                "fieldValue": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/public/{{ $json.Key }}"
-              },
-              {
-                "fieldId": "storage_id",
-                "fieldValue": "={{ $json.Id }}"
-              },
-              {
-                "fieldId": "updated_by",
-                "fieldValue": "Bot@RentReadyS8.com"
-              },
-              {
-                "fieldId": "media_type",
-                "fieldValue": "={{ $('GetImage').item.binary.data.mimeType }}"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.supabase",
-        "typeVersion": 1,
-        "position": [
-          1400,
-          745
-        ],
-        "id": "c7e4261f-9d94-4ae3-855a-3a8ca6e5a0d2",
-        "name": "Insert media",
-        "credentials": {
-          "supabaseApi": {
-            "id": "hN8Yj6BvjJqfKMnH",
-            "name": "Rent Ready Supabase"
-          }
-        },
-        "notes": "media"
-      },
-      {
-        "parameters": {
-          "tableId": "media",
-          "fieldsUi": {
-            "fieldValues": [
-              {
-                "fieldId": "property_id",
-                "fieldValue": "={{ $json.property_id }}"
-              },
-              {
-                "fieldId": "tag",
-                "fieldValue": "Property Photo"
-              },
-              {
-                "fieldId": "media_url_scraped",
-                "fieldValue": "={{ $json.photo_url }}"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.supabase",
-        "typeVersion": 1,
-        "position": [
-          300,
-          745
-        ],
-        "id": "7f0fafad-9fe7-4605-88cd-9913bedba819",
-        "name": "Check if URL exists",
-        "credentials": {
-          "supabaseApi": {
-            "id": "hN8Yj6BvjJqfKMnH",
-            "name": "Rent Ready Supabase"
-          }
-        },
-        "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "tableId": "properties",
-          "filters": {
-            "conditions": [
-              {
-                "keyName": "id",
-                "condition": "eq",
-                "keyValue": "={{ $json.property_id }}"
-              }
-            ]
-          },
-          "fieldsUi": {
-            "fieldValues": [
-              {
-                "fieldId": "scrape_photos",
-                "fieldValue": "={{ false }}"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.supabase",
-        "typeVersion": 1,
-        "position": [
-          2500,
-          260
-        ],
-        "id": "33853bc1-5ec8-48e8-a9a8-64b6a4780624",
-        "name": "Scrape flag off3",
-        "executeOnce": true,
-        "credentials": {
-          "supabaseApi": {
-            "id": "hN8Yj6BvjJqfKMnH",
-            "name": "Rent Ready Supabase"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "dataToSave": {
-            "values": [
-              {
-                "key": "w",
-                "value": "apify-completed"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.executionData",
-        "typeVersion": 1,
-        "position": [
-          80,
-          0
-        ],
-        "id": "b08c2375-7d2a-4d6d-a5a0-4aa91b5a67c5",
-        "name": "apify-completed"
-      },
-      {
-        "parameters": {
-          "jsCode": "// Get inputs from the workflow\nconst photos = $('inputs').first().json.originalPhotos;\nconst propertyId = $input.first().json.id;\n\n// Function to process the photos\nfunction processPhotos(photos, propertyId) {\n  // Array to store the processed photo objects\n  const processedPhotos = [];\n  \n  // Loop through each photo\n  photos.forEach(photo => {\n    // Get the jpeg sources array for the photo\n    const jpegSources = photo.mixedSources.jpeg;\n    \n    // Find the image with the highest resolution (width)\n    const highestResImage = jpegSources.reduce((highest, current) => {\n      return current.width > highest.width ? current : highest;\n    }, jpegSources[0]);\n    \n    // Create an object with the property ID and the photo URL\n    const photoObject = {\n      property_id: propertyId,\n      photo_url: highestResImage.url\n    };\n    \n    // Add the object to the array\n    processedPhotos.push(photoObject);\n  });\n  \n  return processedPhotos;\n}\n\n// Process the photos and return the result\nconst result = processPhotos(photos, propertyId);\n\n// Return the array of processed photos\nreturn result;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          2060,
-          260
-        ],
-        "id": "ee120f36-9a5d-4670-8562-10283af0ba71",
-        "name": "Extract Photos"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "loose",
-              "version": 2
-            },
-            "conditions": [
-              {
-                "id": "5d450fca-039c-48c6-9f45-4332dfd0c38a",
-                "leftValue": "={{ $json.scrape_photos }}",
-                "rightValue": "",
-                "operator": {
-                  "type": "boolean",
-                  "operation": "true",
-                  "singleValue": true
-                }
-              }
-            ],
-            "combinator": "or"
-          },
-          "looseTypeValidation": true,
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.2,
-        "position": [
-          1840,
-          260
-        ],
-        "id": "57ac9d2c-bb4a-4387-8318-494d34c325df",
-        "name": "scrape photos?",
-        "executeOnce": true
-      },
-      {
-        "parameters": {
-          "workflowInputs": {
-            "values": [
-              {
-                "name": "property_id",
-                "type": "number"
-              },
-              {
-                "name": "photo_url"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.executeWorkflowTrigger",
-        "typeVersion": 1.1,
-        "position": [
-          -140,
-          745
-        ],
-        "id": "87650190-244d-46c7-ad30-d1ab889097ca",
-        "name": "/save-photos"
-      },
-      {
-        "parameters": {
-          "workflowId": {
-            "__rl": true,
-            "value": "W0y4robwZgmlRQL8",
-            "mode": "id"
-          },
-          "workflowInputs": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "property_id": "={{ $json.property_id }}",
-              "photo_url": "={{ $json.photo_url }}"
-            },
-            "matchingColumns": [],
-            "schema": [
-              {
-                "id": "property_id",
-                "displayName": "property_id",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "canBeUsedToMatch": true,
-                "type": "number"
-              },
-              {
-                "id": "photo_url",
-                "displayName": "photo_url",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "canBeUsedToMatch": true,
-                "type": "string"
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": true
-          },
-          "mode": "each",
-          "options": {
-            "waitForSubWorkflow": true
-          }
-        },
-        "type": "n8n-nodes-base.executeWorkflow",
-        "typeVersion": 1.2,
-        "position": [
-          2280,
-          260
-        ],
-        "id": "1bb949fe-616f-43c0-b2b3-b6515292201d",
-        "name": "/save-photos1"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "tableId": "properties",
-          "filters": {
-            "conditions": [
-              {
-                "keyName": "zillow_url",
-                "condition": "eq",
-                "keyValue": "=https://www.zillow.com{{ $json.hdpUrl }}"
-              }
-            ]
-          },
-          "fieldsUi": {
-            "fieldValues": [
-              {
-                "fieldId": "prop_year",
-                "fieldValue": "={{ $json.yearBuilt }}"
-              },
-              {
-                "fieldId": "realtor_status",
-                "fieldValue": "={{ $json.homeStatus }}"
-              },
-              {
-                "fieldId": "beds",
-                "fieldValue": "={{ $json.bedrooms }}"
-              },
-              {
-                "fieldId": "baths",
-                "fieldValue": "={{ $json.bathrooms }}"
-              },
-              {
-                "fieldId": "realtor_dwelling_type",
-                "fieldValue": "={{ $json.homeType }}"
-              },
-              {
-                "fieldId": "realtor_list_price",
-                "fieldValue": "={{ $json.price }}"
-              },
-              {
-                "fieldId": "timestamp_updated",
-                "fieldValue": "={{ $now }}"
-              },
-              {
-                "fieldId": "updated_by",
-                "fieldValue": "=Bot@RentReadyS8.com"
-              },
-              {
-                "fieldId": "timestamp_scraped",
-                "fieldValue": "={{ $now }}"
-              },
-              {
-                "fieldId": "realtor_desc",
-                "fieldValue": "={{ $json.description }}"
-              },
-              {
-                "fieldId": "is_forauction",
-                "fieldValue": "={{ $json.listing_sub_type.is_forAuction }}"
-              },
-              {
-                "fieldId": "is_fsbo",
-                "fieldValue": "={{ $json.listing_sub_type.is_FSBO }}"
-              },
-              {
-                "fieldId": "is_fsba",
-                "fieldValue": "={{ $json.listing_sub_type.is_FSBA }}"
-              },
-              {
-                "fieldId": "is_foreclosure",
-                "fieldValue": "={{ $json.listing_sub_type.is_foreclosure }}"
-              },
-              {
-                "fieldId": "is_bankowned",
-                "fieldValue": "={{ $json.listing_sub_type.is_bankOwned }}"
-              },
-              {
-                "fieldId": "is_comingsoon",
-                "fieldValue": "={{ $json.listing_sub_type.is_comingSoon }}"
-              },
-              {
-                "fieldId": "date_listed",
-                "fieldValue": "={{ new Date(Date.now() - ($json.daysOnZillow * 24 * 60 * 60 * 1000)).toISOString() }}"
-              },
-              {
-                "fieldId": "prop_size_inside",
-                "fieldValue": "={{ $json.livingArea }}"
-              },
-              {
-                "fieldId": "prop_size_outside",
-                "fieldValue": "={{ $json.lotSize }}"
-              },
-              {
-                "fieldId": "tax_rate",
-                "fieldValue": "={{ $json.propertyTaxRate }}"
-              },
-              {
-                "fieldId": "contingent_listing_type",
-                "fieldValue": "={{ $json.contingentListingType }}"
-              },
-              {
-                "fieldId": "virtual_tour",
-                "fieldValue": "={{ $json.virtualTourUrl }}"
-              },
-              {
-                "fieldId": "last_sold_price",
-                "fieldValue": "={{ $json.lastSoldPrice }}"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.supabase",
-        "typeVersion": 1,
-        "position": [
-          740,
-          260
-        ],
-        "id": "1d763e20-131d-4ac7-ba68-d09b1ba62d2f",
-        "name": "Update by URL",
-        "alwaysOutputData": true,
-        "credentials": {
-          "supabaseApi": {
-            "id": "hN8Yj6BvjJqfKMnH",
-            "name": "Rent Ready Supabase"
-          }
-        },
-        "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "tableId": "properties",
-          "matchType": "allFilters",
-          "filters": {
-            "conditions": [
-              {
-                "keyName": "address_street",
-                "condition": "ilike",
-                "keyValue": "={{ $('inputs').item.json.streetAddress }}"
-              },
-              {
-                "keyName": "address_city",
-                "condition": "ilike",
-                "keyValue": "={{ $('inputs').item.json.city }}"
-              },
-              {
-                "keyName": "address_state",
-                "condition": "eq",
-                "keyValue": "={{ $('inputs').item.json.state }}"
-              },
-              {
-                "keyName": "address_zip",
-                "condition": "eq",
-                "keyValue": "={{ $('inputs').item.json.zipcode }}"
-              }
-            ]
-          },
-          "fieldsUi": {
-            "fieldValues": [
-              {
-                "fieldId": "prop_year",
-                "fieldValue": "={{ $('inputs').item.json.yearBuilt }}"
-              },
-              {
-                "fieldId": "zillow_id",
-                "fieldValue": "={{ $('inputs').item.json.zpid }}"
-              },
-              {
-                "fieldId": "zillow_url",
-                "fieldValue": "=https://www.zillow.com{{ $('inputs').item.json.hdpUrl }}"
-              },
-              {
-                "fieldId": "beds",
-                "fieldValue": "={{ $('inputs').item.json.bedrooms }}"
-              },
-              {
-                "fieldId": "baths",
-                "fieldValue": "={{ $('inputs').item.json.bathrooms }}"
-              },
-              {
-                "fieldId": "realtor_dwelling_type",
-                "fieldValue": "={{ $('inputs').item.json.homeType }}"
-              },
-              {
-                "fieldId": "realtor_list_price",
-                "fieldValue": "={{ $('inputs').item.json.price }}"
-              },
-              {
-                "fieldId": "timestamp_updated",
-                "fieldValue": "={{ $now }}"
-              },
-              {
-                "fieldId": "updated_by",
-                "fieldValue": "=Bot@RentReadyS8.com"
-              },
-              {
-                "fieldId": "timestamp_scraped",
-                "fieldValue": "={{ $now }}"
-              },
-              {
-                "fieldId": "realtor_desc",
-                "fieldValue": "={{ $('inputs').item.json.description }}"
-              },
-              {
-                "fieldId": "is_forauction",
-                "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_foreclosure }}"
-              },
-              {
-                "fieldId": "is_fsbo",
-                "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_FSBO }}"
-              },
-              {
-                "fieldId": "is_fsba",
-                "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_FSBO }}"
-              },
-              {
-                "fieldId": "is_foreclosure",
-                "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_foreclosure }}"
-              },
-              {
-                "fieldId": "is_bankowned",
-                "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_bankOwned }}"
-              },
-              {
-                "fieldId": "is_comingsoon",
-                "fieldValue": "={{ $('inputs').item.json.listing_sub_type.is_comingSoon }}"
-              },
-              {
-                "fieldId": "date_listed",
-                "fieldValue": "={{ new Date(Date.now() - ($('inputs').item.json.daysOnZillow * 24 * 60 * 60 * 1000)).toISOString() }}"
-              },
-              {
-                "fieldId": "prop_size_inside",
-                "fieldValue": "={{ $('inputs').item.json.livingArea }}"
-              },
-              {
-                "fieldId": "tax_rate",
-                "fieldValue": "={{ $('inputs').item.json.propertyTaxRate }}"
-              },
-              {
-                "fieldId": "contingent_listing_type",
-                "fieldValue": "={{ $('inputs').item.json.contingentListingType }}"
-              },
-              {
-                "fieldId": "virtual_tour",
-                "fieldValue": "={{ $('inputs').item.json.virtualTourUrl }}"
-              },
-              {
-                "fieldId": "last_sold_price",
-                "fieldValue": "={{ $('inputs').item.json.lastSoldPrice }}"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.supabase",
-        "typeVersion": 1,
-        "position": [
-          1180,
-          435
-        ],
-        "id": "350733d1-b54a-4d5e-90db-dfcafcd351d0",
-        "name": "Update by Address",
-        "alwaysOutputData": true,
-        "credentials": {
-          "supabaseApi": {
-            "id": "hN8Yj6BvjJqfKMnH",
-            "name": "Rent Ready Supabase"
-          }
-        },
-        "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
-          "chatId": "-1002250368392",
-          "text": "=<b>Server Error</b>\nWorkflow: {{ $workflow.name }}\nExecution ID: <a href=\"https://s8s.up.railway.app/workflow/5l82Xz5lpYQrrg5V/executions/{{ $execution.id }}\">{{ $execution.id }}</a>",
-          "additionalFields": {
-            "appendAttribution": false,
-            "parse_mode": "HTML",
-            "message_thread_id": 1015
-          }
-        },
-        "type": "n8n-nodes-base.telegram",
-        "typeVersion": 1.2,
-        "position": [
-          1620,
-          485
-        ],
-        "id": "14cc168c-d191-4235-9106-4f02a8de581a",
-        "name": "S8 Notifications1",
-        "webhookId": "bf1c5a21-07eb-49f9-bdab-163ec652c5d0",
-        "credentials": {
-          "telegramApi": {
-            "id": "5EhmVCbyRMyj9grg",
-            "name": "P0m0shnik11_Bot"
-          }
-        }
+        "id": "e83ebad0-a41d-4c07-8d6b-938aa784a448",
+        "name": "/telegram-property-notification1",
+        "webhookId": "40b3e4cc-8ea6-4aad-ad8c-5d6d8c09bc1a"
       },
       {
         "parameters": {
@@ -649,23 +35,13 @@
             },
             "conditions": [
               {
-                "id": "1b87dabe-71ef-4830-8310-56806d785837",
-                "leftValue": "={{ $json.isNotEmpty() }}",
-                "rightValue": "",
-                "operator": {
-                  "type": "boolean",
-                  "operation": "true",
-                  "singleValue": true
-                }
-              },
-              {
-                "id": "f2bac40a-edbb-4dac-ae86-6519280dabcb",
-                "leftValue": "={{ $json.hdpUrl }}",
-                "rightValue": "",
+                "id": "e3b102a1-31d0-4c5c-8ce4-fbdce65237fb",
+                "leftValue": "={{ $json.headers.host }}",
+                "rightValue": "n8n.railway.internal:5678",
                 "operator": {
                   "type": "string",
-                  "operation": "notEmpty",
-                  "singleValue": true
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
                 }
               }
             ],
@@ -676,46 +52,106 @@
         "type": "n8n-nodes-base.filter",
         "typeVersion": 2.2,
         "position": [
-          520,
-          0
+          -1760,
+          880
         ],
-        "id": "8a4238c3-4168-4a7d-8be9-402b99f7a1fb",
-        "name": "filterEmpty"
+        "id": "88245838-f416-4603-961f-2f43802c9ccf",
+        "name": "host1"
       },
       {
         "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "loose",
-              "version": 2
-            },
-            "conditions": [
+          "assignments": {
+            "assignments": [
               {
-                "id": "22c16e66-6e7f-49fc-bbdb-21bbd65f1d22",
-                "leftValue": "={{ $json }}",
-                "rightValue": "",
-                "operator": {
-                  "type": "object",
-                  "operation": "notEmpty",
-                  "singleValue": true
-                }
+                "id": "496e815b-0525-4699-b29c-5103a448fb52",
+                "name": "property_id",
+                "value": "={{ $json.query.property_id }}",
+                "type": "string"
+              },
+              {
+                "id": "5a509075-fc21-4e01-b73a-5ca050eca640",
+                "name": "updated_column",
+                "value": "={{ $json.query.updated_column }}",
+                "type": "string"
+              },
+              {
+                "id": "ce8f7f8c-de36-4ac6-acc1-1a0b77f97fd7",
+                "name": "updated_value",
+                "value": "={{ $json.query.updated_value }}",
+                "type": "string"
+              },
+              {
+                "id": "34a42f6a-63c2-4475-9c87-b22610996925",
+                "name": "updated_column_type",
+                "value": "={{ $json.query.updated_column_type }}",
+                "type": "string"
+              },
+              {
+                "id": "9aaf6714-1f20-4c6a-b716-9bad66c39c82",
+                "name": "updated_by",
+                "value": "={{ $json.query.updated_by }}",
+                "type": "string"
               }
-            ],
-            "combinator": "and"
+            ]
           },
-          "looseTypeValidation": true,
           "options": {}
         },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.2,
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
         "position": [
-          960,
-          260
+          -1540,
+          880
         ],
-        "id": "e0f829d0-4635-47f3-990f-dadaa916c348",
-        "name": "hasData?1"
+        "id": "4595ad1f-5082-4b9f-b7ed-3311e540e538",
+        "name": "inputs1"
+      },
+      {
+        "parameters": {
+          "dataToSave": {
+            "values": [
+              {
+                "key": "property_id",
+                "value": "={{ $json.property_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executionData",
+        "typeVersion": 1,
+        "position": [
+          -1320,
+          880
+        ],
+        "id": "7fbfee98-f543-48b7-929a-98e1e10389c2",
+        "name": "property_id1"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "tableId": "view_properties",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "keyValue": "={{ $json.property_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          -1100,
+          880
+        ],
+        "id": "4889f6a8-81d2-47cf-aa4f-02b8106a89c0",
+        "name": "view_properties2",
+        "credentials": {
+          "supabaseApi": {
+            "id": "hN8Yj6BvjJqfKMnH",
+            "name": "Rent Ready Supabase"
+          }
+        }
       },
       {
         "parameters": {
@@ -728,115 +164,8 @@
             },
             "conditions": [
               {
-                "id": "382e7154-7223-476d-8e24-3ffb3e257a83",
-                "leftValue": "={{ $json }}",
-                "rightValue": "",
-                "operator": {
-                  "type": "object",
-                  "operation": "notEmpty",
-                  "singleValue": true
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.2,
-        "position": [
-          1400,
-          435
-        ],
-        "id": "f4bad5e6-3225-42dc-a219-3a6d81f48643",
-        "name": "hasData?"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "loose",
-              "version": 2
-            },
-            "conditions": [
-              {
-                "id": "ebdba25e-a068-4ede-ba25-782dcf31e608",
-                "leftValue": "={{ $json.hdpUrl }}",
-                "rightValue": "",
-                "operator": {
-                  "type": "string",
-                  "operation": "notEmpty",
-                  "singleValue": true
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "looseTypeValidation": true,
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.2,
-        "position": [
-          520,
-          360
-        ],
-        "id": "0f458ee8-f838-4366-b009-28df74406749",
-        "name": "hasUrl?"
-      },
-      {
-        "parameters": {
-          "dataToSave": {
-            "values": [
-              {
-                "key": "w",
-                "value": "process-property"
-              },
-              {
-                "key": "address"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.executionData",
-        "typeVersion": 1,
-        "position": [
-          300,
-          360
-        ],
-        "id": "ad22656a-1881-4dc5-aa90-5ac20a071a4d",
-        "name": "process-property"
-      },
-      {
-        "parameters": {
-          "mode": "raw",
-          "jsonOutput": "={{ $json.body.propery }}",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          80,
-          360
-        ],
-        "id": "86dbde64-1df3-4702-ab85-d8125ee98c6e",
-        "name": "inputs"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "loose",
-              "version": 2
-            },
-            "conditions": [
-              {
-                "id": "86da3751-a688-4bd2-9830-3aafd54fef70",
-                "leftValue": "={{ $json.id }}",
+                "id": "bbcc66a2-94c1-4ac3-a4af-cc0d6c2f3613",
+                "leftValue": "={{ $('view_properties2').item.json.telegram_realtor_topic_id }}",
                 "rightValue": "",
                 "operator": {
                   "type": "number",
@@ -847,133 +176,120 @@
             ],
             "combinator": "and"
           },
-          "looseTypeValidation": true,
           "options": {}
         },
-        "type": "n8n-nodes-base.filter",
+        "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          520,
-          745
+          -220,
+          780
         ],
-        "id": "793b5311-7632-4086-b70b-e26ebcd293d5",
-        "name": "addedRecord"
+        "id": "e60a6caf-aa31-4c05-b201-4af292b0a5d6",
+        "name": "topicExists?1"
       },
       {
         "parameters": {
-          "url": "={{ $('/save-photos').item.json.photo_url }}",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.2,
-        "position": [
-          960,
-          745
-        ],
-        "id": "ae98b557-0a43-4901-94cf-7ba1907ea5e2",
-        "name": "GetImage",
-        "retryOnFail": true,
-        "waitBetweenTries": 5000
-      },
-      {
-        "parameters": {
-          "method": "POST",
-          "url": "=https://qyyyacmhcwqdxqnhgqmr.supabase.co/storage/v1/object/properties/{{ $('addedRecord').item.json.id }}/photos/{{ $json.uuid }}.jpeg\n\n",
-          "authentication": "predefinedCredentialType",
-          "nodeCredentialType": "supabaseApi",
-          "sendHeaders": true,
-          "headerParameters": {
-            "parameters": [
-              {
-                "name": "Content-Type",
-                "value": "image/jpeg"
-              }
-            ]
-          },
-          "sendBody": true,
-          "contentType": "binaryData",
-          "inputDataFieldName": "data",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.2,
-        "position": [
-          1180,
-          745
-        ],
-        "id": "082b0398-d582-471c-b992-de5c0ca9c041",
-        "name": "bucketUpload",
-        "credentials": {
-          "supabaseApi": {
-            "id": "hN8Yj6BvjJqfKMnH",
-            "name": "Rent Ready Supabase"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "dataToSave": {
+          "rules": {
             "values": [
               {
-                "key": "w",
-                "value": "save-photos"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.executionData",
-        "typeVersion": 1,
-        "position": [
-          80,
-          745
-        ],
-        "id": "ad36f690-2122-4ab9-b8c4-621d4236dcae",
-        "name": "save-photos"
-      },
-      {
-        "parameters": {
-          "httpMethod": "POST",
-          "path": "process-apify-property",
-          "options": {
-            "allowedOrigins": "*"
-          }
-        },
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2,
-        "position": [
-          -140,
-          360
-        ],
-        "id": "49d2f936-bcfd-48ea-9d53-4f56f0c1acda",
-        "name": "/process-apify-property",
-        "webhookId": "0e173c60-6fc3-4f15-9622-f6f36a647c67"
-      },
-      {
-        "parameters": {
-          "method": "POST",
-          "url": "http://n8n.railway.internal:5678/webhook/process-apify-property",
-          "sendBody": true,
-          "bodyParameters": {
-            "parameters": [
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('view_properties2').item.json.realtor_assigned != null && $('view_properties2').item.json.telegram_realtor_forum != null}}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      },
+                      "id": "6262d907-2b9c-4440-856b-6b17547aa272"
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "realtor"
+              },
               {
-                "name": "propery",
-                "value": "={{ $json }}"
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "f72e8246-1f49-41a1-9626-27e8a77b9e83",
+                      "leftValue": "={{ $('view_properties2').item.json.telegram_internal_forum }}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "number",
+                        "operation": "exists",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "internal"
               }
             ]
           },
+          "looseTypeValidation": true,
           "options": {
-            "allowUnauthorizedCerts": true
+            "allMatchingOutputs": true
           }
         },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.2,
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
         "position": [
-          740,
-          0
+          -660,
+          880
         ],
-        "id": "5417e6a7-2f53-4f94-9f13-7fbf2576ba03",
-        "name": "process-apify-property >",
-        "onError": "continueRegularOutput"
+        "id": "b681e3c1-0573-43b8-86fe-71dbcd588277",
+        "name": "Switch1"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -440,
+          980
+        ],
+        "id": "c0bf8d31-cef5-412f-a4e2-ff358d09d073",
+        "name": "add later1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "c1db4e89-a671-404d-8faa-0e7093adba27",
+                "name": "notificationMessage",
+                "value": "={{ $('inputs1').item.json.updated_column\n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ')\n}} ➡️ {{ $('inputs1').item.json.updated_value  \n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ') }}\nby: {{ $('inputs1').item.json.updated_by }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -880,
+          880
+        ],
+        "id": "98cd2c04-1755-4596-a50b-c6c96710d185",
+        "name": "notificationMessage1"
       },
       {
         "parameters": {
@@ -984,7 +300,7 @@
             "parameters": [
               {
                 "name": "property_id",
-                "value": "={{ $json.id }}"
+                "value": "={{ $('view_properties2').item.json.id }}"
               }
             ]
           },
@@ -993,283 +309,257 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          1620,
-          260
+          0,
+          880
         ],
-        "id": "1db61e50-7234-4f4a-a93c-aea84ed28c8d",
-        "name": "/telegram-property-topic",
-        "onError": "continueRegularOutput"
+        "id": "9d520ae8-d69a-47f2-989d-68b49d56d23d",
+        "name": "/telegram-property-topic1"
+      },
+      {
+        "parameters": {
+          "chatId": "=-100{{ $('view_properties2').item.json.telegram_realtor_forum }}",
+          "text": "={{ $('notificationMessage1').item.json.notificationMessage }}",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML",
+            "message_thread_id": "={{ $('view_properties2').item.json.telegram_realtor_topic_id }}"
+          }
+        },
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          0,
+          680
+        ],
+        "id": "2f857c51-5888-47c4-b74b-3095af323fa0",
+        "name": "sendMessage2",
+        "webhookId": "265c260b-3fa1-45fb-9936-b9ad7b40310e",
+        "credentials": {
+          "telegramApi": {
+            "id": "5EhmVCbyRMyj9grg",
+            "name": "P0m0shnik11_Bot"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "chatId": "=-100{{ $('view_properties2').item.json.telegram_realtor_forum }}",
+          "text": "={{ $('notificationMessage1').item.json.notificationMessage }}",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML",
+            "message_thread_id": "={{ $('view_properties2').item.json.telegram_realtor_topic_id }}"
+          }
+        },
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          440,
+          880
+        ],
+        "id": "e8027199-ccc8-43b4-954f-eff76dd2bb5a",
+        "name": "sendMessage3",
+        "webhookId": "265c260b-3fa1-45fb-9936-b9ad7b40310e",
+        "credentials": {
+          "telegramApi": {
+            "id": "5EhmVCbyRMyj9grg",
+            "name": "P0m0shnik11_Bot"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "tableId": "view_properties",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "keyValue": "={{ $json.property_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          220,
+          880
+        ],
+        "id": "863b2b45-97c6-4d51-b431-c7484a15dc54",
+        "name": "view_properties3",
+        "credentials": {
+          "supabaseApi": {
+            "id": "hN8Yj6BvjJqfKMnH",
+            "name": "Rent Ready Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "57088120-5090-460c-86eb-40f9c19f5880",
+                "leftValue": "={{ $('view_properties2').item.json.update_realtor_topic }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.filter",
+        "typeVersion": 2.2,
+        "position": [
+          -440,
+          780
+        ],
+        "id": "36df20ee-dd83-4428-8ed2-5a4ed167633c",
+        "name": "updateRealtor1"
       }
     ],
     "connections": {
-      "Get Apify Data": {
+      "/telegram-property-notification1": {
         "main": [
           [
             {
-              "node": "filterEmpty",
+              "node": "host1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "/apify-completed": {
+      "host1": {
         "main": [
           [
             {
-              "node": "apify-completed",
+              "node": "inputs1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "UUID": {
+      "inputs1": {
         "main": [
           [
             {
-              "node": "GetImage",
+              "node": "property_id1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Check if URL exists": {
+      "property_id1": {
         "main": [
           [
             {
-              "node": "addedRecord",
+              "node": "view_properties2",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "apify-completed": {
+      "view_properties2": {
         "main": [
           [
             {
-              "node": "Get Apify Data",
+              "node": "notificationMessage1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Extract Photos": {
+      "topicExists?1": {
         "main": [
           [
             {
-              "node": "/save-photos1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "scrape photos?": {
-        "main": [
-          [
-            {
-              "node": "Extract Photos",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "/save-photos": {
-        "main": [
-          [
-            {
-              "node": "save-photos",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "/save-photos1": {
-        "main": [
-          [
-            {
-              "node": "Scrape flag off3",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Update by URL": {
-        "main": [
-          [
-            {
-              "node": "hasData?1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Update by Address": {
-        "main": [
-          [
-            {
-              "node": "hasData?",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "filterEmpty": {
-        "main": [
-          [
-            {
-              "node": "process-apify-property >",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "hasData?1": {
-        "main": [
-          [
-            {
-              "node": "/telegram-property-topic",
+              "node": "sendMessage2",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "Update by Address",
+              "node": "/telegram-property-topic1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "hasData?": {
+      "Switch1": {
         "main": [
           [
             {
-              "node": "/telegram-property-topic",
+              "node": "updateRealtor1",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "S8 Notifications1",
+              "node": "add later1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "hasUrl?": {
+      "notificationMessage1": {
         "main": [
           [
             {
-              "node": "Update by URL",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "Update by Address",
+              "node": "Switch1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "process-property": {
+      "/telegram-property-topic1": {
         "main": [
           [
             {
-              "node": "hasUrl?",
+              "node": "view_properties3",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "inputs": {
+      "view_properties3": {
         "main": [
           [
             {
-              "node": "process-property",
+              "node": "sendMessage3",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "addedRecord": {
+      "updateRealtor1": {
         "main": [
           [
             {
-              "node": "UUID",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "GetImage": {
-        "main": [
-          [
-            {
-              "node": "bucketUpload",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "bucketUpload": {
-        "main": [
-          [
-            {
-              "node": "Insert media",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "save-photos": {
-        "main": [
-          [
-            {
-              "node": "Check if URL exists",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "/process-apify-property": {
-        "main": [
-          [
-            {
-              "node": "inputs",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "/telegram-property-topic": {
-        "main": [
-          [
-            {
-              "node": "scrape photos?",
+              "node": "topicExists?1",
               "type": "main",
               "index": 0
             }
@@ -1283,278 +573,38 @@
       "errorWorkflow": "BsX0t3BBGp4TqwZw"
     },
     "staticData": null,
-    "meta": null,
+    "meta": {
+      "templateCredsSetupCompleted": true
+    },
     "pinData": {
-      "/process-apify-property": [
+      "/telegram-property-notification1": [
         {
           "json": {
             "headers": {
               "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
-              "content-type": "application/json",
               "user-agent": "axios/1.7.4",
-              "content-length": "5982",
               "accept-encoding": "gzip, compress, deflate, br",
               "host": "n8n.railway.internal:5678",
-              "connection": "keep-alive"
+              "connection": "keep-alive",
+              "content-length": "0"
             },
             "params": {},
-            "query": {},
-            "body": {
-              "propery": {
-                "streetAddress": "3603 Anderson Pkwy",
-                "city": "Toledo",
-                "state": "OH",
-                "zipcode": "43613",
-                "bedrooms": 3,
-                "bathrooms": 1,
-                "yearBuilt": 1950,
-                "livingArea": 1391,
-                "lotSize": 5000,
-                "price": 25000,
-                "lastSoldPrice": 34000,
-                "priceChange": null,
-                "priceChangeDateString": null,
-                "propertyTaxRate": 1.63,
-                "homeType": "SINGLE_FAMILY",
-                "homeStatus": "PENDING",
-                "keystoneHomeStatus": "Pending",
-                "listing_sub_type": {
-                  "is_forAuction": false,
-                  "is_newHome": false,
-                  "is_FSBO": false,
-                  "is_FSBA": true,
-                  "is_foreclosure": false,
-                  "is_bankOwned": false,
-                  "is_comingSoon": false,
-                  "is_pending": true,
-                  "is_openHouse": false
-                },
-                "contingentListingType": null,
-                "description": "Investor Special! Severely fire damaged house in need of complete renovation top to bottom. All brick home with 2-car detached garage. Garage was not affected by the fire. HOLD HARMLESS AGREEMENT REQUIRED...MULTIPLE OFFERS RECEIVED...HIGHES & BEST DUE BY MON. APRIL 7TH, 2025 @ 5 PM",
-                "virtualTourUrl": "https://www.propertypanorama.com/instaview/toledo/6127977",
-                "mlsid": "6127977",
-                "parcelId": "1655517",
-                "zpid": 34687528,
-                "hdpUrl": "/homedetails/3603-Anderson-Pkwy-Toledo-OH-43613/34687528_zpid/",
-                "daysOnZillow": 9,
-                "datePostedString": "2025-04-03",
-                "originalPhotos": [
-                  {
-                    "caption": "",
-                    "mixedSources": {
-                      "jpeg": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-d_d.jpg",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-o_a.jpg",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-uncropped_scaled_within_1344_1008.jpg",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-uncropped_scaled_within_1536_1152.jpg",
-                          "width": 1536
-                        }
-                      ],
-                      "webp": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-d_d.webp",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-o_a.webp",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-uncropped_scaled_within_1344_1008.webp",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/f106478e859d40688c604fb399e39fe1-uncropped_scaled_within_1536_1152.webp",
-                          "width": 1536
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "caption": "",
-                    "mixedSources": {
-                      "jpeg": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-d_d.jpg",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-o_a.jpg",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-uncropped_scaled_within_1344_1008.jpg",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-uncropped_scaled_within_1536_1152.jpg",
-                          "width": 1536
-                        }
-                      ],
-                      "webp": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-d_d.webp",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-o_a.webp",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-uncropped_scaled_within_1344_1008.webp",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/ecd201c3ad4e57415d7f69d7e0a553f8-uncropped_scaled_within_1536_1152.webp",
-                          "width": 1536
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "caption": "",
-                    "mixedSources": {
-                      "jpeg": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-d_d.jpg",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-o_a.jpg",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-uncropped_scaled_within_1344_1008.jpg",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-uncropped_scaled_within_1536_1152.jpg",
-                          "width": 1536
-                        }
-                      ],
-                      "webp": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-d_d.webp",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-o_a.webp",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-uncropped_scaled_within_1344_1008.webp",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7a3be58fa24470eb0a99c6d3ef8c7e1c-uncropped_scaled_within_1536_1152.webp",
-                          "width": 1536
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "caption": "",
-                    "mixedSources": {
-                      "jpeg": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-d_d.jpg",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-o_a.jpg",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-uncropped_scaled_within_1344_1008.jpg",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-uncropped_scaled_within_1536_1152.jpg",
-                          "width": 1536
-                        }
-                      ],
-                      "webp": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-d_d.webp",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-o_a.webp",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-uncropped_scaled_within_1344_1008.webp",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/cc4865f310ba676e262b1581d0a33e7d-uncropped_scaled_within_1536_1152.webp",
-                          "width": 1536
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "caption": "",
-                    "mixedSources": {
-                      "jpeg": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-d_d.jpg",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-o_a.jpg",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-uncropped_scaled_within_1344_1008.jpg",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-uncropped_scaled_within_1536_1152.jpg",
-                          "width": 1536
-                        }
-                      ],
-                      "webp": [
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-d_d.webp",
-                          "width": 800
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-o_a.webp",
-                          "width": 1024
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-uncropped_scaled_within_1344_1008.webp",
-                          "width": 1344
-                        },
-                        {
-                          "url": "https://photos.zillowstatic.com/fp/7806aa22579841bed64e52bfbfa99b65-uncropped_scaled_within_1536_1152.webp",
-                          "width": 1536
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
+            "query": {
+              "property_id": "824",
+              "updated_column": "realtor_status",
+              "updated_value": "RECENTLY_SOLD",
+              "updated_column_type": "text",
+              "updated_by": "Bot@RentReadyS8.com"
             },
-            "webhookUrl": "https://s8s.up.railway.app/webhook/process-apify-property",
+            "body": {},
+            "webhookUrl": "https://s8s.up.railway.app/webhook/telegram-property-notification",
             "executionMode": "production"
           }
         }
       ]
     },
-    "versionId": "67b66fb7-5317-4160-aeec-622b8fdd6854",
-    "triggerCount": 2,
+    "versionId": "76cf41ee-e05a-4783-896e-fbdd453b2136",
+    "triggerCount": 1,
     "tags": []
   }
 }
