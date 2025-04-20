@@ -1,129 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "empty cover photo": {
-      "main": [
-        [
-          {
-            "node": "set cover photo",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/supabase-updated-media": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "new or update": {
-      "main": [
-        [
-          {
-            "node": "w: update",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "w: new",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "w: update": {
-      "main": [
-        [
-          {
-            "node": "compare",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "w: new": {
-      "main": [
-        [
-          {
-            "node": "coverPhoto & propertyId",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "new or update",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "compare": {
-      "main": [
-        [
-          {
-            "node": "set_to_delete",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "set_to_delete": {
-      "main": [
-        [
-          {
-            "node": "Execute Workflow",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "coverPhoto & propertyId": {
-      "main": [
-        [
-          {
-            "node": "getProperty",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "getProperty": {
-      "main": [
-        [
-          {
-            "node": "empty cover photo",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-10T18:26:15.140Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-13T19:09:49.994Z",
   "id": "RZlZ6qypldoEYRn6",
-  "meta": null,
   "name": "/supabase-updated-media",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -542,7 +422,130 @@
       }
     }
   ],
-  "notes": "",
+  "connections": {
+    "empty cover photo": {
+      "main": [
+        [
+          {
+            "node": "set cover photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/supabase-updated-media": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "new or update": {
+      "main": [
+        [
+          {
+            "node": "w: update",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "w: new",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "w: update": {
+      "main": [
+        [
+          {
+            "node": "compare",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "w: new": {
+      "main": [
+        [
+          {
+            "node": "coverPhoto & propertyId",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "new or update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "compare": {
+      "main": [
+        [
+          {
+            "node": "set_to_delete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_to_delete": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "coverPhoto & propertyId": {
+      "main": [
+        [
+          {
+            "node": "getProperty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getProperty": {
+      "main": [
+        [
+          {
+            "node": "empty cover photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
   "pinData": {
     "/supabase-updated-media": [
       {
@@ -610,12 +613,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "de8043e3-465d-4ed8-adbe-454ca5dc7ba6",
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T19:09:49.994Z",
-  "versionId": "de8043e3-465d-4ed8-adbe-454ca5dc7ba6"
+  "tags": []
 }
