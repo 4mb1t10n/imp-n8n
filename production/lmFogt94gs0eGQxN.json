@@ -1,79 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "changelog1": {
-      "main": [
-        []
-      ]
-    },
-    "compare data1": {
-      "main": [
-        [
-          {
-            "node": "Filter1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter1": {
-      "main": [
-        [
-          {
-            "node": "changelog1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "tasks": {
-      "main": [
-        [
-          {
-            "node": "compare data1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "update or new task": {
-      "main": [
-        [
-          {
-            "node": "tasks",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "tasks1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/updated-tasks": {
-      "main": [
-        [
-          {
-            "node": "update or new task",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-10T18:25:17.121Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-19T23:19:19.747Z",
   "id": "lmFogt94gs0eGQxN",
-  "meta": null,
   "name": "/updated-tasks",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -331,14 +261,82 @@
       "alwaysOutputData": true
     }
   ],
-  "notes": "",
-  "pinData": {},
+  "connections": {
+    "changelog1": {
+      "main": [
+        []
+      ]
+    },
+    "compare data1": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "changelog1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tasks": {
+      "main": [
+        [
+          {
+            "node": "compare data1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update or new task": {
+      "main": [
+        [
+          {
+            "node": "tasks",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "tasks1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/updated-tasks": {
+      "main": [
+        [
+          {
+            "node": "update or new task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
+  "meta": null,
+  "pinData": {},
+  "versionId": "20cd45ef-2658-4eb9-862c-f52977d6bd31",
   "triggerCount": 1,
-  "updatedAt": "2025-04-19T23:19:19.747Z",
-  "versionId": "20cd45ef-2658-4eb9-862c-f52977d6bd31"
+  "tags": []
 }
