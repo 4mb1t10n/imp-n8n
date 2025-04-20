@@ -1,56 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "task insert": {
-      "main": [
-        [
-          {
-            "node": "/telegram-task-topic",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/new-task": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/telegram-task-topic": {
-      "main": [
-        [
-          {
-            "node": "Respond task created",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "task insert",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-10T07:18:34.067Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-17T23:07:09.108Z",
   "id": "GynJ5hUw1T9qL6Zh",
-  "meta": null,
   "name": "/new-task",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -243,7 +196,57 @@
       "name": "inputs"
     }
   ],
-  "notes": "",
+  "connections": {
+    "task insert": {
+      "main": [
+        [
+          {
+            "node": "/telegram-task-topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/new-task": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/telegram-task-topic": {
+      "main": [
+        [
+          {
+            "node": "Respond task created",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "task insert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
   "pinData": {
     "/new-task": [
       {
@@ -274,12 +277,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "ede42148-a9d1-45b4-b8d4-182311c9bb09",
   "triggerCount": 1,
-  "updatedAt": "2025-04-17T23:07:09.108Z",
-  "versionId": "ede42148-a9d1-45b4-b8d4-182311c9bb09"
+  "tags": []
 }
