@@ -2,162 +2,27 @@
   "exec_id": "33494",
   "notes": "testing notes",
   "workflow": {
-    "createdAt": "2025-04-10T00:56:33.675Z",
-    "updatedAt": "2025-04-10T18:18:40.262Z",
-    "id": "vKuRvtLXd2DYrRqE",
-    "name": "/records-get",
+    "createdAt": "2025-04-10T23:17:08.415Z",
+    "updatedAt": "2025-04-19T23:09:55.735Z",
+    "id": "IYI2oAiiYaDMBc5r",
+    "name": "/telegram-property-notification",
     "active": true,
     "nodes": [
       {
         "parameters": {
-          "dataToSave": {
-            "values": [
-              {
-                "key": "select_table",
-                "value": "={{ $json.select_table }}"
-              },
-              {
-                "key": "search_values",
-                "value": "={{ $json.search_values }}"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.executionData",
-        "typeVersion": 1,
-        "position": [
-          -380,
-          -20
-        ],
-        "id": "33a305d0-84f7-4afd-98ec-f742423d3362",
-        "name": "record-get",
-        "notesInFlow": true,
-        "notes": "w: record-get"
-      },
-      {
-        "parameters": {
-          "jsCode": "// Get the input data\nconst inputData = $input.first().json;\nconst table = inputData.select_table;\nconst columns = inputData.select_columns;\nconst searchColumns = inputData.search_columns;\nconst searchValues = inputData.search_values;\nconst sortColumn = inputData.sort_column;\nconst sortDirection = inputData.sort_direction;\n\n// Start with the base URL and table\nlet queryString = \"https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/\" + table;\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(input) {\n  try {\n    // Explicitly check for null and undefined\n    if (input === null || input === undefined) return [];\n    \n    if (typeof input === 'string') {\n      // If it's empty, return empty array\n      if (input.trim() === '') return [];\n      \n      try {\n        // Try to parse it as JSON\n        return JSON.parse(input);\n      } catch (e) {\n        // If parsing fails, assume it's a comma-separated string\n        return input.split(',').map(item => item.trim()).filter(item => item !== '');\n      }\n    } else if (Array.isArray(input)) {\n      return input;\n    }\n    return [];\n  } catch (error) {\n    // If any unexpected error occurs, return empty array as fallback\n    return [];\n  }\n}\n\n// Initialize query parameters\nlet params = [];\n\n// Process columns if they exist - add safety check\nlet processedColumns = [];\ntry {\n  processedColumns = processArrayInput(columns) || [];\n} catch (error) {\n  processedColumns = [];\n}\n\n// Now check the length with safety\nif (Array.isArray(processedColumns) && processedColumns.length > 0) {\n  params.push(\"select=\" + processedColumns.join(','));\n} else {\n  // If no columns specified, select all columns\n  params.push(\"select=*\");\n}\n\n// Process search columns and values - with similar safety checks\nlet processedSearchColumns = [];\nlet processedSearchValues = [];\ntry {\n  processedSearchColumns = processArrayInput(searchColumns) || [];\n  processedSearchValues = processArrayInput(searchValues) || [];\n} catch (error) {\n  processedSearchColumns = [];\n  processedSearchValues = [];\n}\n\n// Extra safety check before accessing length properties\nif (Array.isArray(processedSearchColumns) && Array.isArray(processedSearchValues) && \n    processedSearchColumns.length > 0 && processedSearchValues.length > 0) {\n  // Handle case where we have equal number of columns and values\n  if (processedSearchColumns.length === processedSearchValues.length) {\n    // Create individual filters for each column-value pair\n    for (let i = 0; i < processedSearchColumns.length; i++) {\n      params.push(`${processedSearchColumns[i]}=eq.${processedSearchValues[i]}`);\n    }\n  } else {\n    // If unequal lengths, just use as many pairs as we can\n    const pairCount = Math.min(processedSearchColumns.length, processedSearchValues.length);\n    for (let i = 0; i < pairCount; i++) {\n      params.push(`${processedSearchColumns[i]}=eq.${processedSearchValues[i]}`);\n    }\n  }\n}\n\n// Process sorting if sort_column exists\nif (sortColumn) {\n  // Validate sort direction, default to asc if invalid\n  const direction = (sortDirection && ['asc', 'desc'].includes(sortDirection.toLowerCase())) \n    ? sortDirection.toLowerCase() \n    : 'asc';\n  \n  // Add order parameter\n  params.push(`order=${sortColumn}.${direction}`);\n}\n\n// Add parameters to query string\nif (params.length > 0) {\n  queryString += \"?\" + params.join('&');\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          -160,
-          -20
-        ],
-        "id": "1de1ab47-19df-4409-9aa8-158fb35b2982",
-        "name": "recordGetQuery"
-      },
-      {
-        "parameters": {
-          "url": "={{ $json.queryString }}",
-          "authentication": "predefinedCredentialType",
-          "nodeCredentialType": "supabaseApi",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.2,
-        "position": [
-          60,
-          -20
-        ],
-        "id": "db074b96-d41f-4255-87ee-a226fe419c6b",
-        "name": "Get record",
-        "alwaysOutputData": true,
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "KwKIAL5ixwLlPeZY",
-            "name": "Supabase Imposbl Header Auth"
-          },
-          "supabaseApi": {
-            "id": "hN8Yj6BvjJqfKMnH",
-            "name": "Rent Ready Supabase"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "respondWith": "allIncomingItems",
-          "options": {
-            "responseCode": 200
-          }
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.1,
-        "position": [
-          280,
-          -20
-        ],
-        "id": "b21376a3-e683-43f4-9379-8cf3f3d82ae2",
-        "name": "Respond w Data"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "03333ad5-f3d0-4513-be78-79daf97f9346",
-                "name": "select_table",
-                "value": "={{ $json.query.select_table }}",
-                "type": "string"
-              },
-              {
-                "id": "03c1d52a-2479-4478-8a62-1e67da1040d9",
-                "name": "select_columns",
-                "value": "={{ $json.query.select_columns }}",
-                "type": "string"
-              },
-              {
-                "id": "43b1625d-e963-45b5-abe3-f07d086c6382",
-                "name": "search_columns",
-                "value": "={{ $json.query.search_columns }}",
-                "type": "string"
-              },
-              {
-                "id": "8b8ff294-77f2-4086-81a5-6d93ef36a208",
-                "name": "search_values",
-                "value": "={{ $json.query.search_values }}",
-                "type": "string"
-              },
-              {
-                "id": "4fc09576-ee3e-4347-b2d6-5f33021f2591",
-                "name": "sort_column",
-                "value": "={{ $json.query.sort_column }}",
-                "type": "string"
-              },
-              {
-                "id": "27fd7c10-729a-43ae-8a91-3ffa85a3881c",
-                "name": "sort_direction",
-                "value": "={{ $json.query.sort_direction }}",
-                "type": "string"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          -600,
-          -20
-        ],
-        "id": "3d51f716-001e-4d32-b7a2-2adae3c74a6d",
-        "name": "inputs"
-      },
-      {
-        "parameters": {
-          "path": "records-get",
-          "responseMode": "responseNode",
+          "httpMethod": "POST",
+          "path": "telegram-property-notification",
           "options": {}
         },
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2,
         "position": [
-          -1040,
-          -20
+          -1980,
+          880
         ],
-        "id": "4a7e86cb-5e46-4157-a663-9ef733483172",
-        "name": "/records-get",
-        "webhookId": "f838d05f-0c99-42dd-a099-c038893f8b84"
+        "id": "e83ebad0-a41d-4c07-8d6b-938aa784a448",
+        "name": "/telegram-property-notification1",
+        "webhookId": "40b3e4cc-8ea6-4aad-ad8c-5d6d8c09bc1a"
       },
       {
         "parameters": {
@@ -170,9 +35,9 @@
             },
             "conditions": [
               {
-                "id": "1e446b65-af8b-4eeb-a5c6-eeff2aed5082",
-                "leftValue": "",
-                "rightValue": "",
+                "id": "e3b102a1-31d0-4c5c-8ce4-fbdce65237fb",
+                "leftValue": "={{ $json.headers.host }}",
+                "rightValue": "n8n.railway.internal:5678",
                 "operator": {
                   "type": "string",
                   "operation": "equals",
@@ -187,74 +52,514 @@
         "type": "n8n-nodes-base.filter",
         "typeVersion": 2.2,
         "position": [
-          -820,
-          -20
+          -1760,
+          880
         ],
-        "id": "d221d934-afb8-47a9-866c-7ecb3802ade9",
-        "name": "Filter"
+        "id": "88245838-f416-4603-961f-2f43802c9ccf",
+        "name": "host1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "496e815b-0525-4699-b29c-5103a448fb52",
+                "name": "property_id",
+                "value": "={{ $json.query.property_id }}",
+                "type": "string"
+              },
+              {
+                "id": "5a509075-fc21-4e01-b73a-5ca050eca640",
+                "name": "updated_column",
+                "value": "={{ $json.query.updated_column }}",
+                "type": "string"
+              },
+              {
+                "id": "ce8f7f8c-de36-4ac6-acc1-1a0b77f97fd7",
+                "name": "updated_value",
+                "value": "={{ $json.query.updated_value }}",
+                "type": "string"
+              },
+              {
+                "id": "34a42f6a-63c2-4475-9c87-b22610996925",
+                "name": "updated_column_type",
+                "value": "={{ $json.query.updated_column_type }}",
+                "type": "string"
+              },
+              {
+                "id": "9aaf6714-1f20-4c6a-b716-9bad66c39c82",
+                "name": "updated_by",
+                "value": "={{ $json.query.updated_by }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -1540,
+          880
+        ],
+        "id": "4595ad1f-5082-4b9f-b7ed-3311e540e538",
+        "name": "inputs1"
+      },
+      {
+        "parameters": {
+          "dataToSave": {
+            "values": [
+              {
+                "key": "property_id",
+                "value": "={{ $json.property_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executionData",
+        "typeVersion": 1,
+        "position": [
+          -1320,
+          880
+        ],
+        "id": "7fbfee98-f543-48b7-929a-98e1e10389c2",
+        "name": "property_id1"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "tableId": "view_properties",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "keyValue": "={{ $json.property_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          -1100,
+          880
+        ],
+        "id": "4889f6a8-81d2-47cf-aa4f-02b8106a89c0",
+        "name": "view_properties2",
+        "credentials": {
+          "supabaseApi": {
+            "id": "hN8Yj6BvjJqfKMnH",
+            "name": "Rent Ready Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "bbcc66a2-94c1-4ac3-a4af-cc0d6c2f3613",
+                "leftValue": "={{ $('view_properties2').item.json.telegram_realtor_topic_id }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "number",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -220,
+          780
+        ],
+        "id": "e60a6caf-aa31-4c05-b201-4af292b0a5d6",
+        "name": "topicExists?1"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('view_properties2').item.json.realtor_assigned != null && $('view_properties2').item.json.telegram_realtor_forum != null}}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      },
+                      "id": "6262d907-2b9c-4440-856b-6b17547aa272"
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "realtor"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "f72e8246-1f49-41a1-9626-27e8a77b9e83",
+                      "leftValue": "={{ $('view_properties2').item.json.telegram_internal_forum }}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "number",
+                        "operation": "exists",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "internal"
+              }
+            ]
+          },
+          "looseTypeValidation": true,
+          "options": {
+            "allMatchingOutputs": true
+          }
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          -660,
+          880
+        ],
+        "id": "b681e3c1-0573-43b8-86fe-71dbcd588277",
+        "name": "Switch1"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -440,
+          980
+        ],
+        "id": "c0bf8d31-cef5-412f-a4e2-ff358d09d073",
+        "name": "add later1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "c1db4e89-a671-404d-8faa-0e7093adba27",
+                "name": "notificationMessage",
+                "value": "={{ $('inputs1').item.json.updated_column\n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ')\n}} ➡️ {{ $('inputs1').item.json.updated_value  \n  .replace(/_/g, ' ')\n  .toLowerCase()\n  .split(' ')\n  .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n  .join(' ') }}\nby: {{ $('inputs1').item.json.updated_by }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -880,
+          880
+        ],
+        "id": "98cd2c04-1755-4596-a50b-c6c96710d185",
+        "name": "notificationMessage1"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://n8n.railway.internal:5678/webhook/telegram-property-topic",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "property_id",
+                "value": "={{ $('view_properties2').item.json.id }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          0,
+          880
+        ],
+        "id": "9d520ae8-d69a-47f2-989d-68b49d56d23d",
+        "name": "/telegram-property-topic1"
+      },
+      {
+        "parameters": {
+          "chatId": "=-100{{ $('view_properties2').item.json.telegram_realtor_forum }}",
+          "text": "={{ $('notificationMessage1').item.json.notificationMessage }}",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML",
+            "message_thread_id": "={{ $('view_properties2').item.json.telegram_realtor_topic_id }}"
+          }
+        },
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          0,
+          680
+        ],
+        "id": "2f857c51-5888-47c4-b74b-3095af323fa0",
+        "name": "sendMessage2",
+        "webhookId": "265c260b-3fa1-45fb-9936-b9ad7b40310e",
+        "credentials": {
+          "telegramApi": {
+            "id": "5EhmVCbyRMyj9grg",
+            "name": "P0m0shnik11_Bot"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "chatId": "=-100{{ $('view_properties2').item.json.telegram_realtor_forum }}",
+          "text": "={{ $('notificationMessage1').item.json.notificationMessage }}",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML",
+            "message_thread_id": "={{ $('view_properties2').item.json.telegram_realtor_topic_id }}"
+          }
+        },
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          440,
+          880
+        ],
+        "id": "e8027199-ccc8-43b4-954f-eff76dd2bb5a",
+        "name": "sendMessage3",
+        "webhookId": "265c260b-3fa1-45fb-9936-b9ad7b40310e",
+        "credentials": {
+          "telegramApi": {
+            "id": "5EhmVCbyRMyj9grg",
+            "name": "P0m0shnik11_Bot"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "tableId": "view_properties",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "keyValue": "={{ $json.property_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          220,
+          880
+        ],
+        "id": "863b2b45-97c6-4d51-b431-c7484a15dc54",
+        "name": "view_properties3",
+        "credentials": {
+          "supabaseApi": {
+            "id": "hN8Yj6BvjJqfKMnH",
+            "name": "Rent Ready Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "57088120-5090-460c-86eb-40f9c19f5880",
+                "leftValue": "={{ $('view_properties2').item.json.update_realtor_topic }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.filter",
+        "typeVersion": 2.2,
+        "position": [
+          -440,
+          780
+        ],
+        "id": "36df20ee-dd83-4428-8ed2-5a4ed167633c",
+        "name": "updateRealtor1"
       }
     ],
     "connections": {
-      "record-get": {
+      "/telegram-property-notification1": {
         "main": [
           [
             {
-              "node": "recordGetQuery",
+              "node": "host1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "recordGetQuery": {
+      "host1": {
         "main": [
           [
             {
-              "node": "Get record",
+              "node": "inputs1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Get record": {
+      "inputs1": {
         "main": [
           [
             {
-              "node": "Respond w Data",
+              "node": "property_id1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "inputs": {
+      "property_id1": {
         "main": [
           [
             {
-              "node": "record-get",
+              "node": "view_properties2",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "/records-get": {
+      "view_properties2": {
         "main": [
           [
             {
-              "node": "Filter",
+              "node": "notificationMessage1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Filter": {
+      "topicExists?1": {
         "main": [
           [
             {
-              "node": "inputs",
+              "node": "sendMessage2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "/telegram-property-topic1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch1": {
+        "main": [
+          [
+            {
+              "node": "updateRealtor1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "add later1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "notificationMessage1": {
+        "main": [
+          [
+            {
+              "node": "Switch1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "/telegram-property-topic1": {
+        "main": [
+          [
+            {
+              "node": "view_properties3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "view_properties3": {
+        "main": [
+          [
+            {
+              "node": "sendMessage3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "updateRealtor1": {
+        "main": [
+          [
+            {
+              "node": "topicExists?1",
               "type": "main",
               "index": 0
             }
@@ -263,37 +568,42 @@
       }
     },
     "settings": {
-      "executionOrder": "v1"
+      "executionOrder": "v1",
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": "BsX0t3BBGp4TqwZw"
     },
     "staticData": null,
-    "meta": null,
+    "meta": {
+      "templateCredsSetupCompleted": true
+    },
     "pinData": {
-      "/records-get": [
+      "/telegram-property-notification1": [
         {
           "json": {
             "headers": {
-              "accept-encoding": "gzip",
-              "user-agent": "ReactorNetty/1.1.22",
+              "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
+              "user-agent": "axios/1.7.4",
+              "accept-encoding": "gzip, compress, deflate, br",
               "host": "n8n.railway.internal:5678",
-              "accept": "*/*"
+              "connection": "keep-alive",
+              "content-length": "0"
             },
             "params": {},
             "query": {
-              "select_table": "changelog",
-              "select_columns": "null",
-              "search_columns": "[\"property_id\",\"updated_column\"]",
-              "search_values": "[624,\"followup_notes\"]",
-              "sort_column": "id",
-              "sort_direction": "asc"
+              "property_id": "824",
+              "updated_column": "realtor_status",
+              "updated_value": "RECENTLY_SOLD",
+              "updated_column_type": "text",
+              "updated_by": "Bot@RentReadyS8.com"
             },
             "body": {},
-            "webhookUrl": "https://s8s.up.railway.app/webhook/records-get",
+            "webhookUrl": "https://s8s.up.railway.app/webhook/telegram-property-notification",
             "executionMode": "production"
           }
         }
       ]
     },
-    "versionId": "9bfd1b24-198a-4a4e-bea0-720f6945a281",
+    "versionId": "76cf41ee-e05a-4783-896e-fbdd453b2136",
     "triggerCount": 1,
     "tags": []
   }
