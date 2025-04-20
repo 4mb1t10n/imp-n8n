@@ -1,78 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "record-get": {
-      "main": [
-        [
-          {
-            "node": "recordGetQuery",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "recordGetQuery": {
-      "main": [
-        [
-          {
-            "node": "Get record",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get record": {
-      "main": [
-        [
-          {
-            "node": "Respond w Data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "record-get",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/records-get": {
-      "main": [
-        [
-          {
-            "node": "Filter",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-10T00:56:33.675Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-10T18:18:40.262Z",
   "id": "vKuRvtLXd2DYrRqE",
-  "meta": null,
   "name": "/records-get",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -260,7 +191,79 @@
       "name": "Filter"
     }
   ],
-  "notes": "",
+  "connections": {
+    "record-get": {
+      "main": [
+        [
+          {
+            "node": "recordGetQuery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "recordGetQuery": {
+      "main": [
+        [
+          {
+            "node": "Get record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get record": {
+      "main": [
+        [
+          {
+            "node": "Respond w Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "record-get",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/records-get": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
   "pinData": {
     "/records-get": [
       {
@@ -287,12 +290,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "9bfd1b24-198a-4a4e-bea0-720f6945a281",
   "triggerCount": 1,
-  "updatedAt": "2025-04-10T18:18:40.262Z",
-  "versionId": "9bfd1b24-198a-4a4e-bea0-720f6945a281"
+  "tags": []
 }
