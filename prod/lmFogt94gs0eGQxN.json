@@ -3,13 +3,7 @@
   "connections": {
     "changelog1": {
       "main": [
-        [
-          {
-            "node": "Filter statuses1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "compare data1": {
@@ -28,17 +22,6 @@
         [
           {
             "node": "changelog1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter statuses1": {
-      "main": [
-        [
-          {
-            "node": "Supabase1",
             "type": "main",
             "index": 0
           }
@@ -87,7 +70,7 @@
     }
   },
   "createdAt": "2025-04-10T18:25:17.121Z",
-  "execution_id": "33132",
+  "execution_id": "33186",
   "id": "lmFogt94gs0eGQxN",
   "meta": null,
   "name": "/updated-tasks",
@@ -217,78 +200,6 @@
         280,
         -140
       ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "75d9edff-c5e9-4680-b7f1-e9e3a19b16e5",
-              "leftValue": "={{ $json.updated_column }}",
-              "rightValue": "property_status",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            },
-            {
-              "id": "8a83b269-b28c-430a-8ccf-ae0e6245902d",
-              "leftValue": "={{ $json.updated_column }}",
-              "rightValue": "realtor_status",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.filter",
-      "typeVersion": 2.2,
-      "position": [
-        720,
-        -140
-      ],
-      "id": "b760e7a2-efee-45ef-9938-1914c96de298",
-      "name": "Filter statuses1"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "tableId": "properties",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "keyValue": "={{ $json.property_id }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        940,
-        -140
-      ],
-      "id": "f8de7c85-95d1-48ff-bb48-f23ff98161e8",
-      "name": "Supabase1",
-      "credentials": {
-        "supabaseApi": {
-          "id": "hN8Yj6BvjJqfKMnH",
-          "name": "Rent Ready Supabase"
-        }
-      }
     },
     {
       "parameters": {
@@ -428,6 +339,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-13T18:22:13.700Z",
-  "versionId": "53e67b06-0d61-4c75-bb46-325a512af1b5"
+  "updatedAt": "2025-04-19T23:19:19.747Z",
+  "versionId": "20cd45ef-2658-4eb9-862c-f52977d6bd31"
 }
