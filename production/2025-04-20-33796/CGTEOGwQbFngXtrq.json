@@ -1,0 +1,357 @@
+{
+  "createdAt": "2025-03-20T13:18:41.700Z",
+  "updatedAt": "2025-04-18T00:33:24.944Z",
+  "id": "CGTEOGwQbFngXtrq",
+  "name": "/record-update",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        420,
+        -60
+      ],
+      "id": "a84dfd3a-2724-4e82-8c5b-9b3bf5da1e97",
+      "name": "400"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "={{ $json.table }}",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.record_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "={{ $json.column }}",
+              "fieldValue": "={{ $json.value != null && $json.value != undefined && $json.value.length > 0 ? $json.value : null}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        420,
+        -260
+      ],
+      "id": "b6f6287f-d43c-4904-98a2-31ec5d9141b0",
+      "name": "Supabase",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6999df63-b018-48f9-9625-7e4c3ac88a1d",
+              "leftValue": "={{ $json.table && $json.value }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        200,
+        -160
+      ],
+      "id": "5546fe14-1e9c-481d-9720-cdb9c4697f25",
+      "name": "check_inputs"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "updated",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        640,
+        -260
+      ],
+      "id": "b05785c9-3090-4f40-b6ee-73baeb0e14ea",
+      "name": "Data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2e08aaa2-f13d-4984-8f37-0deb96c21751",
+              "name": "table",
+              "value": "={{ $json.query.table }}",
+              "type": "string"
+            },
+            {
+              "id": "5fb1e90a-da67-4b5c-ab0b-6cfd401d1a48",
+              "name": "column",
+              "value": "={{ $json.query.column }}",
+              "type": "string"
+            },
+            {
+              "id": "d31b685b-da6d-49c8-8228-ac85181bccde",
+              "name": "value",
+              "value": "={{ $json.query.value }}",
+              "type": "string"
+            },
+            {
+              "id": "54388797-7541-4d5c-ae9a-40dfc44b269b",
+              "name": "record_id",
+              "value": "={{ $json.query.record_id }}",
+              "type": "string"
+            },
+            {
+              "id": "d08fc18c-14b6-42c7-8eb8-6982d9c2e8de",
+              "name": "updated_by",
+              "value": "={{ $json.query.updated_by }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -240,
+        -160
+      ],
+      "id": "74a9126a-7f3e-4176-8116-dff01d5b41c6",
+      "name": "inputs"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "record_id",
+              "value": "={{ $json.record_id }}"
+            },
+            {
+              "key": "table",
+              "value": "={{ $json.table }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        -160
+      ],
+      "id": "b20187a2-849a-4b46-8680-7a3e56857f81",
+      "name": "save exec",
+      "notesInFlow": true,
+      "notes": "w: record-post"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "record-update",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -680,
+        -160
+      ],
+      "id": "8daf9af9-7e6f-4ce6-a811-d708c5423b8f",
+      "name": "/record-update",
+      "webhookId": "f838d05f-0c99-42dd-a099-c038893f8b84"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e4cd625e-f8b6-497b-ba11-1981e4d53c2a",
+              "leftValue": "={{ $json.headers.host }}",
+              "rightValue": "=n8n.railway.internal:5678",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -460,
+        -160
+      ],
+      "id": "143e96e3-5492-4d26-9477-36100242d8c8",
+      "name": "host"
+    }
+  ],
+  "connections": {
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_inputs": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "400",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "save exec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "save exec": {
+      "main": [
+        [
+          {
+            "node": "check_inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/record-update": {
+      "main": [
+        [
+          {
+            "node": "host",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "host": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": [
+        12
+      ]
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "/record-update": [
+      {
+        "json": {
+          "headers": {
+            "accept-encoding": "gzip",
+            "user-agent": "ReactorNetty/1.1.22",
+            "host": "n8n.railway.internal:5678",
+            "accept": "*/*",
+            "content-type": "application/json",
+            "content-length": "0"
+          },
+          "params": {},
+          "query": {
+            "table": "tasks",
+            "column": "completed",
+            "value": "true",
+            "updated_by": "alex+dev@imposbl.com",
+            "record_id": "135"
+          },
+          "body": {},
+          "webhookUrl": "https://s8s.up.railway.app/webhook/record-insert",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "versionId": "3ac8239e-859e-4ace-a02a-1d76c800ee72",
+  "triggerCount": 1,
+  "tags": []
+}
