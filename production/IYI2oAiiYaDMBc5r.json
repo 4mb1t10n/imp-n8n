@@ -1,149 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "/telegram-property-notification1": {
-      "main": [
-        [
-          {
-            "node": "host1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "host1": {
-      "main": [
-        [
-          {
-            "node": "inputs1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs1": {
-      "main": [
-        [
-          {
-            "node": "property_id1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "property_id1": {
-      "main": [
-        [
-          {
-            "node": "view_properties2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "view_properties2": {
-      "main": [
-        [
-          {
-            "node": "notificationMessage1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "topicExists?1": {
-      "main": [
-        [
-          {
-            "node": "sendMessage2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "/telegram-property-topic1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch1": {
-      "main": [
-        [
-          {
-            "node": "updateRealtor1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "add later1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "notificationMessage1": {
-      "main": [
-        [
-          {
-            "node": "Switch1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/telegram-property-topic1": {
-      "main": [
-        [
-          {
-            "node": "view_properties3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "view_properties3": {
-      "main": [
-        [
-          {
-            "node": "sendMessage3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "updateRealtor1": {
-      "main": [
-        [
-          {
-            "node": "topicExists?1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-10T23:17:08.415Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-19T23:09:55.735Z",
   "id": "IYI2oAiiYaDMBc5r",
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
   "name": "/telegram-property-notification",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -567,7 +427,152 @@
       "name": "updateRealtor1"
     }
   ],
-  "notes": "",
+  "connections": {
+    "/telegram-property-notification1": {
+      "main": [
+        [
+          {
+            "node": "host1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "host1": {
+      "main": [
+        [
+          {
+            "node": "inputs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs1": {
+      "main": [
+        [
+          {
+            "node": "property_id1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "property_id1": {
+      "main": [
+        [
+          {
+            "node": "view_properties2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "view_properties2": {
+      "main": [
+        [
+          {
+            "node": "notificationMessage1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "topicExists?1": {
+      "main": [
+        [
+          {
+            "node": "sendMessage2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "/telegram-property-topic1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "updateRealtor1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "add later1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "notificationMessage1": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/telegram-property-topic1": {
+      "main": [
+        [
+          {
+            "node": "view_properties3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "view_properties3": {
+      "main": [
+        [
+          {
+            "node": "sendMessage3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "updateRealtor1": {
+      "main": [
+        [
+          {
+            "node": "topicExists?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "pinData": {
     "/telegram-property-notification1": [
       {
@@ -595,14 +600,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1",
-    "callerPolicy": "workflowsFromSameOwner",
-    "errorWorkflow": "BsX0t3BBGp4TqwZw"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "76cf41ee-e05a-4783-896e-fbdd453b2136",
   "triggerCount": 1,
-  "updatedAt": "2025-04-19T23:09:55.735Z",
-  "versionId": "76cf41ee-e05a-4783-896e-fbdd453b2136"
+  "tags": []
 }
