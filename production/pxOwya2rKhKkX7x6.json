@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-02-20T01:50:18.875Z",
-  "updatedAt": "2025-04-20T13:34:34.670Z",
+  "updatedAt": "2025-04-20T13:37:22.003Z",
   "id": "pxOwya2rKhKkX7x6",
   "name": "Github New",
   "active": true,
@@ -252,8 +252,8 @@
               "value": "={{$execution.id}}"
             },
             {
-              "key": "parent",
-              "value": "true"
+              "key": "flow",
+              "value": "parent"
             }
           ]
         }
@@ -331,27 +331,6 @@
     },
     {
       "parameters": {
-        "dataToSave": {
-          "values": [
-            {
-              "key": "parent",
-              "value": "false"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executionData",
-      "typeVersion": 1,
-      "position": [
-        -1380,
-        1360
-      ],
-      "id": "6061ca59-3027-45fb-af3a-0efd72f8ac70",
-      "name": "parent: false",
-      "notesInFlow": true
-    },
-    {
-      "parameters": {
         "resource": "file",
         "owner": {
           "__rl": true,
@@ -416,6 +395,27 @@
           "name": "4mb1t10n"
         }
       }
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "flow",
+              "value": "child"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -1380,
+        1360
+      ],
+      "id": "6061ca59-3027-45fb-af3a-0efd72f8ac70",
+      "name": "flow",
+      "notesInFlow": true
     }
   ],
   "connections": {
@@ -445,7 +445,7 @@
       "main": [
         [
           {
-            "node": "parent: false",
+            "node": "flow",
             "type": "main",
             "index": 0
           }
@@ -541,17 +541,6 @@
         ]
       ]
     },
-    "parent: false": {
-      "main": [
-        [
-          {
-            "node": "Globals",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Create": {
       "main": [
         []
@@ -560,6 +549,17 @@
     "Update": {
       "main": [
         []
+      ]
+    },
+    "flow": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -582,7 +582,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "7c2efa62-7435-4666-bd15-81245639cde1",
+  "versionId": "f2143206-01cb-4735-b6cc-af2afb070705",
   "triggerCount": 1,
   "tags": []
 }
