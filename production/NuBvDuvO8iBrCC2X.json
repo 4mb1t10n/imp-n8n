@@ -1,63 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "Get properties": {
-      "main": [
-        [
-          {
-            "node": "respond with properties",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "propertiesQuery": {
-      "main": [
-        [
-          {
-            "node": "Get properties",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/get-properties": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "propertiesQuery",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "respond with properties": {
-      "main": [
-        []
-      ]
-    }
-  },
   "createdAt": "2025-04-09T17:35:25.999Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-19T22:56:14.172Z",
   "id": "NuBvDuvO8iBrCC2X",
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
   "name": "/properties GET",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -143,7 +89,66 @@
       "notes": "All of the \"filter_\" inputs are optional"
     }
   ],
-  "notes": "",
+  "connections": {
+    "Get properties": {
+      "main": [
+        [
+          {
+            "node": "respond with properties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "propertiesQuery": {
+      "main": [
+        [
+          {
+            "node": "Get properties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/get-properties": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "propertiesQuery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "respond with properties": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "pinData": {
     "/get-properties": [
       {
@@ -174,14 +179,7 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1",
-    "callerPolicy": "workflowsFromSameOwner",
-    "errorWorkflow": "BsX0t3BBGp4TqwZw"
-  },
-  "staticData": null,
-  "tags": [],
+  "versionId": "3006cc4a-4200-449f-ad73-ea0f982ac2be",
   "triggerCount": 1,
-  "updatedAt": "2025-04-19T22:56:14.172Z",
-  "versionId": "3006cc4a-4200-449f-ad73-ea0f982ac2be"
+  "tags": []
 }
