@@ -1,144 +1,9 @@
 {
-  "active": true,
-  "connections": {
-    "view_properties": {
-      "main": [
-        [
-          {
-            "node": "apifyRequest",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "chron": {
-      "main": [
-        [
-          {
-            "node": "chron1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/scrape-all": {
-      "main": [
-        [
-          {
-            "node": "Filter1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "scrape-all": {
-      "main": [
-        [
-          {
-            "node": "view_properties",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "/scrape-property": {
-      "main": [
-        [
-          {
-            "node": "Filter",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter": {
-      "main": [
-        [
-          {
-            "node": "inputs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "inputs": {
-      "main": [
-        [
-          {
-            "node": "property_id",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "property_id": {
-      "main": [
-        [
-          {
-            "node": "view_properties1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "view_properties1": {
-      "main": [
-        [
-          {
-            "node": "apifyRequest",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "apifyRequest": {
-      "main": [
-        [
-          {
-            "node": "/apify",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter1": {
-      "main": [
-        [
-          {
-            "node": "scrape-all",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "chron1": {
-      "main": [
-        [
-          {
-            "node": "view_properties",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
   "createdAt": "2025-04-10T23:03:39.829Z",
-  "execution_id": "33463",
+  "updatedAt": "2025-04-19T22:57:37.816Z",
   "id": "rxu3hF8jQaz70eQU",
-  "meta": null,
   "name": "/scrape-all & /scrape-property",
+  "active": true,
   "nodes": [
     {
       "parameters": {
@@ -453,7 +318,153 @@
       "onError": "continueRegularOutput"
     }
   ],
-  "notes": "",
+  "connections": {
+    "view_properties": {
+      "main": [
+        [
+          {
+            "node": "apifyRequest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chron": {
+      "main": [
+        [
+          {
+            "node": "chron1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/scrape-all": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "scrape-all": {
+      "main": [
+        [
+          {
+            "node": "view_properties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/scrape-property": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "property_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "property_id": {
+      "main": [
+        [
+          {
+            "node": "view_properties1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "view_properties1": {
+      "main": [
+        [
+          {
+            "node": "apifyRequest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "apifyRequest": {
+      "main": [
+        [
+          {
+            "node": "/apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "scrape-all",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chron1": {
+      "main": [
+        [
+          {
+            "node": "view_properties",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "BsX0t3BBGp4TqwZw"
+  },
+  "staticData": {
+    "node:chron": {
+      "recurrenceRules": [
+        0
+      ]
+    }
+  },
+  "meta": null,
   "pinData": {
     "/scrape-property": [
       {
@@ -477,18 +488,8 @@
       }
     ]
   },
-  "settings": {
-    "executionOrder": "v1",
-    "callerPolicy": "workflowsFromSameOwner",
-    "errorWorkflow": "BsX0t3BBGp4TqwZw"
-  },
-  "staticData": {
-    "node:chron": {
-      "recurrenceRules": [
-        0
-      ]
-    }
-  },
+  "versionId": "566ff90c-e791-49f5-be15-6dee39f6a133",
+  "triggerCount": 3,
   "tags": [
     {
       "createdAt": "2025-04-19T11:43:08.117Z",
@@ -496,8 +497,5 @@
       "id": "N6i2kFUE3jSwSod8",
       "name": "NEEDS_UPDATE"
     }
-  ],
-  "triggerCount": 3,
-  "updatedAt": "2025-04-19T22:57:37.816Z",
-  "versionId": "566ff90c-e791-49f5-be15-6dee39f6a133"
+  ]
 }
