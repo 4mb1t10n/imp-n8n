@@ -1,0 +1,35 @@
+{
+  "createdAt": "2025-04-13T23:38:56.891Z",
+  "updatedAt": "2025-04-14T11:50:05.470Z",
+  "id": "NFLMJd6YhNvmy7Sc",
+  "name": "Twilio",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "com.twilio.messaging.inbound-message.received"
+        ]
+      },
+      "type": "n8n-nodes-base.twilioTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1b41a956-acb4-4ec0-bac2-63e016a6b524",
+      "name": "Twilio Trigger",
+      "webhookId": "bbf9f958-3d9a-4e24-828a-273cbd1a976e"
+    }
+  ],
+  "connections": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "730a653a-d020-4839-95db-c279a68ad847",
+  "triggerCount": 0,
+  "tags": []
+}
