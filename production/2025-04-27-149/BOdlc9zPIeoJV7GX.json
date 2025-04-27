@@ -1,0 +1,294 @@
+{
+  "createdAt": "2025-04-09T21:59:06.282Z",
+  "updatedAt": "2025-04-18T00:31:45.243Z",
+  "id": "BOdlc9zPIeoJV7GX",
+  "name": "/record-get",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "select_table",
+              "value": "={{ $json.select_table }}"
+            },
+            {
+              "key": "search_value",
+              "value": "={{ $json.search_value }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        60
+      ],
+      "id": "8fdb3467-4b80-4018-9297-5a31a4d535fc",
+      "name": "record-get",
+      "notesInFlow": true,
+      "notes": "w: record-get"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the input data\nconst inputData = $input.first().json;\nconst table = inputData.select_table;\nconst columns = inputData.select_columns;\nconst searchColumn = inputData.search_column || \"id\"; // Default to \"id\" if empty\nconst recordId = inputData.search_value;\nconst sortColumn = inputData.sort_column;\nconst sortDirection = inputData.sort_direction;\n\n// Start with the base URL and table\nlet queryString = \"https://qyyyacmhcwqdxqnhgqmr.supabase.co/rest/v1/\" + table;\n\n// Function to handle array or string that looks like an array\nfunction processArrayInput(input) {\n  if (!input) return []; // Handle null, undefined, or empty string\n  \n  if (typeof input === 'string') {\n    // If it's empty, return empty array\n    if (input.trim() === '') return [];\n    \n    try {\n      // Try to parse it as JSON\n      return JSON.parse(input);\n    } catch (e) {\n      // If parsing fails, assume it's a comma-separated string\n      return input.split(',').map(item => item.trim()).filter(item => item !== '');\n    }\n  } else if (Array.isArray(input)) {\n    return input;\n  }\n  return [];\n}\n\n// Initialize query parameters\nlet params = [];\n\n// Process columns if they exist\nconst processedColumns = processArrayInput(columns);\nif (processedColumns.length > 0) {\n  params.push(\"select=\" + processedColumns.join(','));\n} else {\n  // If no columns specified, select all columns\n  params.push(\"select=*\");\n}\n\n// Process search column and record id\nif (recordId) {\n  params.push(`${searchColumn}=eq.${recordId}`);\n}\n\n// Process sorting if sort_column exists\nif (sortColumn) {\n  // Validate sort direction, default to asc if invalid\n  // PostgREST requires lowercase asc/desc\n  const direction = (sortDirection && ['asc', 'desc'].includes(sortDirection.toLowerCase())) \n    ? sortDirection.toLowerCase() \n    : 'asc';\n  \n  // Add order parameter\n  params.push(`order=${sortColumn}.${direction}`);\n}\n\n// Add parameters to query string\nif (params.length > 0) {\n  queryString += \"?\" + params.join('&');\n}\n\n// Return data in the format N8N expects\nreturn [{\n  json: {\n    queryString: queryString\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        -40
+      ],
+      "id": "feaee28c-0b92-4c1a-8e43-efa4ee925291",
+      "name": "recordGetQuery"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.queryString }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        100,
+        -40
+      ],
+      "id": "10af05e1-51db-45f5-8a3a-c40328131c78",
+      "name": "Get record",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "KwKIAL5ixwLlPeZY",
+          "name": "Supabase Imposbl Header Auth"
+        },
+        "supabaseApi": {
+          "id": "hN8Yj6BvjJqfKMnH",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "record-get",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1000,
+        60
+      ],
+      "id": "e5aba84a-edcf-457c-8969-d5dd424689be",
+      "name": "/record-get",
+      "webhookId": "f838d05f-0c99-42dd-a099-c038893f8b84"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6999df63-b018-48f9-9625-7e4c3ac88a1d",
+              "leftValue": "={{ $json.select_table && $json.search_value}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -340,
+        60
+      ],
+      "id": "72c2d282-6d04-4036-ba7d-e2015f54014a",
+      "name": "check_inputs"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        -40
+      ],
+      "id": "49ef238c-65c8-4f8b-bc50-b0c5b7c30c88",
+      "name": "Respond w Data"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -120,
+        160
+      ],
+      "id": "3a8e95f3-849e-4af3-b4fb-7465ba271ca0",
+      "name": "400 respond"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "03333ad5-f3d0-4513-be78-79daf97f9346",
+              "name": "select_table",
+              "value": "={{ $json.query.select_table }}",
+              "type": "string"
+            },
+            {
+              "id": "43b1625d-e963-45b5-abe3-f07d086c6382",
+              "name": "search_column",
+              "value": "={{ $json.query.search_column }}",
+              "type": "string"
+            },
+            {
+              "id": "8b8ff294-77f2-4086-81a5-6d93ef36a208",
+              "name": "search_value",
+              "value": "={{ $json.query.search_value }}",
+              "type": "string"
+            },
+            {
+              "id": "03c1d52a-2479-4478-8a62-1e67da1040d9",
+              "name": "select_columns_o",
+              "value": "={{ $json.query.select_columns }}",
+              "type": "string"
+            },
+            {
+              "id": "4fc09576-ee3e-4347-b2d6-5f33021f2591",
+              "name": "sort_column_o",
+              "value": "={{ $json.query.sort_column }}",
+              "type": "string"
+            },
+            {
+              "id": "27fd7c10-729a-43ae-8a91-3ffa85a3881c",
+              "name": "sort_direction_o",
+              "value": "={{ $json.query.sort_direction }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -780,
+        60
+      ],
+      "id": "11772090-a105-4f45-b462-29fad0abc411",
+      "name": "inputs"
+    }
+  ],
+  "connections": {
+    "record-get": {
+      "main": [
+        [
+          {
+            "node": "check_inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "recordGetQuery": {
+      "main": [
+        [
+          {
+            "node": "Get record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get record": {
+      "main": [
+        [
+          {
+            "node": "Respond w Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/record-get": {
+      "main": [
+        [
+          {
+            "node": "inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_inputs": {
+      "main": [
+        [
+          {
+            "node": "recordGetQuery",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "400 respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "inputs": {
+      "main": [
+        [
+          {
+            "node": "record-get",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "006e2742-9898-4ffa-8f3b-cc90ab89d642",
+  "triggerCount": 1,
+  "tags": []
+}
