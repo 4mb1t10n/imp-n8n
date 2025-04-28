@@ -1,0 +1,43 @@
+{
+  "createdAt": "2025-04-27T23:34:47.746Z",
+  "updatedAt": "2025-04-27T23:34:47.746Z",
+  "id": "PjZd6ujx0h7om6MW",
+  "name": "My workflow",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "hi there",
+        "formDescription": "description hree",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "whats your name?",
+              "placeholder": "name here",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "506c9e72-616a-41d9-8846-5d08722fd0ee",
+      "name": "On form submission",
+      "webhookId": "d143ab35-c0cc-46ae-b632-08db9dfc297d"
+    }
+  ],
+  "connections": {},
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "09a75a29-d0df-40a0-aa9e-2b01e253994c",
+  "triggerCount": 0,
+  "tags": []
+}
