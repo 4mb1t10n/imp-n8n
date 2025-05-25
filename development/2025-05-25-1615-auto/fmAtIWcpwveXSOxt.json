@@ -1,0 +1,211 @@
+{
+  "createdAt": "2025-04-30T08:31:32.580Z",
+  "updatedAt": "2025-04-30T08:31:32.580Z",
+  "id": "fmAtIWcpwveXSOxt",
+  "name": "/telegram-task-topic",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "911f1f08-f39e-41f3-a162-80bdfee1e456",
+              "name": "task_id",
+              "value": "={{ $json.query.task_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1640,
+        360
+      ],
+      "id": "63958375-4ad6-4712-9af7-498619d8881e",
+      "name": "Inputs1",
+      "notesInFlow": false,
+      "notes": "supabase_telegram_column = is where the topic ID should be saved"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "telegram-task-topic",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1860,
+        360
+      ],
+      "id": "a4354e33-031f-4e1e-a077-cbda31064423",
+      "name": "/telegram-task-topic",
+      "webhookId": "3f9043e8-ad23-43ab-8af2-949b6d21a108"
+    },
+    {
+      "parameters": {
+        "dataToSave": {
+          "values": [
+            {
+              "key": "task_id",
+              "value": "={{ $json.task_id }}"
+            },
+            {
+              "key": "w",
+              "value": "telegram-task-topic"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executionData",
+      "typeVersion": 1,
+      "position": [
+        -1420,
+        360
+      ],
+      "id": "f5a433f1-bea5-4675-a2f7-b1b74cc16c03",
+      "name": "telegram-task-topic",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "view_tasks",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.task_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        360
+      ],
+      "id": "6cfdfa14-bafe-444b-921e-0bc7e0b86636",
+      "name": "view_tasks",
+      "credentials": {
+        "supabaseApi": {
+          "id": "ljOT7sOtMVrm9WI6",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "71f22a68-cddd-467c-8d83-a598894be042",
+              "leftValue": "={{ $json.completed }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -980,
+        360
+      ],
+      "id": "3d2391b4-d409-4bd9-8b29-68276227fea3",
+      "name": "completed?"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        360
+      ],
+      "id": "477071fd-4cb7-43cb-97d6-4c8ba65892f1",
+      "name": "close topic"
+    }
+  ],
+  "connections": {
+    "Inputs1": {
+      "main": [
+        [
+          {
+            "node": "telegram-task-topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/telegram-task-topic": {
+      "main": [
+        [
+          {
+            "node": "Inputs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "telegram-task-topic": {
+      "main": [
+        [
+          {
+            "node": "view_tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "view_tasks": {
+      "main": [
+        [
+          {
+            "node": "completed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "completed?": {
+      "main": [
+        [
+          {
+            "node": "close topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "7925578d-4bc3-41cd-9f72-ff8514499553",
+  "triggerCount": 0,
+  "tags": []
+}
