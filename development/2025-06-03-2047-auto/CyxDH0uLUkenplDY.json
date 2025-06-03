@@ -1,0 +1,166 @@
+{
+  "createdAt": "2025-04-30T08:31:34.324Z",
+  "updatedAt": "2025-04-30T08:31:34.324Z",
+  "id": "CyxDH0uLUkenplDY",
+  "name": "/delete-media",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "={{ $json.storage_url.replace('/public', '') }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        1750
+      ],
+      "id": "c96e8682-1c6b-4cbd-af81-f8079be87c8c",
+      "name": "Delete Original",
+      "credentials": {
+        "supabaseApi": {
+          "id": "ljOT7sOtMVrm9WI6",
+          "name": "Rent Ready Supabase"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "media",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "storage_url",
+              "condition": "eq",
+              "keyValue": "={{ $('/delete-media').item.json.storage_url }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        780,
+        1750
+      ],
+      "id": "441179c2-8d5a-45c6-a9ed-ae3b30138955",
+      "name": "delete media record",
+      "credentials": {
+        "supabaseApi": {
+          "id": "ljOT7sOtMVrm9WI6",
+          "name": "Rent Ready Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b11c2b55-3869-4aaf-9dbc-273a68f9b325",
+              "leftValue": "={{ $json.storage_url }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        340,
+        1750
+      ],
+      "id": "6e2f0e37-3324-4687-8496-a91dc1e40457",
+      "name": "notEmpty"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "storage_url"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        120,
+        1750
+      ],
+      "id": "d2c01c96-fded-4221-b283-763908290721",
+      "name": "/delete-media"
+    }
+  ],
+  "connections": {
+    "Delete Original": {
+      "main": [
+        [
+          {
+            "node": "delete media record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "delete media record": {
+      "main": [
+        []
+      ]
+    },
+    "notEmpty": {
+      "main": [
+        [
+          {
+            "node": "Delete Original",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/delete-media": {
+      "main": [
+        [
+          {
+            "node": "notEmpty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "meta": null,
+  "pinData": null,
+  "versionId": "79a4abd6-e731-4ccc-90b5-8050c1ed306e",
+  "triggerCount": 0,
+  "tags": []
+}
